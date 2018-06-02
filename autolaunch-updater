@@ -8,5 +8,5 @@ import os
 # 2>&1 to log both stderr and stdout 
 # & to execute program in background
 
-os.system("nohup python3 /home/ethos/ethOS-update-manager/_ethuper/main.py > /home/ethos/ethOs-update-manager/logs/updater 2>&1 &")
+os.system("nohup python3 /home/ethos/ethOS-update-manager/_ethuper/updater.py > /home/ethos/ethOs-update-manager/logs/updater 2>&1 &")
 
