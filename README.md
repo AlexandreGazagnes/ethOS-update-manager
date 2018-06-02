@@ -68,20 +68,20 @@ $ echo "/home/ethos/ethOS-update-manager/launch" >> /home/ethos/.bashrc
 Just run : ```ethuper [cmd] [option]```
 
 with cmd : 
-* **autoboot** : laucnh autamiaticly when booting ethos (defaut) + option : 
+* **autoboot** : laucnh autamiaticly when booting ethos (defaut) ** + OPTION** : 
   * able  
   * disable
-* **start** : start at command + option : 
+* **start** : start at command ** + OPTION** : 
   * fg (foreground)
   * bg (background)
 * **stop** : stop at command
-* **config** : manage configs  + option :  
+* **config** : manage configs ** + OPTION**:  
   * set
   * reset 
   * show 
 * **merge-files** : merge all update files 
 * **man** : acces to manual
-* **reboot** : reboot the entire programm setting original conf + option : 
+* **reboot** : reboot the entire programm setting original conf ** + OPTION** : 
   * hard : -- WARNING -- delete all datafiles and log files
   * soft : Keep all datafiles and log files 
 
