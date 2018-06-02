@@ -5,13 +5,13 @@
 import os, time, pickle
 
 # update install.pk
-with open("/home/ethos/ethOS-update-manager/ethOsUpdateManager/var/install.pk", "w") as f:
+with open("/home/ethos/ethOS-update-manager/_ethuper/var/install.pk", "w") as f:
 	f.write("True")
 	
 # prepare sys
 os.system("cd")
 os.system("chmod +x /home/ethos/ethOS-update-manager/launch")
-os.system("chmod +x /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py")
+os.system("chmod +x /home/ethos/ethOS-update-manager/_ethuper/main.py")
 
 
 # create alias (shortcup for CLI) : 
