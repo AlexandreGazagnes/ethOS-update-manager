@@ -27,11 +27,16 @@ ethos :    1.3.1+ <p>
 hardware : -
 <p><p>
 
+##  DOWNLOAD
+
+from ```/home/ethos/ ``` just type```git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git```
+
 ##  INSTALL
 
 #### Auto
-from ```/home/ethos/ ``` just type```git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git```
-when download completed type : 
+Considering the folder ``` ethOS-update-manager ``` in filepath ``` /home/ethos/ ```
+so as ``` $ ls /home/ethos/ethOS-update-manager ``` returning ``` ethOS-update-manager/ ``` 
+
 ```
 $ chmod +x /home/ethos/ethOS-update-manager/install
 $ /home/ethos/ethOS-update-manager/install
@@ -84,7 +89,7 @@ Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is :
 * **stop** : stop at command
 * **config** : manage configs **+ OPTION**:  
   * set : set specific config parametre(s)
-  * reset : rest all parametres to orginal configuration
+  * reset : reset all parametres to orginal configuration
   * show : print out all parametres in use
 * **merge-files** : merge all update files 
 * **man** : acces to manual (eg doc/)
@@ -105,7 +110,7 @@ Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is :
 
 ##  CONTRIBUING
 Feel free to submit any issues/pull resquest you want <p>
-Clone, download and fork at will 
+Clone, download and fork at will <p>
 Staring and following also strongly recomanded
 
 ##  MISC
@@ -117,7 +122,7 @@ alias BASHRC='nano .bashrc'
 alias LOCAL='nano local.conf'
 ```
 
-ON/OFF
+on / off
 ```
 alias DISALLOW='disallow and minestop'
 alias ALLOW='allow && minestart'
@@ -148,4 +153,4 @@ alias qwerty='setxkbmap fr'
 
 
 ##  DONATION
-Feel free to make a BTC/ETH/XMR/ZEC or any coin you want to NPO :) 
+Feel free to make a BTC / ETH / XMR / ZEC or any coin you want to NPO :) 
