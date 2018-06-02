@@ -101,3 +101,8 @@ azerty
 alias qwerty='setxkbmap fr'
 ```
 
+## Dev
+* create config command to handle reset show set configs of all variables
+* transform in standalone program with argc/argv manager and full doc
+* progress to UpdateManager to RigManager with auto reboot 
+* pip?
