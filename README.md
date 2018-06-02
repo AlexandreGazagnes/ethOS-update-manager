@@ -47,27 +47,37 @@ prepare program and folder/file :
 $ cd
 $ chmod +x /home/ethos/ethOS-update-manager/launch
 $ chmod +x /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py
+$ rm /home/ethos/ethOS-update-manager/install
 ```
-
 
 create alias (shortcup for CLI) : 
 ```
-$ echo "alias --your_shortcut--='/home/ethos/ethOS-update-manager/launch'" >>  /home/ethos/.bashrc
+$ echo "alias --ethuper--='/home/ethos/ethOS-update-manager/launch'" >>  /home/ethos/.bashrc
 ```
 
 for automatic program launch (background) at each ethos stratup : 
 ```
 $ echo "/home/ethos/ethOS-update-manager/launch" >> /home/ethos/.bashrc
 ```
-for manual launch but background work: 
-```
-$ /home/ethos/ethOS-update-manager/launch
-```
 
-for manual launch but foreground work: 
-```
-$ /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py
-```
+## usage
+
+
+Just run : ```ethuper [cmd] [option]```
+
+with cmd : 
+* --autoboot 
+** able
+** disable
+* --start 
+* --stop
+* config
+** set : set one or all params 
+** reset : reset to original configuration
+** show : show actual configuration
+* merge-files
+
+man ethuper
 
 
 <p><p>
