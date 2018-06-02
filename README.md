@@ -1,9 +1,7 @@
 # ethOS-update-manager
 <br><br>
   
-## VERSION
-0.3.0
-<br><br>
+
 
 ##  DESCRIPTION
 
@@ -13,6 +11,11 @@ It is designed to be run directly from the device to avoid ssh breaking connecti
 
 You're free to use ``` update```  or ``` show stats```  command, but as ``` update```  push data to the server for each call, it is recommanded to use ``` show stats```.
 <br><br>
+
+## VERSION
+0.3.0
+<br><br>
+
 ##  LICENCE
 
 GNU General Public License v3.0
@@ -74,7 +77,7 @@ $ r
 ```
 <br><br>
 
-##  USAGE / TUTORIAL
+##  USAGE
 
 
 Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is : 
@@ -107,7 +110,7 @@ Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is :
 * utils :               various scripts to clean, merge, split, manipulate you data files
 <br><br>
 
-##  CONTRIBUING
+##  CONTRIBUTING
 Feel free to submit any issues/pull resquest you want <p>
 Clone, download and fork at will <p>
 Staring and following also strongly recomanded
@@ -144,7 +147,6 @@ alias qwerty='setxkbmap fr'
 ## DEV
 * PARTIAL : find a new name 
 * PARTIAL : create an install who automaticly create alias and autorun in bashrc
-
 * create config command to handle reset show set configs of all variables
 * transform in standalone program with argc/argv manager and full doc
 * progress to UpdateManager to RigManager with auto reboot 
