@@ -27,11 +27,17 @@ ethos :    1.3.1+ <p>
 hardware : -
 <p><p>
 
-##  Installation
-from ```/home/ethos/ ``` just ```git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git```
+##  Automatic installation
+from ```/home/ethos/ ``` just type```git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git```
+when download completed type : 
+```
+$ /home/ethos/ethOS-update-manager/install
+```
+your system will reboot after 3 seconds
+
 <p><p>
 
-## Usage
+## Manual installation
 
 considering the folder ``` ethOS-update-manager ``` in filepath ``` /home/ethos/ ```
 so as ``` $ ls /home/ethos/ethOS-update-manager ``` returning ``` ethOS-update-manager/ ``` 
@@ -41,16 +47,6 @@ prepare program and folder/file :
 $ cd
 $ chmod +x /home/ethos/ethOS-update-manager/launch
 $ chmod +x /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py
-```
-
-for manual launch but background work: 
-```
-$ /home/ethos/ethOS-update-manager/launch
-```
-
-for manual launch but foreground work: 
-```
-$ /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py
 ```
 
 
@@ -63,6 +59,17 @@ for automatic program launch (background) at each ethos stratup :
 ```
 $ echo "/home/ethos/ethOS-update-manager/launch" >> /home/ethos/.bashrc
 ```
+for manual launch but background work: 
+```
+$ /home/ethos/ethOS-update-manager/launch
+```
+
+for manual launch but foreground work: 
+```
+$ /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py
+```
+
+
 <p><p>
 
 ## Folders
