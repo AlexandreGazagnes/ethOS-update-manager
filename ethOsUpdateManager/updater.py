@@ -13,22 +13,21 @@ logging.basicConfig(level=logging.INFO)
 
 # please do not use pandas on ethos 1.3.1
 
-from lib.filepaths import * 
-from lib.params import * 
+from confs.filepaths import * 
+from confs.params import * 
+
 from lib.files import * 
 from lib.data import * 
 from lib.text import * 
-
+from lib.install import *
 
 # Main
 
 def main() : 
 
-	with open("/home/ethos/ethOS-update-manager/ethuper/var/install.pk", "r") as f : v = f.read()
-	if v == "True" : 
-		os.system("rm -f /home/ethos/ethOS-update-manager/install")
-		with open("/home/ethos/ethOS-update-manager/ethuper/var/install.pk", "w") as f : f.write("False")			
-
+	# handle install			
+	install()
+	
 	# file manager
 	init_data_file(DATA_FOLDER, DATA_FILE)
 
