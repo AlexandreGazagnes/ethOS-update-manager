@@ -2,5 +2,11 @@
 #--*-- coding: utf-8 --*--
 
 import os
-os.system("nohup python3 /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py &")
+
+# nohup to free comand from terminal
+# > log to keep a log of exe 
+# 2>&1 to log both stderr and stdout 
+# & to execute program in background
+
+os.system("nohup python3 /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py > log 2>&1 &")
 
