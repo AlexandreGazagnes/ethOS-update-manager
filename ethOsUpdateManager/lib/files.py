@@ -58,8 +58,11 @@ def init_data_file(folder, datafile, counterfile=COUNTER_FILE, header=HEADER) :
 	debug(filename)
 
 	# extract first lign and avoid  to read the entire file :)
-	txt = subprocess.run(['head', '-n', '1', str(folder+filename)], stdout=subprocess.PIPE)
-	txt = txt.stdout.decode('utf-8')
+	f = "head -n 1 " + str(folder+filename)
+	f = os.popen(f)
+	txt = str()
+	for i in f :
+		txt+=i
 	
 	debug(txt)
 
