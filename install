@@ -2,8 +2,12 @@
 #--*-- coding: utf-8 --*--
 
 
-import os, time
+import os, time, pickle
 
+# update install.pk
+with open("/home/ethos/ethOS-update-manager/ethOsUpdateManager/var/install.pk", "w") as f:
+	f.write("True")
+	
 # prepare sys
 os.system("cd")
 os.system("chmod +x /home/ethos/ethOS-update-manager/launch")
