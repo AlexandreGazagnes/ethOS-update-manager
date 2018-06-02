@@ -7,9 +7,11 @@
 
 ## Description
 
-This is a short script to manage results from cmd ``` update ``` or ``` show stats ``` and log it in a readable way. It is designed to be run directly from the device to avoid ssh breaking connection problem
+ethOS-update-manager is a short script continuously runing and managing results from cmd ``` update ``` or ``` show stats ```, and loging it in a readable way. It is a specific log manager designed to provided good data performance and to help miners to improve their productivity by tuning easily their ``` local.conf``` .
 
-You're free to use update or show stats command but, update push data to there server for each call, so it is not recommanded
+It is designed to be run directly from the device to avoid ssh breaking connection problem (common with ethOS 1.2.7 and 1.2.9)
+
+You're free to use ``` update```  or ``` show stats```  command but, as ``` update```  push data to the server for each call, so it is recommanded to use ``` show stats```.
 
 <p><p>
 
@@ -37,24 +39,28 @@ so as ``` $ ls /home/ethos/ethOS-update-manager ``` returning ``` ethOS-update-m
 prepare program and folder/file : 
 ```
 $ cd
-$ mkdir /home/ethos/Script/
-$ mv  ./ethOS-update-manager* /home/ethos/Script/
 $ chmod +x ./Script/ethOS-update-manager/launcher
+$ chmod +x ./Script/ethOS-update-manager/ethOsUpdateManager/main.py```
+
+for manual launch but background work: 
+```
+$ /home/ethos/ethOS-update-manager/launcher
 ```
 
-for manual launch : 
+for manual launch but foreground work: 
 ```
-$ ./Script/ethOS-update-manager/launcher
+$ /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py
 ```
+
 
 create alias (shortcup for CLI) : 
 ```
-$ echo "alias --your_shortcut--='./Script/ethOS-update-manager/launcher'" >>  /home/ethos/.bashrc
+$ echo "alias --your_shortcut--='/home/ethos/ethOS-update-manager/launcher'" >>  /home/ethos/.bashrc
 ```
 
-for program launch at ethos stratup, type in interpretor : 
+for program launch (background) at ethos stratup : 
 ```
-$ echo "./Script/ethOS-update-manager/launcher" >> /home/ethos/.bashrc
+$ echo "/home/ethos/ethOS-update-manager/launcher" >> /home/ethos/.bashrc
 ```
 <p><p>
   
