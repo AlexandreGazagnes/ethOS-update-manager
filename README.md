@@ -1,9 +1,9 @@
 # ethOS-update-manager
-<p>
+<br><br>
   
 ## VERSION
 0.3.0
-<p><p>
+<br><br>
 
 ##  DESCRIPTION
 
@@ -12,24 +12,23 @@ ethOS-update-manager is a short script continuously runing/managing results from
 It is designed to be run directly from the device to avoid ssh breaking connection problem (common with ethOS 1.2.7 and 1.2.9)
 
 You're free to use ``` update```  or ``` show stats```  command, but as ``` update```  push data to the server for each call, it is recommanded to use ``` show stats```.
-
-<p><p>
-
+<br><br>
 ##  LICENCE
 
 GNU General Public License v3.0
-<p><p>
+<br><br>
 
 ##  REQUIREMENTS
 
 python :   3.4.3 + (default ethOS python3)<p>
 ethos :    1.3.1+ <p>
 hardware : -
-<p><p>
+<br><br>
 
 ##  DOWNLOAD
 
 from ```/home/ethos/ ``` just type```git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git```
+<br><br>
 
 ##  INSTALL
 
@@ -43,7 +42,6 @@ $ /home/ethos/ethOS-update-manager/install
 ```
 Warning : Your system will reboot after 3 seconds, nothing unusual by the way
 
-<p><p>
 
 #### Manual
 
@@ -60,7 +58,6 @@ $ chmod +x /home/ethos/ethOS-update-manager/_ethuper/ethuper.py
 ```
 
 
-
 Create alias (shortcup for CLI) : 
 ```
 $ echo "alias ethuper='/home/ethos/ethOS-update-manager/ethuper'" >>  /home/ethos/.bashrc
@@ -75,6 +72,7 @@ Reboot to update .bashrc
 ```
 $ r
 ```
+<br><br>
 
 ##  USAGE / TUTORIAL
 
@@ -98,7 +96,7 @@ Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is :
   * soft : Keep all datafiles and log files 
 
 
-<p><p>
+<br><br>
 
 ##  FOLDERS
 * data :                data file(s) created
@@ -107,12 +105,14 @@ Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is :
 * logs :                logs files stdout and stdr
 * tests :               standard test collection
 * utils :               various scripts to clean, merge, split, manipulate you data files
+<br><br>
 
 ##  CONTRIBUING
 Feel free to submit any issues/pull resquest you want <p>
 Clone, download and fork at will <p>
 Staring and following also strongly recomanded
-
+<br><br>
+  
 ##  MISC
 
 Find bellow various helpful aliases for very popular command 
@@ -139,6 +139,7 @@ azerty
 ```
 alias qwerty='setxkbmap fr'
 ```
+<br><br>
 
 ## DEV
 * PARTIAL : find a new name 
@@ -150,7 +151,8 @@ alias qwerty='setxkbmap fr'
 * pip?
 * use logging with log external file
 * write full doc and utils and test
-
+<br><br>
 
 ##  DONATION
 Feel free to make a BTC / ETH / XMR / ZEC or any coin you want to NPO :) 
+<br><br>
