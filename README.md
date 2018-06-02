@@ -81,7 +81,9 @@ with cmd :
   * show 
 * **merge-files** : merge all update files 
 * **man** : acces to manual
-
+* **reboot** : reboot the entire programm setting original conf + option : 
+  * hard : -- WARNING -- delete all datafiles and log files
+  * soft : Keep all datafiles and log files 
 
 
 <p><p>
