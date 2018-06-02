@@ -39,8 +39,8 @@ so as ``` $ ls /home/ethos/ethOS-update-manager ``` returning ``` ethOS-update-m
 prepare program and folder/file : 
 ```
 $ cd
-$ chmod +x ./Script/ethOS-update-manager/launcher
-$ chmod +x ./Script/ethOS-update-manager/ethOsUpdateManager/main.py
+$ chmod +x /home/ethos/ethOS-update-manager/launcher
+$ chmod +x /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py
 ```
 
 for manual launch but background work: 
