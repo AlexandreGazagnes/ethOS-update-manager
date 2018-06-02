@@ -39,13 +39,13 @@ so as ``` $ ls /home/ethos/ethOS-update-manager ``` returning ``` ethOS-update-m
 prepare program and folder/file : 
 ```
 $ cd
-$ chmod +x /home/ethos/ethOS-update-manager/launcher
+$ chmod +x /home/ethos/ethOS-update-manager/launch
 $ chmod +x /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py
 ```
 
 for manual launch but background work: 
 ```
-$ /home/ethos/ethOS-update-manager/launcher
+$ /home/ethos/ethOS-update-manager/launch
 ```
 
 for manual launch but foreground work: 
@@ -56,12 +56,12 @@ $ /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py
 
 create alias (shortcup for CLI) : 
 ```
-$ echo "alias --your_shortcut--='/home/ethos/ethOS-update-manager/launcher'" >>  /home/ethos/.bashrc
+$ echo "alias --your_shortcut--='/home/ethos/ethOS-update-manager/launch'" >>  /home/ethos/.bashrc
 ```
 
 for automatic program launch (background) at each ethos stratup : 
 ```
-$ echo "/home/ethos/ethOS-update-manager/launcher" >> /home/ethos/.bashrc
+$ echo "/home/ethos/ethOS-update-manager/launch" >> /home/ethos/.bashrc
 ```
 <p><p>
   
