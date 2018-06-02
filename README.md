@@ -7,11 +7,11 @@
 
 ## Description
 
-ethOS-update-manager is a short script continuously runing and managing results from cmd ``` update ``` or ``` show stats ```, and loging it in a readable way. It is a specific log manager designed to provided good data performance and to help miners to improve their productivity by tuning easily their ``` local.conf``` .
+ethOS-update-manager is a short script continuously runing and managing results from cmd ``` update ``` or ``` show stats ```, and logging it in a readable way. It is a specific log manager designed to provided good data performance and to help miners to improve their productivity by tuning easily their ``` local.conf``` .
 
 It is designed to be run directly from the device to avoid ssh breaking connection problem (common with ethOS 1.2.7 and 1.2.9)
 
-You're free to use ``` update```  or ``` show stats```  command but, as ``` update```  push data to the server for each call, so it is recommanded to use ``` show stats```.
+You're free to use ``` update```  or ``` show stats```  command, but as ``` update```  push data to the server for each call, it is recommanded to use ``` show stats```.
 
 <p><p>
 
@@ -40,7 +40,8 @@ prepare program and folder/file :
 ```
 $ cd
 $ chmod +x ./Script/ethOS-update-manager/launcher
-$ chmod +x ./Script/ethOS-update-manager/ethOsUpdateManager/main.py```
+$ chmod +x ./Script/ethOS-update-manager/ethOsUpdateManager/main.py
+```
 
 for manual launch but background work: 
 ```
@@ -58,7 +59,7 @@ create alias (shortcup for CLI) :
 $ echo "alias --your_shortcut--='/home/ethos/ethOS-update-manager/launcher'" >>  /home/ethos/.bashrc
 ```
 
-for program launch (background) at ethos stratup : 
+for automatic program launch (background) at each ethos stratup : 
 ```
 $ echo "/home/ethos/ethOS-update-manager/launcher" >> /home/ethos/.bashrc
 ```
