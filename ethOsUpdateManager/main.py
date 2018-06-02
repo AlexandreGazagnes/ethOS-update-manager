@@ -53,7 +53,7 @@ logging.basicConfig(level=logging.INFO)
 		# CMD = "show stats" # or update
 
 
-SLEEPER = 5  # 5 minutes
+SLEEPER = 5 *60 # 5 minutes
 
 
 		# KEYS_SELECTED= [# global :
@@ -87,7 +87,7 @@ SLEEPER = 5  # 5 minutes
 def main() : 
 
 
-	# if data file do not exist : 
+	# file manager
 	init_data_file(DATA_FOLDER, DATA_FILE)
 
 
@@ -95,18 +95,18 @@ def main() :
 	while True : 
 
 		# just ... sleep!
-		time.sleep(SLEEPER) # to avoid multiple short reboot, options 
+		time.sleep(SLEEPER) # to avoid multiple short reboot 
 
 		# DEPRECIATED : (just for local test)
-		txt = load_data(DATA_FOLDER+TEMP_FILE)
+		# txt = load_data(DATA_FOLDER+TEMP_FILE)
 		
 		# proceed 
-		# txt = data_from_cmd() 			# extract text
+		txt = data_from_cmd() 				# extract text
 		data = convert_txt(txt)				# extract data from text				
 		data = extract_data(data) 			# build data dict of int or str 
-		txt = convert_organized_txt(data) 	# rebuild txt for write
+		txt = convert_organized_txt(data) 		# rebuild txt for write
 
-		# append file
+		# update/append file
 		update_data_file(DATA_FOLDER, DATA_FILE, txt)
 
 
