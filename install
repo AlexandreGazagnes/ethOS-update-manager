@@ -1,3 +1,5 @@
 #!/bin/sh
 
 python3 /home/ethos/ethOS-update-manager/_ethuper/installer.py
+
+exit 0
