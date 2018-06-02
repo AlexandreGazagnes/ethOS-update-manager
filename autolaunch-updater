@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+#--*-- coding: utf-8 --*--
+
+import os
+
+# nohup to free comand from terminal
+# > log to keep a log of exe 
+# 2>&1 to log both stderr and stdout 
+# & to execute program in background
+
+os.system("nohup python3 /home/ethos/ethOS-update-manager/_ethuper/main.py > /home/ethos/ethOs-update-manager/logs/updater 2>&1 &")
+

@@ -7,7 +7,7 @@
 
 ##  DESCRIPTION
 
-ethOS-update-manager is a short script continuously runing and managing results from cmd ``` update ``` or ``` show stats ```, and logging it in a readable way. It is a specific log manager designed to provided good data performance and to help miners to improve their productivity by tuning easily their ``` local.conf``` .
+ethOS-update-manager is a short script continuously runing/managing results from cmd ``` update ``` or ``` show stats ```, and logging it in a readable way. It is a specific log manager designed to provide good data performance and to help miners to improve their productivity by tuning in an easier way their ``` local.conf```.
 
 It is designed to be run directly from the device to avoid ssh breaking connection problem (common with ethOS 1.2.7 and 1.2.9)
 
@@ -33,52 +33,61 @@ hardware : -
 from ```/home/ethos/ ``` just type```git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git```
 when download completed type : 
 ```
+$ chmod +x /home/ethos/ethOS-update-manager/install
 $ /home/ethos/ethOS-update-manager/install
 ```
-your system will reboot after 3 seconds
+Warning : Your system will reboot after 3 seconds, nothing unusual by the way
 
 <p><p>
 
 #### Manual
 
-considering the folder ``` ethOS-update-manager ``` in filepath ``` /home/ethos/ ```
+Considering the folder ``` ethOS-update-manager ``` in filepath ``` /home/ethos/ ```
 so as ``` $ ls /home/ethos/ethOS-update-manager ``` returning ``` ethOS-update-manager/ ``` 
 
-prepare program and folder/file : 
+Prepare program and folder/file : 
 ```
 $ cd
-$ chmod +x /home/ethos/ethOS-update-manager/launch
-$ chmod +x /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py
-$ rm /home/ethos/ethOS-update-manager/install
+$ chmod +x /home/ethos/ethOS-update-manager/autolaunch-updater
+$ chmod +x /home/ethos/ethOS-update-manager/ethuper
+$ chmod +x /home/ethos/ethOS-update-manager/_ethuper/updater.py
+$ chmod +x /home/ethos/ethOS-update-manager/_ethuper/ethuper.py
 ```
 
-create alias (shortcup for CLI) : 
+
+
+Create alias (shortcup for CLI) : 
 ```
-$ echo "alias --ethuper--='/home/ethos/ethOS-update-manager/launch'" >>  /home/ethos/.bashrc
+$ echo "alias ethuper='/home/ethos/ethOS-update-manager/ethuper'" >>  /home/ethos/.bashrc
 ```
 
-for automatic program launch (background) at each ethos stratup : 
+For automatic program launch (background) at each ethos stratup : 
 ```
-$ echo "/home/ethos/ethOS-update-manager/launch" >> /home/ethos/.bashrc
+$ echo '/home/ethos/ethOS-update-manager/autolaunch-updater' >> /home/ethos/.bashrc
+```
+
+Reboot to update .bashrc
+```
+$ r
 ```
 
 ##  USAGE / TUTORIAL
 
 
 Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is : 
-* **autoboot** : laucnh autamiaticly when booting ethos (defaut) **+ OPTION** : 
-  * able  
-  * disable
+* **autoboot** : updater automatiticaly launched or not when booting ethos **+ OPTION** : 
+  * on  : enable (default)
+  * off : disable
 * **start** : start at command **+ OPTION** : 
   * fg (foreground)
   * bg (background)
 * **stop** : stop at command
 * **config** : manage configs **+ OPTION**:  
-  * set
-  * reset 
-  * show 
+  * set : set specific config parametre(s)
+  * reset : rest all parametres to orginal configuration
+  * show : print out all parametres in use
 * **merge-files** : merge all update files 
-* **man** : acces to manual
+* **man** : acces to manual (eg doc/)
 * **reboot** : reboot the entire programm setting original conf **+ OPTION** : 
   * hard : -- WARNING -- delete all datafiles and log files
   * soft : Keep all datafiles and log files 
@@ -89,23 +98,19 @@ Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is :
 ##  FOLDERS
 * data :                data file(s) created
 * doc :                 full documentation 
-* ethOsUpdateManager :  main.py (called by launch) and lib
+* _ ethuper :  			contain core code, scripts and libraires, free to read, not to change
 * logs :                logs files stdout and stdr
 * tests :               standard test collection
 * utils :               various scripts to clean, merge, split, manipulate you data files
 
 ##  CONTRIBUING
-feel free to submit any issues/pull resquest you want <p>
-clone, download and fork at will 
-<p><p>
-  
-##  REWARD
+Feel free to submit any issues/pull resquest you want <p>
+Clone, download and fork at will 
+Staring and following also strongly recomanded
 
-1 ETH for the 100th people to star the project :) 
-<p><p>
-  
 ##  MISC
 
+Find bellow various helpful aliases for very popular command 
 nano
 ```
 alias BASHRC='nano .bashrc'
@@ -131,11 +136,16 @@ alias qwerty='setxkbmap fr'
 ```
 
 ## DEV
+* PARTIAL : find a new name 
+* PARTIAL : create an install who automaticly create alias and autorun in bashrc
+
 * create config command to handle reset show set configs of all variables
 * transform in standalone program with argc/argv manager and full doc
 * progress to UpdateManager to RigManager with auto reboot 
 * pip?
 * use logging with log external file
 * write full doc and utils and test
-* find a new name 
-* create an install who automaticly create alias and autorun in bashrc
+
+
+##  DONATION
+Feel free to make a BTC/ETH/XMR/ZEC or any coin you want to NPO :) 

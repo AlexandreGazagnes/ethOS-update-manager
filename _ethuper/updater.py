@@ -25,7 +25,7 @@ from lib.install import *
 
 def main() : 
 
-	# handle install			
+	# handle install if needed 		
 	install()
 	
 	# file manager
