@@ -106,3 +106,7 @@ alias qwerty='setxkbmap fr'
 * transform in standalone program with argc/argv manager and full doc
 * progress to UpdateManager to RigManager with auto reboot 
 * pip?
+* use logging with log external file
+* write full doc and utils and test
+* find a new name 
+* create an install who automaticly create alias and autorun in bashrc
