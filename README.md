@@ -1,11 +1,11 @@
 # ethOS-update-manager
 <p>
   
-## Version
+## VERSION
 0.2.1 
 <p><p>
 
-## Description
+##  DESCRIPTION
 
 ethOS-update-manager is a short script continuously runing and managing results from cmd ``` update ``` or ``` show stats ```, and logging it in a readable way. It is a specific log manager designed to provided good data performance and to help miners to improve their productivity by tuning easily their ``` local.conf``` .
 
@@ -15,19 +15,21 @@ You're free to use ``` update```  or ``` show stats```  command, but as ``` upda
 
 <p><p>
 
-## Licence
+##  LICENCE
 
 GNU General Public License v3.0
 <p><p>
 
-##  Requirements
+##  REQUIREMENTS
 
 python :   3.4.3 + (default ethOS python3)<p>
 ethos :    1.3.1+ <p>
 hardware : -
 <p><p>
 
-##  Automatic installation
+##  INSTALL
+
+#### Auto
 from ```/home/ethos/ ``` just type```git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git```
 when download completed type : 
 ```
@@ -37,7 +39,7 @@ your system will reboot after 3 seconds
 
 <p><p>
 
-## Manual installation
+#### Manual
 
 considering the folder ``` ethOS-update-manager ``` in filepath ``` /home/ethos/ ```
 so as ``` $ ls /home/ethos/ethOS-update-manager ``` returning ``` ethOS-update-manager/ ``` 
@@ -60,7 +62,7 @@ for automatic program launch (background) at each ethos stratup :
 $ echo "/home/ethos/ethOS-update-manager/launch" >> /home/ethos/.bashrc
 ```
 
-## usage
+##  USAGE / TUTORIAL
 
 
 Just run : ```ethuper [cmd] [option]```
@@ -84,7 +86,7 @@ with cmd :
 
 <p><p>
 
-## Folders
+##  FOLDERS
 * data :                data file(s) created
 * doc :                 full documentation 
 * ethOsUpdateManager :  main.py (called by launch) and lib
@@ -92,17 +94,17 @@ with cmd :
 * tests :               standard test collection
 * utils :               various scripts to clean, merge, split, manipulate you data files
 
-## Contributing
+##  CONTRIBUING
 feel free to submit any issues/pull resquest you want <p>
 clone, download and fork at will 
 <p><p>
   
-## Reward
+##  REWARD
 
 1 ETH for the 100th people to star the project :) 
 <p><p>
   
-##  Misc : useful aliases
+##  MISC
 
 nano
 ```
@@ -128,7 +130,7 @@ azerty
 alias qwerty='setxkbmap fr'
 ```
 
-## Dev
+## DEV
 * create config command to handle reset show set configs of all variables
 * transform in standalone program with argc/argv manager and full doc
 * progress to UpdateManager to RigManager with auto reboot 
