@@ -64,7 +64,15 @@ for automatic program launch (background) at each ethos stratup :
 $ echo "/home/ethos/ethOS-update-manager/launch" >> /home/ethos/.bashrc
 ```
 <p><p>
-  
+
+## Folders
+* data :                data file(s) created
+* doc :                 full documentation 
+* ethOsUpdateManager :  main.py (called by launch) and lib
+* logs :                logs files stdout and stdr
+* tests :               standard test collection
+* utils :               various scripts to clean, merge, split, manipulate you data files
+
 ## Contributing
 feel free to submit any issues/pull resquest you want <p>
 clone, download and fork at will 
