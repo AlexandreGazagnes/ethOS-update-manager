@@ -11,8 +11,8 @@ from logging import debug, warning, info
 
 # do not use pandas on ethos 1.3.1
 
-from lib.params import * 
-from lib.filepaths import * 
+from confs.params import * 
+from confs.filepaths import * 
 
 
 
