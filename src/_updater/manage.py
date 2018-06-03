@@ -59,7 +59,7 @@ def miner_not_started(data) :
 
 
 def miner_too_hot(data) : 
-	"""if miner to hot""" : 
+	"""if miner to hot""" 
 
 	# if GPU temp to hot disallow and minestop
 	if (data["temp_max"] > 75) or (data["temp_avg"] > 70) : 
@@ -80,7 +80,7 @@ def miner_too_hot(data) :
 
 
 def miner_not_perf(data) : 
-	"""if miner not perf """ : 
+	"""if miner not perf """ 
 
 	# if all GPU do not mine : reboot 
 	if data['gpus'] > data['working_gpus'] : 

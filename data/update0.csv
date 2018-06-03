@@ -1,0 +1,1 @@
+timestamp,uptime,miner_secs,miner_version,version,hostname,ip,cpu_temp,gpus,working_gpus,hash,proxy_problem,miner_hashes,rejected_shares,fanrpm,fanpercent,temp,temp_avg,temp_max,bioses,core,mem,voltage,watts,powertune
