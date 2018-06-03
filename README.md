@@ -146,12 +146,14 @@ where **COMMAND** is :
 * src :  			            contain core code, scripts and libraires, FEEL FREE TO READ NOT TO CHANGE
 * tests :               standard test collection
 * utils :               various scripts to clean, merge, split, manipulate you data files
+
 <br><br>
 
 ##  CONTRIBUTING
 Feel free to submit any issues / pull resquest you want <p>
 Clone, download and fork at will <p>
 Staring and following also strongly recommended
+
 <br><br>
   
 ##  MISC
@@ -180,7 +182,7 @@ azerty
 ```
 alias qwerty='setxkbmap fr'
 ```
-<br>
+<br><br>
 
 ## DEV
 * develop an alarm manager to send sms, twitter, mail, telegram (...) warning logs.
@@ -189,6 +191,7 @@ alias qwerty='setxkbmap fr'
 * pip ?
 * use logging with log external file
 * write full doc, utils and test
+
 <br><br>
 
 ##  DONATION
