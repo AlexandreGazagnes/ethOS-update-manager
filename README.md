@@ -172,9 +172,9 @@ Feel free to make a BTC / ETH / XMR / ZEC or any coin you want to NPO :)
 
 <br><br>
 
-##  MISC
+##  BONUS
 
-Find bellow various helpful aliases for very popular command 
+Find bellow various helpful aliases for very popular command <p>
 nano
 ```
 alias BASHRC='nano .bashrc'
