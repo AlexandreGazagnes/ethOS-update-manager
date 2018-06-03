@@ -1,19 +1,22 @@
-# ethOS-update-manager
+# ethOS-update-manager : ethuper
 <br><br>
 
 
 In the following and in files / scripts, ```ethOS-update-manager``` will be replaced by ```ethuper``` which stands for ```ETHos UPdate managER```.
 
-<br><br>
-
+<br>
 ##  DESCRIPTION
 
-ethOS-update-manager is complete solution run and manage automaticly yours miners. 
-Two main features are : 
-* runing and managing results from cmd ``` update ``` or ``` show stats ```, and logging it in a readable way. As a log manager but designed to provide good data performance and to help miners to improve their productivity by tuning in an easier way their ``` local.conf```. 
-* complete automatic reboot manager to handle overwarming, gpu failures and under performances issues buy rebooting, allowing and restarting miner.
+ethOS-update-manager is complete solution deisgned to run, log, manage and reboot (if needed) automaticly yours miners. 
+Two main features are runing / managing results from cmd ``` update ``` or ``` show stats ```, logging it in a readable way, and propose a complete automatic reboot manager to handle overwarming, gpu failure and under performance issues by rebooting (hard or  soft way), allowing and/or restarting miner.<p>
 
-It is designed to be run directly from the device to avoid ssh breaking connection problem (common with ethOS 1.2.7 and 1.2.9)
+As a log/performance manager, it is  designed to provide good and helpfull data performance, and to help miners to improve their productivity by tuning in an easier way their ``` local.conf```. <p>
+
+As a rebooting manager, it is designed to provide a clever solution to increase uptime by rebooting, allowing, restarting with specific strategy for each problem. <p>
+
+Every log, reboot allow restart option is handly configurable with the ```ethuper``` command. See bellow or ```doc/``` for dull information.<p>
+
+It is designed to be run directly from the device to avoid ssh breaking connection problem (common with ethOS 1.2.7 and 1.2.9) <p>
 
 You're free to use ``` update```  or ``` show stats```  command, but as ``` update```  push data to the server for each call, it is recommanded to use ``` show stats```.
 <br><br>
