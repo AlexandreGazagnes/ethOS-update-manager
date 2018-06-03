@@ -121,10 +121,10 @@ where **COMMAND** is :
 <br>
 
 ##  FOLDERS
-* _ ethuper :  			contain core code, scripts and libraires, FEEL FREE TO READ NOT TO CHANGE
 * data :                data file(s) created
 * doc :                 full documentation 
 * logs :                logs files stdout and stdr
+* src :  			            contain core code, scripts and libraires, FEEL FREE TO READ NOT TO CHANGE
 * tests :               standard test collection
 * utils :               various scripts to clean, merge, split, manipulate you data files
 <br><br>
