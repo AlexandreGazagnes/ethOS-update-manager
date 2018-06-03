@@ -18,6 +18,8 @@ def main() :
 
     # handle args
     command, option = arg_manager()
+    
+    # execute command and option
     command_manager(command, option)
 
 
