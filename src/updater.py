@@ -26,46 +26,46 @@ from _updater.manage import *
 
 # main
 
-def main() : 
+def main() :
 
-	# test logging level
-	logging.debug("test logging debug ")
-	logging.info("test logging info ")
-	logging.warning("test logging warning ")
+	with open("/home/ethos/ethOS-update-manager/src/var/autolaunch", "r") as f : v = int(f.read())
 
+	if  v : 
+		# handle install if needed 		
+		install()
 
-	# handle install if needed 		
-	install()
-
-	
-	# file manager
-	init_data_file(DATA_FOLDER, DATA_FILE)
-
-
-	# main loop
-	while True : 
-
-		# just ... sleep!
-		time.sleep(SLEEPER) # to avoid multiple short reboot 
+		# test logging level
+		logging.debug("test logging debug ")
+		logging.info("test logging info ")
+		logging.warning("test logging warning ")
 		
-		# proceed 
-		txt = data_from_cmd()				# extract text
-		
-		# test MODE 
-		txt = load_data("/home/ethos/ethOS-update-manager/data/", "update.temp")
+		# file manager
+		init_data_file(DATA_FOLDER, DATA_FILE)
 
-		data = convert_txt(txt)				# extract data from text				
-		data = extract_data(data) 			# build data dict of int or str 
-		txt = convert_organized_txt(data) 	# rebuild txt for write
+		# main loop
+		while True : 
 
-		# update/append file
-		update_data_file(DATA_FOLDER, DATA_FILE, txt)
+			# just ... sleep!
+			time.sleep(SLEEPER) # to avoid multiple short reboot 
+			
+			# proceed 
+			txt = data_from_cmd()				# extract text
+			
+			# test MODE 
+			txt = load_data("/home/ethos/ethOS-update-manager/data/", "update.temp")
 
-		with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "r") as f : reboot_aut = int(f.read())
-		logging.debug(reboot_aut)
+			data = convert_txt(txt)				# extract data from text				
+			data = extract_data(data) 			# build data dict of int or str 
+			txt = convert_organized_txt(data) 	# rebuild txt for write
 
-		if reboot_aut : 
-			manage(data)
+			# update/append file
+			update_data_file(DATA_FOLDER, DATA_FILE, txt)
+
+			with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "r") as f : reboot_aut = int(f.read())
+			logging.debug(reboot_aut)
+
+			if reboot_aut : 
+				manage(data)
 
 
 
