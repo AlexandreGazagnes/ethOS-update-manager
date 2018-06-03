@@ -48,6 +48,7 @@ def reboot_install() :
 	#auto reboot 
 	v = os.system("r")
 	
+	# if r do not work
 	if v :  
 		os.system("reboot")
 	
