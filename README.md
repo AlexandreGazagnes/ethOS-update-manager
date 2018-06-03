@@ -101,7 +101,7 @@ where **COMMAND** is :
   * reset : reset all parametres to orginal configuration
   * show : print out all parametres in use
 
-* **reboot-aut** : set auto reboot autorisation to eanle automatic rig management mode. Rig will reboot when GPUs no detected/no    wroking, hrate obvious problem, overwarming, etc etc  **+ OPTION**:  
+* **reboot-aut** : set auto reboot autorisation to enale automatic rig management mode. Rig will reboot when GPUs no detected/no    working, hrate obvious problem, overwarming. (Full list in doc/)  **+ OPTION**:  
   * on  : enable (DEFAULT and RECOMMENDED)
   * off : disable
   * set : set specific auto reboot parametre(s) : temp, hrate...
@@ -128,7 +128,7 @@ where **COMMAND** is :
 <br><br>
 
 ##  CONTRIBUTING
-Feel free to submit any issues/pull resquest you want <p>
+Feel free to submit any issues / pull resquest you want <p>
 Clone, download and fork at will <p>
 Staring and following also strongly recommended
 <br><br>
@@ -167,7 +167,7 @@ alias qwerty='setxkbmap fr'
 * create config command to handle reset show set configs of all variables
 * transform in standalone program with argc/argv manager and full doc
 * progress to UpdateManager to RigManager with auto reboot 
-* pip?
+* pip ?
 * use logging with log external file
 * write full doc and utils and test
 <br><br>
