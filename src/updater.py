@@ -9,6 +9,7 @@ import os, subprocess, pickle, time
 
 from logging import debug, warning, info
 import logging
+logging.basicConfig(level=logging.DEBUG)
 
 # please do not use pandas on ethos 1.3.1
 
@@ -29,9 +30,17 @@ def main() :
 
 	# def loggig level
 	logging.basicConfig(level=logging.INFO)
+	
+
+	# test logging level
+	logging.debug("test logging debug ")
+	logging.info("test logging info ")
+	logging.warning("test logging warning ")
+
 
 	# handle install if needed 		
 	install()
+
 	
 	# file manager
 	init_data_file(DATA_FOLDER, DATA_FILE)
@@ -44,7 +53,11 @@ def main() :
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
 		
 		# proceed 
-		txt = data_from_cmd() 				# extract text
+		txt = data_from_cmd()				# extract text
+		
+		# test MODE 
+		txt = load_data("/home/ethos/ethOS-update-manager/data/", "update.temp")
+
 		data = convert_txt(txt)				# extract data from text				
 		data = extract_data(data) 			# build data dict of int or str 
 		txt = convert_organized_txt(data) 	# rebuild txt for write
@@ -52,7 +65,9 @@ def main() :
 		# update/append file
 		update_data_file(DATA_FOLDER, DATA_FILE, txt)
 
-		with("./var/reboot_aut.pk", "r") as f : reboot_aut = int(f.read())
+		with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "r") as f : reboot_aut = int(f.read())
+		logging.debug(reboot_aut)
+
 		if reboot_aut : 
 			manage(data)
 

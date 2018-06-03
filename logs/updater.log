@@ -1,0 +1,12 @@
+/bin/sh: 1: show: not found
+Traceback (most recent call last):
+  File "/home/ethos/ethOS-update-manager/src/updater.py", line 63, in <module>
+    
+  File "/home/ethos/ethOS-update-manager/src/updater.py", line 49, in main
+    raise ValueError("txt not good")  				# extract text
+  File "/home/ethos/ethOS-update-manager/src/_updater/data.py", line 118, in extract_data
+    data = add_working_gpus(data)
+  File "/home/ethos/ethOS-update-manager/src/_updater/data.py", line 58, in add_working_gpus
+    gpus = data["miner_hashes"]
+KeyError: 'miner_hashes'
+'miner_hashes'

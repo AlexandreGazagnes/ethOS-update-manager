@@ -16,7 +16,7 @@ import logging
 
 # log level
 
-logging.basicConfig(level=logging.WARNING)
+logging.basicConfig(level=logging.INFO)
 
 
 
@@ -26,7 +26,7 @@ CMD = "show stats" # or update
 debug(CMD)
 
 
-SLEEPER = 60 * 5 # 5 minutes
+SLEEPER = 10 # 5 minutes
 debug(SLEEPER)
 
 

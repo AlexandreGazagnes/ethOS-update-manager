@@ -42,11 +42,10 @@ def main() :
 		time.sleep(1)
 
 	#auto reboot 
-	os.system("r")
+	v = os.system("r")
 	
-	time.sleep(5)
-	# if not rebooted
-	os.system("reboot")
+	if v :  
+		os.system("reboot")
 	
 	
 
