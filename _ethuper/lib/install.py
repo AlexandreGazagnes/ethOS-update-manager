@@ -4,7 +4,7 @@
 
 def install():
 
-    with open("/home/ethos/ethOS-update-manager/_ethuper/var/install.pk", "r") as f : v = f.read()
-      if v == "True" : 
+    with open("./var/install.pk", "r") as  : inst = int(f.read())
+      if not inst  : 
         os.system("rm -f /home/ethos/ethOS-update-manager/install")
-        with open("/home/ethos/ethOS-update-manager/_ethuper/var/install.pk", "w") as f : f.write("False")
+        with open("./var/install.pk", "w") as f : f.write("0")

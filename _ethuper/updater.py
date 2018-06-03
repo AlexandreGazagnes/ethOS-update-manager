@@ -20,10 +20,12 @@ from lib.files import *
 from lib.data import * 
 from lib.text import * 
 from lib.install import *
+from lib.manage import *
 
 # Main
 
 def main() : 
+	# 
 
 	# handle install if needed 		
 	install()
@@ -37,9 +39,6 @@ def main() :
 
 		# just ... sleep!
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
-
-		# DEPRECIATED : (just for local test)
-		# txt = load_data(DATA_FOLDER+TEMP_FILE)
 		
 		# proceed 
 		txt = data_from_cmd() 				# extract text
@@ -49,6 +48,12 @@ def main() :
 
 		# update/append file
 		update_data_file(DATA_FOLDER, DATA_FILE, txt)
+
+		with("./var/reboot_aut.pk", "r") as f : reboot_aut = int(f.read())
+		# if reboot_aut : 
+			# manage(data)
+
+
 
 
 if __name__ == '__main__':
