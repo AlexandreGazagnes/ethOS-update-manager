@@ -6,7 +6,7 @@
 # import 
 
 import os, time
-from logging import debug, info warning
+from logging import debug, info, warning
 import logging
 
 from _installer.user import * 

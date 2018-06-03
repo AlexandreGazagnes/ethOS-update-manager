@@ -6,7 +6,7 @@
 # import 
 
 import os, time
-from logging import debug, info warning
+from logging import debug, info, warning
 import logging
 
 
@@ -21,9 +21,9 @@ def autosettings() :
 		ans = input()
 
 		if ans.lower() == "y" : 
-			with open("./var/autolaunch.pk", "w") as f : f.write("1")
-			with open("./var/reboot_aut.pk", "w") as f : f.write("1")
-			with open("./var/sleeper.pk", "w") as f : f.write("300")
+			with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("1")
+			with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "w") as f : f.write("1")
+			with open("/home/ethos/ethOS-update-manager/src/var/sleeper.pk", "w") as f : f.write("300")
 			return True
 
 		elif ans.lower() == "n" :  
@@ -36,16 +36,16 @@ def autosettings() :
 def autolaunch() : 
 	""" """
 	
-	print("enable autolaunch ? (DEFAULT and RECOMMANDED")
+	print("enable autolaunch ? (DEFAULT and RECOMMANDED)")
 	while True : 
 		ans = input()
 
 		if ans.lower() == "y" : 
-			with open("./var/autolaunch.pk", "w") as f : f.write("1")
+			with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("1")
 			return True
 
 		elif ans.lower() == "n" :  
-			with open("./var/autolaunch.pk", "w") as f : f.write("0")
+			with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("0")
 			return True
 
 		else : 
@@ -60,18 +60,18 @@ def reboot_aut() :
 		ans = input()
 
 		if ans.lower() == "y" : 
-			with open("./var/reboot_aut.pk", "w") as f : f.write("1")
+			with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "w") as f : f.write("1")
 			return True
 
 		elif ans.lower() == "n" :  
-			with open("./var/reboot_aut.pk", "w") as f : f.write("0")
+			with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "w") as f : f.write("0")
 			return True
 
 		else : 
 			print("y or n")
 
 
-def reboot_aut() : 
+def time_delta() : 
 	""" """
 
 	print("log time delta? in minutes (DEFAULT : 5)" )
@@ -87,7 +87,7 @@ def reboot_aut() :
 
 		if 60 >= ans >= 1 : 
 			t = str(ans * 60)
-			with open("./var/sleeper.pk", "w") as f : f.write(t)
+			with open("/home/ethos/ethOS-update-manager/src/var/sleeper.pk", "w") as f : f.write(t)
 			return True
 		else : 
 			print("Min 1, Max 60")
@@ -95,7 +95,7 @@ def reboot_aut() :
 
 def user_settings() : 
 	""" """ 
-	
+
 	done = autosettings()
 
 	if not done : 
