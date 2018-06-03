@@ -1,0 +1,5 @@
+#!/bin/sh
+
+python3 /home/ethos/ethOS-update-manager/_ethuper/ethuper.py
+
+exit 0
