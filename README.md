@@ -94,7 +94,7 @@ Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is :
 * **reboot** : reboot the entire programm setting original conf **+ OPTION** : 
   * hard : -- WARNING -- delete all datafiles and log files
   * soft : Keep all datafiles and log files 
-<br><br>
+<br>
 
 ##  FOLDERS
 * data :                data file(s) created
@@ -137,7 +137,7 @@ azerty
 ```
 alias qwerty='setxkbmap fr'
 ```
-<br><br>
+<br>
 
 ## DEV
 * PARTIAL : find a new name 
