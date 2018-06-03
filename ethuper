@@ -3,4 +3,4 @@
 
 import os 
 
-os.system("/home/ethos/ethOS-update-manager/src/ethuper.py")
+os.system("python3 /home/ethos/ethOS-update-manager/src/ethuper.py")

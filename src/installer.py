@@ -6,8 +6,11 @@
 # import 
 
 import os, time
+from logging import debug, info, warning
+import logging
 
-
+from _installer.user import * 
+from _installer.system import * 
 
 # main
 
@@ -17,38 +20,21 @@ def main() :
 	with open("/home/ethos/ethOS-update-manager/src/var/install.pk", "w") as f:
 		f.write("1")
 
-		
+	# manage user level of confidence 
+	user_settings()
+
 	# prepare sys
-	os.system("cd")
-	os.system("chmod +x /home/ethos/ethOS-update-manager/autolaunch-updater")
-	os.system("chmod +x /home/ethos/ethOS-update-manager/ethuper")
-
-	os.system("chmod +x /home/ethos/ethOS-update-manager/src/updater.py")
-	os.system("chmod +x /home/ethos/ethOS-update-manager/src/ethuper.py")
-
+	prepare_sys()
 
 	# create alias
-	os.system("""echo "alias ethuper='/home/ethos/ethOS-update-manager/ethuper'" >>  /home/ethos/.bashrc""")
-
+	add_aliases()
 
 	# for automatic program launch (background) at each ethos stratup : 
-	os.system("echo '/home/ethos/ethOS-update-manager/autolaunch-updater' >> /home/ethos/.bashrc")
+	add_autolaunch()
 
-
-	# reboot 
-	print("for full install, system will reboot in : ")
-	for i in range(3, 0, -1) : 
-		print(str(i))
-		time.sleep(1)
-
-	#auto reboot 
-	v = os.system("r")
+	# rebbot atrer install
+	reboot_install()
 	
-	if v :  
-		os.system("reboot")
-	
-	
-
 
 
 if __name__ == '__main__':
