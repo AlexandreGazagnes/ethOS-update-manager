@@ -78,22 +78,37 @@ $ r
 
 
 Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is : 
-* **autoboot** : updater automatiticaly launched or not when booting ethos **+ OPTION** : 
-  * on  : enable (default)
+
+* **auto** : updater auto launched or not when booting ethos **+ OPTION** : 
+  * on  : enable (DEFAULT and RECOMMENDED)
   * off : disable
+
 * **start** : start at command **+ OPTION** : 
-  * fg (foreground)
-  * bg (background)
+  * fg : foreground, print out on stdout all info 
+  * bg : background, dont not show any info about logging (DEFAULT and RECOMMENDED
+
 * **stop** : stop at command
+
 * **config** : manage configs **+ OPTION**:  
   * set : set specific config parametre(s)
   * reset : reset all parametres to orginal configuration
   * show : print out all parametres in use
+
+* **reboot-aut** : set auto reboot autorisation to eanle automatic rig management mode. Rig will reboot when GPUs no detected/no    wroking, hrate obvious problem, overwarming, etc etc  **+ OPTION**:  
+  * on  : enable (DEFAULT and RECOMMENDED)
+  * off : disable
+  * set : set specific auto reboot parametre(s) : temp, hrate...
+  * reset : reset all parametres to orginal configuration
+  * show : print out all parametres in use
+
 * **merge-files** : merge all update files 
+
 * **man** : acces to manual (eg doc/)
-* **reboot** : reboot the entire programm setting original conf **+ OPTION** : 
+
+* **unistall** : uninstall entire programm, setting original conf and deletting dependencies **+ OPTION** : 
   * hard : -- WARNING -- delete all datafiles and log files
-  * soft : Keep all datafiles and log files 
+  * medium : unistall but Keep all datafiles and log files 
+  * soft : unistall but reinstall from scrach by saving data and logs files (DEFAULT and RECOMMENDED)
 <br>
 
 ##  FOLDERS
