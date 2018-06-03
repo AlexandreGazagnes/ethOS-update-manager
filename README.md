@@ -86,7 +86,7 @@ $ ethuper [COMAND] [OPTION]
 ``` 
 where **COMMAND** is : 
 
-* **auto** : updater auto launched or not when booting ethos **+ OPTION** : 
+* **auto-launch** : updater auto launched or not when booting ethos **+ OPTION** : 
   * on  : enable (DEFAULT and RECOMMENDED)
   * off : disable
 
