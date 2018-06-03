@@ -28,10 +28,6 @@ from _updater.manage import *
 
 def main() : 
 
-	# def loggig level
-	logging.basicConfig(level=logging.INFO)
-	
-
 	# test logging level
 	logging.debug("test logging debug ")
 	logging.info("test logging info ")

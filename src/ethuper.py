@@ -7,7 +7,11 @@
 
 import argparse, os
 
-from _ethuper.command import * 
+from logging import debug, warning, info
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
+
 from _ethuper.manager import * 
 
 
@@ -16,14 +20,18 @@ from _ethuper.manager import *
 
 def main() : 
 
-    # handle args
-    command, option = arg_manager()
-    
-    # execute command and option
-    command_manager(command, option)
+	# handle args
+	command, option = arg_manager()
+
+	logging.debug(command)
+	logging.debug(option)
+	
+	if command :     
+		# execute command and option
+		command_manager(command, option)
 
 
 
 if __name__ == '__main__':
-    main()
+	main()
 

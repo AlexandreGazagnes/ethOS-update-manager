@@ -36,7 +36,7 @@ driver:                                   None
 gpus:                                     2
 fanrpm:                                   1935 1939
 fanpercent:                               49 49 
-hash:                                     30
+hash:                                     60
 miner:                                    claymore
 miner_hashes:                             30 30
 rejected_shares:                          0 0 0 0 0 0
@@ -57,4 +57,3 @@ watts:                                    106 109
 watt_min:                                 30.00 30.00
 watt_max:                                 238 238
 powertune:                                5 5
-
