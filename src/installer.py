@@ -5,7 +5,7 @@
 
 # import 
 
-import os
+import os, time
 
 
 
@@ -43,6 +43,12 @@ def main() :
 
 	#auto reboot 
 	os.system("r")
+	
+	time.sleep(5)
+	# if not rebooted
+	os.system("reboot")
+	
+	
 
 
 
