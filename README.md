@@ -1,7 +1,5 @@
 # ethOS-update-manager
 <br><br>
-  
-
 
 ##  DESCRIPTION
 
@@ -60,7 +58,6 @@ $ chmod +x /home/ethos/ethOS-update-manager/_ethuper/updater.py
 $ chmod +x /home/ethos/ethOS-update-manager/_ethuper/ethuper.py
 ```
 
-
 Create alias (shortcup for CLI) : 
 ```
 $ echo "alias ethuper='/home/ethos/ethOS-update-manager/ethuper'" >>  /home/ethos/.bashrc
@@ -97,8 +94,6 @@ Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is :
 * **reboot** : reboot the entire programm setting original conf **+ OPTION** : 
   * hard : -- WARNING -- delete all datafiles and log files
   * soft : Keep all datafiles and log files 
-
-
 <br><br>
 
 ##  FOLDERS
