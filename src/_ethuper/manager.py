@@ -6,23 +6,27 @@
 # import 
 
 import argparse, os, sys
+from logging import debug, warning, info
+import logging
 
-
+from _ethuper.command import * 
 
 # functions
 
 def arg_manager() : 
     """ hanle CLI arguments with full doc"""
+    s = str(sys.argv)
+    logging.debug(s)
 
-    if not len(sys.argv) : 
+    if len(sys.argv) == 1 : 
         print("You have to call 'ehtuper COMMAND + [OPTION] (if needed)")
         helper()
-    elif len(sys.argv) == 2 : 
-        return sys.argv
-    elif len(sys.argv) == 1 :
-        return sys.argv[0], None
+        return None, None
+    elif len(sys.argv) == 3 : 
+        return sys.argv[1], sys.argv[2] 
+    elif len(sys.argv) == 2 :
+        return sys.argv[1], None
     else : 
-
         print("to many command/option, tryin with {} and {}"
                 .format(sys.argv[0],sys.argv[1] ))
         helper()

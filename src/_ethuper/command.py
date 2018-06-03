@@ -5,7 +5,10 @@
 
 # import 
 
-import argparse, os, system
+import argparse, os
+
+from logging import debug, warning, info
+import logging
 
 
 
@@ -14,9 +17,9 @@ import argparse, os, system
 def auto_launch(option) : 
 	""" """
 	if option == "on" :
-		pass 
+		print("Not avialable")
 	elif option == "fg" :
-		pass 
+		print("Not avialable")
 	else : 
 		error()
 
@@ -25,11 +28,12 @@ def start(option) :
 	""" """
 
 	if option == "fg" :
+		print("Not avialable")
 		# os.system("nohup /home/ethos/ethOS-update-manager/src/updater.py")
 	elif option == "bg" :
+		print("Not avialable")
 		# IF updater not WORKING !!!!
 		# os.system("/home/ethos/ethOS-update-manager/autolaunch-updater")
-		pass 
 	else : 
 		error()
 	
@@ -74,7 +78,7 @@ def reboot_aut(option) :
 
 def merge_files() : 
 	""" """
-	pass 
+	print("Not avialable") 
 	# os.system(/home/ethos/ethOS-update-manager/utils/merge-files.py)
 
 

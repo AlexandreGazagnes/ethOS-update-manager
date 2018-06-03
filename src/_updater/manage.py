@@ -33,10 +33,10 @@ from confs.filepaths import *
 def miner_not_started(data) : 
 	"""if miner not started"""
 
-	with open("./var/allow_minestart.pk", "r") as f : allow = int(f.read())
+	with open("/home/ethos/ethOS-update-manager/src/var/allow_minestart.pk", "r") as f : allow = int(f.read())
 
-	# miner not mining
-	if data["miner_hashes"] < 1 :
+	# miner not mining	
+	if data["hash"] < 1 :
 
 		# record  and first restart reallow
 		if not allow : 
@@ -46,25 +46,29 @@ def miner_not_started(data) :
 			os.system("allow")
 			os.system("minestart")
 
-			with open("./var/allow_minestart.pk", "w") as f : f.write("1")
+			with open("/home/ethos/ethOS-update-manager/src/var/allow_minestart.pk", "w") as f : f.write("1")
 
 		# if already restarted and reallowe: reboot
 		else : 
 
 			logging.warning("Miner not working, but already re-allowed and re-started")
 
-			with open("./var/allow_minestart.pk", "w") as f :
+			with open("/home/ethos/ethOS-update-manager/src/var/allow_minestart.pk", "w") as f :
 				 allow = f.write("0")
 			os.system("r")
 
 
 def miner_too_hot(data) : 
-	"""if miner to hot""" : 
+	"""if miner to hot""" 
 
 	# if GPU temp to hot disallow and minestop
-	if (data["temp_max"] > 75) or (data["temp_avg"] > 70) : 
+	if data["temp_max"] > 75 : 
 
-		logging.warning("Critical problem, system disallow and minestop")
+		logging.debug(data["temp"])
+		logging.debug(data["temp_max"])
+		logging.debug(data["temp_avg"])
+
+		logging.warning("Critical overwarming problem, system disallow and minestop")
 
 		os.system("disallow")
 		os.system("minestop")
@@ -80,7 +84,7 @@ def miner_too_hot(data) :
 
 
 def miner_not_perf(data) : 
-	"""if miner not perf """ : 
+	"""if miner not perf """ 
 
 	# if all GPU do not mine : reboot 
 	if data['gpus'] > data['working_gpus'] : 
@@ -94,13 +98,26 @@ def miner_not_perf(data) :
 		### SEND A MESSAGE FOR MANUAL INTERVENTION
 
 
+
+def too_many_rejected_shares(data) : 
+	""" """
+	# limit = 10
+	pass
+
+
+def over_voltage(data) : 
+	""" """
+	# limit = 1
+	pass
+
+
 def manage(data) :
 	""" for each mining config apply good action"""
 
 	logging.info("manage mode enable : checking if problems")
 
 	miner_not_started(data)
-	miner_to_hot(data)
+	miner_too_hot(data)
 	miner_not_perf(data)
 
 

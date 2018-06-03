@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-python3 /home/ethos/ethOS-update-manager/src/ethuper.py
+import os 
 
-exit 0
+os.system("/home/ethos/ethOS-update-manager/src/ethuper.py")
