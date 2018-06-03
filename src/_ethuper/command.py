@@ -3,9 +3,13 @@
 
 
 
+# import 
+
 import argparse, os, system
 
 
+
+# functions
 
 def auto_launch(option) : 
     """ """
@@ -14,7 +18,7 @@ def auto_launch(option) :
     elif option == "fg" :
         pass 
     else : 
-        print(option error)
+        print("option error")
 
 
 def start(option) : 
@@ -24,25 +28,23 @@ def start(option) :
         pass 
     elif option == "bg" :
 
-        os.system(/home/ethos/ethOS-update-manager/auto-launch)
+        # os.system(/home/ethos/ethOS-update-manager/auto-launch)
         pass 
     else : 
-        print(option error)
-
+        print("option error")
     
 
 def stop() : 
     """ """
-
-    os.system(stop updater.py)
+    pass
+    # os.system(stop updater.py)
 
 
 def restart() : 
     """ """
-
-    os.system(stop updater.py)
-    os.system(/home/ethos/ethOs-update-manager/auto-launch)
-
+    pass
+    # os.system(stop updater.py)
+    # os.system(/home/ethos/ethOs-update-manager/auto-launch)
 
 
 def config(option) : 
@@ -54,11 +56,7 @@ def config(option) :
     elif option == "show" :
         pass 
     else : 
-        print(option error)
-
-    set : set specific config parametre(s)
-    reset : reset all parametres to orginal configuration
-    show : print out all parametres in use
+        print("option error")
 
 
 def reboot_aut(option) : 
@@ -75,18 +73,19 @@ def reboot_aut(option) :
     elif option == "show" :
         pass 
     else : 
-        print(option error)
+        print("option error")
 
 
 def merge_files() : 
     """ """
-    os.system(/home/ethos/ethOS-update-manager/utils/merge-files.py)
+    pass 
+    # os.system(/home/ethos/ethOS-update-manager/utils/merge-files.py)
 
 
 def man(): 
     """ """
-    print /home/ethos/ethOS-update-manager/docs/doc.txt
-
+    pass
+    # print /home/ethos/ethOS-update-manager/docs/doc.txt
 
 
 def unistall(option) :
@@ -98,5 +97,5 @@ def unistall(option) :
     elif option == "soft" :
         pass 
     else : 
-        print(option error)
+        print("option error")
 

@@ -84,8 +84,7 @@ def init_data_file(folder, datafile, counterfile=COUNTER_FILE, header=HEADER) :
 	
 		debug(filename)
 	
-		with open(folder+filename, "w") as f : 
-			f.write(header)
+		with open(folder+filename, "w") as f : f.write(header)
 
 
 def update_data_file(folder, datafile, txt, counterfile=COUNTER_FILE) : 

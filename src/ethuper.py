@@ -1,20 +1,23 @@
-
 #!/usr/bin/env python3
 #--*-- coding: utf-8 --*--
 
 
-import argparse, os, system
 
-from ethuper.command import * 
-from ethuper.manager import * 
+# import 
+
+import argparse, os
+
+from _ethuper.command import * 
+from _ethuper.manager import * 
 
 
+
+# main 
 
 def main() : 
 
-    # handle arg c/gar v
+    # handle args
     command, option = arg_manager()
-
     command_manager(command, option)
 
 
