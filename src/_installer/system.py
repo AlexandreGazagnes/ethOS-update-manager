@@ -6,16 +6,12 @@
 # import 
 
 import os, time
-from logging import debug, info warning
+from logging import debug, info, warning
 import logging
-
-from _installer.setting import * 
 
 
 
 # fonctions
-
-
 
 def prepare_sys() : 
 	""" """
@@ -48,7 +44,7 @@ def reboot_install() :
 	#auto reboot 
 	v = os.system("r")
 	
-	# if r do not work
-	if v :  
-		os.system("reboot")
+	# # if r do not work
+	# if v :  
+	# 	os.system("reboot")
 	

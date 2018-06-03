@@ -28,7 +28,7 @@ from _updater.manage import *
 
 def main() :
 
-	with open("/home/ethos/ethOS-update-manager/src/var/autolaunch", "r") as f : v = int(f.read())
+	with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "r") as f : v = int(f.read())
 
 	if  v : 
 		# handle install if needed 		
