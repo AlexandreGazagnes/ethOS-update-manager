@@ -5,6 +5,7 @@
 In the following and in files / scripts, ```ethOS-update-manager``` will be replaced by ```ethuper``` which stands for ```ETHos UPdate managER```.
 
 <br>
+
 ##  DESCRIPTION
 
 ethOS-update-manager is complete solution deisgned to run, log, manage and reboot (if needed) automaticly yours miners. 
