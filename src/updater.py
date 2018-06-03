@@ -53,8 +53,8 @@ def main() :
 		update_data_file(DATA_FOLDER, DATA_FILE, txt)
 
 		with("./var/reboot_aut.pk", "r") as f : reboot_aut = int(f.read())
-		# if reboot_aut : 
-			# manage(data)
+		if reboot_aut : 
+			manage(data)
 
 
 
