@@ -21,15 +21,18 @@ In the following text or in files / scripts, ```ethOS-update-manager``` will be 
 <p align="justify">It is designed to be run directly from the device to avoid ssh breaking connection problem (common with ethOS 1.2.7 and 1.2.9) </p>
 
 <p align="justify">You're free to use update or show stats command, but as update push data to the server for each call, it is recommanded to use show stats.
+ 
 <br><br>
 
 ## VERSION
 0.3.0
+
 <br><br>
 
 ##  LICENCE
 
 GNU General Public License v3.0
+
 <br><br>
 
 ##  REQUIREMENTS
@@ -37,6 +40,7 @@ GNU General Public License v3.0
 python :   3.4.3 + (default ethOS python3)<p>
 ethos :    1.3.1+ <p>
 hardware : -
+
 <br><br>
 
 ##  DOWNLOAD
@@ -46,6 +50,7 @@ Just type :
 $ cd
 $ git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git
 ```
+
 <br><br>
 
 ##  INSTALL
@@ -88,6 +93,7 @@ Reboot to update .bashrc
 ```
 $ r
 ```
+
 <br><br>
 
 ##  USAGE
