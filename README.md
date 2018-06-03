@@ -25,7 +25,9 @@ In the following text or in files / scripts, ```ethOS-update-manager``` will be 
 <br><br>
 
 ## VERSION
-0.3.0
+pre_v0.3.0 pre-relaese </p>
+(will be pulled on June 18)</p>
+for stable release please branch v0.2.1
 
 <br><br>
 

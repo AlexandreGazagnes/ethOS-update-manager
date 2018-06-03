@@ -3,100 +3,113 @@
 
 
 
+# import 
+
 import argparse, os, system
 
 
 
+# functions
+
 def auto_launch(option) : 
-    """ """
-    if option == "on" :
-        pass 
-    elif option == "fg" :
-        pass 
-    else : 
-        print(option error)
+	""" """
+	if option == "on" :
+		pass 
+	elif option == "fg" :
+		pass 
+	else : 
+		error()
 
 
 def start(option) : 
-    """ """
+	""" """
 
-    if option == "fg" :
-        pass 
-    elif option == "bg" :
-
-        os.system(/home/ethos/ethOS-update-manager/auto-launch)
-        pass 
-    else : 
-        print(option error)
-
-    
+	if option == "fg" :
+		# os.system("nohup /home/ethos/ethOS-update-manager/src/updater.py")
+	elif option == "bg" :
+		# IF updater not WORKING !!!!
+		# os.system("/home/ethos/ethOS-update-manager/autolaunch-updater")
+		pass 
+	else : 
+		error()
+	
 
 def stop() : 
-    """ """
-
-    os.system(stop updater.py)
+	""" """
+	pass
+	# os.system(stop updater.py)
 
 
 def restart() : 
-    """ """
-
-    os.system(stop updater.py)
-    os.system(/home/ethos/ethOs-update-manager/auto-launch)
-
+	""" """
+	pass
+	# os.system(stop updater.py)
+	# os.system(/home/ethos/ethOs-update-manager/autolaunch-updater)
 
 
 def config(option) : 
-    """ """
-    if option == "set" :
-        pass 
-    elif option == "reset" :
-        pass 
-    elif option == "show" :
-        pass 
-    else : 
-        print(option error)
-
-    set : set specific config parametre(s)
-    reset : reset all parametres to orginal configuration
-    show : print out all parametres in use
+	""" """
+	if option == "set" :
+		print("Not avialable")
+	elif option == "reset" :
+		print("Not avialable")
+	elif option == "show" :
+		print("Not avialable")
+	else : 
+		error()
 
 
 def reboot_aut(option) : 
-    """ """
-    
-    if option == "on" : 
-        pass
-    elif option == "off" : 
-        pass
-    elif option == "set" :
-        pass 
-    elif option == "reset" :
-        pass 
-    elif option == "show" :
-        pass 
-    else : 
-        print(option error)
+	""" """
+	
+	if option == "on" : 
+		with open("./var/reboot_aut.pk", "w") as f : f.write("1")
+		restart()
+	elif option == "off" : 
+		with open("./var/reboot_aut.pk", "w") as f : f.write("0")
+		restart()
+	else : 
+		error()
 
 
 def merge_files() : 
-    """ """
-    os.system(/home/ethos/ethOS-update-manager/utils/merge-files.py)
-
-
-def man(): 
-    """ """
-    print /home/ethos/ethOS-update-manager/docs/doc.txt
-
+	""" """
+	pass 
+	# os.system(/home/ethos/ethOS-update-manager/utils/merge-files.py)
 
 
 def unistall(option) :
-    """ """ 
-    if option == "hard" : 
-        pass
-    elif option == "medium" : 
-        pass
-    elif option == "soft" :
-        pass 
-    else : 
-        print(option error)
+	""" """ 
+	if option == "hard" : 
+		print("Not avialable")
+	elif option == "medium" : 
+		print("Not avialable")
+	elif option == "soft" :
+		print("Not avialable")
+	else : 
+		error()
+
+
+def error() : 
+	""" """
+
+	print("Command/Option error")
+	print("Do you want to acces to the Manual (full doc of instructions?")
+	ans = input("y/n\n")
+	if ans.lower() == y : 
+		man()
+
+
+def man(): 
+	""" """
+
+	with open("/home/ethos/ethOS-update-manager/docs/manual.txt", "r") as f : 
+		txt = f.read()
+	print(txt)
+
+
+def help(): 
+	""" """
+
+	man()
 

@@ -3,14 +3,30 @@
 
 
 
-import argparse, os, system
+# import 
+
+import argparse, os, sys
 
 
+
+# functions
 
 def arg_manager() : 
-    """ """
+    """ hanle CLI arguments with full doc"""
 
-    return command, option
+    if not len(sys.argv) : 
+        print("You have to call 'ehtuper COMMAND + [OPTION] (if needed)")
+        helper()
+    elif len(sys.argv) == 2 : 
+        return sys.argv
+    elif len(sys.argv) == 1 :
+        return sys.argv[0], None
+    else : 
+
+        print("to many command/option, tryin with {} and {}"
+                .format(sys.argv[0],sys.argv[1] ))
+        helper()
+        return sys.argv[0], sys.argv[1]
 
 
 def command_manager(command, option) : 
@@ -18,9 +34,10 @@ def command_manager(command, option) :
     
     if not command  : 
         print("error you have to chose an command" )
+        helper()
 
     elif command == "auto-launch" : 
-        auto_launch()
+        auto_launch(option)
 
     elif command == "start" :
         start()
@@ -40,11 +57,17 @@ def command_manager(command, option) :
     elif command == "merge-files" : 
         merge_files()
 
-    elif command == "man" : 
+    elif (command == "man") or (command == "help"): 
         man()
 
     elif command == "unistall" : 
         unistall(option)
 
     else : 
-        print("error : command not reconized")
+        print("Error command not avialable")
+        helper()
+
+
+def helper() : 
+    """ """
+    print("type 'ethuper man' or 'ethuper help' for full info")
