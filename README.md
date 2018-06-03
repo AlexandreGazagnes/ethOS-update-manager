@@ -8,19 +8,19 @@ In the following text or in files / scripts, ```ethOS-update-manager``` will be 
 
 ##  DESCRIPTION
 
-ethOS-update-manager is complete solution deisgned to run, log, manage and reboot (if needed) automaticly yours miners. <p>
+<p align="justify">ethOS-update-manager is complete solution deisgned to run, log, manage and reboot (if needed) automaticly yours miners. </p>
  
-Two main features are runing / managing results from cmd ``` update ``` or ``` show stats ```, logging it in a readable way, and providing a complete automatic reboot manager to prevent overwarming, gpu failure and under performance issues by rebooting (hard or soft way), allowing and/or restarting miner.<p>
+<p align="justify">Two main features are runing / managing results from cmd update or show stats, logging it in a readable way, and providing a complete automatic reboot manager to prevent overwarming, gpu failure and under performance issues by rebooting (hard or soft way), allowing and/or restarting miner.</p>
 
-As a log/performance manager, it is  designed to provide good and helpful data information, and to help miners to improve their productivity by tuning in an easier way their ``` local.conf```. <p>
+<p align="justify">As a log/performance manager, it is  designed to provide good and helpful data information, and to help miners to improve their productivity by tuning in an easier way their local.conf. </p>
 
-As a rebooting manager, it is designed to provide a clever solution to increase uptime by rebooting, allowing, restarting with specific strategy for each problem. <p>
+<p align="justify">As a rebooting manager, it is designed to provide a clever solution to increase uptime by rebooting, allowing, restarting with specific strategy for each problem. /<p>
 
-Every log, reboot, allow or restart option is handly configurable with the ```ethuper``` command. See bellow or ```doc/``` for dull information.<p>
+<p align="justify">Every log, reboot, allow or restart option is handly configurable with the ethuper command. See bellow or doc/ for dull information.</p>
 
-It is designed to be run directly from the device to avoid ssh breaking connection problem (common with ethOS 1.2.7 and 1.2.9) <p>
+<p align="justify">It is designed to be run directly from the device to avoid ssh breaking connection problem (common with ethOS 1.2.7 and 1.2.9) </p>
 
-You're free to use ``` update```  or ``` show stats```  command, but as ``` update```  push data to the server for each call, it is recommanded to use ``` show stats```.
+<p align="justify">You're free to use update or show stats command, but as update push data to the server for each call, it is recommanded to use show stats.
 <br><br>
 
 ## VERSION
