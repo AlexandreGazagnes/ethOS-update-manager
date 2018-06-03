@@ -1,7 +1,5 @@
 # ethOS-update-manager
 <br><br>
-  
-
 
 ##  DESCRIPTION
 
@@ -30,18 +28,21 @@ hardware : -
 
 ##  DOWNLOAD
 
-from ```/home/ethos/ ``` just type```git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git```
+Just type : 
+```
+$ cd
+$ git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git
+```
 <br><br>
 
 ##  INSTALL
 
 #### Auto
-Considering the folder ``` ethOS-update-manager ``` in filepath ``` /home/ethos/ ```
-so as ``` $ ls /home/ethos/ethOS-update-manager ``` returning ``` ethOS-update-manager/ ``` 
-
+Just type : 
 ```
-$ chmod +x /home/ethos/ethOS-update-manager/install
-$ /home/ethos/ethOS-update-manager/install
+$ cd
+$ chmod +x ethOS-update-manager/install
+$ ethOS-update-manager/install
 ```
 Warning : Your system will reboot after 3 seconds, nothing unusual by the way
 
@@ -59,7 +60,6 @@ $ chmod +x /home/ethos/ethOS-update-manager/ethuper
 $ chmod +x /home/ethos/ethOS-update-manager/_ethuper/updater.py
 $ chmod +x /home/ethos/ethOS-update-manager/_ethuper/ethuper.py
 ```
-
 
 Create alias (shortcup for CLI) : 
 ```
@@ -80,40 +80,59 @@ $ r
 ##  USAGE
 
 
-Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is : 
-* **autoboot** : updater automatiticaly launched or not when booting ethos **+ OPTION** : 
-  * on  : enable (default)
+Just type : 
+```
+$ ethuper [COMAND] [OPTION]
+``` 
+where **COMMAND** is : 
+
+* **auto** : updater auto launched or not when booting ethos **+ OPTION** : 
+  * on  : enable (DEFAULT and RECOMMENDED)
   * off : disable
+
 * **start** : start at command **+ OPTION** : 
-  * fg (foreground)
-  * bg (background)
+  * fg : foreground, print out on stdout all info 
+  * bg : background, dont not show any info about logging (DEFAULT and RECOMMENDED)
+
 * **stop** : stop at command
+
+* **restart** : stop and start at command to enable configs modification - RECOMMANDED after [CONFIG] - [SET] or [RESET]
+
 * **config** : manage configs **+ OPTION**:  
   * set : set specific config parametre(s)
   * reset : reset all parametres to orginal configuration
   * show : print out all parametres in use
+
+* **reboot-aut** : set auto reboot autorisation to enale automatic rig management mode. Rig will reboot when GPUs no detected/no    working, hrate obvious problem, overwarming. (Full list in doc/)  **+ OPTION**:  
+  * on  : enable (DEFAULT and RECOMMENDED)
+  * off : disable
+  * set : set specific auto reboot parametre(s) : temp, hrate...
+  * reset : reset all parametres to orginal configuration
+  * show : print out all parametres in use
+
 * **merge-files** : merge all update files 
+
 * **man** : acces to manual (eg doc/)
-* **reboot** : reboot the entire programm setting original conf **+ OPTION** : 
+
+* **unistall** : uninstall entire programm, setting original conf and deletting dependencies **+ OPTION** : 
   * hard : -- WARNING -- delete all datafiles and log files
-  * soft : Keep all datafiles and log files 
-
-
-<br><br>
+  * medium : unistall but Keep all datafiles and log files 
+  * soft : unistall but reinstall from scrach by saving data and logs files (DEFAULT and RECOMMENDED)
+<br>
 
 ##  FOLDERS
+* _ ethuper :  			contain core code, scripts and libraires, FEEL FREE TO READ NOT TO CHANGE
 * data :                data file(s) created
 * doc :                 full documentation 
-* _ ethuper :  			contain core code, scripts and libraires, free to read, not to change
 * logs :                logs files stdout and stdr
 * tests :               standard test collection
 * utils :               various scripts to clean, merge, split, manipulate you data files
 <br><br>
 
 ##  CONTRIBUTING
-Feel free to submit any issues/pull resquest you want <p>
+Feel free to submit any issues / pull resquest you want <p>
 Clone, download and fork at will <p>
-Staring and following also strongly recomanded
+Staring and following also strongly recommended
 <br><br>
   
 ##  MISC
@@ -142,7 +161,7 @@ azerty
 ```
 alias qwerty='setxkbmap fr'
 ```
-<br><br>
+<br>
 
 ## DEV
 * PARTIAL : find a new name 
@@ -150,7 +169,7 @@ alias qwerty='setxkbmap fr'
 * create config command to handle reset show set configs of all variables
 * transform in standalone program with argc/argv manager and full doc
 * progress to UpdateManager to RigManager with auto reboot 
-* pip?
+* pip ?
 * use logging with log external file
 * write full doc and utils and test
 <br><br>
