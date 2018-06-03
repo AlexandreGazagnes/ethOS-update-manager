@@ -96,6 +96,8 @@ where **COMMAND** is :
 
 * **stop** : stop at command
 
+* **restart** : stop and start at command to enable configs modification - RECOMMANDED after [CONFIG] - [SET] or [RESET]
+
 * **config** : manage configs **+ OPTION**:  
   * set : set specific config parametre(s)
   * reset : reset all parametres to orginal configuration
