@@ -2,20 +2,21 @@
 <br><br>
 
 
-In the following and in files / scripts, ```ethOS-update-manager``` will be replaced by ```ethuper``` which stands for ```ETHos UPdate managER```.
+In the following text or in files / scripts, ```ethOS-update-manager``` will be replaced by ```ethuper``` which stands for ```ETHos UPdate managER```.
 
 <br>
 
 ##  DESCRIPTION
 
-ethOS-update-manager is complete solution deisgned to run, log, manage and reboot (if needed) automaticly yours miners. 
-Two main features are runing / managing results from cmd ``` update ``` or ``` show stats ```, logging it in a readable way, and propose a complete automatic reboot manager to handle overwarming, gpu failure and under performance issues by rebooting (hard or  soft way), allowing and/or restarting miner.<p>
+ethOS-update-manager is complete solution deisgned to run, log, manage and reboot (if needed) automaticly yours miners. <p>
+ 
+Two main features are runing / managing results from cmd ``` update ``` or ``` show stats ```, logging it in a readable way, and providing a complete automatic reboot manager to prevent overwarming, gpu failure and under performance issues by rebooting (hard or soft way), allowing and/or restarting miner.<p>
 
-As a log/performance manager, it is  designed to provide good and helpfull data performance, and to help miners to improve their productivity by tuning in an easier way their ``` local.conf```. <p>
+As a log/performance manager, it is  designed to provide good and helpful data information, and to help miners to improve their productivity by tuning in an easier way their ``` local.conf```. <p>
 
 As a rebooting manager, it is designed to provide a clever solution to increase uptime by rebooting, allowing, restarting with specific strategy for each problem. <p>
 
-Every log, reboot allow restart option is handly configurable with the ```ethuper``` command. See bellow or ```doc/``` for dull information.<p>
+Every log, reboot, allow or restart option is handly configurable with the ```ethuper``` command. See bellow or ```doc/``` for dull information.<p>
 
 It is designed to be run directly from the device to avoid ssh breaking connection problem (common with ethOS 1.2.7 and 1.2.9) <p>
 
@@ -176,14 +177,12 @@ alias qwerty='setxkbmap fr'
 <br>
 
 ## DEV
-* PARTIAL : find a new name 
-* PARTIAL : create an install who automaticly create alias and autorun in bashrc
-* create config command to handle reset show set configs of all variables
-* transform in standalone program with argc/argv manager and full doc
-* progress to UpdateManager to RigManager with auto reboot 
+* develop an alarm manager to send sms, twitter, mail, telegram (...) warning logs.
+* create config command to handle reset show set configs of all variables.
+* transform in standalone program with argc/argv manager and full doc.
 * pip ?
 * use logging with log external file
-* write full doc and utils and test
+* write full doc, utils and test
 <br><br>
 
 ##  DONATION
