@@ -137,7 +137,8 @@ where **COMMAND** is :
   * hard : -- WARNING -- delete all datafiles and log files
   * medium : unistall but Keep all datafiles and log files 
   * soft : unistall but reinstall from scrach by saving data and logs files (DEFAULT and RECOMMENDED)
-<br>
+
+<br><br>
 
 ##  FOLDERS
 * data :                data file(s) created
@@ -155,7 +156,22 @@ Clone, download and fork at will <p>
 Staring and following also strongly recommended
 
 <br><br>
-  
+ 
+## DEV
+* develop an alarm manager to send sms, twitter, mail, telegram (...) warning logs.
+* create config command to handle reset show set configs of all variables.
+* transform in standalone program with argc/argv manager and full doc.
+* pip ?
+* use logging with log external file
+* write full doc, utils and test
+
+<br><br>
+
+##  DONATION
+Feel free to make a BTC / ETH / XMR / ZEC or any coin you want to NPO :) 
+
+<br><br>
+
 ##  MISC
 
 Find bellow various helpful aliases for very popular command 
@@ -182,18 +198,4 @@ azerty
 ```
 alias qwerty='setxkbmap fr'
 ```
-<br><br>
-
-## DEV
-* develop an alarm manager to send sms, twitter, mail, telegram (...) warning logs.
-* create config command to handle reset show set configs of all variables.
-* transform in standalone program with argc/argv manager and full doc.
-* pip ?
-* use logging with log external file
-* write full doc, utils and test
-
-<br><br>
-
-##  DONATION
-Feel free to make a BTC / ETH / XMR / ZEC or any coin you want to NPO :) 
 <br><br>
