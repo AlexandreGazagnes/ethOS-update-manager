@@ -1,9 +1,17 @@
 # ethOS-update-manager
 <br><br>
 
+
+In the following and in files / scripts, ```ethOS-update-manager``` will be replaced by ```ethuper``` which stands for ```ETHos UPdate managER```.
+
+<br><br>
+
 ##  DESCRIPTION
 
-ethOS-update-manager is a short script continuously runing/managing results from cmd ``` update ``` or ``` show stats ```, and logging it in a readable way. It is a specific log manager designed to provide good data performance and to help miners to improve their productivity by tuning in an easier way their ``` local.conf```.
+ethOS-update-manager is complete solution run and manage automaticly yours miners. 
+Two main features are : 
+* runing and managing results from cmd ``` update ``` or ``` show stats ```, and logging it in a readable way. As a log manager but designed to provide good data performance and to help miners to improve their productivity by tuning in an easier way their ``` local.conf```. 
+* complete automatic reboot manager to handle overwarming, gpu failures and under performances issues buy rebooting, allowing and restarting miner.
 
 It is designed to be run directly from the device to avoid ssh breaking connection problem (common with ethOS 1.2.7 and 1.2.9)
 
