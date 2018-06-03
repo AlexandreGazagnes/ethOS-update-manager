@@ -85,7 +85,7 @@ Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is :
 
 * **start** : start at command **+ OPTION** : 
   * fg : foreground, print out on stdout all info 
-  * bg : background, dont not show any info about logging (DEFAULT and RECOMMENDED
+  * bg : background, dont not show any info about logging (DEFAULT and RECOMMENDED)
 
 * **stop** : stop at command
 
@@ -123,7 +123,7 @@ Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is :
 ##  CONTRIBUTING
 Feel free to submit any issues/pull resquest you want <p>
 Clone, download and fork at will <p>
-Staring and following also strongly recomanded
+Staring and following also strongly recommended
 <br><br>
   
 ##  MISC
