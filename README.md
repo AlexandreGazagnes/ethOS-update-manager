@@ -28,18 +28,21 @@ hardware : -
 
 ##  DOWNLOAD
 
-from ```/home/ethos/ ``` just type```git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git```
+Just type : 
+```
+$ cd
+$ git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git
+```
 <br><br>
 
 ##  INSTALL
 
 #### Auto
-Considering the folder ``` ethOS-update-manager ``` in filepath ``` /home/ethos/ ```
-so as ``` $ ls /home/ethos/ethOS-update-manager ``` returning ``` ethOS-update-manager/ ``` 
-
+Just type : 
 ```
-$ chmod +x /home/ethos/ethOS-update-manager/install
-$ /home/ethos/ethOS-update-manager/install
+$ cd
+$ chmod +x ethOS-update-manager/install
+$ ethOS-update-manager/install
 ```
 Warning : Your system will reboot after 3 seconds, nothing unusual by the way
 
@@ -77,7 +80,11 @@ $ r
 ##  USAGE
 
 
-Just run : ```ethuper [COMAND] [OPTION]``` where **COMMAND** is : 
+Just type : 
+```
+$ ethuper [COMAND] [OPTION]
+``` 
+where **COMMAND** is : 
 
 * **auto** : updater auto launched or not when booting ethos **+ OPTION** : 
   * on  : enable (DEFAULT and RECOMMENDED)
