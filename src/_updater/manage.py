@@ -99,14 +99,34 @@ def miner_not_perf(data) :
 
 
 
+def ping_not_good(data, pool="eu1.ethermine.org") :
+	""" """
+
+	ping_command = "ping -c 1 " + pool
+	ans = os.system(ping command)
+	if ans : 
+		logging.warning("Internet connection problem")
+	if not ans :
+		ans = ans[1]
+		ans = ans.split(" ")
+		ans = [ float(i.replace("time=", "")) for i in ans if i.startswith("time=")]
+		ans = float(ans[0])
+		
+		if ans > 1 :  
+			logging.warning("Internet connection problem")
+
+
+
 def too_many_rejected_shares(data) : 
 	""" """
+	
 	# limit = 10
 	pass
 
 
 def over_voltage(data) : 
 	""" """
+	
 	# limit = 1
 	pass
 
@@ -119,5 +139,7 @@ def manage(data) :
 	miner_not_started(data)
 	miner_too_hot(data)
 	miner_not_perf(data)
-
+	ping_not_good()
+	too_many_rejected_shares()
+	over_voltage()
 
