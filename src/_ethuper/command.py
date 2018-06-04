@@ -17,9 +17,9 @@ import logging
 def auto_launch(option) : 
 	""" """
 	if option == "on" :
-		print("Not avialable")
-	elif option == "fg" :
-		print("Not avialable")
+		with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("1")
+	elif option == "off" :
+		with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("1")
 	else : 
 		error()
 
@@ -28,27 +28,41 @@ def start(option) :
 	""" """
 
 	if option == "fg" :
-		print("Not avialable")
-		# os.system("nohup /home/ethos/ethOS-update-manager/src/updater.py")
-	elif option == "bg" :
-		print("Not avialable")
 		# IF updater not WORKING !!!!
-		# os.system("/home/ethos/ethOS-update-manager/autolaunch-updater")
+		os.system("nohup /home/ethos/ethOS-update-manager/src/updater.py")
+	elif option == "bg" :
+		# IF updater not WORKING !!!!
+		os.system("/home/ethos/ethOS-update-manager/autolaunch-updater")
 	else : 
 		error()
-	
+
+
+def return_pids(cmd) : 
+	""" """
+
+	txt = "ps aux | grep {}".format(cmd)
+	ans = os.popen().readlines()
+	strip = [i.split(" ") for i in ans]
+	strip = [[ i for i in j if i ] for j in strip]
+	pids = [int(i[1]) for i in strip]
+
+	return pids
+
 
 def stop() : 
 	""" """
-	pass
-	# os.system(stop updater.py)
+
+	pids = return_pids("ethOS-update-manager") 
+	for pid in pids  : 
+		s = 'kill ' + str(pid)
+		os.system("kill")
 
 
 def restart() : 
 	""" """
-	pass
-	# os.system(stop updater.py)
-	# os.system(/home/ethos/ethOs-update-manager/autolaunch-updater)
+	
+	stop()
+	start("bg")
 
 
 def config(option) : 
