@@ -9,7 +9,7 @@ import argparse, os
 
 from logging import debug, warning, info
 import logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.WARNING)
 
 
 from _ethuper.manager import * 

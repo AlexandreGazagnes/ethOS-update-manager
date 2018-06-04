@@ -45,6 +45,8 @@ def command_manager(command, option) :
 
     elif command == "start" :
         start()
+    elif command == "is-working" :
+        is_working()
 
     elif command == "stop" :
         stop()

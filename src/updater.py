@@ -9,7 +9,7 @@ import os, subprocess, pickle, time
 
 from logging import debug, warning, info
 import logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.WARNING)
 
 # please do not use pandas on ethos 1.3.1
 
