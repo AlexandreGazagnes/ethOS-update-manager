@@ -107,10 +107,8 @@ $ ethuper [COMAND] [OPTION]
 ``` 
 where **COMMAND** is : 
 
-* **auto-launch** : updater auto launched or not when booting ethos **+ OPTION** : 
-  * on  : enable (DEFAULT and RECOMMENDED)
-  * off : disable
-  * show : print out auto-launch parametre
+
+* **man** / **help**: acces to manual (eg doc/)
 
 * **start** : start at command **+ OPTION** : 
   * fg : foreground, print out on stdout all info 
@@ -122,19 +120,23 @@ where **COMMAND** is :
 
 * **is-working** : print out if the program is curenly working or not 
 
-* **config** : manage configs **+ OPTION**:  
-  * set : set specific config parametre(s)
-  * reset : reset all parametres to orginal configuration
-  * show : print out all parametres in use
+
+* **merge-files** : merge all update files 
+
+* **auto-launch** : updater auto launched or not when booting ethos **+ OPTION** : 
+  * on  : enable (DEFAULT and RECOMMENDED)
+  * off : disable
+  * show : print out auto-launch parametre
 
 * **reboot-aut** : set auto reboot autorisation to enale automatic rig management mode. Rig will reboot when GPUs no detected/no    working, hrate obvious problem, overwarming. (Full list in doc/)  **+ OPTION**:  
   * on  : enable (DEFAULT and RECOMMENDED)
   * off : disable
   * show : print out reboot-aut parametre
 
-* **merge-files** : merge all update files 
-
-* **man** : acces to manual (eg doc/)
+* **config** : manage configs **+ OPTION**:  
+  * set : set specific config parametre(s)
+  * reset : reset all parametres to orginal configuration
+  * show : print out all parametres in use
 
 * **unistall** : uninstall entire programm, setting original conf and deletting dependencies **+ OPTION** : 
   * hard : -- WARNING -- delete all datafiles and log files
