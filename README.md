@@ -192,7 +192,7 @@ Staring and following also strongly recommended
 <br><br>
 
 ##  DONATION
-Feel free to make a BTC / ETH / XMR / ZEC or any coin you want to NPO :) 
+Feel free to make a BTC / ETH / XMR / ZEC or any coin you want to a NPO :) 
 
 <br><br>
 
