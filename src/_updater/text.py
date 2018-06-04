@@ -10,8 +10,8 @@ from logging import debug, warning, info
 
 # do not use pandas on ethos 1.3.1
 
-from lib.params import * 
-from lib.filepaths import * 
+from confs.params import * 
+from confs.filepaths import * 
 
 
 
@@ -21,7 +21,10 @@ def data_from_cmd(cmd=CMD) :
 	"""create a txt from a popen command, for ex "update" """ 
 
 	info("data_from_cmd called")
-
+	v = os.system(cmd) 
+	if v : 
+		logging.warning("command problem")
+	
 	wrap = os.popen(cmd)
 	txt = str()
 
@@ -35,13 +38,12 @@ def data_from_cmd(cmd=CMD) :
 	return txt
 
 
-def load_data(filename) : 
+def load_data(data, filename) : 
 	"""load data from file"""
 
 	info("load_data called")
 	
-	with open(filename, "r") as f : 
-		txt = f.read()
+	with open(data+filename, "r") as f : txt = f.read()
 	subtxt = txt[:300]
 	
 	info(subtxt)

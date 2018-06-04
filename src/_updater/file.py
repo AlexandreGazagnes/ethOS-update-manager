@@ -9,8 +9,8 @@ import os, subprocess, pickle, time
 
 # do not use pandas on ethos 1.3.1
 
-from lib.params import * 
-from lib.filepaths import * 
+from confs.params import * 
+from confs.filepaths import * 
 
 
 
@@ -84,8 +84,7 @@ def init_data_file(folder, datafile, counterfile=COUNTER_FILE, header=HEADER) :
 	
 		debug(filename)
 	
-		with open(folder+filename, "w") as f : 
-			f.write(header)
+		with open(folder+filename, "w") as f : f.write(header)
 
 
 def update_data_file(folder, datafile, txt, counterfile=COUNTER_FILE) : 

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+nohup python3 /home/ethos/ethOS-update-manager/src/updater.py > /home/ethos/ethOS-update-manager/logs/updater.log 2>&1 &
+
+exit 0
