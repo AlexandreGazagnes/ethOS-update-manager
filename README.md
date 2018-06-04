@@ -6,11 +6,18 @@ In the following text or in files / scripts, ```ethOS-update-manager``` will be 
 
 <br>
 
-##  DESCRIPTION
+##  SHORT
+
 
 <p align="justify">ethOS-update-manager is complete solution deisgned to run, log, manage and reboot (if needed) automaticly yours miners. </p>
  
 <p align="justify">Two main features are runing / managing results from cmd update or show stats, logging it in a readable way, and providing a complete automatic reboot manager to prevent overwarming, gpu failure and under performance issues by rebooting (hard or soft way), allowing and/or restarting miner.</p>
+
+<br><br>
+
+
+##  DESCRIPTION
+
 
 <p align="justify">As a log/performance manager, it is  designed to provide good and helpful data information, and to help miners to improve their productivity by tuning in an easier way their local.conf. </p>
 
@@ -21,6 +28,11 @@ In the following text or in files / scripts, ```ethOS-update-manager``` will be 
 <p align="justify">It is designed to be run directly from the device to avoid ssh breaking connection problem (common with ethOS 1.2.7 and 1.2.9) </p>
 
 <p align="justify">You're free to use update or show stats command, but as update push data to the server for each call, it is recommanded to use show stats.
+
+<p align="justify">With a very light structure, all main porcess are handled by two features updater and ethuper. updater is the core process, continuously handling show stats or update results, appending results in data/update.csv and sending system commands (eg reboot if gpu failure or overwarming). ethuper provide an user freindly interface for all current operations (starting, managing settings...)
+</p>
+
+<p align="justify">updater should be run in back ground, called with a nohup and & command. Main settings are auto-launch (should be enabled) which run updater when system boots, reboot-aut which autorised or not updater to reboot system if serious trouble occurs (should be enabled), and sleeper which define the timelap of each iteration (default : 5 min). </p>
  
 <br><br>
 
