@@ -169,7 +169,7 @@ where **COMMAND** is :
 
 ##  PROCESSING
 
-* updater :   core process : continuously handling ```show stats``` or ```update``` results, appending results in data/update.csv and sending system commands (eg reboot if gpu failure or overwarming)  
+* updater :   core process : periodicaly handling ```show stats``` or ```update``` results, appending results in data/update.csv and sending system commands (eg reboot if gpu failure or overwarming)  
 * ethuper :   provide an user freindly interface for all current operations (starting, managing settings...)
 * installer : provide an automatic installation interface (creating aliases, setting auto/ manual parametres...)
 
