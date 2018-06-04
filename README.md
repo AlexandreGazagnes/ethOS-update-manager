@@ -110,6 +110,7 @@ where **COMMAND** is :
 * **auto-launch** : updater auto launched or not when booting ethos **+ OPTION** : 
   * on  : enable (DEFAULT and RECOMMENDED)
   * off : disable
+  * show : print out auto-launch parametre
 
 * **start** : start at command **+ OPTION** : 
   * fg : foreground, print out on stdout all info 
@@ -127,9 +128,7 @@ where **COMMAND** is :
 * **reboot-aut** : set auto reboot autorisation to enale automatic rig management mode. Rig will reboot when GPUs no detected/no    working, hrate obvious problem, overwarming. (Full list in doc/)  **+ OPTION**:  
   * on  : enable (DEFAULT and RECOMMENDED)
   * off : disable
-  * set : set specific auto reboot parametre(s) : temp, hrate...
-  * reset : reset all parametres to orginal configuration
-  * show : print out all parametres in use
+  * show : print out reboot-aut parametre
 
 * **merge-files** : merge all update files 
 

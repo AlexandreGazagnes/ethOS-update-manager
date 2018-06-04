@@ -16,10 +16,19 @@ import logging
 
 def auto_launch(option) : 
 	""" """
+	
 	if option == "on" :
 		with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("1")
 	elif option == "off" :
 		with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("1")
+	elif otion == "show" :
+		with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "r") as f : ans = f.read()
+		if ans == "1" : 
+			print("auto launch : On")
+		elif ans == "0" : 
+			print("auto launch : Off")
+		else : 
+			raise ValueError("auto_launch error")
 	else : 
 		error()
 
@@ -81,11 +90,19 @@ def reboot_aut(option) :
 	""" """
 	
 	if option == "on" : 
-		with open("./var/reboot_aut.pk", "w") as f : f.write("1")
+		with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "w") as f : f.write("1")
 		restart()
 	elif option == "off" : 
-		with open("./var/reboot_aut.pk", "w") as f : f.write("0")
+		with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "w") as f : f.write("0")
 		restart()
+	elif otion == "show" :
+		with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "r") as f : ans = f.read()
+		if ans == "1" : 
+			print("reboot aut : On")
+		elif ans == "0" : 
+			print("reboot aut  : Off")
+		else : 
+			raise ValueError("auto_launch error")
 	else : 
 		error()
 
