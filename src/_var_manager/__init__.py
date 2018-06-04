@@ -14,7 +14,6 @@ def var_manager(filename, mode, var=None, folder="/home/ethos/ethOS-update-manag
 	""" """
 
 	if mode == "r" : 
-		txt = str(var)
 		with open(folder+filename, mode) as f : 
 			res = f.read()
 		try : 

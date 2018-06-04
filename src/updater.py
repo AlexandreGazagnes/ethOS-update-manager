@@ -22,6 +22,8 @@ from _updater.text import *
 from _updater.install import *
 from _updater.manage import *
 
+from _var_manager import * 
+
 
 
 # main
@@ -33,6 +35,10 @@ def main() :
 	if  v : 
 		# handle install if needed 		
 		install()
+
+		# reset pb counters 
+		var_manager("consecutive_problem.pk", "w", "0")
+		var_manager("reboot_number.pk", "w", "0")
 
 		# test logging level
 		logging.debug("test logging debug ")
