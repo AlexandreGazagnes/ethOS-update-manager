@@ -73,10 +73,10 @@ $ git clone https://github.com/AlexandreGazagnes/ethOS-update-manager.git
 Just type : 
 ```
 $ cd
-$ chmod +x ethOS-update-manager/install
-$ ethOS-update-manager/install
+$ chmod +x ethOS-update-manager/src/installer.py
+$ ethOS-update-manager/src/installer.py
 ```
-Warning : Your system will reboot after 3 seconds, nothing unusual by the way
+-- Warning -- : Your system will reboot after 3 seconds, nothing unusual by the way
 
 
 #### Manual
@@ -88,14 +88,13 @@ Prepare program and folder/file :
 ```
 $ cd
 $ chmod +x /home/ethos/ethOS-update-manager/autolaunch-updater
-$ chmod +x /home/ethos/ethOS-update-manager/ethuper
-$ chmod +x /home/ethos/ethOS-update-manager/_ethuper/updater.py
-$ chmod +x /home/ethos/ethOS-update-manager/_ethuper/ethuper.py
+$ chmod +x /home/ethos/ethOS-update-manager/src/ethuper.py
+$ chmod +x /home/ethos/ethOS-update-manager/src/updater.py
 ```
 
 Create alias (shortcup for CLI) : 
 ```
-$ echo "alias ethuper='/home/ethos/ethOS-update-manager/ethuper'" >>  /home/ethos/.bashrc
+$ echo "alias ethuper='/home/ethos/ethOS-update-manager/src/ethuper.py'" >>  /home/ethos/.bashrc
 ```
 
 For automatic program launch (background) at each ethos stratup : 
