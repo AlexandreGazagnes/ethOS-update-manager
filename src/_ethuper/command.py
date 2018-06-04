@@ -17,10 +17,12 @@ import logging
 def auto_launch(option) : 
 	""" """
 	
-	if option == "on" :
+	if option.lower() == "on" :
 		with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("1")
-	elif option == "off" :
-		with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("1")
+		restart()
+	elif option.lower() == "off" :
+		with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("0")
+		# restart()
 	elif otion == "show" :
 		with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "r") as f : ans = f.read()
 		if ans == "1" : 
@@ -36,10 +38,10 @@ def auto_launch(option) :
 def start(option) : 
 	""" """
 
-	if option == "fg" :
+	if option.lower() == "fg" :
 		# IF updater not WORKING !!!!
 		os.system("nohup /home/ethos/ethOS-update-manager/src/updater.py")
-	elif option == "bg" :
+	elif option.lower() == "bg" :
 		# IF updater not WORKING !!!!
 		os.system("/home/ethos/ethOS-update-manager/autolaunch-updater")
 	else : 
@@ -64,7 +66,7 @@ def stop() :
 	pids = return_pids("ethOS-update-manager") 
 	for pid in pids  : 
 		s = 'kill ' + str(pid)
-		os.system("kill")
+		os.system(s)
 
 
 def restart() : 
@@ -76,23 +78,26 @@ def restart() :
 
 def config(option) : 
 	""" """
-	if option == "set" :
+	if option.lower() == "set" :
 		print("Not avialable")
-	elif option == "reset" :
+		# restart()
+	elif option.lower() == "reset" : 
 		print("Not avialable")
-	elif option == "show" :
+		# restart()
+	elif option.lower() == "show" :
 		print("Not avialable")
 	else : 
 		error()
 
 
+
 def reboot_aut(option) : 
 	""" """
 	
-	if option == "on" : 
+	if option.lower() == "on" : 
 		with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "w") as f : f.write("1")
 		restart()
-	elif option == "off" : 
+	elif option.lower() == "off" : 
 		with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "w") as f : f.write("0")
 		restart()
 	elif otion == "show" :
@@ -109,17 +114,31 @@ def reboot_aut(option) :
 
 def merge_files() : 
 	""" """
+
 	print("Not avialable") 
 	# os.system(/home/ethos/ethOS-update-manager/utils/merge-files.py)
 
 
+
+def is_working() : 
+	""" """
+	pids = return_pids("ethOS-update-manager")
+
+	if not len(pids) : 
+		print("False")
+	else : 
+		print("True ({})".format(len(pids)))
+
+
+
 def unistall(option) :
 	""" """ 
-	if option == "hard" : 
+
+	if option.lower() == "hard" : 
 		print("Not avialable")
-	elif option == "medium" : 
+	elif option.lower() == "medium" : 
 		print("Not avialable")
-	elif option == "soft" :
+	elif option.lower() == "soft" :
 		print("Not avialable")
 	else : 
 		error()
@@ -128,7 +147,7 @@ def unistall(option) :
 def error() : 
 	""" """
 
-	print("Command/Option error")
+	print("Command/Option. error")
 	print("Do you want to acces to the Manual (full doc of instructions?")
 	ans = input("y/n\n")
 	if ans.lower() == y : 

@@ -8,6 +8,7 @@
 import os, time
 from logging import debug, info, warning
 import logging
+logging.basicConfig(level=logging.WARNING)
 
 from _installer.user import * 
 from _installer.system import * 

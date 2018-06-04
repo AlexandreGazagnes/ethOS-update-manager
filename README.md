@@ -120,6 +120,8 @@ where **COMMAND** is :
 
 * **restart** : stop and start at command to enable configs modification - RECOMMANDED after [CONFIG] - [SET] or [RESET]
 
+* **is-working** : print out if the program is curenly working or not 
+
 * **config** : manage configs **+ OPTION**:  
   * set : set specific config parametre(s)
   * reset : reset all parametres to orginal configuration
