@@ -247,7 +247,6 @@ automation
 ethos-dashboard 
 management 
 software 
-
 ethos 
 mining 
 ethereum 
