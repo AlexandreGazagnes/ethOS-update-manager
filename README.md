@@ -29,10 +29,10 @@ In the following text or in files / scripts, ```ethOS-update-manager``` will be 
 
 <p align="justify">You're free to use update or show stats command, but as update push data to the server for each call, it is recommanded to use show stats.
 
-<p align="justify">With a very light structure, all main porcess are handled by two features updater and ethuper. updater is the core process, continuously handling show stats or update results, appending results in data/update.csv and sending system commands (eg reboot if gpu failure or overwarming). ethuper provide an user freindly interface for all current operations (starting, managing settings...)
+<p align="justify">With a very light structure, all main process are handled by two features : updater and ethuper. updater is the core process, periodicaly calling show stats/update results, appending results in data/update.csv and sending system commands (eg reboot if gpu failure or overwarming). ethuper provide an user freindly interface for all current operations (starting, managing settings...)
 </p>
 
-<p align="justify">updater should be run in back ground, called with a nohup and & command. Main settings are auto-launch (should be enabled) which run updater when system boots, reboot-aut which autorised or not updater to reboot system if serious trouble occurs (should be enabled), and sleeper which define the timelap of each iteration (default : 5 min). </p>
+<p align="justify">updater should be run in back ground, called with a nohup and & command. Main settings are auto-launch (should be enabled) which run updater at system booting, reboot-aut (should be enabled) which autorise updater to reboot system if serious trouble occurs, and sleeper (default : 5 min) which define the time delta of each iteration. </p>
  
 <br><br>
 
