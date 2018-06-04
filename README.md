@@ -146,12 +146,20 @@ where **COMMAND** is :
 <br><br>
 
 ##  FOLDERS
-* data :                data file(s) created
-* doc :                 full documentation 
-* logs :                logs files stdout and stdr
-* src :  			            contain core code, scripts and libraires, FEEL FREE TO READ NOT TO CHANGE
-* tests :               standard test collection
-* utils :               various scripts to clean, merge, split, manipulate you data files
+* data :      where data file(s) are created
+* docs :      full documentation 
+* logs :      logs files stdout and stderr
+* src :  			  source code and libraires (feel free to read NOT TO CHANGE)
+* tests :     standard test collection
+* utils :     various scripts to clean, merge, split, manipulate you data files
+
+<br><br>
+
+##  PROCESSING
+
+* updater :   core process : continuously handle ```show stats``` or ```update``` results, append results in updateX.csv and send command to system (eg reboot if gpu failure or overwarming)  
+* ethuper :   provide an user freindly interface pour all curent operations (starting, managing settings...)
+* installer : provide automatic installation operations (creating aliases, setting auto/ manual parametres...)
 
 <br><br>
 
