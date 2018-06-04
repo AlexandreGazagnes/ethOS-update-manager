@@ -204,3 +204,26 @@ azerty
 alias qwerty='setxkbmap fr'
 ```
 <br><br>
+
+## TAGS 
+
+ethos<p>
+mining<p>
+ethereum<p>
+ethosdistro<p>
+python<p>
+python3<p>
+miners<p>
+mining-software<p>
+ethos-auto-miner<p>
+mining-monitor<p>
+manager<p>
+update<p>
+miner<p>
+automatic<p>
+reboot<p>
+log<p>
+logs<p>
+logging<p>
+automation<p>
+ethos-dashboard<p><p>
