@@ -10,6 +10,8 @@ import argparse, os
 from logging import debug, warning, info
 import logging
 
+from _var_manager import * 
+
 
 
 # functions
@@ -18,19 +20,20 @@ def auto_launch(option) :
 	""" """
 	
 	if option.lower() == "on" :
-		with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("1")
+		var_manager("autolaunch_aut.pk", "w", 1)
 		restart()
+
 	elif option.lower() == "off" :
-		with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("0")
-		# restart()
+		var_manager("autolaunch_aut.pk", "w", 0)
+		restart()
+
 	elif otion == "show" :
-		with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "r") as f : ans = f.read()
-		if ans == "1" : 
+		var_manager("autolaunch_aut.pk", "r")
+
+		if ans  : 
 			print("auto launch : On")
-		elif ans == "0" : 
-			print("auto launch : Off")
 		else : 
-			raise ValueError("auto_launch error")
+			print("auto launch : Off")
 	else : 
 		error()
 
@@ -39,15 +42,19 @@ def start(option, force=False) :
 	""" """
 
 	if not is_working() : 
+
 		if option.lower() == "fg" :
 			os.system("/home/ethos/ethOS-update-manager/src/updater.py")
+
 		elif option.lower() == "bg" :
 			os.system("/home/ethos/ethOS-update-manager/autolaunch-updater")
 	else : 
 		print("program already running, please type 'Yes' to force an other start")
 		ans = input()
+
 		if ans == "Yes" : 
 			start()
+
 
 def stop() : 
 	""" """
@@ -78,33 +85,38 @@ def restart() :
 
 def config(option) : 
 	""" """
+
 	if option.lower() == "set" :
 		print("Not avialable")
-		# restart()
+		restart()
+
 	elif option.lower() == "reset" : 
 		print("Not avialable")
-		# restart()
+		restart()
 	elif option.lower() == "show" :
 		print("Not avialable")
+	
 	else : 
 		error()
-
 
 
 def reboot_aut(option) : 
 	""" """
 	
 	if option.lower() == "on" : 
-		with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "w") as f : f.write("1")
+		var_manager("reboot_aut.pk", "w", 1)
 		restart()
+
 	elif option.lower() == "off" : 
-		with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "w") as f : f.write("0")
+		var_manager("reboot_aut.pk", "w", 0)
 		restart()
+	
 	elif otion == "show" :
-		with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "r") as f : ans = f.read()
-		if ans == "1" : 
+		var_manager("reboot_aut.pk", "r")
+	
+		if ans  : 
 			print("reboot aut : On")
-		elif ans == "0" : 
+		else  : 
 			print("reboot aut  : Off")
 		else : 
 			raise ValueError("auto_launch error")
