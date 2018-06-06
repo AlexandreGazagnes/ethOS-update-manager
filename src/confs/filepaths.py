@@ -14,7 +14,7 @@ import logging
 
 # Constants
 
-DATA_FOLDER = "/home/ethos/ethOS-update-manager/data/"
+DATA_FOLDER = "/home/alex/ethOS-update-manager/data/"
 debug(DATA_FOLDER)
 
 DATA_FILE = "update.csv" 
@@ -26,5 +26,5 @@ debug(COUNTER_FILE)
 TEMP_FILE = "update.temp" 
 debug(TEMP_FILE) 
 
-VAR_FOLDER = "/home/ethos/ethOS-update-manager/src/var"
+VAR_FOLDER = "/home/alex/ethOS-update-manager/src/var"
 debug(VAR_FOLDER)
