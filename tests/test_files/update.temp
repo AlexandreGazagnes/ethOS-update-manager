@@ -38,7 +38,7 @@ fanrpm:                                   1935 1939
 fanpercent:                               49 49 
 hash:                                     60
 miner:                                    claymore
-miner_hashes:                             30 30
+miner_hashes:                             0 30
 rejected_shares:                          0 0 0 0 0 0
 models:                                   GPU0 
                                           GPU1 
@@ -57,4 +57,3 @@ watts:                                    106 109
 watt_min:                                 30.00 30.00
 watt_max:                                 238 238
 powertune:                                5 5
-
