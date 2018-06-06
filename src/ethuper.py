@@ -10,10 +10,17 @@ import argparse, os
 from logging import debug, warning, info
 import logging
 
+from _var_manager import *
+from confs.filepaths import * 
+
 
 # reading and setting auto level reading
-lev = int(var_manager(VAR__FOLDER+"log_level.pk", "r"))
+lev = var_manager("log_level.pk", "r")
 logging.basicConfig(level=lev)
+
+debug("debug")
+info("info")
+warning("warning")
 
 
 from _ethuper.manager import * 
@@ -24,7 +31,7 @@ from _ethuper.manager import *
 
 def main() : 
 
-	# handle args
+	# handle argparse
 	command, option = arg_manager()
 
 	logging.debug(command)
