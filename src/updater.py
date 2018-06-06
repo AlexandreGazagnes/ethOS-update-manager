@@ -35,13 +35,16 @@ def main() :
 
 		# handle install if needed 		
 		install()
+		logging.debug("install")
 
 		# reset pb counters 
 		var_manager("consecutive_problem.pk", "w", 0)
-		var_manager("reboot_number.pk", "w", 0)
+		var_manager("reboot_number.pk", "i")
+		logging.debug("reset system counters")
 		
 		# file manager
 		init_data_file(DATA_FOLDER, DATA_FILE)
+		logging.debug("init data file")
 
 		# main loop
 		while True : 
@@ -51,23 +54,23 @@ def main() :
 			
 			# proceed 
 			txt = data_from_cmd()				# extract text
-			
-			# JUST FOR TEST MODE 
-			# txt = load_data("DATA_FOLDER", "update.temp")
-
+			# txt = load_data("DATA_FOLDER", "update.temp") // # JUST FOR TEST MODE 
 			data = convert_txt(txt)				# extract data from text				
 			data = extract_data(data) 			# build data dict of int or str 
 			txt = convert_organized_txt(data) 	# rebuild txt for write
+			logging.debug("command, text, data processing")
 
 			# update/append file
 			update_data_file(DATA_FOLDER, DATA_FILE, txt)
+			logging.debug("update data file")
 
 			# if reboot mode enabled or not
-			reboot_aut = var_manager("reboot_aut.pk", "r", folder=VAR_FOLDER)
+			reboot_aut = var_manager("reboot_aut.pk", "r")
 			logging.debug(reboot_aut)
 
 			if reboot_aut : 
 				check_and_reboot(data)
+				loging.debug("check and reboot")
 
 
 
