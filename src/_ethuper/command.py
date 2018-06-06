@@ -122,12 +122,12 @@ def merge_files() :
 
 def is_working() : 
 	""" """
-	pids = return_pids("ethOS-update-manager")
+	res = os.popen("ps aux | grep ethOS-update-manager").readlines()
+	for lign in res : 
+		if "/home/ethos/ethOS-update-manager" in lign : 
+			return True
 
-	if not len(pids) : 
-		print("False")
-	else : 
-		print("True ({})".format(len(pids)))
+	return False
 
 
 
