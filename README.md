@@ -40,7 +40,7 @@ prepare program and folder/file :
 ```
 $ cd
 $ chmod +x /home/ethos/ethOS-update-manager/launch
-$ chmod +x /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py
+$ chmod +x /home/ethos/ethOS-update-manager/src/main.py
 ```
 
 for manual launch but background work: 
@@ -50,7 +50,7 @@ $ /home/ethos/ethOS-update-manager/launch
 
 for manual launch but foreground work: 
 ```
-$ /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py
+$ /home/ethos/ethOS-update-manager/src/main.py
 ```
 
 
@@ -68,7 +68,7 @@ $ echo "/home/ethos/ethOS-update-manager/launch" >> /home/ethos/.bashrc
 ## Folders
 * data :                data file(s) created
 * doc :                 full documentation 
-* ethOsUpdateManager :  main.py (called by launch) and lib
+* src :  		main.py (called by launch) and lib
 * logs :                logs files stdout and stdr
 * tests :               standard test collection
 * utils :               various scripts to clean, merge, split, manipulate you data files
@@ -109,12 +109,4 @@ azerty
 alias qwerty='setxkbmap fr'
 ```
 
-## Dev
-* create config command to handle reset show set configs of all variables
-* transform in standalone program with argc/argv manager and full doc
-* progress to UpdateManager to RigManager with auto reboot 
-* pip?
-* use logging with log external file
-* write full doc and utils and test
-* find a new name 
-* create an install who automaticly create alias and autorun in bashrc
+
