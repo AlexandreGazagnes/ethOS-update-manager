@@ -31,7 +31,9 @@ from _updater.manage import *
 
 def main() :
 
-	autolaunch = var_manager("autolaunch_aut.pk", "r") 
+	# if autolaunch mode enabled or not
+	autolaunch = var_manager("autolaunch_aut.pk", "r", folder=VAR_FOLDER)
+	loging.debug(autolaunch)
 
 	if autolaunch : 
 
@@ -39,13 +41,8 @@ def main() :
 		install()
 
 		# reset pb counters 
-		var_manager("consecutive_problem.pk", "w", 0,folder=VAR_FOLDER)
+		var_manager("consecutive_problem.pk", "w", 0, folder=VAR_FOLDER)
 		var_manager("reboot_number.pk", "w", 0, folder=VAR_FOLDER)
-
-		# test logging level
-		logging.debug("test logging debug")
-		logging.info("test logging info ")
-		logging.warning("test logging warning ")
 		
 		# file manager
 		init_data_file(DATA_FOLDER, DATA_FILE)
@@ -59,8 +56,8 @@ def main() :
 			# proceed 
 			txt = data_from_cmd()				# extract text
 			
-			# test MODE 
-			txt = load_data("/home/ethos/ethOS-update-manager/data/", "update.temp")
+			# JUST FOR TEST MODE 
+			# txt = load_data("DATA_FOLDER", "update.temp")
 
 			data = convert_txt(txt)				# extract data from text				
 			data = extract_data(data) 			# build data dict of int or str 
@@ -69,12 +66,12 @@ def main() :
 			# update/append file
 			update_data_file(DATA_FOLDER, DATA_FILE, txt)
 
-			with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "r") as f : reboot_aut = int(f.read())
+			# if reboot mode enabled or not
+			reboot_aut = var_manager("reboot_aut.pk", "r", folder=VAR_FOLDER)
 			logging.debug(reboot_aut)
 
 			if reboot_aut : 
 				manage(data)
-
 
 
 
