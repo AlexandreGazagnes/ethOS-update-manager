@@ -9,10 +9,9 @@ import os, subprocess, pickle, time
 
 from logging import debug, warning, info
 
-
+from _var_manager import * 
 from confs.params import * 
 from confs.filepaths import * 
-
 
 
 # functions
@@ -20,35 +19,35 @@ from confs.filepaths import *
 def miner_not_started(data) : 
 	"""if miner not started"""
 
-	already_reallowed_and_minestart = var_manager("allow_minestart.pk","r", folder = VAR_FOLDER)
+	already_re_minestarted = var_manager("allow_minestart.pk","r")
 
 	# miner not mining	
 	if data["hash"] < 1 :
 
 		# record  and first restart reallow
-		if not already_reallowed_and_minestart : 
+		if not already_re_minestarted : 
 
 			logging.warning("Miner not started, allow and minestart")
 
 			os.system("allow")
 			os.system("minestart")
 
-			var_manager("allow_minestart.pk","w", 1, folder = VAR_FOLDER)
+			var_manager("allow_minestart.pk","w", 1)
 
 		# if already restarted and reallowe: reboot
 		else : 
 
 			logging.warning("Miner not working, but already re-allowed and re-started")
 
-			var_manager("allow_minestart.pk","w", 0, folder = VAR_FOLDER)
+			var_manager("allow_minestart.pk","w", 0)
 			reboot()
 
 
-def miner_too_hot(data, t=60*30) : 
+def miner_too_hot(data, wait=OVER_WARMING_SLEEPER, t=MAX_TEMP ) : 
 	"""if miner to hot""" 
 
 	# if GPU temp to hot disallow and minestop
-	if data["temp_max"] > 75 : 
+	if data["temp_max"] > t : 
 
 		logging.debug(data["temp"])
 		logging.debug(data["temp_max"])
@@ -62,7 +61,7 @@ def miner_too_hot(data, t=60*30) :
 		logging.warning("Miner will wait before reboot")
 		
 		# wait to have lower temp
-		time.sleep(t) 
+		time.sleep(wait) 
 		
 		reboot()
 
