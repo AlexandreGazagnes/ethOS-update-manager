@@ -35,36 +35,36 @@ def auto_launch(option) :
 		error()
 
 
-def start(option) : 
+def start(option, force=False) : 
 	""" """
 
-	if option.lower() == "fg" :
-		# IF updater not WORKING !!!!
-		os.system("nohup /home/ethos/ethOS-update-manager/src/updater.py")
-	elif option.lower() == "bg" :
-		# IF updater not WORKING !!!!
-		os.system("/home/ethos/ethOS-update-manager/autolaunch-updater")
+	if not is_working() : 
+		if option.lower() == "fg" :
+			os.system("/home/ethos/ethOS-update-manager/src/updater.py")
+		elif option.lower() == "bg" :
+			os.system("/home/ethos/ethOS-update-manager/autolaunch-updater")
 	else : 
-		error()
-
-
-def return_pids(cmd) : 
-	""" """
-
-	txt = "ps aux | grep {}".format(cmd)
-	ans = os.popen().readlines()
-	strip = [i.split(" ") for i in ans]
-	strip = [[ i for i in j if i ] for j in strip]
-	pids = [int(i[1]) for i in strip]
-
-	return pids
-
+		print("program already running, please type 'Yes' to force an other start")
+		ans = input()
+		if ans == "Yes" : 
+			start()
 
 def stop() : 
 	""" """
 
-	pids = return_pids("ethOS-update-manager") 
-	for pid in pids  : 
+	res = os.popen("ps aux | grep ethOS-update-manager").readlines()
+	l = -1
+	for i, lign in enumerate(res) : 
+		if "/home/ethos/ethOS-update-manager" in lign : 
+			l= i 
+
+	if l == -1 : 
+		print("Sorry program not started")
+	else : 
+		li = res[l].split(" ")
+		li = [i for i in li if li]
+		pid = li[1]
+
 		s = 'kill ' + str(pid)
 		os.system(s)
 
@@ -125,8 +125,10 @@ def is_working() :
 	res = os.popen("ps aux | grep ethOS-update-manager").readlines()
 	for lign in res : 
 		if "/home/ethos/ethOS-update-manager" in lign : 
+			print("program is working")
 			return True
 
+	print("program is not working")
 	return False
 
 
