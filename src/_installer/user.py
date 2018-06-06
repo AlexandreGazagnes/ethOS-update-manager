@@ -16,12 +16,12 @@ import logging
 def autosettings() : 
 	""" """
 
-	print("enable autosettings ? y/n")
+	print("enable autosettings ? y/n (DEFAULT and RECOMMANDED)")
 	while True : 
 		ans = input()
 
 		if ans.lower() == "y" : 
-			with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "w") as f : f.write("1")
+			with open("/home/ethos/ethOS-update-manager/src/var/autolaunch_aut.pk", "w") as f : f.write("1")
 			with open("/home/ethos/ethOS-update-manager/src/var/reboot_aut.pk", "w") as f : f.write("1")
 			with open("/home/ethos/ethOS-update-manager/src/var/sleeper.pk", "w") as f : f.write("300")
 			return True
@@ -33,7 +33,7 @@ def autosettings() :
 			print("y or n")
 
 
-def autolaunch() : 
+def choose_autolaunch() : 
 	""" """
 	
 	print("enable autolaunch ? (DEFAULT and RECOMMANDED)")
@@ -52,7 +52,7 @@ def autolaunch() :
 			print("y or n")
 
 
-def reboot_aut() : 
+def choose_reboot_aut() : 
 	""" """
 
 	print("enable rebooting autorisation? (DEFAULT and RECOMMANDED)")
@@ -71,7 +71,7 @@ def reboot_aut() :
 			print("y or n")
 
 
-def time_delta() : 
+def choose_time_delta() : 
 	""" """
 
 	print("log time delta? in minutes (DEFAULT : 5)" )
@@ -99,9 +99,9 @@ def user_settings() :
 	done = autosettings()
 
 	if not done : 
-		autolaunch()
-		reboot_aut()
-		time_delta()
+		choose_autolaunch()
+		choose_reboot_aut()
+		choose_time_delta()
 
 
 

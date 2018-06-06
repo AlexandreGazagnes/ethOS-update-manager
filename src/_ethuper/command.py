@@ -12,6 +12,7 @@ import logging
 
 from _var_manager import *
 from confs.filepaths import *
+from _installer.command import *
 
 
 
@@ -39,7 +40,7 @@ def auto_launch(option) :
 		error()
 
 
-def start(option, force=False) : 
+def start(option) : 
 	""" """
 
 	if not is_working() : 
@@ -88,14 +89,16 @@ def config(option) :
 	""" """
 
 	if option.lower() == "set" :
-		print("Not avialable")
+		choose_autolaunch()
+		choose_reboot_aut()
+		choose_time_delta()
 		restart()
 
 	elif option.lower() == "reset" : 
 		print("Not avialable")
 		restart()
 	elif option.lower() == "show" :
-		print("Not avialable")
+		var_read()
 	
 	else : 
 		error()
