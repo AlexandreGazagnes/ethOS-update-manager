@@ -23,13 +23,10 @@ def var_manager(filename, mode, var=None, folder=VAR_FOLDER) :
 			pass
 		return res
 
-
 	if mode == "i" : 
 		with open(folder+filename, "r") as f : res = f.read()
 		try : 
-			res = int(res)
-			res +=1
-			res = str(res)
+			res = str(int(res) + 1)
 			with open(folder+filename, "w") as f :  f.write(res)
 		except : 
 			raise ValueError("incrementation not possible, txt/bin format confusion")
@@ -37,13 +34,11 @@ def var_manager(filename, mode, var=None, folder=VAR_FOLDER) :
 	elif mode == "w" : 
 		if not var : 
 			raise ValueError("trying to write nothing")
-		txt = str(var)
-		with open(folder + filename, mode) as f : f.write(txt)
+		with open(folder + filename, mode) as f : f.write(str(var))
 		return 1
 
 	elif mode =="rb" :
-
-		with open(folder+filename, mode) as f : res = f.load()	
+		with open(folder+filename, mode) as f : res = pickle.load(f)	
 		try : 
 			res = int(res)
 		except : 
@@ -51,22 +46,18 @@ def var_manager(filename, mode, var=None, folder=VAR_FOLDER) :
 		return res
 	
 	elif mode == "wb" :
-
 		try : 
 			var = int(var)
 		except : 
 			pass 
-
-		with open(folder + filename, mode) as f : 
-			f.dump(var, f)
+		with open(folder + filename, mode) as f : pickle.dump(var, f)
 		return 1
 
 	if mode == "ib" : 
-		with open(folder+filename, "rb") as f : res = f.load()
+		with open(folder+filename, "rb") as f : res = pickle.load(f)
 		try : 
-			res = int(res)
-			res +=1
-			with open(folder+filename, "wb") as f : f.dump(res, f)
+			res = int(res) + 1
+			with open(folder+filename, "wb") as f : pickle.dump(res, f)
 		except : 
 			raise ValueError("incrementation not possible, txt/bin format confusion")
 
@@ -94,9 +85,9 @@ def var_read(folder=VAR_FOLDER, verbose=False) :
 			print(var)
 		
 		except : 
-			with open(folder+file, "rb") as f : var = str(f.load())
+			with open(folder+file, "rb") as f : var = str(pickle.load(f))
 			if verbose : 
 				print("bin format : ")
-			print(var)
+			print(str(var))
 
 
