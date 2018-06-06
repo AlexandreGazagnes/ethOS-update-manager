@@ -10,7 +10,8 @@ import argparse, os
 from logging import debug, warning, info
 import logging
 
-from _var_manager import * 
+from _var_manager import *
+from confs.filepaths import *
 
 
 
@@ -28,7 +29,7 @@ def auto_launch(option) :
 		restart()
 
 	elif otion == "show" :
-		var_manager("autolaunch_aut.pk", "r")
+		ans = var_manager("autolaunch_aut.pk", "r")
 
 		if ans  : 
 			print("auto launch : On")
@@ -112,7 +113,7 @@ def reboot_aut(option) :
 		restart()
 	
 	elif otion == "show" :
-		var_manager("reboot_aut.pk", "r")
+		ans = var_manager("reboot_aut.pk", "r")
 	
 		if ans  : 
 			print("reboot aut : On")
@@ -150,10 +151,13 @@ def unistall(option) :
 
 	if option.lower() == "hard" : 
 		print("Not avialable")
+	
 	elif option.lower() == "medium" : 
 		print("Not avialable")
+	
 	elif option.lower() == "soft" :
 		print("Not avialable")
+	
 	else : 
 		error()
 
@@ -164,15 +168,14 @@ def error() :
 	print("Command/Option. error")
 	print("Do you want to acces to the Manual (full doc of instructions?")
 	ans = input("y/n\n")
-	if ans.lower() == y : 
+	if ans.lower() == "y" : 
 		man()
 
 
 def man(): 
 	""" """
 
-	with open("/home/ethos/ethOS-update-manager/docs/manual.txt", "r") as f : 
-		txt = f.read()
+	txt = var_manager("doc.txt", "r", folder=DOC_FOLDER)
 	print(txt)
 
 

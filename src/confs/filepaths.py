@@ -17,4 +17,4 @@ TEMP_FILE = "update.temp"
 VAR_FOLDER = "/home/alex/ethOS-update-manager/src/var/"
 
 
-DOC_FOLDER = "home/alex/ethOS-update-manager/src/var/"
+DOC_FOLDER = "home/alex/ethOS-update-manager/docs/"
