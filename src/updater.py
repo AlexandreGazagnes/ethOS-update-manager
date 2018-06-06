@@ -5,9 +5,6 @@
 
 # import 
 
-import os, subprocess, pickle, time
-
-from logging import debug, warning, info
 import logging
 
 from _var_manager import *
@@ -18,7 +15,6 @@ lev = var_manager("log_level.pk", "r", folder=VAR_FOLDER)
 logging.basicConfig(level=lev)
 
 from confs.params import * 
-
 from _updater.file import * 
 from _updater.data import * 
 from _updater.text import * 
@@ -32,8 +28,8 @@ from _updater.manage import *
 def main() :
 
 	# if autolaunch mode enabled or not
-	autolaunch = var_manager("autolaunch_aut.pk", "r", folder=VAR_FOLDER)
-	loging.debug(autolaunch)
+	autolaunch = var_manager("autolaunch_aut.pk", "r")
+	logging.debug(autolaunch)
 
 	if autolaunch : 
 
@@ -41,8 +37,8 @@ def main() :
 		install()
 
 		# reset pb counters 
-		var_manager("consecutive_problem.pk", "w", 0, folder=VAR_FOLDER)
-		var_manager("reboot_number.pk", "w", 0, folder=VAR_FOLDER)
+		var_manager("consecutive_problem.pk", "w", 0)
+		var_manager("reboot_number.pk", "w", 0)
 		
 		# file manager
 		init_data_file(DATA_FOLDER, DATA_FILE)

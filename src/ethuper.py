@@ -5,9 +5,6 @@
 
 # import 
 
-import argparse, os
-
-from logging import debug, warning, info
 import logging
 
 from _var_manager import *
@@ -18,7 +15,6 @@ lev = var_manager("log_level.pk", "r", folder=VAR_FOLDER)
 logging.basicConfig(level=int(lev))
 
 from _ethuper.manager import * 
-
 
 
 # main 

@@ -5,13 +5,14 @@
 
 # import 
 
-import os
+import os, pickle
+from confs.filepaths import * 
 
 
 
 # functions 
 
-def var_manager(filename, mode, var=None, folder="/home/alex/ethOS-update-manager/src/var/") : 
+def var_manager(filename, mode, var=None, folder=VAR_FOLDER) : 
 	""" """
 
 	if mode == "r" : 
@@ -31,20 +32,36 @@ def var_manager(filename, mode, var=None, folder="/home/alex/ethOS-update-manage
 			f.write(txt)
 		return 1
 
-	elif mode =="rb" : 
-		print("not implemented : bin format (pickle)")	
+	elif mode =="rb" :
+
+		with open(folder+filename, mode) as f : 
+			res = f.load()	
+		try : 
+			res = int(res)
+		except : 
+			pass
+		return res
 	
-	elif mode == "wb" : 
-		print("not implemented : bin format (pickle)")	
+	elif mode == "wb" :
+
+		try : 
+			var = int(var)
+		except : 
+			pass 
+
+		with open(folder + filename, mode) as f : 
+			f.dump(txt)
+		return 1
 
 
-def var_list(folder="/home/ethos/ethOS-update-manager/src/var/"): 
+def var_list(folder=VAR_FOLDER): 
 	""" """ 
 
-	return os.listdir(folder)
+	print(os.listdir(folder))
+	return(os.listdir(folder)) 
 
 
-def var_read(folder="/home/ethos/ethOS-update-manager/src/var/", verbose=False) : 
+def var_read(folder=VAR_FOLDER, verbose=False) : 
 	""" """
 
 	file_list = os.listdir(folder)
@@ -54,12 +71,17 @@ def var_read(folder="/home/ethos/ethOS-update-manager/src/var/", verbose=False) 
 	for file in file_list : 
 		print(str(file + " : "), end="  ")
 		try : 
-			with open(folder+file, "r") as f : var = f.read()
+			with open(folder+file, "r") as f : 
+				var = f.read()
 			if verbose : 
 				print("txt format : ")
 			print(var)
 		
 		except : 
-			print("not implemented : bin format (pickle)")	
+			with open(folder+file, "rb") as f : 
+				var = str(f.load())
+			if verbose : 
+				print("bin format : ")
+			print(var)
 
-	
+

@@ -9,7 +9,6 @@ import os, subprocess, pickle, time
 
 from logging import debug, warning, info
 
-# do not use pandas on ethos 1.3.1
 
 from confs.params import * 
 from confs.filepaths import * 
@@ -34,14 +33,14 @@ def miner_not_started(data) :
 			os.system("allow")
 			os.system("minestart")
 
-			var_manager("allow_minestart.pk","w", 1 folder = VAR_FOLDER)
+			var_manager("allow_minestart.pk","w", 1, folder = VAR_FOLDER)
 
 		# if already restarted and reallowe: reboot
 		else : 
 
 			logging.warning("Miner not working, but already re-allowed and re-started")
 
-			var_manager("allow_minestart.pk","w", 0 folder = VAR_FOLDER)
+			var_manager("allow_minestart.pk","w", 0, folder = VAR_FOLDER)
 			reboot()
 
 
@@ -116,12 +115,11 @@ def over_voltage(data) :
 	pass
 
 
-
 def reboot() : 
 	""" """
 	# ADD A REBOOT.log
 	logging.warning("auto reboot")
-	os.system("R")
+	os.system("r")
 
 
 def check_and_reboot(data) :
