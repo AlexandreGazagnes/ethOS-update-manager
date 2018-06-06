@@ -8,6 +8,10 @@
 import os, time
 from logging import debug, info, warning
 import logging
+
+"""
+adding auto level reading
+"""
 logging.basicConfig(level=logging.WARNING)
 
 from _installer.user import * 

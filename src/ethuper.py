@@ -9,6 +9,10 @@ import argparse, os
 
 from logging import debug, warning, info
 import logging
+
+"""
+adding auto level reading
+"""
 logging.basicConfig(level=logging.WARNING)
 
 
