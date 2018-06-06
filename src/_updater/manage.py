@@ -131,7 +131,7 @@ def over_voltage(data) :
 	pass
 
 
-def manage(data) :
+def check_and_reboot(data) :
 	""" for each mining config apply good action"""
 
 	logging.info("manage mode enable : checking if problems")
