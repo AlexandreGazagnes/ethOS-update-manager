@@ -12,9 +12,9 @@ import logging
 
 """
 adding auto level reading
+lev = int(var_manager(VAR__FOLDER+"log_level.pk", "r")
+logging.basicConfig(level=lev)
 """
-logging.basicConfig(level=logging.WARNING)
-
 
 from _ethuper.manager import * 
 

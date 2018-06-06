@@ -10,8 +10,6 @@ import os, subprocess, pickle, time
 from logging import debug, warning, info
 import logging
 
-# do not use pandas on ethos 1.3.1
-
 
 
 # Constants
@@ -27,3 +25,6 @@ debug(COUNTER_FILE)
 
 TEMP_FILE = "update.temp" 
 debug(TEMP_FILE) 
+
+VAR_FOLDER = "/home/ethos/ethOS-update-manager/src/var"
+debug(VAR_FOLDER)
