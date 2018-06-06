@@ -10,11 +10,11 @@ import argparse, os
 from logging import debug, warning, info
 import logging
 
-"""
-adding auto level reading
-lev = int(var_manager(VAR__FOLDER+"log_level.pk", "r")
+
+# reading and setting auto level reading
+lev = int(var_manager(VAR__FOLDER+"log_level.pk", "r"))
 logging.basicConfig(level=lev)
-"""
+
 
 from _ethuper.manager import * 
 
