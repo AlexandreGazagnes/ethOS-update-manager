@@ -3,31 +3,13 @@
 
 
 
-# import 
-
-import os, subprocess, pickle, time
-
-from logging import debug, warning, info
-import logging
-
-# do not use pandas on ethos 1.3.1
-
-
-
-# log level
-
-logging.basicConfig(level=logging.INFO)
-
-
 
 # constants
 
 CMD = "show stats" # or update
-debug(CMD)
 
 
 SLEEPER = 10 # 5 minutes
-debug(SLEEPER)
 
 
 KEYS_SELECTED= [ # global :
@@ -43,7 +25,6 @@ KEYS_SELECTED= [ # global :
 				'core','mem','voltage',				# local config
 				'watts',					# conso 
 				'powertune']					# DEPRICIATED
-debug(KEYS_SELECTED)
 
 
 HEADER = 		[ # global
@@ -54,4 +35,5 @@ HEADER = 		[ # global
 				'miner_hashes','rejected_shares',
 				'fanrpm','fanpercent','temp', 'temp_avg', 'temp_max',		
 				'bioses','core','mem','voltage', 'watts', 'powertune']
-debug(HEADER)
+
+

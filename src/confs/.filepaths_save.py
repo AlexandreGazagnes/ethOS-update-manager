@@ -3,28 +3,18 @@
 
 
 
-# import 
-
-import os, subprocess, pickle, time
-
-from logging import debug, warning, info
-import logging
-
-
-
 # Constants
 
-DATA_FOLDER = "/home/ethos/ethOS-update-manager/data/"
-debug(DATA_FOLDER)
+DATA_FOLDER = "/home/alex/ethOS-update-manager/data/"
 
 DATA_FILE = "update.csv" 
-debug(DATA_FILE) 
 
 COUNTER_FILE = ".counter" 
-debug(COUNTER_FILE) 
 
 TEMP_FILE = "update.temp" 
-debug(TEMP_FILE) 
 
-VAR_FOLDER = "/home/ethos/ethOS-update-manager/src/var"
-debug(VAR_FOLDER)
+
+VAR_FOLDER = "/home/alex/ethOS-update-manager/src/var/"
+
+
+DOC_FOLDER = "home/alex/ethOS-update-manager/src/var/"

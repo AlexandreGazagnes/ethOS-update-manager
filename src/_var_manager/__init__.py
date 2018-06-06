@@ -4,13 +4,14 @@
 
 
 # import 
-import os, logging
+
+import os
 
 
 
 # functions 
 
-def var_manager(filename, mode, var=None, folder="/home/ethos/ethOS-update-manager/src/var/") : 
+def var_manager(filename, mode, var=None, folder="/home/alex/ethOS-update-manager/src/var/") : 
 	""" """
 
 	if mode == "r" : 
