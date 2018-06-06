@@ -9,21 +9,24 @@ import os, time
 from logging import debug, info, warning
 import logging
 
-"""
-adding auto level reading
-"""
-logging.basicConfig(level=logging.WARNING)
+from _var_manager import *
+from confs.filepaths import * 
+
+# reading and setting auto log level
+lev = var_manager("log_level.pk", "r", folder=VAR_FOLDER)	
+logging.basicConfig(level=int(lev))
 
 from _installer.user import * 
 from _installer.system import * 
+
+
 
 # main
 
 def main() : 
 
 	# update install.pk
-	with open("/home/ethos/ethOS-update-manager/src/var/install.pk", "w") as f:
-		f.write("1")
+	var_manager("install.pk", "w", str(1), folder=VAR_FOLDER)
 
 	# manage user level of confidence 
 	user_settings()

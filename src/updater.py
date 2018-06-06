@@ -9,11 +9,14 @@ import os, subprocess, pickle, time
 
 from logging import debug, warning, info
 import logging
-logging.basicConfig(level=logging.WARNING)
 
-# please do not use pandas on ethos 1.3.1
-
+from _var_manager import *
 from confs.filepaths import * 
+
+# reading and setting auto log level
+lev = var_manager("log_level.pk", "r", folder=VAR_FOLDER)	
+logging.basicConfig(level=lev)
+
 from confs.params import * 
 
 from _updater.file import * 
@@ -22,26 +25,25 @@ from _updater.text import *
 from _updater.install import *
 from _updater.manage import *
 
-from _var_manager import * 
-
 
 
 # main
 
 def main() :
 
-	with open("/home/ethos/ethOS-update-manager/src/var/autolaunch.pk", "r") as f : v = int(f.read())
+	autolaunch = var_manager("autolaunch_aut.pk", "r") 
 
-	if  v : 
+	if autolaunch : 
+
 		# handle install if needed 		
 		install()
 
 		# reset pb counters 
-		var_manager("consecutive_problem.pk", "w", "0")
-		var_manager("reboot_number.pk", "w", "0")
+		var_manager("consecutive_problem.pk", "w", 0,folder=VAR_FOLDER)
+		var_manager("reboot_number.pk", "w", 0, folder=VAR_FOLDER)
 
 		# test logging level
-		logging.debug("test logging debug ")
+		logging.debug("test logging debug")
 		logging.info("test logging info ")
 		logging.warning("test logging warning ")
 		

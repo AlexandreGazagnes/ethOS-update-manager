@@ -13,11 +13,9 @@ import logging
 from _var_manager import *
 from confs.filepaths import * 
 
-
 # reading and setting auto log level
 lev = var_manager("log_level.pk", "r", folder=VAR_FOLDER)	
 logging.basicConfig(level=int(lev))
-
 
 from _ethuper.manager import * 
 
