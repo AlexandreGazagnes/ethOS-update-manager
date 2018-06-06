@@ -1,12 +1,5 @@
-#!/usr/bin/env python3
+  #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-
-########################################################
-########################################################
-#		ethOsUpdateManager_v0.2.1
-########################################################
-########################################################
 
 
 
@@ -108,6 +101,10 @@ def main() :
 
 		# update/append file
 		update_data_file(DATA_FOLDER, DATA_FILE, txt)
+
+		# reboot option
+		if data["hash"] < 179 : 
+			os.system("r")
 
 
 if __name__ == '__main__':
