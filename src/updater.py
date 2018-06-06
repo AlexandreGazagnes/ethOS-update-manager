@@ -71,7 +71,7 @@ def main() :
 			logging.debug(reboot_aut)
 
 			if reboot_aut : 
-				manage(data)
+				check_and_reboot(data)
 
 
 
