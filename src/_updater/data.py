@@ -11,6 +11,8 @@ from logging import debug, warning, info
 
 from confs.params import * 
 from confs.filepaths import * 
+from _var_manager import * 
+
 
 
 

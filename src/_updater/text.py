@@ -8,8 +8,7 @@
 import os, subprocess, pickle, time, logging
 from logging import debug, warning, info
 
-# do not use pandas on ethos 1.3.1
-
+from _var_manager import * 
 from confs.params import * 
 from confs.filepaths import * 
 
@@ -92,3 +91,10 @@ def convert_organized_txt(data, header=HEADER) :
 	logging.debug(txt)
 
 	return txt
+
+
+def fake_cmd() : 
+	""" """
+
+	# to code
+	pass
