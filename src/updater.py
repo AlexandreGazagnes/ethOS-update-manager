@@ -64,9 +64,11 @@ def main(test_mode=False, lev=None) :
 			logging.info("log process")
 			if not test_mode : 
 				txt = data_from_cmd()				# extract text
-			else : 
-				txt = load_data(DATA_FOLDER, TEMP_FILE) # just for test 
-
+			elif test_mode == "temp" : 
+				txt = load_temp_file(DATA_FOLDER, TEMP_FILE) # just for test 
+			elif test_mode = "fake_cmd" : 
+				txt = load_fake_cmd()
+			
 			data = convert_txt(txt)				# extract data from text				
 			data = extract_data(data) 			# build data dict of int or str 
 			txt = convert_organized_txt(data) 	# rebuild txt for write

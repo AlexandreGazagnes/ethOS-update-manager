@@ -118,7 +118,6 @@ def add_session_number(data) :
 	return data
 
 
-
 def extract_data(data) : 
 	"""whole process from the comand to data dict"""
 	
@@ -129,6 +128,6 @@ def extract_data(data) :
 	data = add_working_gpus(data)
 	data = add_temps(data)
 	data = add_timestamp(data)
-	data = add_session_number()
+	data = add_session_number(data)
 	
 	return data

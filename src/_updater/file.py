@@ -9,52 +9,55 @@ import os, subprocess, pickle, time, logging
 from logging import debug, warning, info
 
 from confs.params import * 
-from confs.filepaths import * 
+from confs.filepaths import *
+from _var_manager import *
 
 
 
 
 # functions
 
+def init_data_file(folder=DATA_FOLDER, datafile=DATA_FILE, counterfile=COUNTER_FILE, header=HEADER) : 
+	""" """
 
-def init_data_file(folder, datafile, counterfile=COUNTER_FILE, header=HEADER) : 
-
-	info("init_data_file called")
+	logging.info("init_data_file called")
 
 	# build header, name and ext
-	header = ",".join(header) + "\n"
+	header = ",".join(HEADER) + "\n"
 	name, ext = datafile.split(".")
 	
-	debug(header)
-	debug(name)
-	debug(ext)
+	logging.debug(header)
+	logging.debug(name)
+	logging.debug(ext)
 
 	# if first launch
 	if counterfile not in os.listdir(folder) : 
 	
-		info("first launch--> initiate .counter and update0.csv")
+		logging.info("first launch--> initiate .counter and update0.csv")
 		
 		c = "0" # intiate counter
 	
-		debug(c)
+		logging.debug(c)
 
 		# create counter file
-		with open(folder+counterfile, "w") as f :  f.write(c)
+		var_manager(counterfile, "w", c, folder)
 
-		filename = name + c + "." + ext # build filename
+		# build filename
+		filename = name + c + "." + ext 
 	
-		debug(filename)
+		logging.debug(filename)
 
 		# create file with header
-		with open(folder+filename, "w") as f : f.write(header)
+		var_manager(filename, "w", header, folder)
 
 	# build filename 
-	info("not first launch - > check headers")
+	logging.info("not first launch - > check headers")
 	
-	with open(folder+counterfile, "r") as f : c = f.read()
-	filename = name + c + "." + ext
+	c = var_manager(counterfile, "r", folder=folder) 
+
+	filename = name + str(c) + "." + ext
 	
-	debug(filename)
+	logging.debug(filename)
 
 	# extract first lign and avoid  to read the entire file :)
 	f = "head -n 1 " + str(folder+filename)
@@ -63,44 +66,46 @@ def init_data_file(folder, datafile, counterfile=COUNTER_FILE, header=HEADER) :
 	for i in f :
 		txt+=i
 	
-	debug(txt)
+	logging.debug(txt)
 
 	# if header has changed, change filename
 	if txt != header :
 	
-		info("Wrong headers, new file created")
+		logging.info("Wrong headers, new file created")
 
 		# update c and counter
-		with open(folder+counterfile, "r") as f : c = f.read()
+		c = var_manager(counterfile, "r", folder=folder)
+		var_manager(counterfile, "i", folder=folder)
+
 		c = str(1+int(c)) 
 	
-		debug(c)
+		logging.debug(c)
 	
-		with open(folder+counterfile, "w") as f :  f.write(c)
-
 		# build new filename and crete new file with new headers 
 		filename = name + c + "." + ext
 	
-		debug(filename)
+		logging.debug(filename)
 	
-		with open(folder+filename, "w") as f : f.write(header)
+		var_manager(filename, "w", header, folder=folder)
 
 
-def update_data_file(folder, datafile, txt, counterfile=COUNTER_FILE) : 
-
-	info("update_data_file called")
+def update_data_file(folder=DATA_FOLDER, datafile=DATA_FILE, txt=None, counterfile=COUNTER_FILE) : 
+	""" """
+	
+	logging.info("update_data_file called")
 	
 	name, ext = datafile.split(".")
 	
-	debug(name)
-	debug(ext)
+	logging.debug(name)
+	logging.debug(ext)
 
 	# update c and counter
-	with open(folder+counterfile, "r") as f : c = f.read()
-	filename = name + c + "." + ext
+	var_manager(counterfile, "r", folder=folder)
+	filename = name + str(c) + "." + ext
 	
-	debug(filename)
+	logging.debug(filename)
 
 	# save in file
 	with open(folder+filename, "a") as f : 
 		f.write(txt)
+

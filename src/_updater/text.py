@@ -5,7 +5,7 @@
 
 # import
 
-import os, subprocess, pickle, time
+import os, subprocess, pickle, time, logging
 from logging import debug, warning, info
 
 # do not use pandas on ethos 1.3.1
@@ -20,7 +20,7 @@ from confs.filepaths import *
 def data_from_cmd(cmd=CMD) :
 	"""create a txt from a popen command, for ex "update" """ 
 
-	info("data_from_cmd called")
+	logging.info("data_from_cmd called")
 	v = os.system(cmd) 
 	if v : 
 		logging.warning("command problem")
@@ -33,20 +33,20 @@ def data_from_cmd(cmd=CMD) :
 
 	if not txt : 
 
-		info("txt is None")
+		logging.info("txt is None")
 
 	return txt
 
 
-def load_data(data, filename) : 
+def load_temp_file(folder=DATA_FOLDER, filename=TEMP_FILE) : 
 	"""load data from file"""
 
-	info("load_data called")
+	logging.info("load_data called")
 	
-	with open(data+filename, "r") as f : txt = f.read()
+	txt = var_manager(filename, "r", folder=folder)
 	subtxt = txt[:300]
 	
-	info(subtxt)
+	logging.info(subtxt)
 
 	return txt
 
@@ -55,7 +55,7 @@ def convert_txt(txt):
 	"""from the str version of cli "update", create and return a list of
 	key, values"""
 
-	info("convert_txt called")
+	logging.info("convert_txt called")
 
 	# fist split lines
 	li1 = txt.splitlines()
@@ -72,7 +72,7 @@ def convert_txt(txt):
 	# strip everything
 	li3 = [[i[0].strip(), i[1].strip()] for i in li3]
 	
-	debug(li3)
+	logging.debug(li3)
 
 	return li3
 
@@ -80,15 +80,15 @@ def convert_txt(txt):
 def convert_organized_txt(data, header=HEADER) : 
 	"""from dict and in a specific order, build text to record"""
 
-	info("convert_organized_txt called")
+	logging.info("convert_organized_txt called")
 
 	li = [str(data[i]) for i in header]
 
-	debug(li)
+	logging.debug(li)
 
 	txt = ",".join(li)
 	txt+="\n"
 
-	debug(txt)
+	logging.debug(txt)
 
 	return txt
