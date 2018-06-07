@@ -3,9 +3,17 @@
 
 
 
+import os
+
+
 # Constants
 
-DATA_FOLDER = "/home/alex/ethOS-update-manager/data/"
+folder = os.getcwd()
+folder = foler.split("/")
+MAIN_FOLDER = "/{}/{}/ethOS-update-manager/".format(folder[0], folder[1])
+
+
+DATA_FOLDER = MAIN_FOLDER+"data/"
 
 DATA_FILE = "update.csv" 
 
@@ -14,7 +22,10 @@ COUNTER_FILE = ".counter"
 TEMP_FILE = "update.temp" 
 
 
-VAR_FOLDER = "/home/alex/ethOS-update-manager/src/var/"
+VAR_FOLDER = MAIN_FOLDER+"src/var/"
 
 
-DOC_FOLDER = "home/alex/ethOS-update-manager/src/var/"
+DOC_FOLDER = MAIN_FOLDER+"docs/"
+
+
+LOG_FOLDER = MAIN_FOLDER+"logs/"
