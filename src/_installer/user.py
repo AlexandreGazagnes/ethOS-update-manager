@@ -17,7 +17,7 @@ from _var_manager import *
 def autosettings() : 
 	""" """
 
-	print("enable autosettings ? y/n (DEFAULT and RECOMMANDED)")
+	print("enable autosettings ? y/n (DEFAULT and RECOMMANDED : y)")
 	while True : 
 		ans = input()
 
@@ -37,7 +37,7 @@ def autosettings() :
 def choose_autolaunch() : 
 	""" """
 	
-	print("enable autolaunch ? (DEFAULT and RECOMMANDED)")
+	print("enable autolaunch ? y/n (DEFAULT and RECOMMANDED : y)")
 	while True : 
 		ans = input()
 
@@ -56,7 +56,7 @@ def choose_autolaunch() :
 def choose_reboot_aut() : 
 	""" """
 
-	print("enable rebooting autorisation? (DEFAULT and RECOMMANDED)")
+	print("enable rebooting autorisation? y/n (DEFAULT and RECOMMANDED : y)")
 	while True : 
 		ans = input()
 

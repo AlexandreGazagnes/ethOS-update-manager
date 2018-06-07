@@ -12,7 +12,7 @@ import logging
 
 from _var_manager import *
 from confs.filepaths import *
-from _installer.command import *
+from _installer.user import *
 
 
 
@@ -89,13 +89,21 @@ def config(option) :
 	""" """
 
 	if option.lower() == "set" :
-		choose_autolaunch()
-		choose_reboot_aut()
-		choose_time_delta()
+		user_settings()
 		restart()
 
-	elif option.lower() == "reset" : 
-		print("Not avialable")
+	elif option.lower() == "reset" :
+
+		################################################## 
+		# ADD DEFAULT SAVING 
+		# i = var_manager(file saving, "r")
+		# j = var_manager(file saving, "r")
+		# k = var_manager(file saving, "r")
+		##################################################
+		
+		var_manager("autolaunch_aut.pk", "w", 1)
+		var_manager("reboot_aut.pk", "w", 1)
+		var_manager("sleeper.pk", "w", 300)
 		restart()
 	elif option.lower() == "show" :
 		var_read()
@@ -168,12 +176,19 @@ def unistall(option) :
 def error() : 
 	""" """
 
-	print("Command/Option. error")
+	print("Command/Option error")
 	print("Do you want to acces to the Manual (full doc of instructions?")
-	ans = input("y/n\n")
-	if ans.lower() == "y" : 
-		man()
+	while True : 
+		ans = input("y/n\n")
+		if ans.lower() == "y" : 
+			man()
+			return True 
+		
+		elif ans.lower() == "n"  : 
+			return True 
 
+		else : 
+			print("y or n")
 
 def man(): 
 	""" """
