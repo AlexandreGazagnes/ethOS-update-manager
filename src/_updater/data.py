@@ -5,11 +5,9 @@
 
 # import 
 
-import os, subprocess, pickle, time
+import os, subprocess, pickle, time, logging
 
 from logging import debug, warning, info
-
-# do not use pandas on ethos 1.3.1
 
 from confs.params import * 
 from confs.filepaths import * 
@@ -86,7 +84,7 @@ def add_temps(data) :
 	
 	debug(temps)
 	
-	working = data["working_gpus"]
+	working = int(data["working_gpus"])
 	data["temp_avg"]= int(sum(temps)/working)
 	data["temp_max"]= int(max(temps))
 	

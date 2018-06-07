@@ -11,7 +11,7 @@ from _var_manager import *
 from confs.filepaths import * 
 
 # reading and setting auto log level
-lev = var_manager("log_level.pk", "r", folder=VAR_FOLDER)	
+lev = var_manager("log_level.pk", "r")	
 logging.basicConfig(level=lev)
 
 from confs.params import * 

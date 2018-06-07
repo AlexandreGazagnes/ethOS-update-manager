@@ -5,9 +5,8 @@
 
 # import 
 
-import os, subprocess, pickle, time
-
-# do not use pandas on ethos 1.3.1
+import os, subprocess, pickle, time, logging
+from logging import debug, warning, info
 
 from confs.params import * 
 from confs.filepaths import * 
