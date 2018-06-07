@@ -9,8 +9,9 @@
 CMD = "show stats" # or update
 
 
-SLEEPER = 10 # 5 minutes
-
+SLEEPER = 10 * 60 # 10 minutes
+OVER_WARMING_SLEEPER = 60 * 60 # 1 hour
+MAX_TEMP = 75
 
 KEYS_SELECTED= [ # global :
 				'uptime','miner_secs', 				# time

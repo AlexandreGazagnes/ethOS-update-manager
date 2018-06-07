@@ -21,11 +21,8 @@ COUNTER_FILE = ".counter"
 
 TEMP_FILE = "update.temp" 
 
-
 VAR_FOLDER = MAIN_FOLDER+"src/var/"
-
 
 DOC_FOLDER = MAIN_FOLDER+"docs/"
 
-
-LOG_FOLDER = MAIN_FOLDER+"logs/"
+LOG_FOLDER = MAIN_FOLDER+"logs/"	
