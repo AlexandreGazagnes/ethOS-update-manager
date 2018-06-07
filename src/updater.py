@@ -42,7 +42,7 @@ def main(test_mode=False, lev=None) :
 
 		# reset pb counters 
 		var_manager("consecutive_problem.pk", "w", 0)
-		var_manager("reboot_number.pk", "i")
+		var_manager("session_number.pk", "i")
 		logging.debug("reset system counters")
 		
 		# file manager
@@ -59,7 +59,8 @@ def main(test_mode=False, lev=None) :
 			if not test_mode : 
 				txt = data_from_cmd()				# extract text
 			else : 
-				txt = load_data("DATA_FOLDER", "update.temp") # JUST FOR TEST MODE 
+				txt = load_data(DATA_FOLDER, TEMP_FILE) # just for test 
+
 			data = convert_txt(txt)				# extract data from text				
 			data = extract_data(data) 			# build data dict of int or str 
 			txt = convert_organized_txt(data) 	# rebuild txt for write
