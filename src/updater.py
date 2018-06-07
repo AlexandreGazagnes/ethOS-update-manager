@@ -11,8 +11,11 @@ from _var_manager import *
 from confs.filepaths import * 
 
 # reading and setting auto log level
-lev = var_manager("log_level.pk", "r")	
-logging.basicConfig(level=lev)
+if not lev : 
+	lev = var_manager("log_level.pk", "r")	
+	logging.basicConfig(level=lev)
+else :
+	logging.basicConfig(level=lev)
 
 from confs.params import * 
 from _updater.file import * 
@@ -25,7 +28,7 @@ from _updater.manage import *
 
 # main
 
-def main(test_mode=False) :
+def main(test_mode=False, lev=None) :
 
 	# if autolaunch mode enabled or not
 	autolaunch = var_manager("autolaunch_aut.pk", "r")
