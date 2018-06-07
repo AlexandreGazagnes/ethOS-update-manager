@@ -25,7 +25,7 @@ from _updater.manage import *
 
 # main
 
-def main() :
+def main(test_mode=False) :
 
 	# if autolaunch mode enabled or not
 	autolaunch = var_manager("autolaunch_aut.pk", "r")
@@ -53,8 +53,10 @@ def main() :
 			time.sleep(SLEEPER) # to avoid multiple short reboot 
 			
 			# proceed 
-			txt = data_from_cmd()				# extract text
-			# txt = load_data("DATA_FOLDER", "update.temp") // # JUST FOR TEST MODE 
+			if not test_mode : 
+				txt = data_from_cmd()				# extract text
+			else : 
+				txt = load_data("DATA_FOLDER", "update.temp") # JUST FOR TEST MODE 
 			data = convert_txt(txt)				# extract data from text				
 			data = extract_data(data) 			# build data dict of int or str 
 			txt = convert_organized_txt(data) 	# rebuild txt for write
