@@ -19,12 +19,11 @@ from confs.filepaths import *
 def select_keys(data, list_keys=KEYS_SELECTED) :
 	""" just keep needed or asked keys"""
 
-	
-	info("select_keys called")
+	logging.info("select_keys called")
 
 	data = [[i, j] for i,j in data if i in list_keys] 
 	
-	debug(data)
+	logging.debug(data)
 	
 	return data
 
@@ -32,7 +31,7 @@ def select_keys(data, list_keys=KEYS_SELECTED) :
 def convert_dict(data) : 
 	""" convert list of list with pair key, value in a dict"""
 
-	info("convert_dict called")
+	logging.info("convert_dict called")
 	
 	di = dict() 
 	
@@ -43,7 +42,7 @@ def convert_dict(data) :
 		except : 
 			di[i] = j
 	
-	debug(di)
+	logging.debug(di)
 
 	return di
 
@@ -51,16 +50,16 @@ def convert_dict(data) :
 def add_working_gpus(data) : 
 	"""add working gpus : gpus curently mining"""
 
-	info("add_working_gpus called")
+	logging.info("add_working_gpus called")
 
 	gpus = data["miner_hashes"]
 	
-	debug(gpus)
+	logging.debug(gpus)
 	
 	gpus = [float(i) for i in gpus.split(" ")]
 	len_gpus = len([i for i in gpus if i>0])
 	
-	debug(len_gpus)
+	logging.debug(len_gpus)
  
 	if not len_gpus : 
 		time.sleep(10*60)
@@ -69,7 +68,7 @@ def add_working_gpus(data) :
 	else : 
 		data["working_gpus"] = len_gpus
 	
-	debug(data["working_gpus"])
+	logging.debug(data["working_gpus"])
 
 	return data
 
@@ -77,19 +76,19 @@ def add_working_gpus(data) :
 def add_temps(data) : 
 	"""add 2 features : max temp and avg temp"""
 
-	info("add_temps called")
+	logging.info("add_temps called")
 	
 	temps = data["temp"]
 	temps = [float(i) for i in temps.split(" ")]
 	
-	debug(temps)
+	logging.debug(temps)
 	
 	working = int(data["working_gpus"])
 	data["temp_avg"]= int(sum(temps)/working)
 	data["temp_max"]= int(max(temps))
 	
-	debug(data["temp_avg"])
-	debug(data["temp_max"])
+	logging.debug(data["temp_avg"])
+	logging.debug(data["temp_max"])
 	
 	return data
 
@@ -97,24 +96,39 @@ def add_temps(data) :
 def add_timestamp(data) : 
 	"""add timestamp to index the 'dataframe' """
 
-	info("add_timestamp called")
+	logging.info("add_timestamp called")
 	
 	data["timestamp"] =  int(time.time())
 	
-	debug(data["timestamp"])
+	logging.debug(data["timestamp"])
 
 	return data
+
+
+def add_session_number(data) : 
+	""" """
+
+	logging.info("add_session_number called")
+	
+	i = var_manager("session_number.pk", "r")
+	data["session_number"] = str(i)
+
+	logging.debug(data["session_number"])
+
+	return data
+
 
 
 def extract_data(data) : 
 	"""whole process from the comand to data dict"""
 	
-	info("extract_data called")
+	logging.info("extract_data called")
 	
 	data = select_keys(data)
 	data = convert_dict(data)
 	data = add_working_gpus(data)
 	data = add_temps(data)
 	data = add_timestamp(data)
+	data = add_session_number()
 	
 	return data

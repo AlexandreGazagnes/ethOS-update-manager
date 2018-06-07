@@ -31,31 +31,37 @@ from _updater.manage import *
 def main(test_mode=False, lev=None) :
 
 	# if autolaunch mode enabled or not
+	logging.info("read autolaunch_aut")
+
 	autolaunch = var_manager("autolaunch_aut.pk", "r")
+	
 	logging.debug(autolaunch)
 
 	if autolaunch : 
 
+		logging.info("autolaunch enabled")
+
 		# handle install if needed 		
 		install()
-		logging.debug("install")
 
 		# reset pb counters 
+		logging.info("(re)set system counters")
 		var_manager("consecutive_problem.pk", "w", 0)
 		var_manager("session_number.pk", "i")
-		logging.debug("reset system counters")
 		
 		# file manager
 		init_data_file(DATA_FOLDER, DATA_FILE)
-		logging.debug("init data file")
 
+		logging.info("main loop")
 		# main loop
 		while True : 
 
+			logging.info("sleeper")
 			# just ... sleep!
 			time.sleep(SLEEPER) # to avoid multiple short reboot 
 			
-			# proceed 
+			# log process 
+			logging.info("log process")
 			if not test_mode : 
 				txt = data_from_cmd()				# extract text
 			else : 
@@ -64,19 +70,17 @@ def main(test_mode=False, lev=None) :
 			data = convert_txt(txt)				# extract data from text				
 			data = extract_data(data) 			# build data dict of int or str 
 			txt = convert_organized_txt(data) 	# rebuild txt for write
-			logging.debug("command, text, data processing")
-
+			
 			# update/append file
 			update_data_file(DATA_FOLDER, DATA_FILE, txt)
-			logging.debug("update data file")
 
 			# if reboot mode enabled or not
+			logging.info("read reboot_aut")
 			reboot_aut = var_manager("reboot_aut.pk", "r")
 			logging.debug(reboot_aut)
 
 			if reboot_aut : 
 				check_and_reboot(data)
-				loging.debug("check and reboot")
 
 
 

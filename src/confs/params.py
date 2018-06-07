@@ -29,7 +29,7 @@ KEYS_SELECTED= [ # global :
 
 
 HEADER = 		[ # global
-				'timestamp', 'uptime','miner_secs','miner_version','version',				
+				'timestamp', 'session_number','uptime','miner_secs','miner_version','version',				
 				'hostname','ip', 'cpu_temp','gpus', 'working_gpus',
 				'hash','proxy_problem',
 			# for each GPU : 
