@@ -1,4 +1,4 @@
-  #!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 
@@ -97,6 +97,9 @@ def return_hash(data, key="hash") :
 # Main
 
 def main() : 
+
+	msg = "time : {} init new session!\n\n".format(str(int(time.time())))
+	logging.info(msg) 
 
 	time.sleep(SLEEPER)
 
