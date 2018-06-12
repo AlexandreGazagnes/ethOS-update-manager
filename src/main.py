@@ -14,9 +14,11 @@ logging.basicConfig(level=logging.INFO)
 
 # Consts
 
-CMD = "show stats"		# CMD = "show stats" # or update
+CMD = "show stats"	# CMD = "show stats" # or update
 
-SLEEPER = 5 *60 # 5 minutes
+SLEEPER = 5 * 60 	# 5 minutes
+
+MIN_HASH = 179
 
 
 # Functions
@@ -116,7 +118,7 @@ def main() :
 
 		# reboot option
 		if isinstance(hashrate, int) : 
-			if hashrate < 179 : 
+			if hashrate < MIN_HASH : 
 				error = "rebooting due to hashrate at {} for value : {}".format(
 				str(int(time.time())), hashrate)
 				os.system("r")
