@@ -31,6 +31,9 @@ from _updater.manage import *
 def main(test_mode=False, lev=None) :
 
 	# if autolaunch mode enabled or not
+	msg = "time = {} NEW SESSION".format(str(int(time.time())))
+	logging.info(msg)
+
 	logging.info("read autolaunch_aut")
 
 	autolaunch = var_manager("autolaunch_aut.pk", "r")
