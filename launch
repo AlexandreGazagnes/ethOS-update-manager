@@ -8,5 +8,11 @@ import os
 # 2>&1 to log both stderr and stdout 
 # & to execute program in background
 
-os.system("nohup python3 /home/ethos/ethOS-update-manager/src/main.py >> /home/ethos/ethOS-update-manager/logs/log 2>&1 &")
+
+
+process = os.popen("ps -aux | grep ethOS-update-manager").readlines()
+is_working = ["src/main.py" in p for p in process]
+
+if True not in is_working :  
+	os.system("nohup python3 /home/ethos/ethOS-update-manager/src/main.py >> /home/ethos/ethOS-update-manager/logs/log 2>&1 &")
 
