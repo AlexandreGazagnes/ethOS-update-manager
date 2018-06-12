@@ -90,7 +90,7 @@ def main(test_mode=False, lev=None) :
 			# record uptime
 			uptime = uptime = os.popen("uptime").readlines()[0].split(",")[0]
 			uptime = uptime.split("up")[1]
-			msg = "Uptime : {}".forma(uptime)
+			msg = "Uptime : {}".format(uptime)
 			logging.info(msg)
 
 
