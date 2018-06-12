@@ -123,6 +123,13 @@ def main() :
 				str(int(time.time())), hashrate)
 				os.system("r")
 
+		# record uptime
+		uptime = uptime = os.popen("uptime").readlines()[0].split(",")[0]
+		uptime = uptime.split("up")[1]
+		msg = "Uptime : {}".format(uptime)
+		logging.info(msg)
+
+
 
 if __name__ == '__main__':
 	main()
