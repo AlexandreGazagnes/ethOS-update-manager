@@ -87,6 +87,12 @@ def main(test_mode=False, lev=None) :
 			if reboot_aut : 
 				check_and_reboot(data)
 
+			# record uptime
+			uptime = uptime = os.popen("uptime").readlines()[0].split(",")[0]
+			uptime = uptime.split("up")[1]
+			msg = "Uptime : {}".forma(uptime)
+			logging.info(msg)
+
 
 
 if __name__ == '__main__':
