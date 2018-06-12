@@ -17,7 +17,7 @@ from lib.filepaths import *
 
 # functions
 
-def data_from_cmd(cmd=CMD) :
+def data_from_cmd(cmd="show stats") :
 	"""create a txt from a popen command, for ex "update" """ 
 
 	info("data_from_cmd called")

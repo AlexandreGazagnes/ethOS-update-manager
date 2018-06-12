@@ -11,100 +11,112 @@ from logging import debug, warning, info
 import logging
 logging.basicConfig(level=logging.INFO)
 
-# please do not use pandas on ethos 1.3.1
 
-from lib.filepaths import * 
-from lib.params import * 
-from lib.files import * 
-from lib.data import * 
-from lib.text import * 
+# Consts
 
-
-# Custom file paths
-
-# feel free to uncomment and to change file paths, 
-# if not default file paths will be used
-# more info in lib/filepaths
-
-		# DATA_FOLDER = "/home.ethos/
-		# DATA_FILE = "update.csv" # feel free to give your personal config
-
-		# COUNTER_FILE = ".counter" # you should not change this file
-		# TEMP_FILE = "update.temp" # you should not change this file
-
-
-
-# Custom Parametres
-
-# feel free to uncomment and to change file paths, 
-# if not default file paths will be used
-# more info in lib/consts
-
-
-logging.basicConfig(level=logging.INFO)
-
-		# CMD = "show stats" # or update
-
+CMD = "show stats"		# CMD = "show stats" # or update
 
 SLEEPER = 5 *60 # 5 minutes
 
 
-		# KEYS_SELECTED= [# global :
-		# 				'uptime','miner_secs', 				# time
-		# 				'miner_version','version',			# ethos
-		# 				'hostname','ip',   				# id 
-		# 				'cpu_temp','gpus','hash','proxy_problem'	#status and perf 
+# Functions
 
-		# 		# for each GPU : 
-		# 				'miner_hashes','rejected_shares',		# perf
-		# 				'fanrpm','fanpercent','temp',			# temp
-		# 				'bioses',					# id 
-		# 				'core','mem','voltage',				# local config
-		# 				'watts',					# conso 
-		# 				'powertune']					# DEPRICIATED
+def data_from_cmd(cmd="show stats") :
+	"""create a txt from a popen command, for ex "update" """ 
+
+	debug("data_from_cmd called")
+
+	wrap = os.popen(cmd)
+	txt = str()
+
+	for i in wrap : 
+		txt +=i
+
+	if not txt : 
+
+		info("txt is None")
+
+	return txt
 
 
-		# HEADER = 		[ # global
-		# 				'timestamp', 'uptime','miner_secs','miner_version','version',				# ethos
-		# 				'hostname','ip', 'cpu_temp','gpus', 'working_gpus',
-		# 				'hash','proxy_problem',
-		# 			# for each GPU : 
-		# 				'miner_hashes','rejected_shares',
-		# 				'fanrpm','fanpercent','temp', 'temp_avg', 'temp_max',		
-		# 				'bioses','core','mem','voltage', 'watts', 'powertune']
+def convert_txt(txt):
+	"""from the str version of cli "update", create and return a list of
+	key, values"""
 
+	debug("convert_txt called")
+
+	# fist split lines
+	li1 = txt.splitlines()
+
+	# separate key, value with ":"
+	li2 = [i.split(":") for i in li1]
+
+	# delete null values
+	li2 = [i for i in li2 if i[0]]
+
+	# info some key values encoded on sevral lines
+	li3 = [["None", i[0]] if len(i) == 1 else i for i in li2]
+
+	# strip everything
+	li3 = [[i[0].strip(), i[1].strip()] for i in li3]
+	
+	return li3
+
+
+def convert_dict(data) : 
+	""" convert list of list with pair key, value in a dict"""
+
+	debug("convert_dict called")
+	
+	di = dict() 
+	
+	for i,j in data : 
+		try : 
+			j = int(j)
+			di[str(i)] = j
+		except : 
+			di[str(i)] = str(j)
+
+	return di
+
+
+def return_hash(data, key="hash") : 
+	""" return hash int"""
+
+	try : 
+		k = int(data["hash"])
+		return k
+	except : 
+		k = str(data["hash"])
+		error = "error reading hash at {} for value : {}".format(
+				str(int(time.time())), k)
+		info(error)
+		return k
 
 
 # Main
 
 def main() : 
 
-
-	# file manager
-	init_data_file(DATA_FOLDER, DATA_FILE)
-
+	time.sleep(SLEEPER)
 
 	# main loop
 	while True : 
 
-		# just ... sleep!
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
-
-		# DEPRECIATED : (just for local test)
-		# txt = load_data(DATA_FOLDER+TEMP_FILE)
 		
 		# proceed 
-		txt = data_from_cmd() 				# extract text
+		txt = data_from_cmd("show stats") 	# extract text
 		data = convert_txt(txt)				# extract data from text				
-		data = extract_data(data) 			# build data dict of int or str 
-		txt = convert_organized_txt(data) 		# rebuild txt for write
-
-		# update/append file
-		update_data_file(DATA_FOLDER, DATA_FILE, txt)
+		data = convert_dict(data)			# build data dict of int or str 
+		hashrate = return_hash(data, "hash")
 
 		# reboot option
-		if data["hash"] < 179 : 
-			os.system("r")
+		if isinstance(hashrate, int) : 
+			if hashrate < 179 : 
+				error = "rebooting due to hashrate at {} for value : {}".format(
+				str(int(time.time())), hashrate)
+				os.system("r")
 
 
 if __name__ == '__main__':
