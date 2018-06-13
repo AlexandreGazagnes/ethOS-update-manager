@@ -73,7 +73,7 @@ def convert_dict(data) :
 	di = dict() 
 	
 	for i,j in data : 
-		try : 
+		try :
 			j = int(j)
 			di[str(i)] = j
 		except : 
@@ -86,7 +86,8 @@ def return_hash(data, key="hash") :
 	""" return hash int"""
 
 	try : 
-		k = int(data["hash"])
+		k = int(float(data["hash"]))
+		info("good int of hash")
 		return k
 	except : 
 		k = str(data["hash"])
@@ -100,14 +101,17 @@ def return_hash(data, key="hash") :
 
 def main() : 
 
+	# init logging
 	msg = "time : {} init new session!\n\n".format(str(int(time.time())))
 	logging.info(msg) 
 
+	# wait
 	time.sleep(SLEEPER)
 
 	# main loop
 	while True : 
 
+		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
 		
 		# proceed 
