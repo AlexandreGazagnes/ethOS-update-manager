@@ -13,7 +13,7 @@ import logging ; logging.basicConfig(level=logging.INFO)
 # Consts
 
 CMD = "show stats"	# CMD = "show stats" # or update
-SLEEPER = 5 * 60 	# 5 minutes
+SLEEPER = 10 * 60 	# 5/10/15 minutes
 MIN_HASH = 179		# 30 ou 120 ou 180 ...
 
 
@@ -111,10 +111,7 @@ def main() :
 	# init logging
 	print("\n\n\n")
 	msg = "time {} : init new session!".format(_time())
-	info(msg) 
-
-	# wait
-	time.sleep(SLEEPER)
+	warning(msg) 
 
 	# main loop
 	while True : 
@@ -136,10 +133,10 @@ def main() :
 				warning(msg)
 				os.system("r")
 			else : 
-				debug("time : {} hashrate OK : {}\n".format(
+				info("time : {} hashrate OK : {}\n".format(
 				_time(), hashrate))
 		else : 
-			debug("time : {} Invalid hrate type\n".format(hashrate))
+			warning("time : {} Invalid hrate type\n".format(hashrate))
 
 		# record uptime
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
@@ -150,5 +147,4 @@ def main() :
 
 if __name__ == '__main__':
 	main()
-
 
