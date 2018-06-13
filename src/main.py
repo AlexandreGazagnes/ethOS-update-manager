@@ -87,11 +87,11 @@ def return_hash(data, key="hash") :
 
 	try : 
 		k = int(float(data["hash"]))
-		info("good int of hash")
+		debug("good type 'int' of hash")
 		return k
 	except : 
 		k = str(data["hash"])
-		error = "error reading hash at {} for value : {}".format(
+		error = "error reading hash as a 'str' at {} for value : {}".format(
 				str(int(time.time())), k)
 		info(error)
 		return k
