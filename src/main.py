@@ -2,29 +2,25 @@
 # -*- coding: utf-8 -*-
 
 
-
 # Import 
 
-import os, subprocess, pickle, time
+import os,  time
 
 from logging import debug, warning, info
-import logging
-logging.basicConfig(level=logging.INFO)
+import logging ; logging.basicConfig(level=logging.INFO)
 
 
 # Consts
 
 CMD = "show stats"	# CMD = "show stats" # or update
-
 SLEEPER = 5 * 60 	# 5 minutes
-
-MIN_HASH = 179
+MIN_HASH = 179		# 30 ou 120 ou 180 ...
 
 
 # Functions
 
 def data_from_cmd(cmd="show stats") :
-	"""create a txt from a popen command, for ex "update" """ 
+	"""create a txt from a popen command, for ex "show stats" """ 
 
 	debug("data_from_cmd called")
 
@@ -35,8 +31,7 @@ def data_from_cmd(cmd="show stats") :
 		txt +=i
 
 	if not txt : 
-
-		info("txt is None")
+		warning("time {} : txt is None".format(_time()))
 
 	return txt
 
@@ -74,7 +69,7 @@ def convert_dict(data) :
 	
 	for i,j in data : 
 		try :
-			j = int(j)
+			j = float(j)
 			di[str(i)] = j
 		except : 
 			di[str(i)] = str(j)
@@ -83,18 +78,30 @@ def convert_dict(data) :
 
 
 def return_hash(data, key="hash") : 
-	""" return hash int"""
+	""" return hash float"""
 
 	try : 
-		k = int(float(data["hash"]))
-		debug("good type 'int' of hash")
+		k = float(data[key])
+		debug("good type 'float' of hash")
 		return k
 	except : 
 		k = str(data["hash"])
-		error = "error reading hash as a 'str' at {} for value : {}".format(
-				str(int(time.time())), k)
-		info(error)
+		msg = "time {} : error reading 'hash' as a float for : {}".format(
+				_time(), k)
+		warning(msg)
 		return k
+
+
+def _time() : 
+	""" give local time in personal str format"""
+	
+	debug("_time called") 
+	
+	t = time.localtime()
+	txt = "{:0>2}/{:0>2}/{:0>2} at {:0>2}:{:0>2}".format(
+		t.tm_mday, t.tm_mon, t.tm_year - 2000, t.tm_hour, t.tm_min)
+
+	return txt
 
 
 # Main
@@ -102,8 +109,9 @@ def return_hash(data, key="hash") :
 def main() : 
 
 	# init logging
-	msg = "time : {} init new session!\n\n".format(str(int(time.time())))
-	logging.info(msg) 
+	print("\n\n\n")
+	msg = "time {} : init new session!".format(_time())
+	info(msg) 
 
 	# wait
 	time.sleep(SLEEPER)
@@ -112,7 +120,7 @@ def main() :
 	while True : 
 
 		# wait
-		time.sleep(SLEEPER) # to avoid multiple short reboot 
+		time.sleep(SLEEPER) 				# to avoid multiple short reboot 
 		
 		# proceed 
 		txt = data_from_cmd("show stats") 	# extract text
@@ -121,17 +129,23 @@ def main() :
 		hashrate = return_hash(data, "hash")
 
 		# reboot option
-		if isinstance(hashrate, int) : 
+		if isinstance(hashrate, float) : 
 			if hashrate < MIN_HASH : 
-				error = "rebooting due to hashrate at {} for value : {}".format(
-				str(int(time.time())), hashrate)
+				msg = "time : {} rebooting due to hashrate : {}\n".format(
+				_time(), hashrate)
+				warning(msg)
 				os.system("r")
+			else : 
+				debug("time : {} hashrate OK : {}\n".format(
+				_time(), hashrate))
+		else : 
+			debug("time : {} Invalid hrate type\n".format(hashrate))
 
 		# record uptime
-		uptime = uptime = os.popen("uptime").readlines()[0].split(",")[0]
+		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
 		uptime = uptime.split("up")[1]
 		msg = "Uptime : {}".format(uptime)
-		logging.info(msg)
+		info(msg)
 
 
 
