@@ -37,7 +37,7 @@ def data_from_cmd(cmd="show stats") :
 
 
 def convert_txt(txt):
-	"""from the str version of cli "update", create and return a list of
+	"""from the str version of cli "show stats", create and return a list of
 	key, values"""
 
 	debug("convert_txt called")
@@ -61,7 +61,7 @@ def convert_txt(txt):
 
 
 def convert_dict(data) : 
-	""" convert list of list with pair key, value in a dict"""
+	"""convert list of list with pair key, value in a dict"""
 
 	debug("convert_dict called")
 	
@@ -146,7 +146,6 @@ def main() :
 		uptime = uptime.split("up")[1]
 		msg = "Uptime : {}".format(uptime)
 		info(msg)
-
 
 
 if __name__ == '__main__':
