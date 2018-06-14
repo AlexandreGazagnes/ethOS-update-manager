@@ -90,7 +90,7 @@ def _time() :
 	
 	t = time.localtime()
 	txt = "{:0>2}/{:0>2}/{:0>2} at {:0>2}:{:0>2}".format(
-		t.tm_mday, t.tm_mon, t.tm_year - 2000, t.tm_hour, t.tm_min)
+		t.tm_mday, t.tm_mon, t.tm_year - 2000, t.tm_hour+7, t.tm_min)
 
 	return txt
 
