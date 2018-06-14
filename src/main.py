@@ -23,6 +23,7 @@ MIN_HASH = 179		# 30 ou 120 ou 180 ...
 
 TOKEN = "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
 CHAT_ID = "487924419"
+RIG="Bold_Eagle"
 
 
 # Functions
@@ -92,13 +93,14 @@ def _time() :
 	return txt
 
 
-def send_bot(bot_message="", token=TOKEN, chat_id=CHAT_ID):
+def send_bot(bot_message="", rig=RIG , token=TOKEN, chat_id=CHAT_ID):
 	"""useful function to send a message to your bot in cli"""
 
 	msg = str(bot_message)
 	if not bot_message : 
 		msg = "error : bot_message : invalid argument"
 
+	msg = str(RIG) + ": "+ msg
 	msg = msg.replace(" ", "%20")
 
 	bot_token = token
