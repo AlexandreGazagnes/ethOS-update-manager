@@ -12,7 +12,9 @@ from logging import debug, warning, info
 
 # Enable loging 
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(	level=logging.INFO, 
+						format='%(levelname)s : %(message)s')
+
 # logging.basicConfig(format='%(asctime)s - %(levelname)s : %(message)s',
 #                      datefmt='%m/%d/%y %H:%M', level=logging.INFO)
 
