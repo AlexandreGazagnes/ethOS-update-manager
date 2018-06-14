@@ -2,6 +2,16 @@
 # -*- coding: utf-8 -*-
 
 
+"""
+ethOS-update-manager v0.4.3
+
+
+please update with your personal settings CMD, 
+SLEEPER and MIN_HASH. You can of course use default settings
+
+
+"""
+
 # Import 
 
 import os, time, logging
@@ -24,6 +34,7 @@ logging.basicConfig(	level=logging.INFO,
 CMD = "show stats"	# CMD = "show stats" # or update
 SLEEPER = 10 * 60 	# 5/10/15 minutes
 MIN_HASH = 179		# 30 ou 120 ou 180 ...
+JET_LAG = 7
 
 TOKEN = "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
 CHAT_ID = "487924419"
@@ -92,7 +103,7 @@ def _time() :
 	
 	t = time.localtime()
 	txt = "{:0>2}/{:0>2}/{:0>2} at {:0>2}:{:0>2}".format(
-		t.tm_mday, t.tm_mon, t.tm_year - 2000, t.tm_hour+7, t.tm_min)
+		t.tm_mday, t.tm_mon, t.tm_year - 2000, t.tm_hour+JET_LAG, t.tm_min)
 
 	return txt
 
@@ -143,15 +154,15 @@ def main() :
 		# reboot option
 		if isinstance(hashrate, float) : 
 			if hashrate < MIN_HASH : 
-				msg = "time : {} rebooting due to hashrate : {}\n".format(
+				msg = " {} rebooting due to hashrate : {}\n".format(
 				_time(), hashrate)
 				warning(msg)  ; send_bot(msg) 
 				os.system("r")
 			else : 
-				debug("time : {} hashrate OK : {}\n".format(
+				debug(" {} hashrate OK : {}\n".format(
 				_time(), hashrate))
 		else : 
-			msg = "time : {} invalid hrate type {} \n".format(
+			msg = " {} invalid hrate type {} \n".format(
 				_time(), type(hashrate))
 			warning() ; send_bot(msg) 
 
