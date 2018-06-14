@@ -49,7 +49,7 @@ def data_from_cmd(cmd="show stats") :
 
 	# handle cmd result
 	li = os.popen(cmd).readlines()
-	if not li : warning("time {} : txt is None".format(_time()))
+	if not li : warning(" {} : txt is None".format(_time()))
 
 	# list operations
 	li2 = [i.split(":") for i in li] # separate key, value with ":"
@@ -77,7 +77,7 @@ def return_hash(data, key="hash") :
 		return k
 	except : 
 		k = str(data["hash"])
-		msg = "time {} : error reading 'hash' as a float for : {}".format(
+		msg = " {} : error reading 'hash' as a float for : {}".format(
 				_time(), k)
 		warning(msg)  ; send_bot(msg)
 		return k
@@ -125,7 +125,7 @@ def main() :
 
 	# init logging
 	print("\n\n\n")
-	msg = "time {} : init new session!".format(_time())
+	msg = " {} : init new session!".format(_time())
 	warning(msg)  ; send_bot(msg) 
 
 	# main loop
@@ -156,7 +156,7 @@ def main() :
 		# record uptime
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
 		uptime = uptime.split("up")[1]
-		msg = "Uptime : {}".format(uptime)
+		msg = " {} : Uptime at {}".format(_time(), uptime)
 		info(msg)
 
 
