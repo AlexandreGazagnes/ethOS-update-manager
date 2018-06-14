@@ -3,10 +3,12 @@
 
 
 """
-ethOS-update-manager v0.4.3
+ethOS-update-manager - main.py - v0.5.0 
 
-Just handle results from a CMD 'show stats' or 'update' and reboot 
+Handle results from a CMD 'show stats' or 'update' and reboot 
 if nedeed, ie your hashrate is too low (aka MIN_HASH).
+
+Manage bot telegram and send warning msg to your personnal bot 
 
 Please update with your personal settings CMD, 
 SLEEPER, JET_LAG and MIN_HASH. You can of course use default settings
@@ -18,7 +20,7 @@ SLEEPER, JET_LAG and MIN_HASH. You can of course use default settings
 
 import os, time, logging
 
-		# from urllib.request import urlopen
+from urllib.request import urlopen
 from logging import debug, warning, info
 
 
@@ -35,9 +37,9 @@ SLEEPER = 10 * 60 	# 5/10/15 minutes
 MIN_HASH = 179		# 30 ou 120 ou 180 ...
 JET_LAG = 7			# depends o fyour local time and your system time
 
-		# TOKEN = "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
-		# CHAT_ID = "487924419"
-		# RIG="Bold_Eagle"
+TOKEN = "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
+CHAT_ID = "487924419"
+RIG = "Bold_Eagle"
 
 
 # Functions
@@ -92,7 +94,7 @@ def return_hash(data, key="hash") :
 		msg = " {} : error reading 'hash' as a float for : {}".format(
 				_time(), k)
 		warning(msg) 
-				# send_bot(msg)
+		send_bot(msg)
 		return k
 
 
@@ -108,24 +110,24 @@ def _time() :
 	return txt
 
 
-		# def send_bot(bot_message="", rig=RIG , token=TOKEN, chat_id=CHAT_ID):
-		# 	"""useful function to send a message to your bot in cli"""
+def send_bot(bot_message="", rig=RIG , token=TOKEN, chat_id=CHAT_ID):
+	"""useful function to send a message to your bot in cli"""
 
-		# 	msg = str(bot_message)
-		# 	if not bot_message : 
-		# 		msg = "error : bot_message : invalid argument"
+	msg = str(bot_message)
+	if not bot_message : 
+		msg = "error : bot_message : invalid argument"
 
-		# 	msg = str(RIG) + ": "+ msg
-		# 	msg = msg.replace(" ", "%20")
+	msg = str(RIG) + ": "+ msg
+	msg = msg.replace(" ", "%20")
 
-		# 	bot_token = token
-		# 	bot_chatID = chat_id
+	bot_token = token
+	bot_chatID = chat_id
 
-		# 	req = 	 'https://api.telegram.org/bot' + bot_token \
-		# 					+ '/sendMessage?chat_id=' + bot_chatID \
-		# 					+ '&parse_mode=Markdown&text=' + msg
+	req = 	 'https://api.telegram.org/bot' + bot_token \
+					+ '/sendMessage?chat_id=' + bot_chatID \
+					+ '&parse_mode=Markdown&text=' + msg
 
-		# 	with urlopen(req) as f : none = f.read()
+	with urlopen(req) as f : none = f.read()
 
 
 # Main
@@ -140,7 +142,7 @@ def main() :
 	print("\n\n\n")
 	msg = " {} : init new session!".format(_time())
 	warning(msg)
-			# send_bot(msg) 
+	send_bot(msg) 
 
 	# main loop
 	while True : 
@@ -158,7 +160,7 @@ def main() :
 				msg = " {} rebooting due to hashrate : {}\n".format(
 				_time(), hashrate)
 				warning(msg)
-						# send_bot(msg) 
+				send_bot(msg) 
 				os.system("r")
 			else : 
 				debug(" {} hashrate OK : {}\n".format(
@@ -167,7 +169,7 @@ def main() :
 			msg = " {} invalid hrate type {} \n".format(
 				_time(), type(hashrate))
 			warning()
-					# send_bot(msg) 
+			send_bot(msg) 
 
 		# record uptime
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
