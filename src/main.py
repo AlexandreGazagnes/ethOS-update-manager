@@ -27,6 +27,18 @@ CHAT_ID = "487924419"
 
 # Functions
 
+def one_process_already_runing() : 
+	""" check if on porcess is already running"""
+
+	time.sleep(10)
+	process = os.popen("ps -aux | grep ethOS-update-manager").readlines()
+	working = [p for p in process if "src/main.py" in p]
+	nb = len(working)
+
+	if not nb : return False
+	else : return True
+
+
 def data_from_cmd(cmd="show stats") :
 	"""create a txt from a popen command, for ex "show stats" """ 
 
@@ -145,4 +157,9 @@ def main() :
 
 if __name__ == '__main__':
 	main()
+
+
+
+
+
 
