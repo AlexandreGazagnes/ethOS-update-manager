@@ -4,9 +4,14 @@
 
 # Import 
 
-import os, time # , requests
+import os, time
 
+from urllib.request import urlopen
 from logging import debug, warning, info
+
+
+# Enable loging 
+
 import logging ; logging.basicConfig(level=logging.INFO)
 
 
@@ -91,7 +96,7 @@ def return_hash(data, key="hash") :
 		k = str(data["hash"])
 		msg = "time {} : error reading 'hash' as a float for : {}".format(
 				_time(), k)
-		warning(msg)  #; send_bot(msg)
+		warning(msg)  ; send_bot(msg)
 		return k
 
 
@@ -110,15 +115,20 @@ def _time() :
 def send_bot(bot_message="", token=TOKEN, chat_id=CHAT_ID):
 	"""useful function to send a message to your bot in cli"""
 
-	msg = bot_message
+	msg = str(bot_message)
 	if not bot_message : 
 		msg = "error : bot_message : invalid argument"
 
+	msg = msg.replace(" ", "%20")
+
 	bot_token = token
 	bot_chatID = chat_id
-	send_text = 	  'https://api.telegram.org/bot' + bot_token \
+
+	req = 	 'https://api.telegram.org/bot' + bot_token \
 					+ '/sendMessage?chat_id=' + bot_chatID \
 					+ '&parse_mode=Markdown&text=' + msg
+
+	with urlopen(req) as f : _ = f.read()
 
 # Main
 
@@ -127,7 +137,7 @@ def main() :
 	# init logging
 	print("\n\n\n")
 	msg = "time {} : init new session!".format(_time())
-	warning(msg)  #; send_bot(msg) 
+	warning(msg)  ; send_bot(msg) 
 
 	# main loop
 	while True : 
@@ -146,7 +156,7 @@ def main() :
 			if hashrate < MIN_HASH : 
 				msg = "time : {} rebooting due to hashrate : {}\n".format(
 				_time(), hashrate)
-				warning(msg)  #; send_bot(msg) 
+				warning(msg)  ; send_bot(msg) 
 				os.system("r")
 			else : 
 				info("time : {} hashrate OK : {}\n".format(
@@ -154,7 +164,7 @@ def main() :
 		else : 
 			msg = "time : {} Invalid hrate type {} \n".format(
 				_time(), type(hashrate))
-			warning() #; send_bot(msg) 
+			warning() ; send_bot(msg) 
 
 		# record uptime
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
