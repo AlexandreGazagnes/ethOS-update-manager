@@ -4,7 +4,7 @@
 
 # Import 
 
-import os,  time
+import os, time, requests
 
 from logging import debug, warning, info
 import logging ; logging.basicConfig(level=logging.INFO)
@@ -15,6 +15,9 @@ import logging ; logging.basicConfig(level=logging.INFO)
 CMD = "show stats"	# CMD = "show stats" # or update
 SLEEPER = 10 * 60 	# 5/10/15 minutes
 MIN_HASH = 179		# 30 ou 120 ou 180 ...
+
+TOKEN = "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
+CHAT_ID = "487924419"
 
 
 # Functions
@@ -88,7 +91,7 @@ def return_hash(data, key="hash") :
 		k = str(data["hash"])
 		msg = "time {} : error reading 'hash' as a float for : {}".format(
 				_time(), k)
-		warning(msg)
+		warning(msg) ; send_bot(msg)
 		return k
 
 
@@ -104,6 +107,19 @@ def _time() :
 	return txt
 
 
+def send_bot(bot_message="", token=TOKEN, chat_id=CHAT_ID):
+	"""useful function to send a message to your bot in cli"""
+
+	msg = bot_message
+	if not bot_message : 
+		msg = "error : bot_message : invalid argument"
+
+	bot_token = token
+	bot_chatID = chat_id
+	send_text = 	  'https://api.telegram.org/bot' + bot_token \
+					+ '/sendMessage?chat_id=' + bot_chatID \
+					+ '&parse_mode=Markdown&text=' + msg
+
 # Main
 
 def main() : 
@@ -111,7 +127,7 @@ def main() :
 	# init logging
 	print("\n\n\n")
 	msg = "time {} : init new session!".format(_time())
-	warning(msg) 
+	warning(msg) ; send_bot(msg) 
 
 	# main loop
 	while True : 
@@ -126,17 +142,19 @@ def main() :
 		hashrate = return_hash(data, "hash")
 
 		# reboot option
-		if isinstance(hashrate, float) : 
+		if ((isinstance(hashrate, float)) or (isinstance(hashrate, int))) : 
 			if hashrate < MIN_HASH : 
 				msg = "time : {} rebooting due to hashrate : {}\n".format(
 				_time(), hashrate)
-				warning(msg)
+				warning(msg) ; send_bot(msg) 
 				os.system("r")
 			else : 
 				info("time : {} hashrate OK : {}\n".format(
 				_time(), hashrate))
 		else : 
-			warning("time : {} Invalid hrate type\n".format(hashrate))
+			msg = "time : {} Invalid hrate type {} \n".format(
+				_time(), type(hashrate))
+			warning(); send_bot(msg) 
 
 		# record uptime
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
