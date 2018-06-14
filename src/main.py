@@ -8,12 +8,11 @@ ethOS-update-manager v0.4.3
 Just handle results from a CMD 'show stats' or 'update' and reboot 
 if nedeed, ie your hashrate is too low (aka MIN_HASH).
 
-
 Please update with your personal settings CMD, 
 SLEEPER, JET_LAG and MIN_HASH. You can of course use default settings
 
-
 """
+
 
 # Import 
 
@@ -27,9 +26,6 @@ from logging import debug, warning, info
 
 logging.basicConfig(	level=logging.INFO, 
 						format='%(levelname)s - %(message)s')
-
-		# logging.basicConfig(format='%(asctime)s - %(levelname)s : %(message)s',
-		#                      datefmt='%m/%d/%y %H:%M', level=logging.INFO)
 
 
 # Consts
