@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-ethOS-update-manager - launch.py - v0.5.0
+ethOS-update-manager - launcher - v0.5.0
+launcher for main.py see src/main.py
 """
+
 
 import os
 
