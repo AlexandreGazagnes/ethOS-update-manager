@@ -114,7 +114,7 @@ def send_bot(bot_message="", token=TOKEN, chat_id=CHAT_ID):
 
 def main() : 
 
-	# il program already launched :  break
+	# if program already launched :  break
 	if one_process_already_runing() : 
 		return 0
 
