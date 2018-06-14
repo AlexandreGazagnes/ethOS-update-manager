@@ -32,57 +32,25 @@ def data_from_cmd(cmd="show stats") :
 
 	debug("data_from_cmd called")
 
-	wrap = os.popen(cmd)
-	txt = str()
+	# handle cmd result
+	li = os.popen(cmd).readlines()
+	if not li : warning("time {} : txt is None".format(_time()))
 
-	for i in wrap : 
-		txt +=i
+	# list operations
+	li2 = [i.split(":") for i in li] # separate key, value with ":"
+	li2 = [i for i in li2 if i[0]] 	# delete null values
+	li3 = [["None", i[0]] if len(i) == 1 else i for i in li2] 	# info some key values encoded on sevral lines
+	li3 = [[i[0].strip(), i[1].strip()] for i in li3] 	# strip everything
+	li3 = [[i[0], i[1]] for i in li3 if i[0] != "None"] # del "None" keys
+	li3 = [[i[0], i[1]] for i in li3 if i[1]] # del None values
 
-	if not txt : 
-		warning("time {} : txt is None".format(_time()))
+	# dict operations
+	data = {i[0] : i[1] for i in li3}
+	for i, j in data.items() : 
+		try : data[i] = float(j)
+		except : pass
 
-	return txt
-
-
-def convert_txt(txt):
-	"""from the str version of cli "show stats", create and return a list of
-	key, values"""
-
-	debug("convert_txt called")
-
-	# fist split lines
-	li1 = txt.splitlines()
-
-	# separate key, value with ":"
-	li2 = [i.split(":") for i in li1]
-
-	# delete null values
-	li2 = [i for i in li2 if i[0]]
-
-	# info some key values encoded on sevral lines
-	li3 = [["None", i[0]] if len(i) == 1 else i for i in li2]
-
-	# strip everything
-	li3 = [[i[0].strip(), i[1].strip()] for i in li3]
-	
-	return li3
-
-
-def convert_dict(data) : 
-	"""convert list of list with pair key, value in a dict"""
-
-	debug("convert_dict called")
-	
-	di = dict() 
-	
-	for i,j in data : 
-		try :
-			j = float(j)
-			di[str(i)] = j
-		except : 
-			di[str(i)] = str(j)
-
-	return di
+	return data
 
 
 def return_hash(data, key="hash") : 
@@ -128,7 +96,7 @@ def send_bot(bot_message="", token=TOKEN, chat_id=CHAT_ID):
 					+ '/sendMessage?chat_id=' + bot_chatID \
 					+ '&parse_mode=Markdown&text=' + msg
 
-	with urlopen(req) as f : _ = f.read()
+	with urlopen(req) as f : none = f.read()
 
 # Main
 
