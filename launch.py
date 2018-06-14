@@ -12,14 +12,16 @@ def main() :
 	is_working = ["src/main.py" in p for p in process]
 
 	# if 0 process launched, launch one 
-	if True not in is_working :
-		print("ethOS-update-manager first launch")
-		os.system("nohup python3 /home/ethos/ethOS-update-manager/src/main.py >> /home/ethos/ethOS-update-manager/logs/log 2>&1 &")
+	if True in is_working :
+		print("ethOS-update-manager already running")
 		return 0
+	
+	print("ethOS-update-manager first launch")
+	os.system("nohup python3 /home/ethos/ethOS-update-manager/src/main.py >> /home/ethos/ethOS-update-manager/logs/log 2>&1 &")
+	return 0
 
 	# else if one already working, don to not launch an another
-	print("ethOS-update-manager already running")
-	return 0
+
 
 	# # chechk instead if multiple working processes
 	# working = [p for p in process if "src/main.py" in p]
