@@ -102,6 +102,10 @@ def send_bot(bot_message="", token=TOKEN, chat_id=CHAT_ID):
 
 def main() : 
 
+	# il program already launched :  break
+	if one_process_already_runing() : 
+		return 0
+
 	# init logging
 	print("\n\n\n")
 	msg = "time {} : init new session!".format(_time())
@@ -111,26 +115,24 @@ def main() :
 	while True : 
 
 		# wait
-		time.sleep(SLEEPER) 				# to avoid multiple short reboot 
+		time.sleep(SLEEPER) # to avoid multiple short reboot 
 		
 		# proceed 
-		txt = data_from_cmd("show stats") 	# extract text
-		data = convert_txt(txt)				# extract data from text				
-		data = convert_dict(data)			# build data dict of int or str 
+		data = data_from_cmd("show stats") 	# extract data from cmd 
 		hashrate = return_hash(data, "hash")
 
 		# reboot option
-		if ((isinstance(hashrate, float)) or (isinstance(hashrate, int))) : 
+		if isinstance(hashrate, float) : 
 			if hashrate < MIN_HASH : 
 				msg = "time : {} rebooting due to hashrate : {}\n".format(
 				_time(), hashrate)
 				warning(msg)  ; send_bot(msg) 
 				os.system("r")
 			else : 
-				info("time : {} hashrate OK : {}\n".format(
+				debug("time : {} hashrate OK : {}\n".format(
 				_time(), hashrate))
 		else : 
-			msg = "time : {} Invalid hrate type {} \n".format(
+			msg = "time : {} invalid hrate type {} \n".format(
 				_time(), type(hashrate))
 			warning() ; send_bot(msg) 
 
