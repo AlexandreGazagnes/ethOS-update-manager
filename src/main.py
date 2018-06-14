@@ -4,7 +4,7 @@
 
 # Import 
 
-import os, time, requests
+import os, time # , requests
 
 from logging import debug, warning, info
 import logging ; logging.basicConfig(level=logging.INFO)
@@ -91,7 +91,7 @@ def return_hash(data, key="hash") :
 		k = str(data["hash"])
 		msg = "time {} : error reading 'hash' as a float for : {}".format(
 				_time(), k)
-		warning(msg) ; send_bot(msg)
+		warning(msg)  #; send_bot(msg)
 		return k
 
 
@@ -127,7 +127,7 @@ def main() :
 	# init logging
 	print("\n\n\n")
 	msg = "time {} : init new session!".format(_time())
-	warning(msg) ; send_bot(msg) 
+	warning(msg)  #; send_bot(msg) 
 
 	# main loop
 	while True : 
@@ -146,7 +146,7 @@ def main() :
 			if hashrate < MIN_HASH : 
 				msg = "time : {} rebooting due to hashrate : {}\n".format(
 				_time(), hashrate)
-				warning(msg) ; send_bot(msg) 
+				warning(msg)  #; send_bot(msg) 
 				os.system("r")
 			else : 
 				info("time : {} hashrate OK : {}\n".format(
@@ -154,7 +154,7 @@ def main() :
 		else : 
 			msg = "time : {} Invalid hrate type {} \n".format(
 				_time(), type(hashrate))
-			warning(); send_bot(msg) 
+			warning() #; send_bot(msg) 
 
 		# record uptime
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
