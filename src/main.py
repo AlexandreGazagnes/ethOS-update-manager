@@ -8,12 +8,10 @@ ethOS-update-manager v0.4.3
 Just handle results from a CMD 'show stats' or 'update' and reboot 
 if nedeed, ie your hashrate is too low (aka MIN_HASH).
 
-
 Please update with your personal settings CMD, 
 SLEEPER, JET_LAG and MIN_HASH. You can of course use default settings
-
-
 """
+
 
 # Import 
 
@@ -182,9 +180,4 @@ def main() :
 
 if __name__ == '__main__':
 	main()
-
-
-
-
-
 
