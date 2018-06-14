@@ -4,7 +4,7 @@
 
 # Import 
 
-import os, time
+import os, time, logging
 
 from urllib.request import urlopen
 from logging import debug, warning, info
@@ -12,7 +12,9 @@ from logging import debug, warning, info
 
 # Enable loging 
 
-import logging ; logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(format='%(asctime)s - %(levelname)s : %(message)s',
+#                      datefmt='%m/%d/%y %H:%M', level=logging.INFO)
 
 
 # Consts
@@ -111,6 +113,7 @@ def send_bot(bot_message="", rig=RIG , token=TOKEN, chat_id=CHAT_ID):
 					+ '&parse_mode=Markdown&text=' + msg
 
 	with urlopen(req) as f : none = f.read()
+
 
 # Main
 
