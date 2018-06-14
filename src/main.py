@@ -3,7 +3,7 @@
 
 
 """
-ethOS-update-manager v0.4.3
+ethOS-update-manager - main - v0.4.3
 
 Just handle results from a CMD 'show stats' or 'update' and reboot 
 if nedeed, ie your hashrate is too low (aka MIN_HASH).
@@ -16,8 +16,6 @@ SLEEPER, JET_LAG and MIN_HASH. You can of course use default settings
 # Import 
 
 import os, time, logging
-
-		# from urllib.request import urlopen
 from logging import debug, warning, info
 
 
@@ -26,9 +24,6 @@ from logging import debug, warning, info
 logging.basicConfig(	level=logging.INFO, 
 						format='%(levelname)s - %(message)s')
 
-		# logging.basicConfig(format='%(asctime)s - %(levelname)s : %(message)s',
-		#                      datefmt='%m/%d/%y %H:%M', level=logging.INFO)
-
 
 # Consts
 
@@ -36,10 +31,6 @@ CMD = "show stats"	# CMD = "show stats" # or update
 SLEEPER = 10 * 60 	# 5/10/15 minutes
 MIN_HASH = 179		# 30 ou 120 ou 180 ...
 JET_LAG = 7			# depends o fyour local time and your system time
-
-		# TOKEN = "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
-		# CHAT_ID = "487924419"
-		# RIG="Bold_Eagle"
 
 
 # Functions
@@ -94,7 +85,6 @@ def return_hash(data, key="hash") :
 		msg = " {} : error reading 'hash' as a float for : {}".format(
 				_time(), k)
 		warning(msg) 
-				# send_bot(msg)
 		return k
 
 
@@ -108,26 +98,6 @@ def _time() :
 		t.tm_mday, t.tm_mon, t.tm_year - 2000, t.tm_hour+JET_LAG, t.tm_min)
 
 	return txt
-
-
-		# def send_bot(bot_message="", rig=RIG , token=TOKEN, chat_id=CHAT_ID):
-		# 	"""useful function to send a message to your bot in cli"""
-
-		# 	msg = str(bot_message)
-		# 	if not bot_message : 
-		# 		msg = "error : bot_message : invalid argument"
-
-		# 	msg = str(RIG) + ": "+ msg
-		# 	msg = msg.replace(" ", "%20")
-
-		# 	bot_token = token
-		# 	bot_chatID = chat_id
-
-		# 	req = 	 'https://api.telegram.org/bot' + bot_token \
-		# 					+ '/sendMessage?chat_id=' + bot_chatID \
-		# 					+ '&parse_mode=Markdown&text=' + msg
-
-		# 	with urlopen(req) as f : none = f.read()
 
 
 # Main
