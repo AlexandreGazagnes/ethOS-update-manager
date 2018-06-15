@@ -27,7 +27,7 @@ logging.basicConfig(	level=logging.INFO,
 
 # Consts
 
-SLEEPER 	= 10 *60 		# IN SECONDS think to multiply by 60 for minutes ;)
+SLEEPER 	= 10 * 60 		# IN SECONDS think to multiply by 60 for minutes ;)
 MIN_HASH 	= 49			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 JET_LAG 	= 0				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
