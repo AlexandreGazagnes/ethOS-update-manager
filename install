@@ -44,8 +44,8 @@ os.system("""echo 'python3 /home/ethos/ethOS-update-manager/launch.py' >> /home/
 
 # info reboot
 print("for full install, system will reboot in : ")
-for i in range(2, 0, -1) : 
-	print(str(i+1))
+for i in range(3, 0, -1) : 
+	print(str(i))
 	time.sleep(1)
 
 
