@@ -22,7 +22,7 @@ from logging import debug, warning, info
 # Enable loging 
 
 logging.basicConfig(	level=logging.INFO, 
-						format='%(levelname)s - %(message)s')
+						format='%(levelname)s %(message)s')
 
 
 # Consts
@@ -105,7 +105,7 @@ def _time(jet_lag=JET_LAG) :
 	debug("_time called") 
 	
 	t = time.localtime()
-	txt = "{:0>2}/{:0>2}/{:0>2} at {:0>2}:{:0>2}".format(
+	txt = "{:0>2}/{:0>2}/{:0>2} {:0>2}:{:0>2}".format(
 		t.tm_mday, t.tm_mon, t.tm_year - 2000, t.tm_hour+jet_lag, t.tm_min)
 
 	return txt
@@ -116,8 +116,7 @@ def _time(jet_lag=JET_LAG) :
 def main() : 
 
 	# if program already launched :  break
-	if one_process_already_runing() : 
-		return 0
+	# if one_process_already_runing() : return 0
 
 	# init logging
 	print("\n\n\n")
