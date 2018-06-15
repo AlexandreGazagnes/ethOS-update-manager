@@ -63,11 +63,17 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 	debug(msg)
 	
 	if not li : 
-		msg = "{} : command unknown --> simulation mode ON".format(_time())
-		warning(msg)
-		li = os.popen("cat {}".format(fake_file))
+		res = os.system(cmd)
+		if res : 
+			msg = "{} : command unknown --> simulation mode ON".format(_time())
+			warning(msg)
+			li = os.popen("cat {}".format(fake_file))
+		else : 
+			msg = "{} : error unknown --> Please debug!".format(_time())
+			warning(msg)
+			li = os.popen("cat {}".format(fake_file))
 	
-	
+
 	# list operations
 	li = [i.replace("\n", "") for i in li if i.replace("\n", "")] # delete '\n' and null lines
 	li = [i for i in li if i[0] != " "] # delete lines with no keys (mem info and models)
