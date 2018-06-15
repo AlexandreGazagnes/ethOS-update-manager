@@ -28,9 +28,10 @@ logging.basicConfig(	level=logging.INFO,
 # Consts
 
 CMD = "show stats"	# CMD = "show stats" # or update
-SLEEPER = 10 * 60 	# 5/10/15 minutes
+SLEEPER = 10	  	# In seconds ! 5/10/15 minutes
 MIN_HASH = 49		# 30 ou 120 ou 180 ...
-JET_LAG = 7			# depends o fyour local time and your system time
+JET_LAG = 0			# depends o fyour local time and your system time
+
 
 # Functions
 
@@ -115,14 +116,10 @@ def _time(jet_lag=JET_LAG) :
 
 def main() : 
 
-	# if program already launched :  break
-	# if one_process_already_runing() : return 0
-
 	# init logging
 	print("\n\n\n")
 	msg = "{} : init new session!".format(_time())
 	warning(msg)
-			# send_bot(msg) 
 
 	# main loop
 	while True : 
@@ -140,7 +137,7 @@ def main() :
 				msg = " {} rebooting due to hashrate : {}\n".format(
 				_time(), hashrate)
 				warning(msg)
-						# send_bot(msg) 
+
 				os.system("r")
 			else : 
 				debug(" {} hashrate OK : {}\n".format(
@@ -149,7 +146,6 @@ def main() :
 			msg = " {} invalid hrate type {} \n".format(
 				_time(), type(hashrate))
 			warning()
-					# send_bot(msg) 
 
 		# record uptime
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
