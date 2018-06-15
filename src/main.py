@@ -42,9 +42,9 @@ LATENCY 	= True			# if LATENCY additionnal sleeper added to give time
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
 
 
-TOKEN = "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
-CHAT_ID = "487924419"
-RIG = "Bold_Eagle"
+TOKEN = "546465733:AAHXfOQb5zYqVHShspgomsCwA"
+CHAT_ID = "4924419"
+RIG = "Rig"
 
 
 
@@ -80,11 +80,11 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 		res = os.system(cmd)
 		if res : 
 			msg = "{} : command unknown --> simulation mode ON".format(_time())
-			warning(msg)
+			warning(msg) ; send_bot(msg)
 			li = os.popen("cat {}".format(fake_file))
 		else : 
 			msg = "{} : error unknown --> Please debug!".format(_time())
-			warning(msg)
+			warning(msg) ; send_bot(msg)
 			li = os.popen("cat {}".format(fake_file))
 	
 
@@ -118,7 +118,7 @@ def return_hash(data, key="hash") :
 		k = str(data["hash"])
 		msg = "{} : error reading 'hash' as a float for : {}".format(
 				_time(), k)
-		warning(msg) 
+		warning(msg) ; send_bot(msg) 
 
 		return k
 
@@ -178,7 +178,7 @@ def reboot() :
 					"##################################################\n"
 					"\n\n")
 				
-				warning(msg)
+				warning(msg) ; send_bot(msg)
 				raise ValueError("auto reboot impossible")
 
 
@@ -190,7 +190,7 @@ def main() :
 	# init logging
 	warning("\n\n\n")
 	msg = "{} : init new session!".format(_time())
-	warning(msg)
+	warning(msg) ; send_bot(msg)
 
 	# to avoid multiple short reboot 
 	time.sleep(SLEEPER)
@@ -213,7 +213,7 @@ def main() :
 			if hashrate < MIN_HASH : 
 				msg = "{} : rebooting ('r') due to hashrate : {}\n".format(
 					_time(), hashrate)
-				warning(msg)
+				warning(msg) ; send_bot(msg)
 
 				reboot()
 
@@ -226,13 +226,13 @@ def main() :
 			msg = "{} : invalid hrate type {} \n".format(
 				_time(), type(hashrate))
 
-			warning(msg)
+			warning(msg) ; send_bot(msg)
 
 		# record uptime
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
 		uptime = uptime.split("up")[1]
 		msg = "{} : uptime at {}".format(_time(), uptime)
-		info(msg)
+		info(msg) ; send_bot(msg)
 
 		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
