@@ -61,16 +61,16 @@ def data_from_cmd(cmd="show stats", test=False, fake_echo="show_stats.txt") :
 	if not li : warning(" {} : txt is None".format(_time()))
 
 	# list operations
-	li = [i.replace("\n", "") for i in li if i.replace("\n", "")]
-	li = [i for i in li if i[0] != " "]
+	li = [i.replace("\n", "") for i in li if i.replace("\n", "")] # delete '\n' and null lines
+	li = [i for i in li if i[0] != " "] # delete lines with no keys (mem info and models)
 	li = [i.split(":") for i in li] # separate key, value with ":"
-	li = [i for i in li if i[0]] 	# delete null values
-	li = [i for i in li if i[1]]
-	li = [[i[0].strip(), i[1].strip()] for i in li] 	# strip everything
+	li = [i for i in li if i[0]] 	# delete null keys
+	li = [i for i in li if i[1]] # delete null values
+	li = [[i[0].strip(), i[1].strip()] for i in li] # strip everything
 
 	# dict operations
-	data = {i[0] : i[1] for i in li}
-	for i, j in data.items() : 
+	data = {i[0] : i[1] for i in li} # create dict
+	for i, j in data.items() : # auto cast
 		try : data[i] = float(j)
 		except : data[i] = str(j)
 
