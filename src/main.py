@@ -8,8 +8,8 @@ ethOS-update-manager - main - v0.4.3
 Just handle results from a CMD 'show stats' or 'update' and reboot 
 if nedeed, ie your hashrate is too low (aka MIN_HASH).
 
-Please update with your personal settings CMD, 
-SLEEPER, JET_LAG, LATENCY and MIN_HASH. You can of course use default settings
+Please update with your personal settings : SLEEPER, JET_LAG, LATENCY 
+and MIN_HASH. You can of course use default settings
 """
 
 
@@ -27,7 +27,6 @@ logging.basicConfig(	level=logging.INFO,
 
 # Consts
 
-CMD 		="show stats"	# CMD = "show stats" # or update
 SLEEPER 	= 10 *60 		# IN SECONDS think to multiply by 60 for minutes ;)
 MIN_HASH 	= 49			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 JET_LAG 	= 0				# depends of your local/sys time 
@@ -45,7 +44,7 @@ def not_the_first_process_launched() :
 	working = [p for p in process if "src/main.py" in p]
 	nb = len(working)
 
-	if nb >1 :	return True
+	if nb > 1 :	return True
 	else : 		return False
 
 
@@ -59,19 +58,16 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 		fake_file = "/home/ethos/ethOS-update-manager/.show_stats.txt"
 	
 	# handle cmd result
-	if not os.system(cmd)	: 
-		li = os.popen(cmd).readlines()
-		msg = "{} : executed and handled".format(_time(), cmd) 
-		debug(msg)
-	else :
+	li = os.popen(cmd).readlines()
+	msg = "{} : executed and handled".format(_time(), cmd) 
+	debug(msg)
+	
+	if not li : 
 		msg = "{} : command unknown --> simulation mode ON".format(_time())
 		warning(msg)
 		li = os.popen("cat {}".format(fake_file))
 	
-	if not li : 
-		msg = "{} : txt is None".format(_time())
-		warning(msg)
-
+	
 	# list operations
 	li = [i.replace("\n", "") for i in li if i.replace("\n", "")] # delete '\n' and null lines
 	li = [i for i in li if i[0] != " "] # delete lines with no keys (mem info and models)
@@ -150,7 +146,7 @@ def reboot() :
 def main() : 
 
 	# init logging
-	print("\n\n\n")
+	warning("\n\n\n")
 	msg = "{} : init new session!".format(_time())
 	warning(msg)
 
@@ -166,8 +162,8 @@ def main() :
 		debug("main loop entrance") 
 		
 		# proceed 
-		data = data_from_cmd("show stats") 	# extract data from cmd 
-		hashrate = return_hash(data, "hash")
+		data = data_from_cmd() 	# extract data from cmd 
+		hashrate = return_hash(data)
 
 		# reboot option
 		if isinstance(hashrate, float) : 
