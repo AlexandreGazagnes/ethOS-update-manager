@@ -115,6 +115,25 @@ def _time(jet_lag=JET_LAG) :
 	return txt
 
 
+def reboot() : 
+	"""reboot process from ethos cmd 'r' to 'reboot' to 'sudo reboot' """
+
+	debug("reboot called")
+
+	res = os.system("r")
+	if res : 
+		warning("previous command fail 'r', trying 'reboot' ")
+		res = os.system("reboot")
+
+		if res : 
+			warning("previous command fail 'reboot', trying 'sudo reboot' ")
+			res = os.system("sudo reboot")
+
+			if res : 
+				warning("previous command fail 'sudo reboot', please try MANUALY")
+				raise ValueError("auto reboot impossible")
+
+
 # Main
 
 def main() : 
@@ -143,18 +162,8 @@ def main() :
 					_time(), hashrate)
 				warning(msg)
 
-				res = os.system("r")
-				if res : 
-					warning("previous command fail 'r', trying 'reboot' ")
-					res = os.system("reboot")
+				reboot()
 
-					if res : 
-						warning("previous command fail 'reboot', trying 'sudo reboot' ")
-						res = os.system("sudo reboot")
-
-						if res : 
-							warning("previous command fail 'sudo reboot', please try MANUALY")
-							raise ValueError("auto reboot impossible")
 			else : 
 				msg = "{} : hashrate OK : {}\n".format(
 					_time(), hashrate)
