@@ -143,13 +143,14 @@ def main() :
 	msg = "{} : init new session!".format(_time())
 	warning(msg)
 
+	time.sleep(SLEEPER) # to avoid multiple short reboot 
+	if SLEEPER < 60 * 8 : 
+		time.sleep(SLEEPER)
+
 	# main loop
 	while True :
 
 		debug("main loop entrance") 
-
-		# wait
-		time.sleep(SLEEPER) # to avoid multiple short reboot 
 		
 		# proceed 
 		data = data_from_cmd("show stats") 	# extract data from cmd 
@@ -179,6 +180,9 @@ def main() :
 		uptime = uptime.split("up")[1]
 		msg = "{} : uptime at {}".format(_time(), uptime)
 		info(msg)
+
+		# wait
+		time.sleep(SLEEPER) # to avoid multiple short reboot 
 
 
 if __name__ == '__main__':
