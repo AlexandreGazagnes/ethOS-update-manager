@@ -27,11 +27,10 @@ logging.basicConfig(	level=logging.INFO,
 
 # Consts
 
-CMD = "show stats"	# CMD = "show stats" # or update
-SLEEPER = 10	  	# In seconds ! 5/10/15 minutes
-MIN_HASH = 49		# 30 ou 120 ou 180 ...
-JET_LAG = 0			# depends o fyour local time and your system time
-
+CMD = 		"show stats"	# CMD = "show stats" # or update
+SLEEPER = 	10	  			# IN SECONDS think to multiply by 60 for minutes ;)
+MIN_HASH = 	49				# 30 ou 120 ou 180 ... depends of your perf and GPU's number
+JET_LAG = 	0				# depends of your local/sys time 
 
 # Functions
 
@@ -88,6 +87,8 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 def return_hash(data, key="hash") : 
 	""" return hash float"""
 
+	debug ("return_hash called")
+
 	try : 
 		k = float(data[key])
 		debug("good type 'float' of hash")
@@ -122,7 +123,9 @@ def main() :
 	warning(msg)
 
 	# main loop
-	while True : 
+	while True :
+
+		debug("main loop entrance") 
 
 		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
@@ -134,18 +137,31 @@ def main() :
 		# reboot option
 		if isinstance(hashrate, float) : 
 			if hashrate < MIN_HASH : 
-				msg = " {} rebooting due to hashrate : {}\n".format(
-				_time(), hashrate)
+				msg = "{} : rebooting ('r') due to hashrate : {}\n".format(
+					_time(), hashrate)
 				warning(msg)
 
-				os.system("r")
+				res = os.system("r")
+				if res : 
+					warning("previous command fail 'r', trying 'reboot' ")
+					res = os.system("reboot")
+
+					if res : 
+						warning("previous command fail 'reboot', trying 'sudo reboot' ")
+						res = os.system("sudo reboot")
+
+						if res : 
+							warning("previous command fail 'sudo reboot', please try MANUALY")
+							raise ValueError("auto reboot impossible")
 			else : 
-				debug(" {} hashrate OK : {}\n".format(
-				_time(), hashrate))
+				msg = "{} : hashrate OK : {}\n".format(
+					_time(), hashrate)
+				debug(msg)
+
 		else : 
-			msg = " {} invalid hrate type {} \n".format(
+			msg = "{} : invalid hrate type {} \n".format(
 				_time(), type(hashrate))
-			warning()
+			warning(msg)
 
 		# record uptime
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
