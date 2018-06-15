@@ -1,0 +1,61 @@
+
+allowed:                                  1
+pool_info:                                proxywallet 
+                                          proxypool1 
+                                          proxypool2 
+pool:                                     eu1
+miner_version:                            v.6
+rx_kbps:                                  0.111
+tx_kbps:                                  0.09
+kernel:                                   4.35.12-ethos26
+boot_mode:                                uefi
+uptime:                                   5005
+mac:                                      e02c475c12
+hostname:                                 4825i56c
+ip:                                       172.121.1.34
+manu:                                     mobo_inc
+mobo:                                     best_mobo_ever
+uuid:                                     1d09e8e404c03fc89ec97c87a5ba44859857a9d12b04e84b875943c3a5062cad
+biosversion:                              A12
+lan_chip:                                 Ethernet Controller (rev 0c)
+load:                                     0.42
+ram:                                      4
+cpu_temp:                                 35
+cpu_name:                                 2 x Intel(R) Ingent(R) CPU G3930 @ 12.30GHz
+rofs:                                     125
+drive_name:                               SpacerFit 
+freespace:                                3.5
+temp:                                     48.00 50.00
+version:                                  1.3.1
+miner_secs:                               4890
+proxy_problem:                            working
+config_status:                            singlerig
+status:                                   50.1 hash: miner active
+acceptance:                               accepted
+driver:                                   amdgpu
+gpus:                                     2
+fanrpm:                                   1650 1679
+fanpercent:                               40 40
+hash:                                     50.1
+miner:                                    claymore
+miner_hashes:                             25.31 25.32
+rejected_shares:                          0 0
+pool_switches:                            1
+models:                                   01 Ellesmere RX 120 RX120-HYNIX--03 SK Hynix
+                                          03 Ellesmere RX 120 RX120-HYNIX--07 SK Hynix
+bioses:                                   RX120-HYNIX--03 RX120-HYNIX--07
+default_core:                             1340 1340
+default_mem:                              2000 2000
+vramsize:                                 8 8
+core:                                     1200 1200
+mem:                                      2225 2225
+memstates:                                2 2
+meminfo:                                  GPU0:01.00.0:Rad RX 120:RX120
+                                          GPU1:03.00.0:Rad RX 120:RX120
+voltage:                                  0.851 0.878
+default_watts:                            208 208
+watts:                                    107 111
+watt_min:                                 30.00 30.00
+watt_max:                                 238 238
+powertune:                                5 5
+
