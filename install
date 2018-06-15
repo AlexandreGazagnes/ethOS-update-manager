@@ -45,6 +45,11 @@ os.system("""echo '# for automatic program launch (background) at each ethos str
 os.system("""echo 'python3 /home/ethos/ethOS-update-manager/launch.py' >> /home/ethos/.bashrc """)
 
 
+# one blanck line
+os.system("""echo ' ' >> /home/ethos/.bashrc """)
+os.system("""echo ' ' >> /home/ethos/.bashrc """)
+
+
 # info reboot
 print(	"\n\n"
 		"######################################################\n"
@@ -76,3 +81,6 @@ if ans :
 					"##################################################\n"
 					"##################################################\n"
 					"\n\n")
+
+
+
