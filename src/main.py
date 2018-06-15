@@ -9,7 +9,7 @@ Just handle results from a CMD 'show stats' or 'update' and reboot
 if nedeed, ie your hashrate is too low (aka MIN_HASH).
 
 Please update with your personal settings CMD, 
-SLEEPER, JET_LAG and MIN_HASH. You can of course use default settings
+SLEEPER, JET_LAG, LATENCY and MIN_HASH. You can of course use default settings
 """
 
 
@@ -27,14 +27,17 @@ logging.basicConfig(	level=logging.INFO,
 
 # Consts
 
-CMD = 		"show stats"	# CMD = "show stats" # or update
-SLEEPER = 	10	  			# IN SECONDS think to multiply by 60 for minutes ;)
-MIN_HASH = 	49				# 30 ou 120 ou 180 ... depends of your perf and GPU's number
-JET_LAG = 	0				# depends of your local/sys time 
+CMD 		="show stats"	# CMD = "show stats" # or update
+SLEEPER 	= 10 *60 		# IN SECONDS think to multiply by 60 for minutes ;)
+MIN_HASH 	= 49			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
+JET_LAG 	= 0				# depends of your local/sys time 
+LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
+							# to rig to be fully operational (STRONGLY RECOMMANDED)
+
 
 # Functions
 
-def one_process_already_runing() : 
+def not_the_first_process_launched() : 
 	""" check if on porcess is already running"""
 
 	time.sleep(10)
@@ -42,8 +45,8 @@ def one_process_already_runing() :
 	working = [p for p in process if "src/main.py" in p]
 	nb = len(working)
 
-	if not nb : return False
-	else : return True
+	if nb >1 :	return True
+	else : 		return False
 
 
 def data_from_cmd(cmd="show stats", fake_file=None) :
@@ -130,7 +133,15 @@ def reboot() :
 			res = os.system("sudo reboot")
 
 			if res : 
-				warning("previous command fail 'sudo reboot', please try MANUALY")
+				msg=str("\n\n"
+					"##################################################\n"
+					"##################################################\n\n\n"
+					"-->  auto reboot fail : please reboot manualy  <--\n\n\n"
+					"##################################################\n"
+					"##################################################\n"
+					"\n\n")
+				
+				warning(msg)
 				raise ValueError("auto reboot impossible")
 
 
@@ -143,9 +154,11 @@ def main() :
 	msg = "{} : init new session!".format(_time())
 	warning(msg)
 
-	time.sleep(SLEEPER) # to avoid multiple short reboot 
-	if SLEEPER < 60 * 8 : 
-		time.sleep(SLEEPER)
+	# to avoid multiple short reboot 
+	time.sleep(SLEEPER)
+	
+	if LATENCY and (SLEEPER < 60 * 6) :  
+		time.sleep(600 - SLEEPER)
 
 	# main loop
 	while True :
