@@ -57,7 +57,7 @@ if ans :
 		ans = os.system("sudo reboot")
 		if ans : 
 			print(	"\n\n"
-					"#######################################\n"
-					"auto reboot fail, please reboot manualy\n"
+					"#######################################\n\n"
+					"auto reboot fail, please reboot manualy\n\n"
 					"#######################################\n"
 					"\n\n")
