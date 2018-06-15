@@ -58,6 +58,8 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 	# handle cmd result
 	if not os.system(cmd)	: 
 		li = os.popen(cmd).readlines()
+		msg = "{} : executed and handled".format(_time(), cmd) 
+		debug(msg)
 	else :
 		msg = "{} : command unknown --> simulation mode ON".format(_time())
 		warning(msg)
