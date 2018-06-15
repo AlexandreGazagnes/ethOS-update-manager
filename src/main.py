@@ -32,7 +32,6 @@ SLEEPER = 10 * 60 	# 5/10/15 minutes
 MIN_HASH = 179		# 30 ou 120 ou 180 ...
 JET_LAG = 7			# depends o fyour local time and your system time
 
-
 # Functions
 
 def one_process_already_runing() : 
@@ -47,18 +46,26 @@ def one_process_already_runing() :
 	else : return True
 
 
-def data_from_cmd(cmd="show stats", test=False, fake_echo="show_stats.txt") :
+def data_from_cmd(cmd="show stats", fake_file=None) :
 	"""create a txt from a popen command, for ex "show stats" """ 
 
 	debug("data_from_cmd called")
 
-	# handle cmd result
-	if not test	: 
-		li = os.popen(cmd).readlines()
-	else : 
-		li = os.popen("cat {}".format(fake_echo))
+	# define default fake file
+	if not fake_file : 
+		fake_file = "/home/ethos/ethOS-update-manager/.show_stats.txt"
 	
-	if not li : warning(" {} : txt is None".format(_time()))
+	# handle cmd result
+	if not os.system(cmd)	: 
+		li = os.popen(cmd).readlines()
+	else :
+		msg = " {} : command unknown --> simulation mode ON".format(_time())
+		warning(msg)
+		li = os.popen("cat {}".format(fake_file))
+	
+	if not li : 
+		msg = " {} : txt is None".format(_time())
+		warning(msg)
 
 	# list operations
 	li = [i.replace("\n", "") for i in li if i.replace("\n", "")] # delete '\n' and null lines
@@ -92,14 +99,14 @@ def return_hash(data, key="hash") :
 		return k
 
 
-def _time() : 
+def _time(jet_lag=JET_LAG) : 
 	""" give local time in personal str format"""
 	
 	debug("_time called") 
 	
 	t = time.localtime()
 	txt = "{:0>2}/{:0>2}/{:0>2} at {:0>2}:{:0>2}".format(
-		t.tm_mday, t.tm_mon, t.tm_year - 2000, t.tm_hour+JET_LAG, t.tm_min)
+		t.tm_mday, t.tm_mon, t.tm_year - 2000, t.tm_hour+jet_lag, t.tm_min)
 
 	return txt
 
