@@ -17,8 +17,10 @@ os.system("chmod +x /home/ethos/ethOS-update-manager/src/main.py")
 
 
 # title in .bashrc
+os.system("""echo ' ' >> /home/ethos/.bashrc """)
+os.system("""echo ' ' >> /home/ethos/.bashrc """)
 os.system("""echo '################################' >> /home/ethos/.bashrc """)
-os.system("""echo 'ethOS-update-manager' >> /home/ethos/.bashrc """)
+os.system("""echo '#	ethOS-update-manager' >> /home/ethos/.bashrc """)
 os.system("""echo '################################' >> /home/ethos/.bashrc """)
 
 
@@ -49,9 +51,9 @@ for i in range(2, 0, -1) :
 
 #auto reboot 
 ans = os.system("r")
-if not ans : 
+if ans : 
 	ans = os.system("reboot")
-	if not ans : 
+	if ans : 
 		ans = os.system("sudo reboot")
-		if not ans : 
+		if ans : 
 			print("auto reboot fail, please reboot manualy")
