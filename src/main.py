@@ -47,28 +47,32 @@ def one_process_already_runing() :
 	else : return True
 
 
-def data_from_cmd(cmd="show stats") :
+def data_from_cmd(cmd="show stats", test=False, fake_echo="show_stats.txt") :
 	"""create a txt from a popen command, for ex "show stats" """ 
 
 	debug("data_from_cmd called")
 
 	# handle cmd result
-	li = os.popen(cmd).readlines()
+	if not test	: 
+		li = os.popen(cmd).readlines()
+	else : 
+		li = os.popen("cat {}".format(fake_echo))
+	
 	if not li : warning(" {} : txt is None".format(_time()))
 
 	# list operations
-	li2 = [i.split(":") for i in li] # separate key, value with ":"
-	li2 = [i for i in li2 if i[0]] 	# delete null values
-	li3 = [["None", i[0]] if len(i) == 1 else i for i in li2] 	# info some key values encoded on sevral lines
-	li3 = [[i[0].strip(), i[1].strip()] for i in li3] 	# strip everything
-	li3 = [[i[0], i[1]] for i in li3 if i[0] != "None"] # del "None" keys
-	li3 = [[i[0], i[1]] for i in li3 if i[1]] # del None values
+	li = [i.replace("\n", "") for i in li if i.replace("\n", "")]
+	li = [i for i in li if i[0] != " "]
+	li = [i.split(":") for i in li] # separate key, value with ":"
+	li = [i for i in li if i[0]] 	# delete null values
+	li = [i for i in li if i[1]]
+	li = [[i[0].strip(), i[1].strip()] for i in li] 	# strip everything
 
 	# dict operations
-	data = {i[0] : i[1] for i in li3}
+	data = {i[0] : i[1] for i in li}
 	for i, j in data.items() : 
 		try : data[i] = float(j)
-		except : pass
+		except : data[i] = str(j)
 
 	return data
 
