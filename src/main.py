@@ -29,7 +29,7 @@ logging.basicConfig(	level=logging.INFO,
 
 CMD = "show stats"	# CMD = "show stats" # or update
 SLEEPER = 10 * 60 	# 5/10/15 minutes
-MIN_HASH = 179		# 30 ou 120 ou 180 ...
+MIN_HASH = 49		# 30 ou 120 ou 180 ...
 JET_LAG = 7			# depends o fyour local time and your system time
 
 # Functions
@@ -59,12 +59,12 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 	if not os.system(cmd)	: 
 		li = os.popen(cmd).readlines()
 	else :
-		msg = " {} : command unknown --> simulation mode ON".format(_time())
+		msg = "{} : command unknown --> simulation mode ON".format(_time())
 		warning(msg)
 		li = os.popen("cat {}".format(fake_file))
 	
 	if not li : 
-		msg = " {} : txt is None".format(_time())
+		msg = "{} : txt is None".format(_time())
 		warning(msg)
 
 	# list operations
@@ -93,7 +93,7 @@ def return_hash(data, key="hash") :
 		return k
 	except : 
 		k = str(data["hash"])
-		msg = " {} : error reading 'hash' as a float for : {}".format(
+		msg = "{} : error reading 'hash' as a float for : {}".format(
 				_time(), k)
 		warning(msg) 
 		return k
@@ -121,7 +121,7 @@ def main() :
 
 	# init logging
 	print("\n\n\n")
-	msg = " {} : init new session!".format(_time())
+	msg = "{} : init new session!".format(_time())
 	warning(msg)
 			# send_bot(msg) 
 
@@ -155,7 +155,7 @@ def main() :
 		# record uptime
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
 		uptime = uptime.split("up")[1]
-		msg = " {} : uptime at {}".format(_time(), uptime)
+		msg = "{} : uptime at {}".format(_time(), uptime)
 		info(msg)
 
 
