@@ -4,7 +4,10 @@
 
 """
 ethOS-update-manager - launcher - v0.4.3
-launcher for main.py see src/main.py
+launcher for main.py
+avoid multi session launching by searching in all process
+if program aleardy running 
+for more info  please read /src/main.py
 """
 
 
