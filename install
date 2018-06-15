@@ -17,7 +17,7 @@ os.system("chmod +x /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py"
 
 
 # create alias (shortcup for CLI) : 
-os.system("""echo "alias LAUNCH='/home/ethos/ethOS-update-manager/launch.py'" >>  /home/ethos/.bashrc""")
+os.system("""echo "alias LAUNCH='python3 /home/ethos/ethOS-update-manager/launch.py'" >>  /home/ethos/.bashrc""")
 
 
 # for automatic program launch (background) at each ethos stratup : 
