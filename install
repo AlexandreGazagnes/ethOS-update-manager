@@ -13,15 +13,31 @@ import os, time
 # prepare sys
 os.system("cd /home/ethos/")
 os.system("chmod +x /home/ethos/ethOS-update-manager/launch.py")
-os.system("chmod +x /home/ethos/ethOS-update-manager/ethOsUpdateManager/main.py")
+os.system("chmod +x /home/ethos/ethOS-update-manager/src/main.py")
 
 
-# create alias (shortcup for CLI) : 
-os.system("""echo "alias LAUNCH='python3 /home/ethos/ethOS-update-manager/launch.py'" >>  /home/ethos/.bashrc""")
+# title in .bashrc
+os.system("""echo '################################' >> /home/ethos/.bashrc """)
+os.system("""echo 'ethOS-update-manager' >> /home/ethos/.bashrc """)
+os.system("""echo '################################' >> /home/ethos/.bashrc """)
 
 
-# for automatic program launch (background) at each ethos stratup : 
-os.system("echo 'python3 /home/ethos/ethOS-update-manager/launch.py' >> /home/ethos/.bashrc")
+# one blanck line
+os.system("""echo ' ' >> /home/ethos/.bashrc """)
+
+
+# create alias (shortcup for CLI) 'LAUNCH' to launch program manualy : 
+os.system("""echo '# create alias (shortcup for CLI) 'LAUNCH' to launch program manualy :' >> /home/ethos/.bashrc """)
+os.system("""echo "alias LAUNCH='python3 /home/ethos/ethOS-update-manager/launch.py'" >> /home/ethos/.bashrc """)
+
+
+# one blanck line
+os.system("""echo ' ' >> /home/ethos/.bashrc """)
+
+
+# for automatic program launch (background) at each ethos stratup :
+os.system("""echo '# for automatic program launch (background) at each ethos stratup:' >> /home/ethos/.bashrc """)
+os.system("""echo 'python3 /home/ethos/ethOS-update-manager/launch.py' >> /home/ethos/.bashrc """)
 
 
 # info reboot
