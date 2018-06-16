@@ -187,11 +187,11 @@ def reboot() :
 	res = os.system("r")
 	if res : 
 
-		warning("previous command fail 'r', trying 'reboot' ")
+		_warning("previous command fail 'r', trying 'reboot' ")
 		res = os.system("reboot")
 
 		if res : 
-			warning("previous command fail 'reboot', trying 'sudo reboot' ")
+			_warning("previous command fail 'reboot', trying 'sudo reboot' ")
 			res = os.system("sudo reboot")
 
 			if res : 
@@ -203,7 +203,7 @@ def reboot() :
 					"##################################################\n"
 					"\n\n")
 				
-				warning(msg)
+				_warning(msg)
 				raise ValueError("auto reboot impossible")
 
 
