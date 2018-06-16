@@ -216,7 +216,7 @@ def _warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=ENABLE_TELEGR
 	warning(msg)
 
 
-def _info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID):
+def _info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=ENABLE_TELEGRAM_MSG):
 	"""over write info """
 
 	if telegram : send_bot(bot_message=msg, rig , token, chat_id)
