@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+
 """
 ethOS-update-manager - launcher - v0.5.0
 launcher for main.py
@@ -9,8 +10,13 @@ if program aleardy running
 for more info  please read /src/main.py
 """
 
+
+# import 
+
 import os
 
+
+# main 
 
 def main() : 
 
@@ -24,7 +30,7 @@ def main() :
 		return 0
 	
 	# else launch one
-	print("ethOS-update-manager first launch")
+	print("ethOS-update-manager launched")
 	os.system("nohup python3 /home/ethos/ethOS-update-manager/src/main.py >> /home/ethos/ethOS-update-manager/logs/log 2>&1 &")
 	return 0
 

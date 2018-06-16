@@ -15,7 +15,7 @@ and MIN_HASH. You can of course use default settings
 """
 
 
-# Import 
+# import 
 
 import os, time, logging
 
@@ -26,40 +26,71 @@ from urllib.request import urlopen
 
 
 
-# Enable loging 
+# logging 
 
 logging.basicConfig(	level=logging.INFO, 
 						format='%(levelname)s %(message)s')
 
 
 
-# Consts
+# consts
 
 SLEEPER 	= 10 * 60 		# IN SECONDS think to multiply by 60 for minutes ;)
-MIN_HASH 	= 49			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
-JET_LAG 	= 0				# depends of your local/sys time 
+MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
+JET_LAG 	= 1				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
 
 
-TOKEN = "546465733:AAHXfOQb5zYqVHShspgomsCwA"
-CHAT_ID = "4924419"
+TOKEN = "5464657szzs33:AAHXfOQb5zYqVHShspgomsCwA"
+CHAT_ID = "49zsz24419"
 RIG = "Rig"
 
 
 
-# Functions
+
+# functions
 
 def not_the_first_process_launched() : 
 	""" check if on porcess is already running"""
 
-	time.sleep(10)
+	debug("not_the_first_process_launched called")
+
+	time.sleep(3)
+
 	process = os.popen("ps -aux | grep ethOS-update-manager").readlines()
 	working = [p for p in process if "src/main.py" in p]
 	nb = len(working)
 
 	if nb > 1 :	return True
 	else : 		return False
+
+
+def search_and_autokill() : 
+	""" search pid of other instance and kill it"""
+
+	debug("search_and_autokill called")
+
+	time.sleep(3)
+
+	process = os.popen("ps -aux | grep ethOS-update-manager").readlines()
+	working = [p for p in process if "src/main.py" in p]
+	working = [line.split(" ") for line in working]
+	working = [[i for i in line if i] for line in working]
+	pids = [i[1] for i in working]
+
+	l = len(pids)
+	if l  == 1 : 
+		debug("good number of process")
+	elif l > 1 : 
+		_warning("invalid number of process : {}, kill first one".format(pids))
+		try : 
+			os.system(str("kill " + pids[0]))
+			_warning("process killed")
+		except : 
+			_warning("autokill failed, please kill it MANUALY")
+	else : 
+		_warning("error unknown --> Please debug  MANUALY!")
 
 
 def data_from_cmd(cmd="show stats", fake_file=None) :
@@ -73,18 +104,18 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 	
 	# handle cmd result
 	li = os.popen(cmd).readlines()
-	msg = "{} : executed and handled".format(_time(), cmd) 
-	debug(msg)
+
+	debug("command executed and handled")
 	
 	if not li : 
 		res = os.system(cmd)
+
 		if res : 
-			msg = "{} : command unknown --> simulation mode ON".format(_time())
-			warning(msg) ; send_bot(msg)
+			_warning("command unknown --> simulation mode ON")
 			li = os.popen("cat {}".format(fake_file))
+
 		else : 
-			msg = "{} : error unknown --> Please debug!".format(_time())
-			warning(msg) ; send_bot(msg)
+			_warning("error unknown --> Please debug  MANUALY!")
 			li = os.popen("cat {}".format(fake_file))
 	
 
@@ -111,16 +142,13 @@ def return_hash(data, key="hash") :
 	debug ("return_hash called")
 
 	try : 
-		k = float(data[key])
+		hashrate = float(data[key])
 		debug("good type 'float' of hash")
-		return k
+		return hashrate
 	except : 
-		k = str(data["hash"])
-		msg = "{} : error reading 'hash' as a float for : {}".format(
-				_time(), k)
-		warning(msg) ; send_bot(msg) 
-
-		return k
+		hashrate = str(data["hash"])
+		_warning("error reading 'hash' as a float for : {}".format(hashrate)) 
+		return hashrate
 
 
 def _time(jet_lag=JET_LAG) : 
@@ -145,11 +173,8 @@ def send_bot(bot_message="", rig=RIG , token=TOKEN, chat_id=CHAT_ID):
 	msg = str(RIG) + ": "+ msg
 	msg = msg.replace(" ", "%20")
 
-	bot_token = token
-	bot_chatID = chat_id
-
-	req = 	 'https://api.telegram.org/bot' + bot_token \
-					+ '/sendMessage?chat_id=' + bot_chatID \
+	req = 	 'https://api.telegram.org/bot' + token \
+					+ '/sendMessage?chat_id=' + chat_id \
 					+ '&parse_mode=Markdown&text=' + msg
 
 	with urlopen(req) as f : none = f.read()
@@ -162,6 +187,7 @@ def reboot() :
 
 	res = os.system("r")
 	if res : 
+
 		warning("previous command fail 'r', trying 'reboot' ")
 		res = os.system("reboot")
 
@@ -178,26 +204,41 @@ def reboot() :
 					"##################################################\n"
 					"\n\n")
 				
-				warning(msg) ; send_bot(msg)
+				warning(msg)
 				raise ValueError("auto reboot impossible")
 
 
+def _warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID) : 
+	"""over write warning """
+	
+	w_msg = _time() + " : " + msg
+	warning(w_msg)
 
-# Main
+	send_bot(bot_message=msg, rig , token, chat_id)
+
+
+def _info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID):
+	"""over write info """
+
+	i_msg = _time() + " : " + msg
+	info(i_msg) 
+	
+	send_bot(bot_message=msg, rig , token, chat_id)
+
+
+# main
 
 def main() : 
 
 	# init logging
 	warning("\n\n\n")
-	msg = "{} : init new session!".format(_time())
-	warning(msg) ; send_bot(msg)
+	_warning("init new session!")
 
 	# to avoid multiple short reboot 
 	time.sleep(SLEEPER)
 	
-	if LATENCY and (SLEEPER < 60 * 6) :  
+	if LATENCY and (SLEEPER < (60 * 6)) :  
 		time.sleep(600 - SLEEPER)
-
 
 	# main loop
 	while True :
@@ -211,28 +252,22 @@ def main() :
 		# reboot option
 		if isinstance(hashrate, float) : 
 			if hashrate < MIN_HASH : 
-				msg = "{} : rebooting ('r') due to hashrate : {}\n".format(
-					_time(), hashrate)
-				warning(msg) ; send_bot(msg)
-
+				_warning("rebooting due to hashrate : {}\n".format(hashrate))
 				reboot()
 
 			else : 
-				msg = "{} : hashrate OK : {}\n".format(
-					_time(), hashrate)
-				debug(msg)
+				debug("hashrate OK")
 
 		else : 
-			msg = "{} : invalid hrate type {} \n".format(
-				_time(), type(hashrate))
+			_warning("invalid hrate type {} \n".format(type(hashrate)))
 
-			warning(msg) ; send_bot(msg)
 
 		# record uptime
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
 		uptime = uptime.split("up")[1]
-		msg = "{} : uptime at {}".format(_time(), uptime)
-		info(msg) ; send_bot(msg)
+ 
+		_info("uptime at{}".format(uptime))
+
 
 		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 

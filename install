@@ -10,77 +10,90 @@ try to reboot
 """
 
 # import 
+
 import os, time
 
 
-# prepare sys
-os.system("cd /home/ethos/")
-os.system("chmod +x /home/ethos/ethOS-update-manager/launch.py")
-os.system("chmod +x /home/ethos/ethOS-update-manager/src/main.py")
+# functions
+
+def write_bashrc(txt=" ") : 
+
+	cmd = """echo "{}" >> /home/ethos/.bashrc """.format(txt)
+	os.system(cmd)
 
 
-# title in .bashrc
-os.system("""echo ' ' >> /home/ethos/.bashrc """)
-os.system("""echo ' ' >> /home/ethos/.bashrc """)
-os.system("""echo '###################################' >> /home/ethos/.bashrc """)
-os.system("""echo '#	ethOS-update-manager' >> /home/ethos/.bashrc """)
-os.system("""echo '###################################' >> /home/ethos/.bashrc """)
+def counter(k=4) : 
 
-
-# one blanck line
-os.system("""echo ' ' >> /home/ethos/.bashrc """)
-
-
-# create alias (shortcup for CLI) 'LAUNCH' to launch program manualy : 
-os.system("""echo '# create alias (shortcup for CLI) 'LAUNCH' to launch program manualy :' >> /home/ethos/.bashrc """)
-os.system("""echo "alias LAUNCH='python3 /home/ethos/ethOS-update-manager/launch.py'" >> /home/ethos/.bashrc """)
-
-
-# one blanck line
-os.system("""echo ' ' >> /home/ethos/.bashrc """)
-
-
-# for automatic program launch (background) at each ethos stratup :
-os.system("""echo '# for automatic program launch (background) at each ethos stratup:' >> /home/ethos/.bashrc """)
-os.system("""echo 'python3 /home/ethos/ethOS-update-manager/launch.py' >> /home/ethos/.bashrc """)
-
-
-# one blanck line
-os.system("""echo ' ' >> /home/ethos/.bashrc """)
-os.system("""echo ' ' >> /home/ethos/.bashrc """)
-
-
-# info reboot
-print(	"\n\n"
-		"######################################################\n"
-		"######################################################\n\n\n"
-		"-->  your program is now installed and functional <--\n\n\n"
-		"-->   for full install, system will reboot in 3s  <--\n\n\n"
-		"######################################################\n"
-		"######################################################\n"
-		"\n\n")
-
-time.sleep(1)
-print()
-for i in range(4, 0, -1) : 
-	print(str(i-1))
 	time.sleep(1)
+	print("")
+	for i in range(k, 0, -1) : 
+		print(str(i-1), end=" --> ")
+		time.sleep(1)
 
 
-#auto reboot 
-ans = os.system("r")
-if ans : 
-	ans = os.system("reboot")
+# main
+
+def main() : 
+
+	# prepare sys
+	os.system("clear")
+	os.system("cd /home/ethos/")
+	os.system("chmod +x /home/ethos/ethOS-update-manager/launch.py")
+	os.system("chmod +x /home/ethos/ethOS-update-manager/src/main.py")
+
+
+	# title in .bashrc
+	write_bashrc() #  empty line
+	write_bashrc()
+	write_bashrc("###################################")
+	write_bashrc("#      ethOS-update-manager        ")
+	write_bashrc("###################################")
+	write_bashrc()
+	write_bashrc()
+
+	# create alias (shortcup for CLI) 'LAUNCH' to launch program manualy :
+	write_bashrc("# create alias (shortcup for CLI) LAUNCH to launch program manualy :")
+	write_bashrc("alias LAUNCH='python3 /home/ethos/ethOS-update-manager/launch.py'")
+
+	write_bashrc()
+
+	# for automatic program launch (background) at each ethos stratup :
+	write_bashrc("# for automatic program launch (background) at each ethos stratup:")
+	write_bashrc("python3 /home/ethos/ethOS-update-manager/launch.py")
+
+	write_bashrc()
+	write_bashrc()
+
+
+	# info reboot
+	print(	"\n\n"
+			"######################################################\n"
+			"######################################################\n\n\n"
+			"-->  your program is now installed and functional <--\n\n\n"
+			"-->   for full install, system will reboot in 3s  <--\n\n\n"
+			"######################################################\n"
+			"######################################################\n"
+			"\n\n")
+
+	counter(4)
+
+
+	#auto reboot 
+	ans = os.system("r")
 	if ans : 
-		ans = os.system("sudo reboot")
+		ans = os.system("reboot")
 		if ans : 
-			print(	"\n\n"
-					"##################################################\n"
-					"##################################################\n\n\n"
-					"-->  auto reboot fail : please reboot manualy  <--\n\n\n"
-					"##################################################\n"
-					"##################################################\n"
-					"\n\n")
+			ans = os.system("sudo reboot")
+			if ans : 
+				print(	"\n\n"
+						"##################################################\n"
+						"##################################################\n\n\n"
+						"-->  auto reboot fail : please reboot manualy  <--\n\n\n"
+						"##################################################\n"
+						"##################################################\n"
+						"\n\n")
 
 
+if __name__ == '__main__':
+	main()
 
