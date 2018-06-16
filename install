@@ -22,6 +22,15 @@ def write_bashrc(txt=" ") :
 	os.system(cmd)
 
 
+def counter(k=4) : 
+
+	time.sleep(1)
+	print("")
+	for i in range(k, 0, -1) : 
+		print(str(i-1), end=" --> ")
+		time.sleep(1)
+
+
 # main
 
 def main() : 
@@ -65,11 +74,7 @@ def main() :
 			"######################################################\n"
 			"\n\n")
 
-	time.sleep(1)
-	print()
-	for i in range(4, 0, -1) : 
-		print(str(i-1), end=" --> ")
-		time.sleep(1)
+	counter(4)
 
 
 	#auto reboot 
