@@ -59,19 +59,18 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 	
 	# handle cmd result
 	li = os.popen(cmd).readlines()
-	msg = "{} : executed and handled".format(_time(), cmd) 
 
-	debug(msg)
+	debug("command executed and handled")
 	
 	if not li : 
 		res = os.system(cmd)
+
 		if res : 
-			msg = "{} : command unknown --> simulation mode ON".format(_time())
-			warning(msg)
+			_warning("command unknown --> simulation mode ON")
 			li = os.popen("cat {}".format(fake_file))
+
 		else : 
-			msg = "{} : error unknown --> Please debug  MANUALY!".format(_time())
-			warning(msg)
+			_warning("error unknown --> Please debug  MANUALY!")
 			li = os.popen("cat {}".format(fake_file))
 	
 
@@ -98,15 +97,13 @@ def return_hash(data, key="hash") :
 	debug ("return_hash called")
 
 	try : 
-		k = float(data[key])
+		hashrate = float(data[key])
 		debug("good type 'float' of hash")
-		return k
+		return hashrate
 	except : 
-		k = str(data["hash"])
-		msg = "{} : error reading 'hash' as a float for : {} is {}".format(
-				_time(), k, type(k))
-		warning(msg) 
-		return k
+		hashrate = str(data["hash"])
+		_warning("error reading 'hash' as a float for : {}".format(hashrate)) 
+		return hashrate
 
 
 def _time(jet_lag=JET_LAG) : 
@@ -145,7 +142,7 @@ def reboot() :
 					"##################################################\n"
 					"\n\n")
 				
-				warning(msg)
+				_warning(msg)
 				raise ValueError("auto reboot impossible")
 
 
@@ -153,7 +150,8 @@ def _warning(msg) :
 	"""over write warning """
 	
 	msg = _time() + " : " + msg
-	warning(msg)
+	_warning(msg)
+
 
 def _info(msg) :
 	"""over write info """
@@ -161,14 +159,14 @@ def _info(msg) :
 	msg = _time() + " : " + msg
 	info(msg) 
 
+
 # main
 
 def main() : 
 
 	# init logging
 	warning("\n\n\n")
-	msg = "{} : init new session!".format(_time())
-	warning(msg)
+	_warning("init new session!")
 
 	# to avoid multiple short reboot 
 	time.sleep(SLEEPER)
@@ -188,27 +186,21 @@ def main() :
 		# reboot option
 		if isinstance(hashrate, float) : 
 			if hashrate < MIN_HASH : 
-				msg = "{} : rebooting due to hashrate : {}\n".format(
-					_time(), hashrate)
-				warning(msg)
+				_warning("rebooting due to hashrate : {}\n".format(hashrate))
 
 				reboot()
 
 			else : 
-				msg = "{} : hashrate OK : {}\n".format(
-					_time(), hashrate)
-				debug(msg)
+				debug("hashrate OK")
 
 		else : 
-			msg = "{} : invalid hrate type {} \n".format(
-				_time(), type(hashrate))
-			warning(msg)
+			_warning("invalid hrate type {} \n".format(type(hashrate)))
 
 		# record uptime
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
 		uptime = uptime.split("up")[1]
-		msg = "{} : uptime at {}".format(_time(), uptime)
-		info(msg)
+ 
+		_info("uptime at {}".format(uptime))
 
 		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
