@@ -13,13 +13,13 @@ and MIN_HASH. You can of course use default settings
 """
 
 
-# Import 
+# import 
 
 import os, time, logging
 from logging import debug, warning, info
 
 
-# Enable loging 
+# logging 
 
 logging.basicConfig(	level=logging.INFO, 
 						format='%(levelname)s %(message)s')
@@ -60,6 +60,7 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 	# handle cmd result
 	li = os.popen(cmd).readlines()
 	msg = "{} : executed and handled".format(_time(), cmd) 
+
 	debug(msg)
 	
 	if not li : 
@@ -69,7 +70,7 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 			warning(msg)
 			li = os.popen("cat {}".format(fake_file))
 		else : 
-			msg = "{} : error unknown --> Please debug!".format(_time())
+			msg = "{} : error unknown --> Please debug  MANUALY!".format(_time())
 			warning(msg)
 			li = os.popen("cat {}".format(fake_file))
 	
@@ -102,8 +103,8 @@ def return_hash(data, key="hash") :
 		return k
 	except : 
 		k = str(data["hash"])
-		msg = "{} : error reading 'hash' as a float for : {}".format(
-				_time(), k)
+		msg = "{} : error reading 'hash' as a float for : {} is {}".format(
+				_time(), k, type(k))
 		warning(msg) 
 		return k
 
@@ -127,6 +128,7 @@ def reboot() :
 
 	res = os.system("r")
 	if res : 
+
 		warning("previous command fail 'r', trying 'reboot' ")
 		res = os.system("reboot")
 
@@ -147,7 +149,19 @@ def reboot() :
 				raise ValueError("auto reboot impossible")
 
 
-# Main
+def _warning(msg) : 
+	"""over write warning """
+	
+	msg = _time() + " : " + msg
+	warning(msg)
+
+def _info(msg) :
+	"""over write info """
+
+	msg = _time() + " : " + msg
+	info(msg) 
+
+# main
 
 def main() : 
 
@@ -159,7 +173,7 @@ def main() :
 	# to avoid multiple short reboot 
 	time.sleep(SLEEPER)
 	
-	if LATENCY and (SLEEPER < 60 * 6) :  
+	if LATENCY and (SLEEPER < (60 * 6)) :  
 		time.sleep(600 - SLEEPER)
 
 	# main loop
@@ -174,7 +188,7 @@ def main() :
 		# reboot option
 		if isinstance(hashrate, float) : 
 			if hashrate < MIN_HASH : 
-				msg = "{} : rebooting ('r') due to hashrate : {}\n".format(
+				msg = "{} : rebooting due to hashrate : {}\n".format(
 					_time(), hashrate)
 				warning(msg)
 
