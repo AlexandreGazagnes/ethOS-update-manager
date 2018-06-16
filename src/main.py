@@ -67,16 +67,16 @@ def search_and_autokill() :
 	l = len(pids)
 	if l  == 1 : 
 		debug("good number of process")
-	if l > 1 : 
+	elif l > 1 : 
 		_warning("invalid number of process : {}, kill first one".format(pids))
 		try : 
 			os.system(str("kill " + pids[0]))
 			_warning("process killed")
-		else : 
-		_warning("autokill failed, please kill it MANUALY")
+		except : 
+			_warning("autokill failed, please kill it MANUALY")
 	else : 
 		_warning("error unknown --> Please debug  MANUALY!")
-		
+
 
 def data_from_cmd(cmd="show stats", fake_file=None) :
 	"""create a txt from a popen command, for ex "show stats" """ 
