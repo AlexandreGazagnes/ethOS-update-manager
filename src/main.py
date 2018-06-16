@@ -174,7 +174,7 @@ def send_bot(bot_message="", rig=RIG , token=TOKEN, chat_id=CHAT_ID):
 	
 	URL_ENCODING = [(" ", "%20"), ("#", "%23"), ("\n", "%0A")]
 	for i, j in URL_ENCODING : 
-	msg = msg.replace(i,j)
+		msg = msg.replace(i,j)
 	
 	req = 	 'https://api.telegram.org/bot' + token \
 					+ '/sendMessage?chat_id=' + chat_id \
