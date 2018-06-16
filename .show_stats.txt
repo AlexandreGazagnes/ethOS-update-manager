@@ -36,7 +36,7 @@ driver:                                   amdgpu
 gpus:                                     2
 fanrpm:                                   1650 1679
 fanpercent:                               40 40
-hash:                                     50.1
+hash:                                     181
 miner:                                    claymore
 miner_hashes:                             25.31 25.32
 rejected_shares:                          0 0
