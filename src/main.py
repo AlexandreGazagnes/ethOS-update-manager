@@ -40,6 +40,7 @@ MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 JET_LAG 	= 1				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
+UPTIME=True
 
 
 ENABLE_TELEGRAM_MSG = True
@@ -165,6 +166,8 @@ def _time(jet_lag=JET_LAG) :
 def send_bot(bot_message="", rig=RIG , token=TOKEN, chat_id=CHAT_ID):
 	"""useful function to send a message to your bot in cli"""
 
+	debug("send_bot called")
+
 	msg = str(bot_message)
 	if not bot_message : 
 		msg = "error : bot_message : invalid argument"
@@ -211,8 +214,24 @@ def reboot() :
 				raise ValueError("auto reboot impossible")
 
 
+def uptime(u=UPTIME) : 
+	"""record uptime """
+	
+	debug("uptime called")
+
+	if u : 
+		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
+		uptime = uptime.split("up")[1]
+
+		_info("uptime at{}".format(uptime))
+
+
 def _warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=ENABLE_TELEGRAM_MSG) : 
 	"""over write warning """
+
+	debug("warning called")
+
+	uptime()
 
 	if telegram : send_bot(msg, rig , token, chat_id)
 
@@ -222,6 +241,8 @@ def _warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=ENABLE_TELEGR
 
 def _info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=ENABLE_TELEGRAM_MSG):
 	"""over write info """
+
+	debug("info called")
 
 	if telegram : send_bot(msg, rig , token, chat_id)
 
@@ -254,6 +275,7 @@ def main() :
 
 		# reboot option
 		if isinstance(hashrate, float) : 
+			
 			if hashrate < MIN_HASH : 
 				_warning("rebooting due to hashrate : {}\n".format(hashrate))
 				reboot()
@@ -263,14 +285,6 @@ def main() :
 
 		else : 
 			_warning("invalid hrate type {} \n".format(type(hashrate)))
-
-
-		# record uptime
-		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
-		uptime = uptime.split("up")[1]
- 
-		_info("uptime at{}".format(uptime))
-
 
 		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
