@@ -54,7 +54,7 @@ RIG = "Rig"
 def not_the_first_process_launched() : 
 	""" check if on porcess is already running"""
 
-	debug("not_the_first_process_launched called")
+	_debug("not_the_first_process_launched called")
 
 	time.sleep(3)
 
@@ -69,7 +69,7 @@ def not_the_first_process_launched() :
 def search_and_autokill() : 
 	""" search pid of other instance and kill it"""
 
-	debug("search_and_autokill called")
+	_debug("search_and_autokill called")
 
 	time.sleep(3)
 
@@ -81,7 +81,7 @@ def search_and_autokill() :
 
 	l = len(pids)
 	if l  == 1 : 
-		debug("good number of process")
+		_debug("good number of process")
 	elif l > 1 : 
 		_warning("invalid number of process : {}, kill first one".format(pids))
 		try : 
@@ -96,7 +96,7 @@ def search_and_autokill() :
 def data_from_cmd(cmd="show stats", fake_file=None) :
 	"""create a txt from a popen command, for ex "show stats" """ 
 
-	debug("data_from_cmd called")
+	_debug("data_from_cmd called")
 
 	# define default fake file
 	if not fake_file : 
@@ -105,7 +105,7 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 	# handle cmd result
 	li = os.popen(cmd).readlines()
 
-	debug("command executed and handled")
+	_debug("command executed and handled")
 	
 	if not li : 
 		res = os.system(cmd)
@@ -143,7 +143,7 @@ def return_hash(data, key="hash") :
 
 	try : 
 		hashrate = float(data[key])
-		debug("good type 'float' of hash")
+		_debug("good type 'float' of hash")
 		return hashrate
 	except : 
 		hashrate = str(data["hash"])
@@ -154,7 +154,7 @@ def return_hash(data, key="hash") :
 def _time(jet_lag=JET_LAG) : 
 	""" give local time in personal str format"""
 	
-	debug("_time called") 
+	_debug("_time called") 
 	
 	t = time.localtime()
 	txt = "{:0>2}/{:0>2}/{:0>2} {:0>2}:{:0>2}".format(
@@ -166,7 +166,7 @@ def _time(jet_lag=JET_LAG) :
 def send_bot(bot_message="", rig=RIG , token=TOKEN, chat_id=CHAT_ID):
 	"""useful function to send a message to your bot in cli"""
 
-	debug("send_bot called")
+	_debug("send_bot called")
 
 	msg = str(bot_message)
 	if not bot_message : 
@@ -189,7 +189,7 @@ def send_bot(bot_message="", rig=RIG , token=TOKEN, chat_id=CHAT_ID):
 def reboot() : 
 	"""reboot process from ethos cmd 'r' to 'reboot' to 'sudo reboot' """
 
-	debug("reboot called")
+	_debug("reboot called")
 
 	res = os.system("r")
 	if res : 
@@ -217,7 +217,7 @@ def reboot() :
 def uptime(u=UPTIME) : 
 	"""record uptime """
 	
-	debug("uptime called")
+	_debug("uptime called")
 
 	if u : 
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
@@ -229,26 +229,32 @@ def uptime(u=UPTIME) :
 def _warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=ENABLE_TELEGRAM_MSG) : 
 	"""over write warning """
 
-	debug("warning called")
+	_debug("warning called")
 
 	uptime()
 
 	if telegram : send_bot(msg, rig , token, chat_id)
 
 	msg = _time() + " : " + msg
-	warning(msg)
+	logging.warning(msg)
 
 
 def _info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=ENABLE_TELEGRAM_MSG):
 	"""over write info """
 
-	debug("info called")
+	_debug("info called")
 
 	if telegram : send_bot(msg, rig , token, chat_id)
 
 	msg = _time() + " : " + msg
-	info(msg) 
-	
+	logging.info(msg) 
+
+
+def _debug(msg) : 
+	"""over write debug """
+
+	logging.debug(msg)
+
 
 # main
 
@@ -267,7 +273,7 @@ def main() :
 	# main loop
 	while True :
 
-		debug("main loop entrance") 
+		_debug("main loop entrance") 
 		
 		# proceed 
 		data = data_from_cmd() 	# extract data from cmd 
@@ -281,7 +287,7 @@ def main() :
 				reboot()
 
 			else : 
-				debug("hashrate OK")
+				_debug("hashrate OK")
 
 		else : 
 			_warning("invalid hrate type {} \n".format(type(hashrate)))
