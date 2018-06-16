@@ -28,8 +28,8 @@ logging.basicConfig(	level=logging.INFO,
 # consts
 
 SLEEPER 	= 10 * 60 		# IN SECONDS think to multiply by 60 for minutes ;)
-MIN_HASH 	= 49			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
-JET_LAG 	= 0				# depends of your local/sys time 
+MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
+JET_LAG 	= 1				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
 
@@ -39,7 +39,10 @@ LATENCY 	= True			# if LATENCY additionnal sleeper added to give time
 def not_the_first_process_launched() : 
 	""" check if on porcess is already running"""
 
-	time.sleep(10)
+	debug("not_the_first_process_launched called")
+
+	time.sleep(3)
+
 	process = os.popen("ps -aux | grep ethOS-update-manager").readlines()
 	working = [p for p in process if "src/main.py" in p]
 	nb = len(working)
@@ -47,6 +50,33 @@ def not_the_first_process_launched() :
 	if nb > 1 :	return True
 	else : 		return False
 
+
+def search_and_autokill() : 
+	""" search pid of other instance and kill it"""
+
+	debug("search_and_autokill called")
+
+	time.sleep(3)
+
+	process = os.popen("ps -aux | grep ethOS-update-manager").readlines()
+	working = [p for p in process if "src/main.py" in p]
+	working = [line.split(" ") for line in working]
+	working = [[i for i in line if i] for line in working]
+	pids = [i[1] for i in working]
+
+	l = len(pids)
+	if l  == 1 : 
+		debug("good number of process")
+	if l > 1 : 
+		_warning("invalid number of process : {}, kill first one".format(pids))
+		try : 
+			os.system(str("kill " + pids[0]))
+			_warning("process killed")
+		else : 
+		_warning("autokill failed, please kill it MANUALY")
+	else : 
+		_warning("error unknown --> Please debug  MANUALY!")
+		
 
 def data_from_cmd(cmd="show stats", fake_file=None) :
 	"""create a txt from a popen command, for ex "show stats" """ 
@@ -200,7 +230,7 @@ def main() :
 		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
 		uptime = uptime.split("up")[1]
  
-		_info("uptime at {}".format(uptime))
+		_info("uptime at{}".format(uptime))
 
 		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 

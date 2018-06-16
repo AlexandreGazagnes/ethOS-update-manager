@@ -36,6 +36,7 @@ def counter(k=4) :
 def main() : 
 
 	# prepare sys
+	os.system("clear")
 	os.system("cd /home/ethos/")
 	os.system("chmod +x /home/ethos/ethOS-update-manager/launch.py")
 	os.system("chmod +x /home/ethos/ethOS-update-manager/src/main.py")
