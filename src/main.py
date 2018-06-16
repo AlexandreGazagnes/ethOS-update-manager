@@ -25,7 +25,7 @@ logging.basicConfig(	level=logging.INFO,
 						format='%(levelname)s %(message)s')
 
 
-# Consts
+# consts
 
 SLEEPER 	= 10 * 60 		# IN SECONDS think to multiply by 60 for minutes ;)
 MIN_HASH 	= 49			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
@@ -34,7 +34,7 @@ LATENCY 	= True			# if LATENCY additionnal sleeper added to give time
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
 
 
-# Functions
+# functions
 
 def not_the_first_process_launched() : 
 	""" check if on porcess is already running"""
@@ -150,7 +150,7 @@ def _warning(msg) :
 	"""over write warning """
 	
 	msg = _time() + " : " + msg
-	_warning(msg)
+	warning(msg)
 
 
 def _info(msg) :

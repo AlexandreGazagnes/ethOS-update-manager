@@ -68,7 +68,7 @@ def main() :
 	time.sleep(1)
 	print()
 	for i in range(4, 0, -1) : 
-		print(str(i-1))
+		print(str(i-1), end=" --> ")
 		time.sleep(1)
 
 
