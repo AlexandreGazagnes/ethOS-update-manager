@@ -42,11 +42,10 @@ LATENCY 	= True			# if LATENCY additionnal sleeper added to give time
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
 
 
+ENABLE_TELEGRAM_MSG = True
 TOKEN = "5464657szzs33:AAHXfOQb5zYqVHShspgomsCwA"
 CHAT_ID = "49zsz24419"
 RIG = "Rig"
-
-
 
 
 # functions
@@ -208,23 +207,23 @@ def reboot() :
 				raise ValueError("auto reboot impossible")
 
 
-def _warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID) : 
+def _warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=ENABLE_TELEGRAM_MSG) : 
 	"""over write warning """
-	
-	w_msg = _time() + " : " + msg
-	warning(w_msg)
 
-	send_bot(bot_message=msg, rig , token, chat_id)
+	if telegram : send_bot(bot_message=msg, rig , token, chat_id)
+
+	msg = _time() + " : " + msg
+	warning(msg)
 
 
 def _info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID):
 	"""over write info """
 
-	i_msg = _time() + " : " + msg
-	info(i_msg) 
-	
-	send_bot(bot_message=msg, rig , token, chat_id)
+	if telegram : send_bot(bot_message=msg, rig , token, chat_id)
 
+	msg = _time() + " : " + msg
+	info(msg) 
+	
 
 # main
 
