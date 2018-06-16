@@ -214,7 +214,7 @@ def reboot() :
 def _warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=ENABLE_TELEGRAM_MSG) : 
 	"""over write warning """
 
-	if telegram : send_bot(bot_message=msg, rig , token, chat_id)
+	if telegram : send_bot(msg, rig , token, chat_id)
 
 	msg = _time() + " : " + msg
 	warning(msg)
@@ -223,7 +223,7 @@ def _warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=ENABLE_TELEGR
 def _info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=ENABLE_TELEGRAM_MSG):
 	"""over write info """
 
-	if telegram : send_bot(bot_message=msg, rig , token, chat_id)
+	if telegram : send_bot(msg, rig , token, chat_id)
 
 	msg = _time() + " : " + msg
 	info(msg) 
