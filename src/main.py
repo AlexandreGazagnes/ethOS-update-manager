@@ -31,10 +31,10 @@ logging.basicConfig(	level=logging.INFO,
 
 # consts
 
-SLEEPER 	= 10	 		# IN SECONDS think to multiply by 60 for minutes ;)
+SLEEPER 	= 10 	 		# IN SECONDS think to multiply by 60 for minutes ;)
 MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
-JET_LAG 	= 1				# depends of your local/sys time 
-LATENCY 	= False			# if LATENCY additionnal sleeper added to give time 
+JET_LAG 	= 7				# depends of your local/sys time 
+LATENCY 	= False		# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
 
 
@@ -119,7 +119,7 @@ def data_from_cmd(cmd="show stats", fake_mode=False, fake_cmd="cat", fake_file=N
 
 		else : 
 			warning("error unknown --> Please debug  MANUALY!")
-			li = li = os.popen("{} {}".format(fake_cmd, fake_file))
+			li = os.popen("{} {}".format(fake_cmd, fake_file))
 	
 
 	# list operations
