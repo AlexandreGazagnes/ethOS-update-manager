@@ -43,7 +43,7 @@ LATENCY 	= False		# if LATENCY additionnal sleeper added to give time
 TELEGRAM_MODE 	= True
 TOKEN 			= "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
 CHAT_ID 		= "487924419"
-RIG 			= "Lenovo"
+RIG 			= "Bold_Eagle"
 
 
 # functions
