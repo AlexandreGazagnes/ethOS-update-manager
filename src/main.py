@@ -158,13 +158,12 @@ def _time(jet_lag=JET_LAG) :
 	return txt
 
 
-def send_bot(bot_message="", rig=RIG , token=TOKEN, chat_id=CHAT_ID):
+def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 	"""useful function to send a message to your bot in cli"""
 
 	debug("send_bot called")
 
-	msg = str(bot_message)
-	if not bot_message : 
+	if not str(msg) : 
 		msg = "error : bot_message : invalid argument"
 	
 	txt = urllib.parse.urlencode({"text":msg})
@@ -204,13 +203,13 @@ def reboot() :
 				raise ValueError("auto reboot impossible")
 
 
-def uptime() : 
+def _uptime() : 
 	"""record uptime """
 	
 	debug("uptime called")
 
 	uptime  = os.popen("uptime").readlines()[0].split(",")[0]
-	uptime = uptime.split("up")[1]
+	uptime = str(uptime.split("up")[1])
 
 	return uptime
 
@@ -220,7 +219,7 @@ def warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=ENABLE_TELEGRA
 
 	debug("warning called")
 
-	msg = rig + " up " + str(uptime()) + ": " + msg
+	msg = rig + " up" + _uptime() + "# " + msg
 	if telegram : send_bot(msg, token, chat_id)
 
 	msg = _time() + " : " + msg
@@ -232,14 +231,14 @@ def info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=ENABLE_TELEGRAM_
 
 	debug("info called")
 
-	if telegram : send_bot(msg, rig , token, chat_id)
+	# if telegram : send_bot(msg, token, chat_id)
 
-	msg = rig + " up " + str(uptime()) + ": " + msg
-	if telegram : send_bot(msg, token, chat_id)
+	# msg = rig + " up " + str(uptime()) + ": " + msg
+	# if telegram : send_bot(msg, token, chat_id)
 
-	msg = _time() + " : " + msg
+	# msg = _time() + " : " + msg
 
-	logging.info(msg) 
+	# logging.info(msg) 
 
 
 def debug(msg) : 
