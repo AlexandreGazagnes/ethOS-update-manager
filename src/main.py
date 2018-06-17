@@ -173,10 +173,11 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 	def __request(msg, token=token, chat_id=chat_id) : 
 
 		#txt = urllib.parse.urlencode(dict(text=msg))
+		logging.warning("\n\n")
 		logging.warning(msg)
-		
-		txt = msg
-		for i in [" ", "/", ":", ",", "#"] : 
+		logging.warning("\n\n")
+		txt = str(msg)
+		for i in [" ", "/", ":", ",", "#", "!"] : 
 		 	txt = txt.replace(i, "+")
 
 		# txt = "this is __request called"
@@ -279,8 +280,8 @@ def debug(msg) :
 def main() : 
 
 	# init logging
-	print("\n\n\n")
-	warning("init new session!")
+	logging.warning("\n\n\n")
+	warning("init new session")
 
 	# to avoid multiple short reboot 
 	time.sleep(SLEEPER)
