@@ -43,7 +43,7 @@ LATENCY 	= False			# if LATENCY additionnal sleeper added to give time
 TELEGRAM_MODE 	= True
 TOKEN 			= "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
 CHAT_ID 		= "487924419"
-RIG 			= "YourRig"
+RIG 			= "Lenovo"
 
 
 # functions
@@ -253,7 +253,7 @@ def debug(msg) :
 def main() : 
 
 	# init logging
-	warning("\n\n\n")
+	print("\n\n\n")
 	warning("init new session!")
 
 	# to avoid multiple short reboot 
