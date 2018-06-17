@@ -17,7 +17,9 @@ and MIN_HASH. You can of course use default settings
 
 # import 
 
-import os, time, logging, urllib.parse, urllib.request
+import os, time, logging
+from urllib.parse import urlencode
+from urllib.request import urlopen
 
 
 
