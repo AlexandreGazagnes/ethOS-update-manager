@@ -187,7 +187,10 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 		logging.warning("first __request failed, trying a second one")
 
 		try : 
-			__request("error from bot_message, invalid argument")
+			req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=ErrorCallingRequestAsNormal')
+
+			with urllib.request.urlopen(req) as f : 
+				none = f.read()
 
 		except Exception as e :
 			logging.warning(e) 
