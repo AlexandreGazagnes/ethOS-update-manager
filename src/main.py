@@ -17,11 +17,7 @@ and MIN_HASH. You can of course use default settings
 
 # import 
 
-import os, time, logging
-
-from logging import debug, warning, info
-
-from urllib.request import urlopen
+import os, time, logging, urllib
 
 
 
@@ -40,7 +36,6 @@ MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 JET_LAG 	= 1				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
-UPTIME=True
 
 
 ENABLE_TELEGRAM_MSG = True
@@ -54,7 +49,7 @@ RIG = "Rig"
 def not_the_first_process_launched() : 
 	""" check if on porcess is already running"""
 
-	_debug("not_the_first_process_launched called")
+	debug("not_the_first_process_launched called")
 
 	time.sleep(3)
 
@@ -69,7 +64,7 @@ def not_the_first_process_launched() :
 def search_and_autokill() : 
 	""" search pid of other instance and kill it"""
 
-	_debug("search_and_autokill called")
+	debug("search_and_autokill called")
 
 	time.sleep(3)
 
@@ -81,22 +76,22 @@ def search_and_autokill() :
 
 	l = len(pids)
 	if l  == 1 : 
-		_debug("good number of process")
+		debug("good number of process")
 	elif l > 1 : 
-		_warning("invalid number of process : {}, kill first one".format(pids))
+		warning("invalid number of process : {}, kill first one".format(pids))
 		try : 
 			os.system(str("kill " + pids[0]))
-			_warning("process killed")
+			warning("process killed")
 		except : 
-			_warning("autokill failed, please kill it MANUALY")
+			warning("autokill failed, please kill it MANUALY")
 	else : 
-		_warning("error unknown --> Please debug  MANUALY!")
+		warning("error unknown --> Please debug  MANUALY!")
 
 
 def data_from_cmd(cmd="show stats", fake_file=None) :
 	"""create a txt from a popen command, for ex "show stats" """ 
 
-	_debug("data_from_cmd called")
+	debug("data_from_cmd called")
 
 	# define default fake file
 	if not fake_file : 
@@ -105,17 +100,17 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 	# handle cmd result
 	li = os.popen(cmd).readlines()
 
-	_debug("command executed and handled")
+	debug("command executed and handled")
 	
 	if not li : 
 		res = os.system(cmd)
 
 		if res : 
-			_warning("command unknown --> simulation mode ON")
+			warning("command unknown --> simulation mode ON")
 			li = os.popen("cat {}".format(fake_file))
 
 		else : 
-			_warning("error unknown --> Please debug  MANUALY!")
+			warning("error unknown --> Please debug  MANUALY!")
 			li = os.popen("cat {}".format(fake_file))
 	
 
@@ -143,18 +138,18 @@ def return_hash(data, key="hash") :
 
 	try : 
 		hashrate = float(data[key])
-		_debug("good type 'float' of hash")
+		debug("good type 'float' of hash")
 		return hashrate
 	except : 
 		hashrate = str(data["hash"])
-		_warning("error reading 'hash' as a float for : {}".format(hashrate)) 
+		warning("error reading 'hash' as a float for : {}".format(hashrate)) 
 		return hashrate
 
 
 def _time(jet_lag=JET_LAG) : 
 	""" give local time in personal str format"""
 	
-	_debug("_time called") 
+	debug("_time called") 
 	
 	t = time.localtime()
 	txt = "{:0>2}/{:0>2}/{:0>2} {:0>2}:{:0>2}".format(
@@ -166,39 +161,34 @@ def _time(jet_lag=JET_LAG) :
 def send_bot(bot_message="", rig=RIG , token=TOKEN, chat_id=CHAT_ID):
 	"""useful function to send a message to your bot in cli"""
 
-	_debug("send_bot called")
+	debug("send_bot called")
 
 	msg = str(bot_message)
 	if not bot_message : 
 		msg = "error : bot_message : invalid argument"
-
-
-	msg = str(RIG) + ": "+ msg
 	
-	URL_ENCODING = [(" ", "%20"), ("#", "%23"), ("\n", "%0A")]
-	for i, j in URL_ENCODING : 
-		msg = msg.replace(i,j)
+	txt = urllib.parse.urlencode({"text":msg})
 	
 	req = 	 'https://api.telegram.org/bot' + token \
 					+ '/sendMessage?chat_id=' + chat_id \
-					+ '&parse_mode=Markdown&text=' + msg
+					+ '&parse_mode=Markdown&' + txt
 
-	with urlopen(req) as f : none = f.read()
+	with urllib.request.urlopen(req) as f : none = f.read()
 
 
 def reboot() : 
 	"""reboot process from ethos cmd 'r' to 'reboot' to 'sudo reboot' """
 
-	_debug("reboot called")
+	debug("reboot called")
 
 	res = os.system("r")
 	if res : 
 
-		_warning("previous command fail 'r', trying 'reboot' ")
+		warning("previous command fail 'r', trying 'reboot' ")
 		res = os.system("reboot")
 
 		if res : 
-			_warning("previous command fail 'reboot', trying 'sudo reboot' ")
+			warning("previous command fail 'reboot', trying 'sudo reboot' ")
 			res = os.system("sudo reboot")
 
 			if res : 
@@ -210,39 +200,37 @@ def reboot() :
 					"##################################################\n"
 					"\n\n")
 				
-				_warning(msg)
+				warning(msg)
 				raise ValueError("auto reboot impossible")
 
 
-def uptime(u=UPTIME) : 
+def _uptime() : 
 	"""record uptime """
 	
-	_debug("uptime called")
+	debug("uptime called")
 
-	if u : 
-		uptime  = os.popen("uptime").readlines()[0].split(",")[0]
-		uptime = uptime.split("up")[1]
+	uptime  = os.popen("uptime").readlines()[0].split(",")[0]
+	uptime = uptime.split("up")[1]
 
-		_info("uptime at{}".format(uptime))
+	return uptime
 
 
-def _warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=ENABLE_TELEGRAM_MSG) : 
+def warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=ENABLE_TELEGRAM_MSG) : 
 	"""over write warning """
 
-	_debug("warning called")
+	debug("warning called")
 
-	uptime()
-
-	if telegram : send_bot(msg, rig , token, chat_id)
+	msg = rig + " up at " + str(uptime()) + ": " + msg
+	if telegram : send_bot(msg, token, chat_id)
 
 	msg = _time() + " : " + msg
 	logging.warning(msg)
 
 
-def _info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=ENABLE_TELEGRAM_MSG):
+def info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=ENABLE_TELEGRAM_MSG):
 	"""over write info """
 
-	_debug("info called")
+	debug("info called")
 
 	if telegram : send_bot(msg, rig , token, chat_id)
 
@@ -250,7 +238,7 @@ def _info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=ENABLE_TELEGRAM
 	logging.info(msg) 
 
 
-def _debug(msg) : 
+def debug(msg) : 
 	"""over write debug """
 
 	logging.debug(msg)
@@ -262,7 +250,7 @@ def main() :
 
 	# init logging
 	warning("\n\n\n")
-	_warning("init new session!")
+	warning("init new session!")
 
 	# to avoid multiple short reboot 
 	time.sleep(SLEEPER)
@@ -273,7 +261,7 @@ def main() :
 	# main loop
 	while True :
 
-		_debug("main loop entrance") 
+		debug("main loop entrance") 
 		
 		# proceed 
 		data = data_from_cmd() 	# extract data from cmd 
@@ -283,14 +271,14 @@ def main() :
 		if isinstance(hashrate, float) : 
 			
 			if hashrate < MIN_HASH : 
-				_warning("rebooting due to hashrate : {}\n".format(hashrate))
+				warning("rebooting due to hashrate : {}\n".format(hashrate))
 				reboot()
 
 			else : 
-				_debug("hashrate OK")
+				debug("hashrate OK")
 
 		else : 
-			_warning("invalid hrate type {} \n".format(type(hashrate)))
+			warning("invalid hrate type {} \n".format(type(hashrate)))
 
 		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
