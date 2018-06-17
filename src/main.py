@@ -182,6 +182,8 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 
 		req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(txt))
 
+		logging.warning(req)
+		
 		with urllib.request.urlopen(req) as f : 
 			none = f.read()
 	
