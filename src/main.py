@@ -171,17 +171,21 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 
 	debug("send_bot called")
 
-	if not str(msg) : 
-		msg = "error : bot_message : invalid argument"
+	def request(msg, token=token, chat_id=chat_id) : 
+		txt = urllib.parse.urlencode({"text":msg})
 	
-	txt = urllib.parse.urlencode({"text":msg})
-	
-	req = 	 'https://api.telegram.org/bot' + token \
+		req = 	 'https://api.telegram.org/bot' + token \
 					+ '/sendMessage?chat_id=' + chat_id \
 					+ '&parse_mode=Markdown&' + txt
 
-	with urllib.request.urlopen(req) as f : none = f.read()
-
+		with urllib.request.urlopen(req) as f : none = f.read()
+	
+	try : 
+		request(msg)
+	except : 
+		try : request("error from bot_message, invalid argument")
+		except : logging.warning("error send_bot : bad request")
+	
 
 def reboot() : 
 	"""reboot process from ethos cmd 'r' to 'reboot' to 'sudo reboot' """

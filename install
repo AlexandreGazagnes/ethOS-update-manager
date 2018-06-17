@@ -69,8 +69,8 @@ def main() :
 	print(	"\n\n"
 			"######################################################\n"
 			"######################################################\n\n\n"
-			"-->  your program is now installed and functional <--\n\n\n"
-			"-->   for full install, system will reboot in 3s  <--\n\n\n"
+			"-->  your program is now installed & functional   <--\n\n\n"
+			"-->  for full install, system will reboot in 3s   <--\n\n\n"
 			"######################################################\n"
 			"######################################################\n"
 			"\n\n")
