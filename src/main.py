@@ -204,7 +204,7 @@ def reboot() :
 				raise ValueError("auto reboot impossible")
 
 
-def _uptime() : 
+def uptime() : 
 	"""record uptime """
 	
 	debug("uptime called")
@@ -220,7 +220,7 @@ def warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=ENABLE_TELEGRA
 
 	debug("warning called")
 
-	msg = rig + " up at " + str(uptime()) + ": " + msg
+	msg = rig + " up " + str(uptime()) + ": " + msg
 	if telegram : send_bot(msg, token, chat_id)
 
 	msg = _time() + " : " + msg
@@ -234,7 +234,11 @@ def info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=ENABLE_TELEGRAM_
 
 	if telegram : send_bot(msg, rig , token, chat_id)
 
+	msg = rig + " up " + str(uptime()) + ": " + msg
+	if telegram : send_bot(msg, token, chat_id)
+
 	msg = _time() + " : " + msg
+
 	logging.info(msg) 
 
 
