@@ -175,10 +175,12 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 		#txt = urllib.parse.urlencode(dict(text=msg))
 		logging.warning("\n\n")
 		logging.warning(msg)
-		logging.warning("\n\n")
-		txt = str(msg)
-		for i in [" ", "/", ":", ",", "#", "!"] : 
+
+		txt = str(msg).strip()
+		for i in [" ", "/", ":", ",", "#", "!", "_"] : 
 		 	txt = txt.replace(i, "+")
+		logging.warning(txt)
+		logging.warning("\n\n")
 
 		# txt = "this is __request called"
 		req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(txt))
