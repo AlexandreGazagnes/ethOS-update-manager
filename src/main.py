@@ -174,20 +174,18 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 
 		txt = str(msg).strip()
 		
-		# URL = [(" ","+"), ("/","%2F"), (":","%3A"), (",","%2C"), ("#","%23"), ("!","%21"), ("_","%5F")] 
-		URL = [(i, "%20") for i in [" ", "/", ":", "," ,"#", "!", "_"]]
+		# # URL = [(" ","+"), ("/","%2F"), (":","%3A"), (",","%2C"), ("#","%23"), ("!","%21"), ("_","%5F")] 
+		# URL = [(i, "+") for i in [" ", "/", ":", "," ,"#", "!", "_"]]
 
-		for i,j in URL : 
-			txt = txt.replace(i, j)
+		# for i,j in URL : 
+		# 	txt = txt.replace(i, j)
 
 		logging.warning(txt)
 		req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(txt))
 
 		logging.warning(req)
 
-		with urllib.request.urlopen(req) as f : 
-			none = f.read()
-	
+		urllib.request.urlopen(req)	
 	try : 
 		__request(msg)	
 	
