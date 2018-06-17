@@ -31,7 +31,7 @@ logging.basicConfig(	level=logging.INFO,
 
 # consts
 
-SLEEPER 	= 10 * 60 		# IN SECONDS think to multiply by 60 for minutes ;)
+SLEEPER 	= 10	 		# IN SECONDS think to multiply by 60 for minutes ;)
 MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 JET_LAG 	= 1				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
@@ -39,9 +39,9 @@ LATENCY 	= True			# if LATENCY additionnal sleeper added to give time
 
 
 ENABLE_TELEGRAM_MSG = True
-TOKEN = "5464657szzs33:AAHXfOQb5zYqVHShspgomsCwA"
-CHAT_ID = "49zsz24419"
-RIG = "Rig"
+TOKEN = "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
+CHAT_ID = "487924419"
+RIG = "YourRig"
 
 
 # functions
@@ -253,7 +253,7 @@ def debug(msg) :
 def main() : 
 
 	# init logging
-	warning("\n\n\n")
+	#print("\n\n\n")
 	warning("init new session!")
 
 	# to avoid multiple short reboot 
