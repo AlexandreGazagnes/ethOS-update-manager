@@ -172,17 +172,14 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 
 	def __request(msg, token=token, chat_id=chat_id) : 
 
-		#txt = urllib.parse.urlencode(dict(text=msg))
-		logging.warning("\n\n")
-		logging.warning(msg)
-
 		txt = str(msg).strip()
-		for i in [" ", "/", ":", ",", "#", "!", "_"] : 
-		 	txt = txt.replace(i, "+")
-		logging.warning(txt)
-		logging.warning("\n\n")
+		
+		URL = [(" ","+"), ("/","+"), (":","+"), (",","+"), ("#","+"), ("!","+"), ("_","+")]
+		for i,j in URL : 
+			txt = txt.replace(i, j)
 
-		# txt = "this is __request called"
+		logging.warning(txt)
+
 		req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(txt))
 
 		with urllib.request.urlopen(req) as f : 
@@ -192,18 +189,15 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 		__request(msg)	
 	
 	except Exception as e:
-		logging.warning(e)
-		logging.warning("first __request failed, trying a second one")
+		logging.warning(e) ; logging.warning("first __request failed, trying a second one")
 
 		try : 
 			req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=Error+Calling+Request+As+Normal')
 
-			with urllib.request.urlopen(req) as f : 
-				none = f.read()
+			with urllib.request.urlopen(req) as f : none = f.read()
 
 		except Exception as e :
-			logging.warning(e) 
-			logging.warning("error send_bot, bad request")
+			logging.warning(e) ; logging.warning("error send_bot, bad request")
 
 
 def reboot() : 
