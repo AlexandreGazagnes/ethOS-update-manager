@@ -29,10 +29,10 @@ logging.basicConfig(	level=logging.INFO,
 
 # consts
 
-SLEEPER 	= 10 	 		# IN SECONDS think to multiply by 60 for minutes ;)
+SLEEPER 	= 10 *60		# IN SECONDS think to multiply by 60 for minutes ;)
 MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 JET_LAG 	= 7				# depends of your local/sys time 
-LATENCY 	= False		# if LATENCY additionnal sleeper added to give time 
+LATENCY 	= True		# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
 
 
@@ -179,7 +179,7 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 			txt = txt.replace(i, j)
 
 		req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(txt))
-		urllib.request.urlopen(req)	
+			urllib.request.urlopen(req)	
 
 	try : 
 		__request(msg)	
