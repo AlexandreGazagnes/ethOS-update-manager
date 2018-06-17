@@ -174,12 +174,14 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 
 		txt = str(msg).strip()
 		
-		URL = [(" ","%20"), ("/","%2F"), (":","%3A"), (",","%2C"), ("#","%23"), ("!","%21"), ("_","%5F")]
+		# URL = [(" ","+"), ("/","%2F"), (":","%3A"), (",","%2C"), ("#","%23"), ("!","%21"), ("_","%5F")]
+		URL  = [" ", "/", ":", "," ,"#", "!", "_"]
+		URL = [(i, "+") for i in URL]
+
 		for i,j in URL : 
 			txt = txt.replace(i, j)
 
 		logging.warning(txt)
-
 		req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(txt))
 
 		logging.warning(req)
@@ -194,7 +196,8 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 		logging.warning(e) ; logging.warning("first __request failed, trying a second one")
 
 		try : 
-			req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=Error+Calling+Request+As+Normal')
+			txt = "Error+Calling+Request+As+Normal"
+			req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(txt))
 
 			with urllib.request.urlopen(req) as f : none = f.read()
 
@@ -237,6 +240,7 @@ def _uptime() :
 
 	uptime  = os.popen("uptime").readlines()[0].split(",")[0]
 	uptime = str(uptime.split("up")[1])
+	uptime = uptime.replace(":", "h")
 
 	return uptime
 
