@@ -17,11 +17,7 @@ and MIN_HASH. You can of course use default settings
 
 # import 
 
-import os, time, logging
-from urllib.parse import urlencode
-from urllib.request import urlopen
-
-
+import os, time, logging, urllib.parse, urllib.request
 
 
 # logging 
@@ -177,17 +173,15 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 		txt = str(msg).strip()
 		
 		# # URL = [(" ","+"), ("/","%2F"), (":","%3A"), (",","%2C"), ("#","%23"), ("!","%21"), ("_","%5F")] 
-		# URL = [(i, "+") for i in [" ", "/", ":", "," ,"#", "!", "_"]]
+		URL = [(i, "+") for i in [" ", "/", ":", "," ,"#", "!", "_"]]
 
-		# for i,j in URL : 
-		# 	txt = txt.replace(i, j)
+		for i,j in URL : 
+			txt = txt.replace(i, j)
 
-		logging.warning(txt)
 		req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(txt))
+		with urllib.request.urlopen(req) as f : 
+			none = f.read(f)	
 
-		logging.warning(req)
-
-		urlopen(req)	
 	try : 
 		__request(msg)	
 	
@@ -195,11 +189,8 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 		logging.warning(e) ; logging.warning("first __request failed, trying a second one")
 
 		try : 
-			txt = "Error+Calling+Request+As+Normal"
-			req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(txt))
-
-			urlopen(req)
-
+			__request("Error+Calling+Request+As+Normal")
+			
 		except Exception as e :
 			logging.warning(e) ; logging.warning("error send_bot, bad request")
 
