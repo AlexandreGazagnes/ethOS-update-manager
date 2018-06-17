@@ -174,7 +174,7 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 
 		txt = str(msg).strip()
 		
-		URL = [(" ","+"), ("/","+"), (":","+"), (",","+"), ("#","+"), ("!","+"), ("_","+")]
+		URL = [(" ","+"), ("/","%2F"), (":","%3A"), (",","%2C"), ("#","%23"), ("!","%21"), ("_","%5F")]
 		for i,j in URL : 
 			txt = txt.replace(i, j)
 
