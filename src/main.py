@@ -87,7 +87,7 @@ def search_and_autokill() :
 		except : 
 			warning("autokill failed, please kill it MANUALY")
 	else : 
-		warning("error unknown --> Please debug  MANUALY!")
+		warning("error unknown, please debug  MANUALY!")
 
 
 def data_from_cmd(cmd="show stats", fake_mode=False, fake_cmd="cat", fake_file=None) :
@@ -104,9 +104,8 @@ def data_from_cmd(cmd="show stats", fake_mode=False, fake_cmd="cat", fake_file=N
 		debug("real mode")
 		li = os.popen(cmd).readlines()
 	else : 
-		debug("test mode")
+		warning("fake_mode, simulation mode ON")
 		li = os.popen("{} {}".format(fake_cmd, fake_file))
-
 
 	debug("command executed and handled")
 	
@@ -114,11 +113,11 @@ def data_from_cmd(cmd="show stats", fake_mode=False, fake_cmd="cat", fake_file=N
 		res = os.system(cmd)
 
 		if res : 
-			warning("command unknown --> simulation mode ON")
+			warning("command unknown, simulation mode ON")
 			li = os.popen("{} {}".format(fake_cmd, fake_file))
 
 		else : 
-			warning("error unknown --> Please debug  MANUALY!")
+			warning("error unknown, Please debug  MANUALY!")
 			li = os.popen("{} {}".format(fake_cmd, fake_file))
 	
 
@@ -150,7 +149,7 @@ def return_hash(data, key="hash") :
 		return hashrate
 	except : 
 		hashrate = str(data["hash"])
-		warning("error reading 'hash' as a float for : {}".format(hashrate)) 
+		warning("error reading 'hash' as a float for {}".format(hashrate)) 
 		return hashrate
 
 
@@ -182,10 +181,18 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 	
 	try : 
 		__request(msg)	
-	except : 
-		try : __request("error from bot_message, invalid argument")
-		except : logging.warning("error send_bot : bad request")
 	
+	except Exception as e:
+		logging.warning(e)
+		logging.warning("first __request failed, trying a second one")
+
+		try : 
+			__request("error from bot_message, invalid argument")
+
+		except Exception as e :
+			logging.warning(e) 
+			logging.warning("error send_bot, bad request")
+
 
 def reboot() : 
 	"""reboot process from ethos cmd 'r' to 'reboot' to 'sudo reboot' """
@@ -231,10 +238,11 @@ def warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=TELEGRAM_MODE)
 
 	debug("warning called")
 
-	msg = rig + " (up" + _uptime() + ") : " + msg
-	if telegram : send_bot(msg, token, chat_id)
+	msg = rig + " up" + _uptime() + " " + msg
+	if telegram : 
+		send_bot(msg, token, chat_id)
 
-	msg = _time() + " : " + msg
+	msg = _time() + " " + msg
 	logging.warning(msg)
 
 
@@ -243,12 +251,11 @@ def info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=TELEGRAM_MODE):
 
 	debug("info called")
 
-	debug("warning called")
+	msg = rig + " up" + _uptime() + " " + msg
+	if telegram : 
+		send_bot(msg, token, chat_id)
 
-	msg = rig + " (up" + _uptime() + ") : " + msg
-	if telegram : send_bot(msg, token, chat_id)
-
-	msg = _time() + " : " + msg
+	msg = _time() + " " + msg
 	logging.info(msg)
 
 
@@ -285,14 +292,14 @@ def main() :
 		if isinstance(hashrate, float) : 
 			
 			if hashrate < MIN_HASH : 
-				warning("rebooting due to hashrate : {}\n".format(hashrate))
+				warning("rebooting due to hashrate {}\n".format(hashrate))
 				reboot()
 
 			else : 
 				debug("hashrate OK")
 
 		else : 
-			warning("invalid hrate type {} \n".format(type(hashrate)))
+			warning("invalid hrate type {}\n".format(type(hashrate)))
 
 		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
