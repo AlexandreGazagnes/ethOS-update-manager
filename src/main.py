@@ -171,19 +171,19 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 
 	debug("send_bot called")
 
-	def request(msg, token=token, chat_id=chat_id) : 
-		txt = urllib.parse.urlencode({"text":msg})
-	
-		req = 	 'https://api.telegram.org/bot' + token \
-					+ '/sendMessage?chat_id=' + chat_id \
-					+ '&parse_mode=Markdown&' + txt
+	def __request(msg, token=token, chat_id=chat_id) : 
 
-		with urllib.request.urlopen(req) as f : none = f.read()
+		txt = urllib.parse.urlencode(dict(text=msg))
+	
+		req = 'https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&' + str(txt)
+
+		with urllib.request.urlopen(req) as f : 
+			none = f.read()
 	
 	try : 
-		request(msg)
+		__request(msg)	
 	except : 
-		try : request("error from bot_message, invalid argument")
+		try : __request("error from bot_message, invalid argument")
 		except : logging.warning("error send_bot : bad request")
 	
 
