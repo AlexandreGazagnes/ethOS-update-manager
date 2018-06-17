@@ -173,6 +173,7 @@ def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
 	def __request(msg, token=token, chat_id=chat_id) : 
 
 		#txt = urllib.parse.urlencode(dict(text=msg))
+		logging.warning(msg)
 		
 		txt = msg
 		for i in [" ", "/", ":", ",", "#"] : 
