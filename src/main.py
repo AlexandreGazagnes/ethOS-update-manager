@@ -90,7 +90,7 @@ def search_and_autokill() :
 		warning("error unknown --> Please debug  MANUALY!")
 
 
-def data_from_cmd(cmd="show stats", fake_file=None) :
+def data_from_cmd(cmd="show stats", fake_mode=False, fake_cmd="cat", fake_file=None) :
 	"""create a txt from a popen command, for ex "show stats" """ 
 
 	debug("data_from_cmd called")
@@ -100,7 +100,13 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 		fake_file = "/home/ethos/ethOS-update-manager/.show_stats.txt"
 	
 	# handle cmd result
-	li = os.popen(cmd).readlines()
+	if not fake_mode : 
+		debug("real mode")
+		li = os.popen(cmd).readlines()
+	else : 
+		debug("test mode")
+		li = os.popen("{} {}".format(fake_cmd, fake_file))
+
 
 	debug("command executed and handled")
 	
@@ -109,11 +115,11 @@ def data_from_cmd(cmd="show stats", fake_file=None) :
 
 		if res : 
 			warning("command unknown --> simulation mode ON")
-			li = os.popen("cat {}".format(fake_file))
+			li = os.popen("{} {}".format(fake_cmd, fake_file))
 
 		else : 
 			warning("error unknown --> Please debug  MANUALY!")
-			li = os.popen("cat {}".format(fake_file))
+			li = li = os.popen("{} {}".format(fake_cmd, fake_file))
 	
 
 	# list operations
@@ -288,7 +294,7 @@ def main() :
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
 
 		# DELETE, JUST FOR TESTS
-		info("new loop!!!")
+		# info("new loop!!!")
 
 if __name__ == '__main__':
 	main()
