@@ -34,14 +34,16 @@ logging.basicConfig(	level=logging.INFO,
 SLEEPER 	= 10	 		# IN SECONDS think to multiply by 60 for minutes ;)
 MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 JET_LAG 	= 1				# depends of your local/sys time 
-LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
+LATENCY 	= False			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
 
 
-ENABLE_TELEGRAM_MSG = True
-TOKEN = "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
-CHAT_ID = "487924419"
-RIG = "YourRig"
+# telegram params
+
+TELEGRAM_MODE 	= True
+TOKEN 			= "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
+CHAT_ID 		= "487924419"
+RIG 			= "YourRig"
 
 
 # functions
@@ -214,31 +216,30 @@ def _uptime() :
 	return uptime
 
 
-def warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=ENABLE_TELEGRAM_MSG) : 
+def warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=TELEGRAM_MODE) : 
 	"""over write warning """
 
 	debug("warning called")
 
-	msg = rig + " up" + _uptime() + "# " + msg
+	msg = rig + " (up" + _uptime() + ") : " + msg
 	if telegram : send_bot(msg, token, chat_id)
 
 	msg = _time() + " : " + msg
 	logging.warning(msg)
 
 
-def info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=ENABLE_TELEGRAM_MSG):
+def info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=TELEGRAM_MODE):
 	"""over write info """
 
 	debug("info called")
 
-	# if telegram : send_bot(msg, token, chat_id)
+	debug("warning called")
 
-	# msg = rig + " up " + str(uptime()) + ": " + msg
-	# if telegram : send_bot(msg, token, chat_id)
+	msg = rig + " (up" + _uptime() + ") : " + msg
+	if telegram : send_bot(msg, token, chat_id)
 
-	# msg = _time() + " : " + msg
-
-	# logging.info(msg) 
+	msg = _time() + " : " + msg
+	logging.info(msg)
 
 
 def debug(msg) : 
@@ -252,7 +253,7 @@ def debug(msg) :
 def main() : 
 
 	# init logging
-	#print("\n\n\n")
+	warning("\n\n\n")
 	warning("init new session!")
 
 	# to avoid multiple short reboot 
@@ -286,6 +287,8 @@ def main() :
 		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
 
+		# DELETE, JUST FOR TESTS
+		info("new loop!!!")
 
 if __name__ == '__main__':
 	main()
