@@ -21,7 +21,7 @@ AUTO_REBOOT = True			# enable auto reboot if min hashrate threshold reached
 JET_LAG 	= 8				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
-VAR_FOLDER 	= "/home/ethos/ethOs-update-manager/src/var"
+VAR_FOLDER 	= "/home/ethos/ethOS-update-manager/src/var"
 
 
 # telegram params
