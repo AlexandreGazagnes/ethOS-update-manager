@@ -254,7 +254,7 @@ def reboot() :
 def _uptime() : 
 	"""record uptime """
 	
-	debug("uptime called")
+	logging.debug("uptime called")
 
 	uptime  = os.popen("uptime").readlines()[0].split(",")[0]
 	uptime = str(uptime.split("up")[1])
@@ -263,12 +263,13 @@ def _uptime() :
 	return uptime
 
 
-def warning(msg, rig=RIG, t = _uptime(), telegram=TELEGRAM_MODE) : 
+def warning(msg, rig=RIG, telegram=TELEGRAM_MODE) : 
 	"""over write warning """
 
 	debug("warning called")
 
-	msg = rig + " up" + t + " " + msg
+	msg = rig + " up" + _uptime() + " " + msg
+	
 	if telegram : 
 		send_bot(msg)
 
