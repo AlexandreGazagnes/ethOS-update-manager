@@ -45,7 +45,7 @@ def var_manager(filename, mode, var=None, folder=VAR_FOLDER) :
 			pass
 		return res
 
-	if mode == "i" : 
+	elif mode == "i" : 
 		with open(folder+filename, "r") as f : res = f.read()
 		try : 
 			res = str(int(res) + 1)
@@ -53,7 +53,7 @@ def var_manager(filename, mode, var=None, folder=VAR_FOLDER) :
 		except : 
 			raise ValueError("incrementation not possible, txt/bin format confusion")
 
-		elif mode == "w" : 
+	elif mode == "w" : 
 		with open(folder + filename, mode) as f : f.write(str(var))
 		return 1
 
@@ -73,7 +73,7 @@ def var_manager(filename, mode, var=None, folder=VAR_FOLDER) :
 		with open(folder + filename, mode) as f : pickle.dump(var, f)
 		return 1
 
-	if mode == "ib" : 
+	elif  mode == "ib" : 
 		with open(folder+filename, "rb") as f : res = pickle.load(f)
 		try : 
 			res = int(res) + 1
@@ -81,6 +81,8 @@ def var_manager(filename, mode, var=None, folder=VAR_FOLDER) :
 		except : 
 			raise ValueError("incrementation not possible, txt/bin format confusion")
 
+	else : 
+		raise ValueError("Fatal Error")
 
 def var_list(folder=VAR_FOLDER): 
 	""" """ 
