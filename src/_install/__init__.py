@@ -91,7 +91,8 @@ def main_title():
 
 def system_var_title() : 
 	"""" """
-
+	os.system("clear")
+	print()
 	print()
 	print("       Set system variables ")
 	print("###################################")
@@ -102,11 +103,14 @@ def system_var_title() :
 			"You will have to set SLEEPER, LAP_STAMP, MIN_HASH, AUTO_REBOOT\n"
 			"JET_LAG and LATENCY\n"
 			"everything will be explained, let you drive\n")
-
+	print()
+	print()
 
 def telegram_var_title() : 
 	""" """
-	
+
+	os.system("clear")
+	print()
 	print()
 	print("       Set telegram variables ")
 	print("###################################")
@@ -116,6 +120,8 @@ def telegram_var_title() :
 	print(	"We are settings first all telegram variables\n"
 			"You will have to set TELEGRAM_MODE, TOKEN, CHAT_ID and RIG\n"
 			"everything will be explained, let you drive\n")
+	print()
+	print()
 
 
 def write_alias() : 
@@ -141,6 +147,9 @@ def write_autolaunch() :
 def reboot() : 
 	"""auto reboot"""
 
+	os.system("clear")
+	print()
+	print()
 	# info reboot
 	print(	"\n\n"
 			"######################################################\n"
