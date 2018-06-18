@@ -70,11 +70,8 @@ def main_title():
 	"""print title and intro for install manualy"""
 
 	os.system("clear")
-	print() #  empty line
-	print()
-	print()
-	print()
-
+	print() ; print() ; print()
+	print() ; print() ; print()
 	print("###################################")
 	print("#      ethOS-update-manager        ")
 	print("###################################")
@@ -96,10 +93,8 @@ def main_title():
 def system_var_title() : 
 	"""" """
 	os.system("clear")
-	print()
-	print()
-	print()
-	print()
+	print() ; print() ; print()
+	print() ; print() ; print()
 	print("###################################")
 	print("       Set system variables ")
 	print("###################################")
@@ -117,10 +112,8 @@ def telegram_var_title() :
 	""" """
 
 	os.system("clear")
-	print()
-	print()
-	print()
-	print()
+	print() ; print() ; print()
+	print() ; print() ; print()
 	print("###################################")
 	print("       Set telegram variables ")
 	print("###################################")
@@ -158,13 +151,10 @@ def reboot() :
 	"""auto reboot"""
 
 	os.system("clear")
-	print()
-	print()
-	print()
-	print()
+	print() ; print() ; print()
+	print() ; print() ; print()
 	# info reboot
-	print(	"\n\n"
-			"######################################################\n"
+	print(	"######################################################\n"
 			"######################################################\n\n\n"
 			"-->  your program is now installed & functional   <--\n\n\n"
 			"-->  for full install, system will reboot in 3s   <--\n\n\n"
