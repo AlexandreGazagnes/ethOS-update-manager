@@ -28,24 +28,25 @@ logging.basicConfig(	level=logging.INFO,
 
 # import 
 from src._main import * 
+from src._var import * 
 
 
-# consts
+# sys params
 
-SLEEPER 	= 10 * 60		# IN SECONDS think to multiply by 60 for minutes ;)
-LAP_STAMP	= 6 * 4			# update normal status each LAP_STAMP * SLEEPER sec
-MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
-JET_LAG 	= 8				# depends of your local/sys time 
-LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
-							# to rig to be fully operational (STRONGLY RECOMMANDED)
+# SLEEPER 	= 10 * 60		# IN SECONDS think to multiply by 60 for minutes ;)
+# LAP_STAMP	= 6 * 4			# update normal status each LAP_STAMP * SLEEPER sec
+# MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
+# JET_LAG 	= 8				# depends of your local/sys time 
+# LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
+# 							# to rig to be fully operational (STRONGLY RECOMMANDED)
 
 
 # telegram params
 
-TELEGRAM_MODE 	= True
-TOKEN 			= "YourToken"
-CHAT_ID 		= "YourChatId"
-RIG 			= "YourRigName"
+# TELEGRAM_MODE 	= False
+# TOKEN 			= "YourToken"
+# CHAT_ID 		= "YourChatId"
+# RIG 			= "YourRigName"
 
 
 # main

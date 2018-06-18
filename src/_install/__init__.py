@@ -10,6 +10,7 @@ install functions
 # import 
 
 import os, time
+from src._var import *
 
 
 # functions
@@ -34,6 +35,14 @@ def prepare_system():
 
 	os.system("clear")
 	os.system("cd /home/ethos/")
+	os.system("mkdir ethOS-update-manager/src/var/")
+
+	FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
+					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG"]
+	
+	for filename in : FILES
+		os.system("touch ethOS-update-manager/src/var/{}".format(filename))
+
 	os.system("chmod +x /home/ethos/ethOS-update-manager/launch.py")
 	os.system("chmod +x /home/ethos/ethOS-update-manager/src/main.py")
 
@@ -99,6 +108,5 @@ def reboot() :
 						"##################################################\n"
 						"##################################################\n"
 						"\n\n")
-
 
 
