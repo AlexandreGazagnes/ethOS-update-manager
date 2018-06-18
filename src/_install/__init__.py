@@ -38,7 +38,7 @@ def prepare_system():
 	os.system("mkdir ethOS-update-manager/src/var/")
 
 	FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
-					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG"]
+					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT"]
 	
 	for filename in : FILES
 		os.system("touch ethOS-update-manager/src/var/{}".format(filename))

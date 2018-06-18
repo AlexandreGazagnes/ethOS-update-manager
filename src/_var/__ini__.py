@@ -17,7 +17,8 @@ import pickle, random, urllib.request
 SLEEPER 	= 10 * 60		# IN SECONDS think to multiply by 60 for minutes ;)
 LAP_STAMP	= 6 * 4			# update normal status each LAP_STAMP * SLEEPER sec
 MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
-JET_LAG 	= 8			# depends of your local/sys time 
+AUTO_REBOOT = True			# enable auto reboot if min hashrate threshold reached
+JET_LAG 	= 8				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
 					# to rig to be fully operational (STRONGLY RECOMMANDED)
 VAR_FOLDER 	= "/home/ethos/ethOs-update-manager/src/var"
@@ -25,7 +26,7 @@ VAR_FOLDER 	= "/home/ethos/ethOs-update-manager/src/var"
 
 # telegram params
 
-TELEGRAM_MODE 		= False 	
+TELEGRAM_MODE 	= False 	
 TOKEN 			= "YourToken"
 CHAT_ID 		= "YourChatId"
 RIG 			= "YourRigName"
@@ -109,8 +110,7 @@ def var_read(folder=VAR_FOLDER, verbose=False) :
 			with open(folder+file, "rb") as f : var = str(pickle.load(f))
 			if verbose : 
 				print("bin format : ")
-			print(str(var))
-
+			print(str(var), str(type(var)))
 
 
 def handle_bool() : 
@@ -127,7 +127,6 @@ def handle_bool() :
 		else : 
 			ans = input("\nwrong input, expected 'y' or 'n'\n")
 			
-
 
 def handle_int(mi=0, ma=10000) : 
 	"""read a int response"""
@@ -146,7 +145,6 @@ def handle_int(mi=0, ma=10000) :
 			ans = input("\nwrong input, expected number between {} and {}\n".format(mi, ma))
 
 
-
 def set_system_var() : 
 	""" """
 
@@ -159,23 +157,35 @@ def set_system_var() :
 		var_manager("MIN_HASH", "wb", MIN_HASH)
 		var_manager("JET_LAG", "wb", JET_LAG)
 		var_manager("LATENCY", "wb", LATENCY)
+		var_manager("AUTO_REBOOT", "wb", AUTO_REBOOT)
+
 	else : 
-		print("\ndefine sleeper : ")
+		print("\nSLEEPER : the time of loop processing -- in seconds --, default value (STRONGLY RECOMMANDED) {}".format(SLEEPER))
+		print("define sleeper : ")
 		ans = handle_int(60, 60*60)
 		var_manager("SLEEPER", "wb", ans)
 
-		print("\ndefine lap_stamp : ")
+		print("\nLAP_STAMP : the rate of info logging (inform you if everything is fine), the more it is important the less you will be informed -- in lap --, default value (STRONGLY RECOMMANDED) {}".format(LAP_STAMP))
+		print("define lap_stamp : ")
 		ans = handle_int(1, 6*24)
 		var_manager("LAP_STAMP", "wb", ans)		
 
+		print("\nMIN_HASH : if your miner's hashrate fall bellow this threshold you will be warned and miner will reboot. Consider nb of GPUS x min GPU expected rate -- in global summed hashrate --, default value {}".format(MIN_HASH))
 		print("\ndefine min_hash : ")
 		ans = handle_int(15, 12 * 35)
 		var_manager("MIN_HASH", "wb", ans)
-		
-		print("\ndefine jet_lag : ")
+
+		print("\nAUTO_REBOOT : Boolean value -- y/n--, if set, your miner will reboot if MIN_HASH threshold is reached, default value (STRONGLY RECOMMANDED) {}".format(AUTO_REBOOT))		
+		print("\ndefine auto reboot : ")
+		ans = handle_bool()
+		var_manager("AUTO_REBOOT", "wb", ans)
+
+		print("\nJET_LAG : the time stamp -- in hours -- between your local time and your system time, default value {}".format(JET_LAG))		
+		print("define jet_lag : ")
 		ans = handle_int(-24, +24)
 		var_manager("JET_LAG", "wb", ans)
-		
+	
+		print("\nLATENCY : Boolean value -- y/n--, if set, your miner will have the time to wake up and to launch all GPUs before being scanned, default value (STRONGLY RECOMMANDED) {}".format(LATENCY))		
 		print("\ndefine latency : ")
 		ans = handle_bool()
 		var_manager("LATENCY", "wb", ans)
@@ -234,10 +244,11 @@ def load_system_var(folder = VAR_FOLDER) :
 	SLEEPER 	= var_manager("SLEEPER", "rb")
 	LAP_STAMP 	= var_manager("LAP_STAMP", "rb")
 	MIN_HASH 	= var_manager("MIN_HASH", "rb")
+	AUTO_REBOOT	= var_manager("AUTO_REBOOT", "rb")	
 	JET_LAG 	= var_manager("JET_LAG", "rb")
 	LATENCY 	= var_manager("LATENCY", "rb")
 
-	return SLEEPER, LAP_STAMP, MIN_HASH, LATENCY
+	return SLEEPER, LAP_STAMP, MIN_HASH, AUTO_REBOOT, LATENCY
 
 
 def load_telegram_var(folder=VAR_FOLDER) : 
