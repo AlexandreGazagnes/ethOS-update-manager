@@ -18,11 +18,13 @@ SLEEPER 	= 10 * 60		# IN SECONDS think to multiply by 60 for minutes ;)
 LAP_STAMP	= 6 * 4			# update normal status each LAP_STAMP * SLEEPER sec
 MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 AUTO_REBOOT = True			# enable auto reboot if min hashrate threshold reached
+AUTO_LAUNCH = True			# enable auto lauch at system boot
 JET_LAG 	= 8				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
-VAR_FOLDER 	= "/home/ethos/ethOS-update-manager/src/var/"
 
+VAR_FOLDER 	= "/home/ethos/ethOS-update-manager/src/var/"
+DATA_FOLDER	= "/home/ethos/ethOS-update-manager/data/"
 
 # telegram params
 
@@ -156,7 +158,8 @@ def set_system_var(mode="wb", folder=VAR_FOLDER) :
 		var_manager("SLEEPER", mode, SLEEPER, folder=folder)
 		var_manager("LAP_STAMP", mode, LAP_STAMP, folder=folder)
 		var_manager("MIN_HASH", mode, MIN_HASH, folder=folder)
-		var_manager("AUTO_REBOOT", mode, AUTO_REBOOT, folder=folder)		
+		var_manager("AUTO_REBOOT", mode, AUTO_REBOOT, folder=folder)
+		var_manager("AUTO_LAUNCH", mode, AUTO_LAUNCH, folder=folder)		
 		var_manager("JET_LAG", mode, JET_LAG, folder=folder)
 		var_manager("LATENCY", mode, LATENCY, folder=folder)
 
@@ -177,6 +180,12 @@ def set_system_var(mode="wb", folder=VAR_FOLDER) :
 		var_manager("MIN_HASH", mode, ans, folder=folder)
 
 		print("\n\nAUTO_REBOOT : Boolean value -- y/n--, if set, your miner will reboot if MIN_HASH threshold is reached, \ndefault value (STRONGLY RECOMMANDED) : {}".format("y"))		
+		print("\ndefine auto reboot : ")
+		ans = handle_bool()
+		if not ans : ans=0
+		var_manager("AUTO_REBOOT", mode, ans, folder=folder)
+
+		print("\n\nAUTO_LAUNCH: Boolean value -- y/n--, if set, your program will be launched automaticly when your miner will boot, \ndefault value (STRONGLY RECOMMANDED) : {}".format("y"))		
 		print("\ndefine auto reboot : ")
 		ans = handle_bool()
 		if not ans : ans=0
@@ -249,6 +258,7 @@ def confirm_connexion(token, chat_id, mi=100000, ma=999999) :
 	code = random.randint(mi, ma)
 
 	try : 
+		code = "connection+code+is+{}".format(code)
 		req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(code))	
 		urllib.request.urlopen(req)
 
@@ -281,11 +291,12 @@ def load_system_var(mode="rb", folder = VAR_FOLDER) :
 	SLEEPER 	= var_manager("SLEEPER", mode)
 	LAP_STAMP 	= var_manager("LAP_STAMP", mode)
 	MIN_HASH 	= var_manager("MIN_HASH", mode)
-	AUTO_REBOOT	= var_manager("AUTO_REBOOT", mode)	
+	AUTO_REBOOT	= var_manager("AUTO_REBOOT", mode)
+	AUTO_LAUNCH	= var_manager("AUTO_LAUNCH", mode)	
 	JET_LAG 	= var_manager("JET_LAG", mode)
 	LATENCY 	= var_manager("LATENCY", mode)
 
-	return SLEEPER, LAP_STAMP, MIN_HASH, AUTO_REBOOT, JET_LAG, LATENCY
+	return SLEEPER, LAP_STAMP, MIN_HASH, AUTO_REBOOT, AUTO_LAUNCH, JET_LAG, LATENCY
 
 
 def load_telegram_var(mode="rb", folder=VAR_FOLDER) : 

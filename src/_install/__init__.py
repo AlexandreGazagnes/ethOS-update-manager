@@ -42,7 +42,8 @@ def prepare_system(folder= "/home/ethos/ethOS-update-manager/src/var/"):
 		print("BE SURE FILES ALREADY EXISTS")
 
 	FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
-					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT"]
+					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT",
+					"AUTO_LAUNCH"	]
 	
 	for filename in FILES :
 		try : 
