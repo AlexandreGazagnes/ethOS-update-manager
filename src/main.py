@@ -29,10 +29,10 @@ logging.basicConfig(	level=logging.INFO,
 
 # consts
 
-SLEEPER 	= 10 *60		# IN SECONDS think to multiply by 60 for minutes ;)
+SLEEPER 	= 10 * 5		# IN SECONDS think to multiply by 60 for minutes ;)
 MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 JET_LAG 	= 7				# depends of your local/sys time 
-LATENCY 	= True		# if LATENCY additionnal sleeper added to give time 
+LATENCY 	= False			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
 
 
@@ -136,19 +136,40 @@ def data_from_cmd(cmd="show stats", fake_mode=False, fake_cmd="cat", fake_file=N
 	return data
 
 
-def return_hash(data, key="hash") : 
+def return_hash(data, key="hash", default_hashrate=187) : 
 	""" return hash float"""
 
 	debug ("return_hash called")
 
 	try : 
+
 		hashrate = float(data[key])
 		debug("good type 'float' of hash")
 		return hashrate
-	except : 
-		hashrate = str(data["hash"])
-		warning("error reading 'hash' as a float for {}".format(hashrate)) 
-		return hashrate
+	
+	except Exception as e: 
+
+		try : 
+			warning(e)
+			hashrate = str(data["hash"])
+			warning("error reading 'hash' as a float for {}".format(hashrate)) 
+			return hashrate
+	
+		except Exception as e: 
+			warning(e)
+			warning("Miner maybe not started yet")
+			os.system("allow")
+			os.system("minestart")
+			time.sleep(5*60) 
+			return default_hashrate
+
+
+def _jet_lag(h, jet_lag=JET_LAG) : 
+	"""be sue that h 24 format"""
+	
+	debug("_jet_lag called")
+
+	return h = h-24 if h>24 else h
 
 
 def _time(jet_lag=JET_LAG) : 
@@ -158,40 +179,48 @@ def _time(jet_lag=JET_LAG) :
 	
 	t = time.localtime()
 	txt = "{:0>2}/{:0>2}/{:0>2} {:0>2}:{:0>2}".format(
-		t.tm_mday, t.tm_mon, t.tm_year - 2000, t.tm_hour+jet_lag, t.tm_min)
+						t.tm_mday, t.tm_mon, t.tm_year - 2000, 
+						_jet_lag(t.tm_hour,jet_lag), t.tm_min)
 
 	return txt
 
 
-def send_bot(msg="", token=TOKEN, chat_id=CHAT_ID):
+def request(msg, token=TOKEN, chat_id=CHAT_ID) :
+	""" format text and send a request""" 
+
+	debug("request")
+
+	txt = str(msg).strip()
+	
+	# # URL = [(" ","+"), ("/","%2F"), (":","%3A"), (",","%2C"), ("#","%23"), ("!","%21"), ("_","%5F")] 
+	URL = [(i, "+") for i in [" ", "/", ":", "," ,"#", "!", "_"]]
+
+	for i,j in URL : 
+		txt = txt.replace(i, j)
+
+	req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(txt))
+	
+	urllib.request.urlopen(req)	
+
+
+def send_bot(msg=""):
 	"""useful function to send a message to your bot in cli"""
 
 	debug("send_bot called")
 
-	def __request(msg, token=token, chat_id=chat_id) : 
-
-		txt = str(msg).strip()
-		
-		# # URL = [(" ","+"), ("/","%2F"), (":","%3A"), (",","%2C"), ("#","%23"), ("!","%21"), ("_","%5F")] 
-		URL = [(i, "+") for i in [" ", "/", ":", "," ,"#", "!", "_"]]
-
-		for i,j in URL : 
-			txt = txt.replace(i, j)
-
-		req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(txt))
-			urllib.request.urlopen(req)	
-
 	try : 
-		__request(msg)	
+		request(msg)	
 	
 	except Exception as e:
-		logging.warning(e) ; logging.warning("first __request failed, trying a second one")
+		logging.warning(e) ; 
+		logging.warning("first request failed, trying a second one")
 
 		try : 
-			__request("Error+Calling+Request+As+Normal")
+			request("Error+Calling+Request+As+Normal")
 			
 		except Exception as e :
-			logging.warning(e) ; logging.warning("error send_bot, bad request")
+			logging.warning(e) ; 
+			logging.warning("error send_bot, bad request")
 
 
 def reboot() : 
@@ -234,27 +263,27 @@ def _uptime() :
 	return uptime
 
 
-def warning(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID, telegram=TELEGRAM_MODE) : 
+def warning(msg, rig=RIG, t = _uptime(), telegram=TELEGRAM_MODE) : 
 	"""over write warning """
 
 	debug("warning called")
 
-	msg = rig + " up" + _uptime() + " " + msg
+	msg = rig + " up" + t + " " + msg
 	if telegram : 
-		send_bot(msg, token, chat_id)
+		send_bot(msg)
 
 	msg = _time() + " " + msg
 	logging.warning(msg)
 
 
-def info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=TELEGRAM_MODE):
+def info(msg, rig=RIG, t = _uptime(), telegram=TELEGRAM_MODE):
 	"""over write info """
 
 	debug("info called")
 
-	msg = rig + " up" + _uptime() + " " + msg
+	msg = rig + " up" + t + " " + msg
 	if telegram : 
-		send_bot(msg, token, chat_id)
+		send_bot(msg)
 
 	msg = _time() + " " + msg
 	logging.info(msg)
@@ -263,12 +292,16 @@ def info(msg, rig=RIG , token=TOKEN, chat_id=CHAT_ID,  telegram=TELEGRAM_MODE):
 def debug(msg) : 
 	"""over write debug """
 
+	debug("msg")
+
 	logging.debug(msg)
 
 
 # main
 
 def main() : 
+
+	debug("main")
 
 	# init logging
 	logging.warning("\n\n\n")
