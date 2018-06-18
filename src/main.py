@@ -31,41 +31,19 @@ from src._main import *
 from src._var import * 
 
 
-# sys params
-
-# SLEEPER 		= 10 * 60		# IN SECONDS think to multiply by 60 for minutes ;)
-# LAP_STAMP		= 6 * 4			# update normal status each LAP_STAMP * SLEEPER sec
-# MIN_HASH 		= 179
-# AUTO_REBOOT 	= True			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
-# JET_LAG 		= 8				# depends of your local/sys time 
-# LATENCY 		= True			# if LATENCY additionnal sleeper added to give time 
-# 								# to rig to be fully operational (STRONGLY RECOMMANDED)
-
-
-# telegram params
-
-# TELEGRAM_MODE 	= False
-# TOKEN 			= "YourToken"
-# CHAT_ID 		= "YourChatId"
-# RIG 			= "YourRigName"
-
-
 # main
 
 def main() : 
 
 	debug("main")
 
-
 	# read var
 	SLEEPER, LAP_STAMP, MIN_HASH, AUTO_REBOOT, LATENCY =  load_system_var()
 	TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
 
-
 	# init logging
 	logging.warning("\n\n\n")
 	warning("init new session")
-
 
 	# to avoid multiple short reboot 
 	time.sleep(SLEEPER)
@@ -75,22 +53,18 @@ def main() :
 
 	lap = 0
 
-
 	# main loop
 	while True :
 
 		debug("main loop entrance") 
 
-
 		# update var
 		SLEEPER, LAP_STAMP, MIN_HASH, AUTO_REBOOT, LATENCY =  load_system_var()
 		TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
-
 		
 		# proceed 
 		data = data_from_cmd() 	# extract data from cmd 
 		hashrate = return_hash(data)
-
 
 		# reboot option
 		if isinstance(hashrate, float) or isinstance(hashrate, int) : 

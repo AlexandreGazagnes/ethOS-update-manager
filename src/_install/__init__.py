@@ -40,7 +40,7 @@ def prepare_system():
 	FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
 					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT"]
 	
-	for filename in : FILES
+	for filename in FILES :
 		os.system("touch ethOS-update-manager/src/var/{}".format(filename))
 
 	os.system("chmod +x /home/ethos/ethOS-update-manager/launch.py")

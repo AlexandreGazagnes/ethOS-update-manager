@@ -20,7 +20,7 @@ MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 AUTO_REBOOT = True			# enable auto reboot if min hashrate threshold reached
 JET_LAG 	= 8				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
-					# to rig to be fully operational (STRONGLY RECOMMANDED)
+							# to rig to be fully operational (STRONGLY RECOMMANDED)
 VAR_FOLDER 	= "/home/ethos/ethOs-update-manager/src/var"
 
 
@@ -155,9 +155,9 @@ def set_system_var() :
 		var_manager("SLEEPER", "wb", SLEEPER)
 		var_manager("LAP_STAMP", "wb", LAP_STAMP)
 		var_manager("MIN_HASH", "wb", MIN_HASH)
+		var_manager("AUTO_REBOOT", "wb", AUTO_REBOOT)		
 		var_manager("JET_LAG", "wb", JET_LAG)
 		var_manager("LATENCY", "wb", LATENCY)
-		var_manager("AUTO_REBOOT", "wb", AUTO_REBOOT)
 
 	else : 
 		print("\nSLEEPER : the time of loop processing -- in seconds --, default value (STRONGLY RECOMMANDED) {}".format(SLEEPER))
@@ -199,9 +199,10 @@ def set_telegram_var() :
 
 	connect_not_confirmed = True 
 
-	while connect_not_confirmed :  
+	if ans : 
 
-		if ans : 
+		while connect_not_confirmed :  
+
 			var_manager("TELEGRAM_MODE", "wb", True)
 
 			print("\ndefine token : ")
@@ -225,7 +226,6 @@ def set_telegram_var() :
 		var_manager("TELEGRAM_MODE", "wb", False)
 
 
-
 def confirm_connexion(token, chat_id, mi=100000, max=999999) : 
 	""" """
 
@@ -234,7 +234,7 @@ def confirm_connexion(token, chat_id, mi=100000, max=999999) :
 	req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(code))	
 	urllib.request.urlopen(req)
 
-	print("\na connection code was sent to your telegram account : ")
+	print("\nto autorize connection, a personnal code was sent to your telegram account, please check")
 	print("\nconnection code : ")
 	ans = handle_int(mi, ma)
 
@@ -251,6 +251,7 @@ def confirm_connexion(token, chat_id, mi=100000, max=999999) :
 
 def load_system_var(folder = VAR_FOLDER) : 
 	""" """
+
 	SLEEPER 	= var_manager("SLEEPER", "rb")
 	LAP_STAMP 	= var_manager("LAP_STAMP", "rb")
 	MIN_HASH 	= var_manager("MIN_HASH", "rb")
@@ -275,3 +276,6 @@ def load_telegram_var(folder=VAR_FOLDER) :
 		RIG 	= var_manager("RIG", "rb")
 
 		return True, TOKEN, CHAT_ID, RIG
+
+
+
