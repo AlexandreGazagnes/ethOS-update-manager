@@ -54,8 +54,6 @@ def var_manager(filename, mode, var=None, folder=VAR_FOLDER) :
 			raise ValueError("incrementation not possible, txt/bin format confusion")
 
 	elif mode == "w" : 
-		if not var : 
-			raise ValueError("trying to write nothing")
 		with open(folder + filename, mode) as f : f.write(str(var))
 		return 1
 
