@@ -56,9 +56,16 @@ def main() :
 
 	debug("main")
 
+
+	# read var
+	SLEEPER, LAP_STAMP, MIN_HASH, AUTO_REBOOT, LATENCY =  load_system_var()
+	TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
+
+
 	# init logging
 	logging.warning("\n\n\n")
 	warning("init new session")
+
 
 	# to avoid multiple short reboot 
 	time.sleep(SLEEPER)
@@ -75,7 +82,7 @@ def main() :
 		debug("main loop entrance") 
 
 
-		# read var
+		# update var
 		SLEEPER, LAP_STAMP, MIN_HASH, AUTO_REBOOT, LATENCY =  load_system_var()
 		TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
 
@@ -103,9 +110,8 @@ def main() :
 		else : 
 			warning("invalid hashrate type {}\n".format(type(hashrate)))
 
-		# wait
+		# wait and lap
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
-
 		lap +=1
 
 

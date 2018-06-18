@@ -197,9 +197,9 @@ def set_telegram_var() :
 	print("do you want to enable telegram auto push logging ?")
 	ans = handle_bool()
 
-	connect_confirmed = False 
+	connect_not_confirmed = True 
 
-	while not connect_confirmed :  
+	while connect_not_confirmed :  
 
 		if ans : 
 			var_manager("TELEGRAM_MODE", "wb", True)
@@ -216,7 +216,10 @@ def set_telegram_var() :
 			rig = input("alphanumeric input\n")
 			var_manager("RIG", "wb", rig)
 
-			connect_confirmed = confirm_connexion(token, chat_id)
+			connect_not_confirmed = confirm_connexion(token, chat_id)
+			if confirm_connexion == 2 : 
+				var_manager("TELEGRAM_MODE", "wb", False)
+				connect_not_confirmed = 0
 	
 	else :
 		var_manager("TELEGRAM_MODE", "wb", False)
@@ -235,8 +238,15 @@ def confirm_connexion(token, chat_id, mi=100000, max=999999) :
 	print("\nconnection code : ")
 	ans = handle_int(mi, ma)
 
-	if ans == code : 	return True
-	else : 				return False
+	if ans == code : 	
+		print("\nconnection established")
+		return 0
+	else : 
+		print("connection error, try again (y) or disable telegram mode (n)")
+		ans = handle_bool()
+
+		if ans  : return 1
+		else 	: return 2 
 
 
 def load_system_var(folder = VAR_FOLDER) : 
