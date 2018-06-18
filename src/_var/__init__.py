@@ -223,6 +223,7 @@ def set_telegram_var(mode="w", folder=VAR_FOLDER) :
 				break
 			elif confirm_connexion == 2 : 
 				var_manager("TELEGRAM_MODE", mode, False)
+				print("titi toto tata tutu")
 				break
 			else : 
 				pass
