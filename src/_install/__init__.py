@@ -30,7 +30,7 @@ def counter(k=4) :
 		time.sleep(1)
 
 
-def prepare_system(folder = "/home/ethos/ethOS-update-manager/src/var/"): 
+def prepare_system(folder= "/home/ethos/ethOS-update-manager/src/var/"): 
 	"""prepare system"""
 
 	os.system("clear")
@@ -41,29 +41,17 @@ def prepare_system(folder = "/home/ethos/ethOS-update-manager/src/var/"):
 	except : 
 		print("BE SURE FILES ALREADY EXISTS")
 
-	try : 
-		FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
+	FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
 					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT"]
 	
-		for filename in FILES :
+	for filename in FILES :
+		try : 
 			os.system("touch {}{}".format(folder, filename))
-	except : 
-		print("BE SURE FILES ALREADY EXISTS")
+		except : 
+			print("BE SURE FILES ALREADY EXISTS")
 
 	os.system("chmod +x /home/ethos/ethOS-update-manager/launch.py")
 	os.system("chmod +x /home/ethos/ethOS-update-manager/src/main.py")
-
-
-def write_title():
-	"""title in .bashrc"""
-
-	write_bashrc() #  empty line
-	write_bashrc()
-	write_bashrc("###################################")
-	write_bashrc("#      ethOS-update-manager        ")
-	write_bashrc("###################################")
-	write_bashrc()
-	write_bashrc()
 
 
 def main_title():
@@ -109,6 +97,7 @@ def system_var_title() :
 	print()
 	print()
 
+
 def telegram_var_title() : 
 	""" """
 
@@ -125,6 +114,18 @@ def telegram_var_title() :
 			"everything will be explained, let you drive\n")
 	print()
 	print()
+
+
+def write_title():
+	"""title in .bashrc"""
+
+	write_bashrc() #  empty line
+	write_bashrc()
+	write_bashrc("###################################")
+	write_bashrc("#      ethOS-update-manager        ")
+	write_bashrc("###################################")
+	write_bashrc()
+	write_bashrc()
 
 
 def write_alias() : 
