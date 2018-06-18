@@ -252,6 +252,9 @@ def confirm_connexion(token, chat_id, mi=100000, ma=999999) :
 	except : 
 		print("\nconnection error, try again (y) or disable telegram mode (n)")
 		ans = handle_bool()
+		
+		if ans  : return 1
+		else 	: return 2 
 
 
 
