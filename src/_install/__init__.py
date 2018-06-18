@@ -72,6 +72,7 @@ def main_title():
 	os.system("clear")
 	print() ; print() ; print()
 	print() ; print() ; print()
+	print() ; print() ; print()
 	print("###################################")
 	print("#      ethOS-update-manager        ")
 	print("###################################")
@@ -95,6 +96,7 @@ def system_var_title() :
 	os.system("clear")
 	print() ; print() ; print()
 	print() ; print() ; print()
+	print() ; print() ; print()
 	print("###################################")
 	print("       Set system variables ")
 	print("###################################")
@@ -112,6 +114,7 @@ def telegram_var_title() :
 	""" """
 
 	os.system("clear")
+	print() ; print() ; print()
 	print() ; print() ; print()
 	print() ; print() ; print()
 	print("###################################")
@@ -151,6 +154,7 @@ def reboot() :
 	"""auto reboot"""
 
 	os.system("clear")
+	print() ; print() ; print()
 	print() ; print() ; print()
 	print() ; print() ; print()
 	# info reboot
