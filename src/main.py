@@ -292,8 +292,6 @@ def info(msg, rig=RIG, t = _uptime(), telegram=TELEGRAM_MODE):
 def debug(msg) : 
 	"""over write debug """
 
-	debug("msg")
-
 	logging.debug(msg)
 
 
