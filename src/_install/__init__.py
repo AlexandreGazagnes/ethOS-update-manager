@@ -41,7 +41,7 @@ def prepare_system(folder = "/home/ethos/ethOS-update-manager/src/var"):
 					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT"]
 	
 	for filename in FILES :
-		os.system("touch{}/{}".format(folder, filename))
+		os.system("touch {}/{}".format(folder, filename))
 
 	os.system("chmod +x /home/ethos/ethOS-update-manager/launch.py")
 	os.system("chmod +x /home/ethos/ethOS-update-manager/src/main.py")
