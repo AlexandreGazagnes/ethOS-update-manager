@@ -20,6 +20,8 @@ from src._var import *
 
 def main() : 
 	main_title()
+	input()
+	system_var_title()
 	set_system_var()
 	prepare_system()
 	write_title()

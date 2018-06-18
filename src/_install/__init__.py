@@ -35,7 +35,10 @@ def prepare_system(folder = "/home/ethos/ethOS-update-manager/src/var"):
 
 	os.system("clear")
 	os.system("cd /home/ethos/")
-	os.system("mkdir {}".format(folder))
+	try : 
+		os.system("mkdir {}".format(folder))
+	except : 
+		pass
 
 	FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
 					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT"]
@@ -77,6 +80,8 @@ def main_title():
 	print(	"Welcome in ethOS-update-manager v0.5\n"
 			"we are going to help you in this awsome experience\n"
 			"but first thing first : \n")
+	print()
+	print("please type <Enter> to continue...")
 	print()
 
 
