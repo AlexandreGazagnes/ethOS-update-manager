@@ -12,7 +12,6 @@ try to reboot
 
 # import 
 
-import os, time
 from src._install import * 
 
 
