@@ -32,6 +32,7 @@ logging.basicConfig(	level=logging.INFO,
 # consts
 
 SLEEPER 	= 10 * 60		# IN SECONDS think to multiply by 60 for minutes ;)
+LAP_STAMP	= 6 * 4			# update normal status each LAP_STAMP * SLEEPER sec
 MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 JET_LAG 	= 8				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
@@ -336,7 +337,7 @@ def main() :
 
 			else : 
 				debug("hashrate OK")
-				if not lap % (6*3) : 
+				if not lap % LAP_STAMP : 
 					warning("everything is fine, hashrate {}\n".format(hashrate))
 
 		else : 
