@@ -199,11 +199,9 @@ def set_telegram_var(mode="w", folder=VAR_FOLDER) :
 	print("do you want to enable telegram auto push logging ?")
 	ans = handle_bool()
 
-	connect_not_confirmed = True 
-
 	if ans : 
 
-		while connect_not_confirmed :  
+		while True :  
 
 			var_manager("TELEGRAM_MODE", mode, True)
 
@@ -220,9 +218,14 @@ def set_telegram_var(mode="w", folder=VAR_FOLDER) :
 			var_manager("RIG", mode, rig)
 
 			connect_not_confirmed = confirm_connexion(token, chat_id)
-			if confirm_connexion == 2 : 
+			
+			if not connect_not_confirmed : 
+				break
+			elif confirm_connexion == 2 : 
 				var_manager("TELEGRAM_MODE", mode, False)
-				connect_not_confirmed = 0
+				break
+			else : 
+				pass
 	
 	else :
 		var_manager("TELEGRAM_MODE", mode, False)
