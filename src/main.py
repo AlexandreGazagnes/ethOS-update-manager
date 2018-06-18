@@ -272,7 +272,7 @@ def warning(msg, rig=RIG, telegram=TELEGRAM_MODE) :
 	if telegram : 
 		send_bot(msg)
 
-	msg =  "{} {}".format(time(), msg)
+	msg =  "{} {}".format(_time(), msg)
 	logging.warning(msg)
 
 
@@ -286,7 +286,7 @@ def info(msg, rig=RIG, telegram=TELEGRAM_MODE):
 	if telegram : 
 		send_bot(msg)
 
-	msg =  "{} {}".format(time(), msg)
+	msg =  "{} {}".format(_time(), msg)
 	logging.info(msg)
 
 
