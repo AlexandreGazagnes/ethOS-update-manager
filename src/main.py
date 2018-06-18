@@ -29,10 +29,10 @@ logging.basicConfig(	level=logging.INFO,
 
 # consts
 
-SLEEPER 	= 30			# IN SECONDS think to multiply by 60 for minutes ;)
+SLEEPER 	= 10 * 60		# IN SECONDS think to multiply by 60 for minutes ;)
 MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
-JET_LAG 	= 7				# depends of your local/sys time 
-LATENCY 	= False			# if LATENCY additionnal sleeper added to give time 
+JET_LAG 	= 8				# depends of your local/sys time 
+LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
 
 
@@ -157,8 +157,9 @@ def return_hash(data, key="hash", default_hashrate=187) :
 	
 		except Exception as e: 
 			logging.warning(e)
-			warning("Miner maybe not started yet")
+			warning("miner maybe not started yet")
 			os.system("allow")
+			time.sleep(2)
 			os.system("minestart")
 			time.sleep(5*60) 
 			return default_hashrate
@@ -188,7 +189,7 @@ def _time(jet_lag=JET_LAG) :
 def request(msg, token=TOKEN, chat_id=CHAT_ID) :
 	""" format text and send a request""" 
 
-	debug("request")
+	debug("request called")
 
 	txt = str(msg).strip()
 	
@@ -312,6 +313,8 @@ def main() :
 	if LATENCY and (SLEEPER < (60 * 6)) :  
 		time.sleep(600 - SLEEPER)
 
+	INCREMENT = 0
+
 	# main loop
 	while True :
 
@@ -322,7 +325,7 @@ def main() :
 		hashrate = return_hash(data)
 
 		# reboot option
-		if isinstance(hashrate, float) : 
+		if isinstance(hashrate, float) or isinstance(hashrate, int) : 
 			
 			if hashrate < MIN_HASH : 
 				warning("rebooting due to hashrate {}\n".format(hashrate))
@@ -330,6 +333,8 @@ def main() :
 
 			else : 
 				debug("hashrate OK")
+				if not INCREMENT % (6*3) : 
+					warning("everything is fine, hashrate {}\n".format(hashrate))
 
 		else : 
 			warning("invalid hashrate type {}\n".format(type(hashrate)))
@@ -337,8 +342,8 @@ def main() :
 		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
 
-		# DELETE, JUST FOR TESTS
-		info("new loop!!!")
+		INCREMENT +=0
+
 
 if __name__ == '__main__':
 	main()
