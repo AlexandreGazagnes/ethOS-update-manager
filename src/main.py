@@ -313,7 +313,7 @@ def main() :
 	if LATENCY and (SLEEPER < (60 * 6)) :  
 		time.sleep(600 - SLEEPER)
 
-	INCREMENT = 0
+	lap = 0
 
 	# main loop
 	while True :
@@ -333,7 +333,7 @@ def main() :
 
 			else : 
 				debug("hashrate OK")
-				if not INCREMENT % (6*3) : 
+				if not lap % (6*3) : 
 					warning("everything is fine, hashrate {}\n".format(hashrate))
 
 		else : 
@@ -342,7 +342,7 @@ def main() :
 		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
 
-		INCREMENT +=0
+		lap +=1
 
 
 if __name__ == '__main__':

@@ -21,7 +21,7 @@ import os, time, random
 def main() : 
 
 	# add a random sleeper to avoid multi boot 
-	s = round(random.random() * 10 * 0.5, 1) 
+	s = round(random.random() * 10 * 1, 1) 
 	time.sleep(s)
 
 	# handle working processes 
