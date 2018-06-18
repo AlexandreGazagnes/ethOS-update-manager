@@ -35,13 +35,13 @@ def prepare_system():
 
 	os.system("clear")
 	os.system("cd /home/ethos/")
-	os.system("mkdir /home/ethos/ethOS-update-manager/src/var/")
+	os.system("mkdir {}".format(VAR_FOLDER))
 
 	FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
 					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT"]
 	
 	for filename in FILES :
-		os.system("touch ethOS-update-manager/src/var/{}".format(filename))
+		os.system("touch{}/{}".format(VAR_FOLDER, filename))
 
 	os.system("chmod +x /home/ethos/ethOS-update-manager/launch.py")
 	os.system("chmod +x /home/ethos/ethOS-update-manager/src/main.py")
