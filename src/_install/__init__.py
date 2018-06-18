@@ -35,7 +35,7 @@ def prepare_system():
 
 	os.system("clear")
 	os.system("cd /home/ethos/")
-	os.system("mkdir ethOS-update-manager/src/var/")
+	os.system("mkdir /home/ethos/ethOS-update-manager/src/var/")
 
 	FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
 					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT"]
