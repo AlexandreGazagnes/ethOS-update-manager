@@ -169,7 +169,7 @@ def _jet_lag(h, jet_lag=JET_LAG) :
 	
 	debug("_jet_lag called")
 
-	return h = h-24 if h>24 else h
+	return h-24 if h>24 else h
 
 
 def _time(jet_lag=JET_LAG) : 
