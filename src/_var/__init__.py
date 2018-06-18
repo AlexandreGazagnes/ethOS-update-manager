@@ -53,7 +53,7 @@ def var_manager(filename, mode, var=None, folder=VAR_FOLDER) :
 		except : 
 			raise ValueError("incrementation not possible, txt/bin format confusion")
 
-	elif mode == "w" : 
+		elif mode == "w" : 
 		with open(folder + filename, mode) as f : f.write(str(var))
 		return 1
 
@@ -231,22 +231,30 @@ def confirm_connexion(token, chat_id, mi=100000, ma=999999) :
 
 	code = random.randint(mi, ma)
 
-	req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(code))	
-	urllib.request.urlopen(req)
+	try : 
+		req = str('https://api.telegram.org/bot' + str(token) + '/sendMessage?chat_id=' + str(chat_id) + '&parse_mode=Markdown&text=' + str(code))	
+		urllib.request.urlopen(req)
 
-	print("\nto autorize connection, a personnal code was sent to your telegram account, please check")
-	print("\nconnection code : ")
-	ans = handle_int(mi, ma)
+		print("\nto autorize connection, a personnal code was sent to your telegram account, please check")
+		print("\nconnection code : ")
+		ans = handle_int(mi, ma)
 
-	if ans == code : 	
-		print("\nconnection established")
-		return 0
-	else : 
-		print("connection error, try again (y) or disable telegram mode (n)")
+		if ans == code : 	
+			print("\nconnection established")
+			return 0
+		else : 
+			print("\nconnection error, try again (y) or disable telegram mode (n)")
+			ans = handle_bool()
+
+			if ans  : return 1
+			else 	: return 2 
+	
+	except : 
+		print("\nconnection error, try again (y) or disable telegram mode (n)")
 		ans = handle_bool()
 
-		if ans  : return 1
-		else 	: return 2 
+
+
 
 
 def load_system_var(folder = VAR_FOLDER) : 
