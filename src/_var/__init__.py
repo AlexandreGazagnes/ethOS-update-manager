@@ -219,14 +219,16 @@ def set_telegram_var(mode="w", folder=VAR_FOLDER) :
 
 			connect_not_confirmed = confirm_connexion(token, chat_id)
 			
-			if not connect_not_confirmed : 
+			if connect_not_confirmed == 0 : 
 				break
-			elif confirm_connexion == 2 : 
+			elif connect_not_confirmed == 1 : 
+				pass
+			elif connect_not_confirmed == 2 : 
 				var_manager("TELEGRAM_MODE", mode, False)
 				print("titi toto tata tutu")
 				break
 			else : 
-				pass
+				print("Fatal error")
 	
 	else :
 		var_manager("TELEGRAM_MODE", mode, False)
@@ -249,20 +251,18 @@ def confirm_connexion(token, chat_id, mi=100000, ma=999999) :
 			print("\nconnection established")
 			return 0
 		else : 
-			print("\nconnection error, try again (y) or disable telegram mode (n)")
+			print("\nconnection error, try again (ie 'y') or disable telegram mode (ie 'n')")
 			ans = handle_bool()
 
 			if ans  : return 1
 			else 	: return 2 
 	
 	except : 
-		print("\nconnection error, try again (y) or disable telegram mode (n)")
+		print("\nconnection error, try again (ie 'y') or disable telegram mode (ie 'n')")
 		ans = handle_bool()
-		
+
 		if ans  : return 1
 		else 	: return 2 
-
-
 
 
 
