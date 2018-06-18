@@ -193,7 +193,7 @@ def request(msg, token=TOKEN, chat_id=CHAT_ID) :
 	txt = str(msg).strip()
 	
 	# # URL = [(" ","+"), ("/","%2F"), (":","%3A"), (",","%2C"), ("#","%23"), ("!","%21"), ("_","%5F")] 
-	URL = [(i, "+") for i in [" ", "/", ":", "," ,"#", "!", "_"]]
+	URL = [(i, "+") for i in [" ", "/", ":", "," ,"#", "!", "_", "(", ")", "\n", '"', "'"]]
 
 	for i,j in URL : 
 		txt = txt.replace(i, j)
@@ -212,12 +212,11 @@ def send_bot(msg=""):
 		request(msg)	
 	
 	except Exception as e:
-		logging.warning(e) ; 
-		logging.warning("first request failed, trying a second one")
-
+		
 		try : 
-			request("Error+Calling+Request+As+Normal")
-			
+			logging.warning(e)
+			request("request failed, please watch out logging file")
+	
 		except Exception as e :
 			logging.warning(e) ; 
 			logging.warning("error send_bot, bad request")
