@@ -233,6 +233,7 @@ def set_telegram_var(mode="wb", folder=VAR_FOLDER) :
 				print("################################")
 				print("\n"*2)
 				print("please type <Enter> to continue...")
+				input()
 				break
 			else : 
 				print("Fatal error")
