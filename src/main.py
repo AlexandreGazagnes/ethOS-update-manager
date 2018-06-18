@@ -5,13 +5,16 @@
 """
 ethOS-update-manager - main - v0.5.0 
 
-Handle results from a CMD 'show stats' or 'update' and reboot 
+Handle results from a CMD 'show stats' or  and reboot 
 if nedeed, ie your hashrate is too low (aka MIN_HASH).
 
 Manage bot telegram and send warning msg to your personnal bot 
+if you don't want this feature, please just set TELEGRAM_MODE = False/0
 
 Please update with your personal settings : SLEEPER, JET_LAG, LATENCY 
 and MIN_HASH. You can of course use default settings
+
+if TELERAM_MODE set to True, you will have to set TOKEN, CHAT_ID, and RIG ame
 """
 
 
@@ -24,7 +27,6 @@ import os, time, logging, urllib.parse, urllib.request
 
 logging.basicConfig(	level=logging.INFO, 
 						format='%(levelname)s %(message)s')
-
 
 
 # consts
@@ -314,6 +316,7 @@ def main() :
 		time.sleep(600 - SLEEPER)
 
 	lap = 0
+
 
 	# main loop
 	while True :
