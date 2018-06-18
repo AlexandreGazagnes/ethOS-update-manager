@@ -30,18 +30,18 @@ def counter(k=4) :
 		time.sleep(1)
 
 
-def prepare_system(): 
+def prepare_system(folder = "/home/ethos/ethOs-update-manager/src/var"): 
 	"""prepare system"""
 
 	os.system("clear")
 	os.system("cd /home/ethos/")
-	os.system("mkdir {}".format(VAR_FOLDER))
+	os.system("mkdir {}".format(folder))
 
 	FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
 					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT"]
 	
 	for filename in FILES :
-		os.system("touch{}/{}".format(VAR_FOLDER, filename))
+		os.system("touch{}/{}".format(folder, filename))
 
 	os.system("chmod +x /home/ethos/ethOS-update-manager/launch.py")
 	os.system("chmod +x /home/ethos/ethOS-update-manager/src/main.py")
