@@ -13,12 +13,16 @@ for more info  please read /src/main.py
 
 # import 
 
-import os
+import os, time, random
 
 
 # main 
 
 def main() : 
+
+	# add a random sleeper to avoid multi boot 
+	s = round(random.random() * 10 * 0.5, 1) 
+	time.sleep(s)
 
 	# handle working processes 
 	process = os.popen("ps -aux | grep ethOS-update-manager").readlines()

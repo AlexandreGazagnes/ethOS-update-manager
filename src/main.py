@@ -150,13 +150,13 @@ def return_hash(data, key="hash", default_hashrate=187) :
 	except Exception as e: 
 
 		try : 
-			warning(e)
+			logging.warning(e)
 			hashrate = str(data["hash"])
 			warning("error reading 'hash' as a float for {}".format(hashrate)) 
 			return hashrate
 	
 		except Exception as e: 
-			warning(e)
+			logging.warning(e)
 			warning("Miner maybe not started yet")
 			os.system("allow")
 			os.system("minestart")
@@ -267,12 +267,12 @@ def warning(msg, rig=RIG, telegram=TELEGRAM_MODE) :
 
 	debug("warning called")
 
-	msg = rig + " up" + _uptime() + " " + msg
+	msg = "{} up{} {}".format(rig, _uptime(), msg)
 	
 	if telegram : 
 		send_bot(msg)
 
-	msg = _time() + " " + msg
+	msg =  "{} {}".format(time(), msg)
 	logging.warning(msg)
 
 
@@ -281,11 +281,12 @@ def info(msg, rig=RIG, telegram=TELEGRAM_MODE):
 
 	debug("info called")
 
-	msg = rig + " up" + _uptime() + " " + msg
+	msg = "{} up{} {}".format(rig, _uptime(), msg)
+	
 	if telegram : 
 		send_bot(msg)
 
-	msg = _time() + " " + msg
+	msg =  "{} {}".format(time(), msg)
 	logging.info(msg)
 
 
