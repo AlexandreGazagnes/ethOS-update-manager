@@ -20,8 +20,7 @@ from src._launch import *
 
 def main() : 
 	randomize_start()
-	is_working = working_process()
-	launch_if_needed(is_working)
+	launch_if_needed(working_process())
 
 
 if __name__ == '__main__':
