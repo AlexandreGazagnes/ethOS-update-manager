@@ -178,6 +178,7 @@ def set_system_var(mode="w", folder=VAR_FOLDER) :
 		print("\nAUTO_REBOOT : Boolean value -- y/n--, if set, your miner will reboot if MIN_HASH threshold is reached, default value (STRONGLY RECOMMANDED) : {}".format("y"))		
 		print("\ndefine auto reboot : ")
 		ans = handle_bool()
+		if not ans : ans=0
 		var_manager("AUTO_REBOOT", mode, ans, folder=folder)
 
 		print("\nJET_LAG : the time stamp -- in hours -- between your local time and your system time, default value : {}".format(JET_LAG))		
@@ -188,10 +189,11 @@ def set_system_var(mode="w", folder=VAR_FOLDER) :
 		print("\nLATENCY : Boolean value -- y/n--, if set, your miner will have the time to wake up and to launch all GPUs before being scanned, default value (STRONGLY RECOMMANDED) : {}".format("y"))		
 		print("\ndefine latency : ")
 		ans = handle_bool()
+		if not ans : ans=0
 		var_manager("LATENCY", mode, ans, folder=folder)
 
 
-def set_telegram_var() :
+def set_telegram_var(mode="w", folder=VAR_FOLDER) :
 	""" """ 
 	
 	print("do you want to enable telegram auto push logging ?")
@@ -203,27 +205,27 @@ def set_telegram_var() :
 
 		while connect_not_confirmed :  
 
-			var_manager("TELEGRAM_MODE", "wb", True)
+			var_manager("TELEGRAM_MODE", mode, True)
 
 			print("\ndefine token : ")
 			token = input("alphanumeric input\n")
-			var_manager("TOKEN", "wb", token)
+			var_manager("TOKEN", mode, token)
 
 			print("\ndefine chat_id : ")
 			chat_id = input("alphanumeric input\n")
-			var_manager("CHAT_ID", "wb", chat_id)		
+			var_manager("CHAT_ID", mode, chat_id)		
 
 			print("\ndefine rig_name : ")
 			rig = input("alphanumeric input\n")
-			var_manager("RIG", "wb", rig)
+			var_manager("RIG", mode, rig)
 
 			connect_not_confirmed = confirm_connexion(token, chat_id)
 			if confirm_connexion == 2 : 
-				var_manager("TELEGRAM_MODE", "wb", False)
+				var_manager("TELEGRAM_MODE", mode, False)
 				connect_not_confirmed = 0
 	
 	else :
-		var_manager("TELEGRAM_MODE", "wb", False)
+		var_manager("TELEGRAM_MODE", mode, False)
 
 
 def confirm_connexion(token, chat_id, mi=100000, ma=999999) : 
