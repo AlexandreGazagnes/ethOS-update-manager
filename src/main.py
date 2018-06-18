@@ -42,9 +42,9 @@ LATENCY 	= True			# if LATENCY additionnal sleeper added to give time
 # telegram params
 
 TELEGRAM_MODE 	= True
-TOKEN 			= "546465733:AAHXfrCs7pYWeRbOQb5zYqVHShspgomsCwA"
-CHAT_ID 		= "487924419"
-RIG 			= "Bold_Eagle"
+TOKEN 			= "YourToken"
+CHAT_ID 		= "YourChatId"
+RIG 			= "YourRigName"
 
 
 # functions
