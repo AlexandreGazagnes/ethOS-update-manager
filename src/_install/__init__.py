@@ -59,6 +59,52 @@ def write_title():
 	write_bashrc()
 
 
+def main_title():
+	"""print title and intro for install manualy"""
+
+	os.system("clear")
+	print() #  empty line
+	print()
+	print("###################################")
+	print("#      ethOS-update-manager        ")
+	print("###################################")
+	print()
+	print()
+	print("      	Install mode")
+	print("###################################")
+	print()
+	print()
+	print(	"Welcome in ethOS-update-manager v0.5\n"
+			"we are going to help you in this awsome experience\n"
+			"but first thing first : \n")
+	print()
+
+
+def system_var_title()
+	print()
+	print("       Set system variables ")
+	print("###################################")
+	print()
+	print()
+			
+	print(	"We are settings first all system variables\n"
+			"You will have to set SLEEPER, LAP_STAMP, MIN_HASH, AUTO_REBOOT\n"
+			"JET_LAG and LATENCY\n"
+			"everything will be explained, let you drive\n")
+
+
+def telegram_var_title()
+	print()
+	print("       Set telegram variables ")
+	print("###################################")
+	print()
+	print()
+			
+	print(	"We are settings first all telegram variables\n"
+			"You will have to set TELEGRAM_MODE, TOKEN, CHAT_ID and RIG\n"
+			"everything will be explained, let you drive\n")
+
+
 def write_alias() : 
 	"""create alias (shortcup for CLI) 'LAUNCH' to launch program manualy"""
 

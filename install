@@ -13,11 +13,14 @@ try to reboot
 # import 
 
 from src._install import * 
+from src._var import * 
 
 
 # main
 
 def main() : 
+	main_title()
+	set_system_var()
 	prepare_system()
 	write_title()
 	write_alias()
