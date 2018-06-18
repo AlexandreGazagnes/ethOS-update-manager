@@ -30,21 +30,25 @@ def counter(k=4) :
 		time.sleep(1)
 
 
-def prepare_system(folder = "/home/ethos/ethOS-update-manager/src/var"): 
+def prepare_system(folder = "/home/ethos/ethOS-update-manager/src/var/"): 
 	"""prepare system"""
 
 	os.system("clear")
 	os.system("cd /home/ethos/")
+
 	try : 
 		os.system("mkdir {}".format(folder))
 	except : 
-		pass
+		print("BE SURE FILES ALREADY EXISTS")
 
-	FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
+	try : 
+		FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
 					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT"]
 	
-	for filename in FILES :
-		os.system("touch {}/{}".format(folder, filename))
+		for filename in FILES :
+			os.system("touch {}{}".format(folder, filename))
+	except : 
+		print("BE SURE FILES ALREADY EXISTS")
 
 	os.system("chmod +x /home/ethos/ethOS-update-manager/launch.py")
 	os.system("chmod +x /home/ethos/ethOS-update-manager/src/main.py")

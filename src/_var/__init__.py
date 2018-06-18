@@ -21,7 +21,7 @@ AUTO_REBOOT = True			# enable auto reboot if min hashrate threshold reached
 JET_LAG 	= 8				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
-VAR_FOLDER 	= "/home/ethos/ethOS-update-manager/src/var"
+VAR_FOLDER 	= "/home/ethos/ethOS-update-manager/src/var/"
 
 
 # telegram params
@@ -145,50 +145,50 @@ def handle_int(mi=0, ma=10000) :
 			ans = input("\nwrong input, expected number between {} and {}\n".format(mi, ma))
 
 
-def set_system_var() : 
+def set_system_var(mode="w", folder=VAR_FOLDER) : 
 	""" """
 
 	print("do you want to use system default var ?")
 	ans = handle_bool()
 
 	if ans : 
-		var_manager("SLEEPER", "wb", SLEEPER)
-		var_manager("LAP_STAMP", "wb", LAP_STAMP)
-		var_manager("MIN_HASH", "wb", MIN_HASH)
-		var_manager("AUTO_REBOOT", "wb", AUTO_REBOOT)		
-		var_manager("JET_LAG", "wb", JET_LAG)
-		var_manager("LATENCY", "wb", LATENCY)
+		var_manager("SLEEPER", mode, SLEEPER, folder=folder)
+		var_manager("LAP_STAMP", mode, LAP_STAMP, folder=folder)
+		var_manager("MIN_HASH", mode, MIN_HASH, folder=folder)
+		var_manager("AUTO_REBOOT", mode, AUTO_REBOOT, folder=folder)		
+		var_manager("JET_LAG", mode, JET_LAG, folder=folder)
+		var_manager("LATENCY", mode, LATENCY, folder=folder)
 
 	else : 
 		print("\nSLEEPER : the time of loop processing -- in seconds --, default value (STRONGLY RECOMMANDED) : {}".format(SLEEPER))
 		print("define sleeper : ")
 		ans = handle_int(60, 60*60)
-		var_manager("SLEEPER", "wb", ans)
+		var_manager("SLEEPER", mode, ans, folder=folder)
 
 		print("\nLAP_STAMP : the rate of info logging (inform you if everything is fine), the more it is important the less you will be informed -- in lap --, default value (STRONGLY RECOMMANDED) : {}".format(LAP_STAMP))
 		print("define lap_stamp : ")
 		ans = handle_int(1, 6*24)
-		var_manager("LAP_STAMP", "wb", ans)		
+		var_manager("LAP_STAMP", mode, ans, folder=folder)		
 
 		print("\nMIN_HASH : if your miner's hashrate fall bellow this threshold you will be warned and miner will reboot. Consider nb of GPUS x min GPU expected rate -- in global summed hashrate --, default value : {}".format(MIN_HASH))
 		print("\ndefine min_hash : ")
 		ans = handle_int(15, 12 * 35)
-		var_manager("MIN_HASH", "wb", ans)
+		var_manager("MIN_HASH", mode, ans, folder=folder)
 
 		print("\nAUTO_REBOOT : Boolean value -- y/n--, if set, your miner will reboot if MIN_HASH threshold is reached, default value (STRONGLY RECOMMANDED) : {}".format("y"))		
 		print("\ndefine auto reboot : ")
 		ans = handle_bool()
-		var_manager("AUTO_REBOOT", "wb", ans)
+		var_manager("AUTO_REBOOT", mode, ans, folder=folder)
 
 		print("\nJET_LAG : the time stamp -- in hours -- between your local time and your system time, default value : {}".format(JET_LAG))		
 		print("define jet_lag : ")
 		ans = handle_int(-24, +24)
-		var_manager("JET_LAG", "wb", ans)
+		var_manager("JET_LAG", mode, ans, folder=folder)
 	
 		print("\nLATENCY : Boolean value -- y/n--, if set, your miner will have the time to wake up and to launch all GPUs before being scanned, default value (STRONGLY RECOMMANDED) : {}".format("y"))		
 		print("\ndefine latency : ")
 		ans = handle_bool()
-		var_manager("LATENCY", "wb", ans)
+		var_manager("LATENCY", mode, ans, folder=folder)
 
 
 def set_telegram_var() :
@@ -226,7 +226,7 @@ def set_telegram_var() :
 		var_manager("TELEGRAM_MODE", "wb", False)
 
 
-def confirm_connexion(token, chat_id, mi=100000, max=999999) : 
+def confirm_connexion(token, chat_id, mi=100000, ma=999999) : 
 	""" """
 
 	code = random.randint(mi, ma)
