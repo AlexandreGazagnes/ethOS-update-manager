@@ -29,7 +29,7 @@ logging.basicConfig(	level=logging.INFO,
 
 # consts
 
-SLEEPER 	= 10 * 5		# IN SECONDS think to multiply by 60 for minutes ;)
+SLEEPER 	= 30			# IN SECONDS think to multiply by 60 for minutes ;)
 MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 JET_LAG 	= 7				# depends of your local/sys time 
 LATENCY 	= False			# if LATENCY additionnal sleeper added to give time 
@@ -139,7 +139,7 @@ def data_from_cmd(cmd="show stats", fake_mode=False, fake_cmd="cat", fake_file=N
 def return_hash(data, key="hash", default_hashrate=187) : 
 	""" return hash float"""
 
-	debug ("return_hash called")
+	debug("return_hash called")
 
 	try : 
 
@@ -277,12 +277,12 @@ def warning(msg, rig=RIG, telegram=TELEGRAM_MODE) :
 	logging.warning(msg)
 
 
-def info(msg, rig=RIG, t = _uptime(), telegram=TELEGRAM_MODE):
+def info(msg, rig=RIG, telegram=TELEGRAM_MODE):
 	"""over write info """
 
 	debug("info called")
 
-	msg = rig + " up" + t + " " + msg
+	msg = rig + " up" + _uptime() + " " + msg
 	if telegram : 
 		send_bot(msg)
 
@@ -332,13 +332,13 @@ def main() :
 				debug("hashrate OK")
 
 		else : 
-			warning("invalid hrate type {}\n".format(type(hashrate)))
+			warning("invalid hashrate type {}\n".format(type(hashrate)))
 
 		# wait
 		time.sleep(SLEEPER) # to avoid multiple short reboot 
 
 		# DELETE, JUST FOR TESTS
-		# info("new loop!!!")
+		info("new loop!!!")
 
 if __name__ == '__main__':
 	main()
