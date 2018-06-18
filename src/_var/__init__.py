@@ -225,12 +225,14 @@ def set_telegram_var(mode="wb", folder=VAR_FOLDER) :
 				pass
 			elif connect_not_confirmed == 2 : 
 				var_manager("TELEGRAM_MODE", mode, False)
+				print("\n" *2)
 				print("################################")
-				print("\n"*2)
+				print()
 				print("WARNING : TELEGRAM_MODE DISABLED")
+				print()
 				print("################################")
 				print("\n"*2)
-				input("type <Enter to continue")
+				print("please type <Enter> to continue...")
 				break
 			else : 
 				print("Fatal error")
