@@ -145,7 +145,7 @@ def handle_int(mi=0, ma=10000) :
 			ans = input("\nwrong input, expected number between {} and {}\n".format(mi, ma))
 
 
-def set_system_var(mode="w", folder=VAR_FOLDER) : 
+def set_system_var(mode="wb", folder=VAR_FOLDER) : 
 	""" """
 
 	print("do you want to use system default var ?")
@@ -160,40 +160,40 @@ def set_system_var(mode="w", folder=VAR_FOLDER) :
 		var_manager("LATENCY", mode, LATENCY, folder=folder)
 
 	else : 
-		print("\nSLEEPER : the time of loop processing -- in seconds --, default value (STRONGLY RECOMMANDED) : {}".format(SLEEPER))
+		print("\nSLEEPER : the time of loop processing -- in seconds --, \ndefault value (STRONGLY RECOMMANDED) : {}".format(SLEEPER))
 		print("define sleeper : ")
 		ans = handle_int(60, 60*60)
 		var_manager("SLEEPER", mode, ans, folder=folder)
 
-		print("\nLAP_STAMP : the rate of info logging (inform you if everything is fine), the more it is important the less you will be informed -- in lap --, default value (STRONGLY RECOMMANDED) : {}".format(LAP_STAMP))
+		print("\nLAP_STAMP : the rate of info logging (inform you if everything is fine), the more it is important the less you will be informed -- in lap --, \ndefault value (STRONGLY RECOMMANDED) : {}".format(LAP_STAMP))
 		print("define lap_stamp : ")
 		ans = handle_int(1, 6*24)
 		var_manager("LAP_STAMP", mode, ans, folder=folder)		
 
-		print("\nMIN_HASH : if your miner's hashrate fall bellow this threshold you will be warned and miner will reboot. Consider nb of GPUS x min GPU expected rate -- in global summed hashrate --, default value : {}".format(MIN_HASH))
+		print("\nMIN_HASH : if your miner's hashrate fall bellow this threshold you will be warned and miner will reboot. Consider nb of GPUS x min GPU expected rate -- in global summed hashrate --, \ndefault value : {}".format(MIN_HASH))
 		print("\ndefine min_hash : ")
 		ans = handle_int(15, 12 * 35)
 		var_manager("MIN_HASH", mode, ans, folder=folder)
 
-		print("\nAUTO_REBOOT : Boolean value -- y/n--, if set, your miner will reboot if MIN_HASH threshold is reached, default value (STRONGLY RECOMMANDED) : {}".format("y"))		
+		print("\nAUTO_REBOOT : Boolean value -- y/n--, if set, your miner will reboot if MIN_HASH threshold is reached, \ndefault value (STRONGLY RECOMMANDED) : {}".format("y"))		
 		print("\ndefine auto reboot : ")
 		ans = handle_bool()
 		if not ans : ans=0
 		var_manager("AUTO_REBOOT", mode, ans, folder=folder)
 
-		print("\nJET_LAG : the time stamp -- in hours -- between your local time and your system time, default value : {}".format(JET_LAG))		
+		print("\nJET_LAG : the time stamp -- in hours -- between your local time and your system time, \ndefault value : {}".format(JET_LAG))		
 		print("define jet_lag : ")
 		ans = handle_int(-24, +24)
 		var_manager("JET_LAG", mode, ans, folder=folder)
 	
-		print("\nLATENCY : Boolean value -- y/n--, if set, your miner will have the time to wake up and to launch all GPUs before being scanned, default value (STRONGLY RECOMMANDED) : {}".format("y"))		
+		print("\nLATENCY : Boolean value -- y/n--, if set, your miner will have the time to wake up and to launch all GPUs before being scanned, \ndefault value (STRONGLY RECOMMANDED) : {}".format("y"))		
 		print("\ndefine latency : ")
 		ans = handle_bool()
 		if not ans : ans=0
 		var_manager("LATENCY", mode, ans, folder=folder)
 
 
-def set_telegram_var(mode="w", folder=VAR_FOLDER) :
+def set_telegram_var(mode="wb", folder=VAR_FOLDER) :
 	""" """ 
 	
 	print("do you want to enable telegram auto push logging ?")
@@ -225,7 +225,12 @@ def set_telegram_var(mode="w", folder=VAR_FOLDER) :
 				pass
 			elif connect_not_confirmed == 2 : 
 				var_manager("TELEGRAM_MODE", mode, False)
-				print("titi toto tata tutu")
+				print("################################")
+				print("\n"*2)
+				print("WARNING : TELEGRAM_MODE DISABLED")
+				print("################################")
+				print("\n"*2)
+				input("type <Enter to continue")
 				break
 			else : 
 				print("Fatal error")
