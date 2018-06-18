@@ -80,7 +80,9 @@ def main_title():
 	print()
 
 
-def system_var_title()
+def system_var_title() : 
+	"""" """
+
 	print()
 	print("       Set system variables ")
 	print("###################################")
@@ -93,7 +95,9 @@ def system_var_title()
 			"everything will be explained, let you drive\n")
 
 
-def telegram_var_title()
+def telegram_var_title() : 
+	""" """
+	
 	print()
 	print("       Set telegram variables ")
 	print("###################################")
