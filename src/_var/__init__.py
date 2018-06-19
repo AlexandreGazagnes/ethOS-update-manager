@@ -356,8 +356,8 @@ def find_ip_ext(http="http://whatismyip.host/") :
 	""" """
 
 	try : 	
-		html = urlopen(http).read()
-		html = html.decode("utf-8").splitlines()
+		html = urllib.request.urlopen(http).readlines()
+		html = [i.decode("utf-8") for i in html]
 		tag = """<p class="ipaddress">"""
 		html = [i.strip().replace(tag, "").replace("</p>", "") for i in html if tag in i]
 		ip = html[0]
