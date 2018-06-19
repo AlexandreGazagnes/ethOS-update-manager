@@ -30,10 +30,7 @@ def counter(k=4) :
 		time.sleep(1)
 
 
-print(VAR_FOLDER)
-input()
-
-def prepare_system(folder="/home/ethos/ethOS-update-manager/src/var/"): 
+def prepare_system(folder=VAR_FOLDER): 
 	"""prepare system"""
 
 	os.system("clear")

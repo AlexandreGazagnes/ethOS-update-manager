@@ -40,9 +40,10 @@ SYS_VAR_PAIRS = [ 	("SLEEPER", SLEEPER), ("LAP_STAMP", LAP_STAMP),
 
 # sys paths
 
-VAR_FOLDER 	= "/home/ethos/ethOS-update-manager/src/var/"
-DATA_FOLDER	= "/home/ethos/ethOS-update-manager/data/"
-VAR_FOLDER 	= "/home/ethos/ethOS-update-manager/docs/"
+ROOT_FOLDER = "/home/ethos/ethOS-update-manager/"
+VAR_FOLDER 	=  ROOT_FOLDER + "src/var/"
+DATA_FOLDER	=  ROOT_FOLDER + "data/"
+DOC_FOLDER 	=  ROOT_FOLDER + "docs/"
 
 
 # telegram params
