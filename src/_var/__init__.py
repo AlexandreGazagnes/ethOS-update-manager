@@ -14,22 +14,26 @@ import os, pickle, random, urllib.request
 
 # sys params
 
-SLEEPER 	= 10 * 60		# IN SECONDS think to multiply by 60 for minutes ;)
-LAP_STAMP	= 6 * 6			# update normal status each LAP_STAMP * SLEEPER sec
+SLEEPER 		= 10 * 60		# IN SECONDS think to multiply by 60 for minutes ;)
+LAP_STAMP		= 6 * 6			# update normal status each LAP_STAMP * SLEEPER sec
 
-AUTO_REBOOT = True			# enable auto reboot if min hashrate threshold reached
-AUTO_LAUNCH = True			# enable auto lauch at system boot
+AUTO_REBOOT 	= True			# enable auto reboot if min hashrate threshold reached
+AUTO_LAUNCH 	= True			# enable auto lauch at system boot
 
-HASH_MODE	= True			# enable if hashraste is too low
-MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
+HASH_MODE		= True			# enable if hashraste is too low
+MIN_HASH 		= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 
-TEMP_MODE	= True			# enable reboot if over warming 
-MAX_TEMP	= 75			# 70, 75, 80 ... depends of the care you have for your GPUs
+TEMP_MODE		= True			# enable reboot if over warming 
+MAX_TEMP		= 75			# 70, 75, 80 ... depends of the care you have for your GPUs
 
-JET_LAG 	= 8				# depends of your local/sys time 
-LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
-							# to rig to be fully operational (STRONGLY RECOMMANDED)
-LOGGING_LEVEL = 100
+JET_LAG 		= 8				# depends of your local/sys time 
+LATENCY 		= True			# if LATENCY additionnal sleeper added to give time 
+								# to rig to be fully operational (STRONGLY RECOMMANDED)
+LOGGING_LEVEL 	= 100
+
+USER 		  	= "User "
+IP_INT 			= "100.100.1.10"
+IP_EXT 			= "100.100.100.1.10"
 
 
 SYS_VAR_PAIRS = [ 	("SLEEPER", SLEEPER), ("LAP_STAMP", LAP_STAMP),
@@ -41,10 +45,10 @@ SYS_VAR_PAIRS = [ 	("SLEEPER", SLEEPER), ("LAP_STAMP", LAP_STAMP),
 
 # sys paths
 
-ROOT_FOLDER = "/home/ethos/ethOS-update-manager/"
-VAR_FOLDER 	=  ROOT_FOLDER + "src/var/"
-DATA_FOLDER	=  ROOT_FOLDER + "data/"
-DOC_FOLDER 	=  ROOT_FOLDER + "docs/"
+ROOT_FOLDER 	= "/home/ethos/ethOS-update-manager/"
+VAR_FOLDER 		=  ROOT_FOLDER + "src/var/"
+DATA_FOLDER		=  ROOT_FOLDER + "data/"
+DOC_FOLDER 		=  ROOT_FOLDER + "docs/"
 
 
 # telegram params
@@ -134,8 +138,8 @@ def var_read(folder=VAR_FOLDER, verbose=False) :
 			with open(folder+file, "rb") as f : var = pickle.load(f)
 			if verbose : 
 				print("bin format : ")
-			if var == 0 : var = "off"
-			if var == 1 : var = "on"
+			if var == 0 : var = "Off"
+			if var == 1 : var = "On"
 			print(str(var))
 
 
@@ -243,6 +247,7 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 		ans = handle_int(2, 6*24, LAP_STAMP)
 		var_manager("LAP_STAMP", mode, ans, folder=folder)		
 
+		################################
 
 		print("\n\nAUTO_REBOOT : Boolean value -- 'y'/'n'--, if set, your miner will reboot if MIN_HASH threshold is reached, \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))		
 		print("\ndefine auto reboot : ", end ="")
@@ -254,6 +259,7 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 		ans = handle_bool(AUTO_LAUNCH)
 		var_manager("AUTO_LAUNCH", mode, ans, folder=folder)
 
+		################################
 
 		print("\n\nHASH_MODE : Boolean value -- 'y'/'n'--, do you allow your system to check and take care of your hashrate ? \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))
 		print("\ndefine hash_mode : ", end ="")
@@ -268,6 +274,8 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 		else : 
 			var_manager("MIN_HASH", mode, None, folder=folder)
 
+		################################
+
 		print("\n\nTEMP_MODE : Boolean value -- 'y'/'n'--, do you allow your system to check and take care of your GPUs temperature ? \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))
 		print("\ndefine temp_mode : ", end ="")
 		ans = handle_bool(TEMP_MODE)
@@ -281,6 +289,7 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 		else : 
 			var_manager("MAX_TEMP", mode, None, folder=folder)
 
+		################################
 
 		print("\n\nJET_LAG : the time stamp -- in hours -- between your local time and your system time, \ndefault value : {}".format(JET_LAG))		
 		print("\ndefine jet_lag : ", end ="")
@@ -296,6 +305,78 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 		print("\ndefine logging_level : ",end ="")
 		ans = handle_bool(LOGGING_LEVEL)
 		var_manager("LOGGING_LEVEL", mode, ans, folder=folder)
+
+		################################
+
+
+def set_id_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) : 
+
+		_USER   = find_user()
+		_IP_INT  = find_ip_int()
+		_IP_EXT  = find_ip_ext()
+
+		print("\n\nuser :".ljust(16, " "), str(_USER))
+		print("intern ip :".ljust(16, " "), str(_IP_INT))
+		print("external ip :".ljust(16, " "), str(_IP_EXT))
+
+		print("\ndo you confirm? ",end ="")
+		ans = handle_bool()
+
+		if  ans : 
+			var_manager("USER", mode, _USER, folder=folder)
+			var_manager("IP_INT", mode, _IP_INT, folder=folder)
+			var_manager("IP_EXT", mode, _IP_EXT, folder=folder)
+		else : 
+			var_manager("USER", mode, USER, folder=folder)
+			var_manager("IP_INT", mode,IP_INT, folder=folder)
+			var_manager("IP_EXT", mode, IP_EXT, folder=folder)
+
+
+def find_ip_ext(http="http://whatismyip.host/") : 
+	""" """
+
+	try : 	
+		html = urlopen(http).read()
+		html = html.decode("utf-8").splitlines()
+		tag = """<p class="ipaddress">"""
+		html = [i.strip().replace(tag, "").replace("</p>", "") for i in html if tag in i]
+		ip = html[0]
+		return ip
+	except : 
+		print("error reading ip_ext")
+		return None
+
+
+def find_ip_int(cmd = "ifconfig") : 
+	""" """
+
+	eth0 = os.popen(cmd +' eth0').readlines()
+	if eth0 : 
+		try : 
+			eth0 = eth0[1].strip().split(" ")[1].split(':')[1]
+			return eth0
+		except : 
+			eth0 = eth0[1].strip().split(" ")[1]
+			return eth0
+	else : 
+		wlp3s0 = os.popen(cmd +' wlp3s0').readlines()
+		if wlp3s0 : 
+			try : 
+				wlp3s0 = wlp3s0[1].strip().split(" ")[1].split(':')[1]
+				return wlp3s0
+			except : 
+				wlp3s0 = wlp3s0[1].strip().split(" ")[1]
+				return wlp3s0
+	print("error reading ip_int")
+	return None
+
+
+def find_user(cmd="whoami") : 
+	""" """
+
+	who = os.popen(cmd).readlines()[0].replace("\n", "")
+	return who
+
 
 
 def set_telegram_var(mode="wb", folder=VAR_FOLDER) :
@@ -399,3 +480,20 @@ def load_telegram_var(mode="rb", folder=VAR_FOLDER) :
 		RIG 	= var_manager("RIG", mode, folder=folder)
 
 		return True, TOKEN, CHAT_ID, RIG
+
+def load_id_var(mode="rb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) : 
+	""" """
+
+		USER 	= var_manager("USER", mode, folder=folder)
+		INT_IP	= var_manager("IN_IP", mode, folder=folder)
+		EXT_IP 	= var_manager("EXT_IP", mode, folder=folder)
+
+		return USER, INT_IP, EXT_IP
+
+
+if __name__ != '__main__':
+
+	USER, INT_IP, EXT_IP = load_id_var()
+	TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
+ 	SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH, \
+		TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()

@@ -46,7 +46,8 @@ def prepare_system(folder=VAR_FOLDER):
 					"HASH_MODE","MIN_HASH",
 					"TEMP_MODE", "MAX_TEMP", 
 					"JET_LAG", "LATENCY", "LOGGING_LEVEL",  
-					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG"]
+					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", 
+					"USER", "IP_EXT", "IP_INT"]
 	
 	for filename in FILES :
 		try : 
