@@ -151,10 +151,10 @@ def handle_choice(*li) :
 	# 		ans = input("\nwrong input, expected 'y' or 'n'\n")
 
 
-def handle_bool() : 
+def handle_bool(default=None) : 
 	"""read a bool response"""
 
-	ans = input("y/n\n")
+	ans = input("'y' / 'n' -- 'd' for default value\n")
 	
 	while True: 
 
@@ -162,14 +162,19 @@ def handle_bool() :
 			return True
 		elif ans.lower() == "n":
 			return False
+		elif : ans.lower() == "d"
+			return default
 		else : 
 			ans = input("\nwrong input, expected 'y' or 'n'\n")
 			
 
-def handle_int(mi=0, ma=10000) : 
+def handle_int(mi=0, ma=10000, default=None) : 
 	"""read a int response"""
 
-	ans = input("number between {} and {}\n".format(mi, ma))
+	ans = input("number between {} and {}  --  'd' for defalut value\n".format(mi, ma))
+
+	if ans.lower() == "d"
+			return default
 	
 	while True: 
 
@@ -196,37 +201,56 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 	else : 
 		print("\n\nSLEEPER : the time of loop processing -- in seconds --, \ndefault value (STRONGLY RECOMMANDED) : {}".format(SLEEPER))
 		print("\ndefine sleeper : ")
-		ans = handle_int(60, 60*60)
+		ans = handle_int(60, 60*60, SLEEPER)
 		var_manager("SLEEPER", mode, ans, folder=folder)
 
 		print("\n\nLAP_STAMP : the rate of info logging (inform you if everything is fine), the more it is important the less you will be informed -- in lap --, \ndefault value (STRONGLY RECOMMANDED) : {}".format(LAP_STAMP))
 		print("\ndefine lap_stamp : ")
-		ans = handle_int(1, 6*24)
+		ans = handle_int(1, 6*24, LAP_STAMP)
 		var_manager("LAP_STAMP", mode, ans, folder=folder)		
+
+
+		print("\n\nAUTO_REBOOT : Boolean value -- 'y'/'n'--, if set, your miner will reboot if MIN_HASH threshold is reached, \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))		
+		print("\ndefine auto reboot : ")
+		ans = handle_bool(AUTO_REBOOT)
+		var_manager("AUTO_REBOOT", mode, ans, folder=folder)
+
+		print("\n\nAUTO_LAUNCH: Boolean value -- 'y'/'n'--, if set, your program will be launched automaticly when your miner will boot, \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))		
+		print("\ndefine auto reboot : ")
+		ans = handle_bool(AUTO_LAUNCH)
+		var_manager("AUTO_LAUNCH", mode, ans, folder=folder)
+
+
+		print("\n\nHASH_MODE : Boolean value -- 'y'/'n'--, do you allow your system to check and take care of your hashrate ? \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))
+		print("\ndefine min_hash : ")
+		ans = handle_bool(HASH_MODE)
+		var_manager("HASH_MODE", mode, ans, folder=folder)
 
 		print("\n\nMIN_HASH : if your miner's hashrate fall bellow this threshold you will be warned and miner will reboot. Consider nb of GPUS x min GPU expected rate -- in global summed hashrate --, \ndefault value : {}".format(MIN_HASH))
 		print("\ndefine min_hash : ")
-		ans = handle_int(15, 12 * 35)
+		ans = handle_int(15, 12 * 35, MIN_HASH)
 		var_manager("MIN_HASH", mode, ans, folder=folder)
 
-		print("\n\nAUTO_REBOOT : Boolean value -- y/n--, if set, your miner will reboot if MIN_HASH threshold is reached, \ndefault value (STRONGLY RECOMMANDED) : {}".format("y"))		
-		print("\ndefine auto reboot : ")
-		ans = handle_bool()
-		var_manager("AUTO_REBOOT", mode, ans, folder=folder)
 
-		print("\n\nAUTO_LAUNCH: Boolean value -- y/n--, if set, your program will be launched automaticly when your miner will boot, \ndefault value (STRONGLY RECOMMANDED) : {}".format("y"))		
-		print("\ndefine auto reboot : ")
-		ans = handle_bool()
-		var_manager("AUTO_REBOOT", mode, ans, folder=folder)
+		print("\n\nTEMP_MODE : Boolean value -- 'y'/'n'--, do you allow your system to check and take care of your GPUs temperature ? \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))
+		print("\ndefine min_hash : ")
+		ans = handle_bool(TEMP_MODE)
+		var_manager("TEMP_MODE", mode, ans, folder=folder)
+
+		print("\n\nMAX_TEMP : if one of your GPUs temp is too hot  -- in °C -- your miner will be stoped for 30 min or 1 hour, you will be warned and miner will reboot, \ndefault value : {}".format(MIN_HASH))
+		print("\ndefine min_hash : ")
+		ans = handle_int(15, 12 * 35, MIN_HASH)
+		var_manager("MIN_HASH", mode, ans, folder=folder)
+
 
 		print("\n\nJET_LAG : the time stamp -- in hours -- between your local time and your system time, \ndefault value : {}".format(JET_LAG))		
 		print("\ndefine jet_lag : ")
-		ans = handle_int(-24, +24)
+		ans = handle_int(-24, +24, JET_LAG)
 		var_manager("JET_LAG", mode, ans, folder=folder)
 	
-		print("\n\nLATENCY : Boolean value -- y/n--, if set, your miner will have the time to wake up and to launch all GPUs before being scanned, \ndefault value (STRONGLY RECOMMANDED) : {}".format("y"))		
+		print("\n\nLATENCY : Boolean value -- 'y'/'n'--, if set, your miner will have the time to wake up and to launch all GPUs before being scanned, \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))		
 		print("\ndefine latency : ")
-		ans = handle_bool()
+		ans = handle_bool(LATENCY)
 		var_manager("LATENCY", mode, ans, folder=folder)
 
 
