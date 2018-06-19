@@ -162,10 +162,10 @@ def handle_bool(default=None) :
 			return True
 		elif ans.lower() == "n":
 			return False
-		elif : ans.lower() == "d"
+		elif  ans.lower() == "d" : 
 			return default
 		else : 
-			ans = input("\nwrong input, expected 'y' or 'n'\n")
+			ans = input("\nwrong input, expected 'y', 'n', or  'd'\n")
 			
 
 def handle_int(mi=0, ma=10000, default=None) : 
@@ -173,8 +173,8 @@ def handle_int(mi=0, ma=10000, default=None) :
 
 	ans = input("number between {} and {}  --  'd' for defalut value\n".format(mi, ma))
 
-	if ans.lower() == "d"
-			return default
+	if ans.lower() == "d" : 
+		return default
 	
 	while True: 
 
@@ -183,9 +183,9 @@ def handle_int(mi=0, ma=10000, default=None) :
 			if (ans > mi) and (ans < ma) : 
 				return ans
 			else : 
-				ans = input("\nwrong input, expected number between {} and {}\n".format(mi, ma))
+				ans = input("\nwrong input, expected number between {} and {}, or 'd'\n".format(mi, ma))
 		except :  
-			ans = input("\nwrong input, expected number between {} and {}\n".format(mi, ma))
+			ans = input("\nwrong input, expected number between {} and {}, or 'd'\n".format(mi, ma))
 
 
 def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) : 
