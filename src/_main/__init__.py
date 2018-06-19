@@ -274,3 +274,86 @@ def debug(msg) :
 	logging.debug(msg)
 
 
+def update_ip_ext() : 
+	""" """
+
+	new_ip = find_ip_ext()
+	if new_ip : 
+		old_ip = var_manager("IP_EXT", "rb", folder=VAR_FOLDER)
+		if new_ip != old_ip : 
+			warning("new ip is {}".format(new_ip))
+			var_manager("IP_EXT", "wb", new_ip folder=VAR_FOLDER)
+
+
+def manage_hashrate(hashrate): 
+	""" """
+
+	# reboot option
+	if (isinstance(hashrate, float) or isinstance(hashrate, int)) : 
+		
+		if hashrate < MIN_HASH : 
+			
+			if AUTO_REBOOT : 
+				warning("rebooting due to hashrate {}\n auto reboot mode enabled\n".format(hashrate))
+				reboot()
+			
+			else : 
+				warning("hashrate problem {}\n auto reboot mode disabled".format(hashrate))
+
+		else : 
+			debug("hashrate OK")
+			
+			if not lap % LAP_STAMP : 
+				warning("everything is fine, hashrate {}\n".format(hashrate))
+
+	else : 
+		warning("invalid hashrate type {}\n".format(type(hashrate)))
+
+
+
+def manage_temp(max_temp) : 
+	""" """
+
+	# reboot option
+	if (isinstance(max_temp, float) or isinstance(max_temp, int)) : 
+		
+		if max_temp > MAX_TEMP : 
+			
+			if AUTO_REBOOT : 
+				warning("rebooting due to max_temp {}\n auto reboot mode enabled\n".format(max_temp))
+				reboot()
+			
+			else : 
+				warning("max_temp problem {}\n auto reboot mode disabled".format(max_temp))
+
+		else : 
+			debug("max_temp OK")
+			
+			if not lap % LAP_STAMP : 
+				warning("everything is fine, max_temp {}\n".format(max_temp))
+
+	else : 
+		warning("invalid max_temp type {}\n".format(type(max_temp)))
+	
+
+
+def return_temp(data) : 
+	""" """
+
+	return None
+
+
+def enhance_data(data): 
+	""" """
+
+	return data
+
+
+def update_stats(data):
+	""" """
+
+	pass
+
+
+
+

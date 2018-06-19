@@ -294,7 +294,7 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 		if ans : 
 			print("\n\nMAX_TEMP : if one of your GPUs temp is too hot  -- in °C -- your miner will be stoped for 30 min or 1 hour, you will be warned and miner will reboot, \ndefault value (STRONGLY RECOMMANDED) : {}".format(MAX_TEMP))
 			print("\ndefine max_temp : ", end ="")
-			ans = handle_int(50, 100, MIN_HASH)
+			ans = handle_int(50, 100, MAX_TEMP)
 			var_manager("MAX_TEMP", mode, ans, folder=folder)
 		else : 
 			var_manager("MAX_TEMP", mode, None, folder=folder)
