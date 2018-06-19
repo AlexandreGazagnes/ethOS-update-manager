@@ -286,7 +286,7 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 
 		print("\n\nLOGGING_LEVEL : Boolean value -- 'y'/'n'--, not implemented yet :), \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))		
 		print("\ndefine logging_level : ",end ="")
-		ans = handle_bool(LOGGING_LEVEL, end ="")
+		ans = handle_bool(LOGGING_LEVEL)
 		var_manager("LOGGING_LEVEL", mode, ans, folder=folder)
 
 
@@ -380,15 +380,15 @@ def load_system_var(mode="rb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 def load_telegram_var(mode="rb", folder=VAR_FOLDER) : 
 	""" """
 
-	TELEGRAM_MODE 	= var_manager("TELEGRAM_MODE", mode)
+	TELEGRAM_MODE 	= var_manager("TELEGRAM_MODE", mode, folder=folder)
 
 	if not TELEGRAM_MODE : 
 		return False, None, None, None
 
 	else :
-		TOKEN 	= var_manager("TOKEN", mode)
-		CHAT_ID	= var_manager("CHAT_ID", mode)
-		RIG 	= var_manager("RIG", mode)
+		TOKEN 	= var_manager("TOKEN", mode, folder=folder)
+		CHAT_ID	= var_manager("CHAT_ID", mode, folder=folder)
+		RIG 	= var_manager("RIG", mode, folder=folder)
 
 		return True, TOKEN, CHAT_ID, RIG
 
