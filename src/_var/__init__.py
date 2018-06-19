@@ -280,8 +280,8 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 		var_manager("JET_LAG", mode, ans, folder=folder)
 	
 		print("\n\nLATENCY : Boolean value -- 'y'/'n'--, if set, your miner will have the time to wake up and to launch all GPUs before being scanned, \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))		
-		print("\ndefine latency : ")
-		ans = handle_bool(LATENCY, end ="")
+		print("\ndefine latency : ",end ="")
+		ans = handle_bool(LATENCY)
 		var_manager("LATENCY", mode, ans, folder=folder)
 
 

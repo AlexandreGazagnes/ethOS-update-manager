@@ -137,6 +137,7 @@ def write_alias() :
 
 	write_bashrc("# create alias (shortcup for CLI) LAUNCH to launch program manualy :")
 	write_bashrc("alias LAUNCH='python3 /home/ethos/ethOS-update-manager/launch.py'")
+	write_bashrc("alias ethuper='python3 /home/ethos/ethOS-update-manager/src/ethuper.py'")
 
 	write_bashrc()
 	write_bashrc()
