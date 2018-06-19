@@ -22,6 +22,10 @@ AUTO_LAUNCH = True			# enable auto lauch at system boot
 JET_LAG 	= 8				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
+LOGGING_LEVEL = True
+
+
+# sys paths
 
 VAR_FOLDER 	= "/home/ethos/ethOS-update-manager/src/var/"
 DATA_FOLDER	= "/home/ethos/ethOS-update-manager/data/"
@@ -116,6 +120,21 @@ def var_read(folder=VAR_FOLDER, verbose=False) :
 			if verbose : 
 				print("bin format : ")
 			print(str(var), str(type(var)))
+
+
+def handle_choice(*li) : 
+	"""read a bool response"""
+
+	# ans = input("y/n\n")
+	
+	# while True: 
+
+	# 	if ans.lower() == "y" : 
+	# 		return True
+	# 	elif ans.lower() == "n":
+	# 		return False
+	# 	else : 
+	# 		ans = input("\nwrong input, expected 'y' or 'n'\n")
 
 
 def handle_bool() : 

@@ -43,7 +43,7 @@ def prepare_system(folder=VAR_FOLDER):
 
 	FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
 					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT",
-					"AUTO_LAUNCH"	]
+					"AUTO_LAUNCH", "LOGGING_LEVEL"	]
 	
 	for filename in FILES :
 		try : 
