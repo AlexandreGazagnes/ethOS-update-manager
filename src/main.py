@@ -27,8 +27,8 @@ logging.basicConfig(	level=logging.INFO,
 
 
 # import 
-from src._main import * 
-from src._var import * 
+from _main import * 
+from _var import * 
 
 
 # main
