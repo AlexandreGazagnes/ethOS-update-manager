@@ -12,6 +12,22 @@ var functions
 import os, pickle, random, urllib.request
 
 
+# sys paths
+
+ROOT_FOLDER 	= "/home/ethos/ethOS-update-manager/"
+VAR_FOLDER 		=  ROOT_FOLDER + "src/var/"
+DATA_FOLDER		=  ROOT_FOLDER + "data/"
+DOC_FOLDER 		=  ROOT_FOLDER + "docs/"
+
+VAR_FILE_LIST	= [	"SLEEPER", "LAP_STAMP", 
+			 		"AUTO_REBOOT", "AUTO_LAUNCH", 
+					"HASH_MODE","MIN_HASH",
+					"TEMP_MODE", "MAX_TEMP", 
+					"JET_LAG", "LATENCY", "LOGGING_LEVEL",  
+					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", 
+					"USER", "IP_EXT", "IP_INT"]
+
+
 # sys params
 
 SLEEPER 		= 10 * 60		# IN SECONDS think to multiply by 60 for minutes ;)
@@ -19,7 +35,6 @@ LAP_STAMP		= 6 * 6			# update normal status each LAP_STAMP * SLEEPER sec
 
 AUTO_REBOOT 	= True			# enable auto reboot if min hashrate threshold reached
 AUTO_LAUNCH 	= True			# enable auto lauch at system boot
-
 HASH_MODE		= True			# enable if hashraste is too low
 MIN_HASH 		= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
 
@@ -31,24 +46,20 @@ LATENCY 		= True			# if LATENCY additionnal sleeper added to give time
 								# to rig to be fully operational (STRONGLY RECOMMANDED)
 LOGGING_LEVEL 	= 100
 
-USER 		  	= "User "
-IP_INT 			= "100.100.1.10"
-IP_EXT 			= "100.100.100.1.10"
-
 
 SYS_VAR_PAIRS = [ 	("SLEEPER", SLEEPER), ("LAP_STAMP", LAP_STAMP),
 	      			("AUTO_REBOOT",AUTO_REBOOT), ("AUTO_LAUNCH", AUTO_LAUNCH), 
 	      			("HASH_MODE", HASH_MODE), ("MIN_HASH", MIN_HASH), 	
 	      			("TEMP_MODE", TEMP_MODE), ("MAX_TEMP", MAX_TEMP), 
-	      			("JET_LAG", JET_LAG), ("LATENCY",LATENCY), ("LOGGING_LEVEL", LOGGING_LEVEL)]
+	      			("JET_LAG", JET_LAG), ("LATENCY",LATENCY), 
+	      			("LOGGING_LEVEL", LOGGING_LEVEL)	]
 
 
-# sys paths
+# id params
 
-ROOT_FOLDER 	= "/home/ethos/ethOS-update-manager/"
-VAR_FOLDER 		=  ROOT_FOLDER + "src/var/"
-DATA_FOLDER		=  ROOT_FOLDER + "data/"
-DOC_FOLDER 		=  ROOT_FOLDER + "docs/"
+USER 		  	= "User "
+IP_INT 			= "100.100.1.10"
+IP_EXT 			= "100.100.100.1.10"
 
 
 # telegram params
@@ -225,7 +236,6 @@ def handle_int(mi=0, ma=10000, default=None) :
 				ans = input("\nwrong input, expected number between {}\n".format(mi, ma))
 
 
-
 def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) : 
 	""" """
 
@@ -310,26 +320,36 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 
 
 def set_id_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) : 
+	""" """
+	_USER   = find_user()
+	_IP_INT  = find_ip_int()
+	_IP_EXT  = find_ip_ext()
 
-		_USER   = find_user()
-		_IP_INT  = find_ip_int()
-		_IP_EXT  = find_ip_ext()
+	print("\n\nid variables: ")
+	print("user :".ljust(16, " "), str(_USER))
+	print("intern ip :".ljust(16, " "), str(_IP_INT))
+	print("external ip :".ljust(16, " "), str(_IP_EXT))
 
-		print("\n\nuser :".ljust(16, " "), str(_USER))
-		print("intern ip :".ljust(16, " "), str(_IP_INT))
-		print("external ip :".ljust(16, " "), str(_IP_EXT))
+	print("\ndo you confirm? ",end ="")
+	ans = handle_bool()
 
-		print("\ndo you confirm? ",end ="")
-		ans = handle_bool()
+	if  ans : 
+		var_manager("USER", mode, _USER, folder=folder)
+		var_manager("IP_INT", mode, _IP_INT, folder=folder)
+		var_manager("IP_EXT", mode, _IP_EXT, folder=folder)
+	
+	else : 
+		print("\ndefine user : ")
+		user = input("alphanumeric input\n")
+		var_manager("USER", mode, user, folder=folder)
+		
+		print("\ndefine ip_int : ")
+		ip_int = input("alphanumeric input\n")
+		var_manager("IP_INT", mode,ip_int, folder=folder)
 
-		if  ans : 
-			var_manager("USER", mode, _USER, folder=folder)
-			var_manager("IP_INT", mode, _IP_INT, folder=folder)
-			var_manager("IP_EXT", mode, _IP_EXT, folder=folder)
-		else : 
-			var_manager("USER", mode, USER, folder=folder)
-			var_manager("IP_INT", mode,IP_INT, folder=folder)
-			var_manager("IP_EXT", mode, IP_EXT, folder=folder)
+		print("\ndefine ip_ext : ")
+		ip_ext = input("alphanumeric input\n")
+		var_manager("IP_EXT", mode, ip_ext, folder=folder)
 
 
 def find_ip_ext(http="http://whatismyip.host/") : 
@@ -376,7 +396,6 @@ def find_user(cmd="whoami") :
 
 	who = os.popen(cmd).readlines()[0].replace("\n", "")
 	return who
-
 
 
 def set_telegram_var(mode="wb", folder=VAR_FOLDER) :
@@ -481,19 +500,28 @@ def load_telegram_var(mode="rb", folder=VAR_FOLDER) :
 
 		return True, TOKEN, CHAT_ID, RIG
 
+
 def load_id_var(mode="rb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) : 
 	""" """
 
-		USER 	= var_manager("USER", mode, folder=folder)
-		INT_IP	= var_manager("IN_IP", mode, folder=folder)
-		EXT_IP 	= var_manager("EXT_IP", mode, folder=folder)
+	USER 	= var_manager("USER", mode, folder=folder)
+	INT_IP	= var_manager("IN_IP", mode, folder=folder)
+	EXT_IP 	= var_manager("EXT_IP", mode, folder=folder)
 
-		return USER, INT_IP, EXT_IP
+	return USER, INT_IP, EXT_IP
 
 
 if __name__ != '__main__':
 
-	USER, INT_IP, EXT_IP = load_id_var()
-	TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
- 	SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH, \
-		TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
+	try : 
+
+		USER, INT_IP, EXT_IP = load_id_var()
+		TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
+	 	SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH, \
+			TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
+	except :
+
+		pass
+
+
+

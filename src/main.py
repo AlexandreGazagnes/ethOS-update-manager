@@ -38,9 +38,11 @@ def main() :
 	debug("main")
 
 	# read var
-	SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH, \
-		TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
+	USER, INT_IP, EXT_IP = load_id_var()
 	TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
+ 	SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH, \
+		TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
+
 
 	# if not AUTO_LAUNCH stop the program
 	if not AUTO_LAUNCH : 
@@ -66,10 +68,11 @@ def main() :
 		debug("main loop entrance") 
 
 		# update var
-		SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH, \
-			TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
+		USER, INT_IP, EXT_IP = load_id_var()
 		TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
-		
+	 	SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH, \
+			TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
+			
 		# proceed 
 		data = data_from_cmd() 	# extract data from cmd 
 		hashrate = return_hash(data)

@@ -31,6 +31,8 @@ def working_process() :
 
 
 def launch_if_needed(is_working) : 
+	""" """
+	
 	# if 1 process break
 	if True in is_working :
 		print("ethOS-update-manager already running")

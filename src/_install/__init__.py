@@ -16,12 +16,14 @@ from src._var import *
 # functions
 
 def write_bashrc(txt=" ") : 
+	""" """
 
 	cmd = """echo "{}" >> /home/ethos/.bashrc """.format(txt)
 	os.system(cmd)
 
 
 def counter(k=4) : 
+	""" """
 
 	time.sleep(1)
 	print("")
@@ -30,7 +32,7 @@ def counter(k=4) :
 		time.sleep(1)
 
 
-def prepare_system(folder=VAR_FOLDER): 
+def prepare_system(folder=VAR_FOLDER, files=VAR_FILE_LIST): 
 	"""prepare system"""
 
 	os.system("clear")
@@ -41,15 +43,8 @@ def prepare_system(folder=VAR_FOLDER):
 	except : 
 		print("BE SURE FILES ALREADY EXISTS")
 
-	FILES = 	[	"SLEEPER", "LAP_STAMP", 
-					"AUTO_REBOOT", "AUTO_LAUNCH", 
-					"HASH_MODE","MIN_HASH",
-					"TEMP_MODE", "MAX_TEMP", 
-					"JET_LAG", "LATENCY", "LOGGING_LEVEL",  
-					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", 
-					"USER", "IP_EXT", "IP_INT"]
 	
-	for filename in FILES :
+	for filename in files :
 		try : 
 			os.system("touch {}{}".format(folder, filename))
 		except : 
@@ -87,6 +82,7 @@ def main_title():
 
 def system_var_title() : 
 	"""" """
+	
 	os.system("clear")
 	print("\n" * 6)
 	print("###################################")
