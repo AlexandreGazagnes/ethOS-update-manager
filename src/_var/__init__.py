@@ -15,7 +15,7 @@ import os, pickle, random, urllib.request
 # sys params
 
 SLEEPER 	= 10 * 60		# IN SECONDS think to multiply by 60 for minutes ;)
-LAP_STAMP	= 6 * 4			# update normal status each LAP_STAMP * SLEEPER sec
+LAP_STAMP	= 6 * 6			# update normal status each LAP_STAMP * SLEEPER sec
 
 AUTO_REBOOT = True			# enable auto reboot if min hashrate threshold reached
 AUTO_LAUNCH = True			# enable auto lauch at system boot
@@ -30,6 +30,7 @@ JET_LAG 	= 8				# depends of your local/sys time
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
 LOGGING_LEVEL = 100
+
 
 SYS_VAR_PAIRS = [ 	("SLEEPER", SLEEPER), ("LAP_STAMP", LAP_STAMP),
 	      			("AUTO_REBOOT",AUTO_REBOOT), ("AUTO_LAUNCH", AUTO_LAUNCH), 
