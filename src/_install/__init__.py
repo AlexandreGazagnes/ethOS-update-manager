@@ -41,9 +41,12 @@ def prepare_system(folder=VAR_FOLDER):
 	except : 
 		print("BE SURE FILES ALREADY EXISTS")
 
-	FILES = 	[	"SLEEPER", "LAP_STAMP", "MIN_HASH", "JET_LAG", "LATENCY", 
-					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG", "AUTO_REBOOT",
-					"AUTO_LAUNCH", "LOGGING_LEVEL"	]
+	FILES = 	[	"SLEEPER", "LAP_STAMP", 
+					"AUTO_REBOOT", "AUTO_LAUNCH", 
+					"HASH_MODE","MIN_HASH",
+					"TEMP_MODE", "MAX_TEMP", 
+					"JET_LAG", "LATENCY", "LOGGING_LEVEL",  
+					"TELEGRAM_MODE", "TOKEN", "CHAT_ID", "RIG"]
 	
 	for filename in FILES :
 		try : 

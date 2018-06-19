@@ -16,13 +16,26 @@ import pickle, random, urllib.request
 
 SLEEPER 	= 10 * 60		# IN SECONDS think to multiply by 60 for minutes ;)
 LAP_STAMP	= 6 * 4			# update normal status each LAP_STAMP * SLEEPER sec
-MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
+
 AUTO_REBOOT = True			# enable auto reboot if min hashrate threshold reached
 AUTO_LAUNCH = True			# enable auto lauch at system boot
+
+HASH_MODE	= True			# enable if hashraste is too low
+MIN_HASH 	= 179			# 30 ou 120 ou 180 ... depends of your perf and GPU's number
+
+TEMP_MODE	= True			# enable reboot if over warming 
+MAX_TEMP	= 75			# 70, 75, 80 ... depends of the care you have for your GPUs
+
 JET_LAG 	= 8				# depends of your local/sys time 
 LATENCY 	= True			# if LATENCY additionnal sleeper added to give time 
 							# to rig to be fully operational (STRONGLY RECOMMANDED)
-LOGGING_LEVEL = True
+LOGGING_LEVEL = 100
+
+SYS_VAR_PAIRS = [ 	("SLEEPER", SLEEPER), ("LAP_STAMP", LAP_STAMP),
+	      			("AUTO_REBOOT",AUTO_REBOOT), ("AUTO_LAUNCH", AUTO_LAUNCH), 
+	      			("HASH_MODE", HASH_MODE), ("MIN_HASH", MIN_HASH), 	
+	      			("TEMP_MODE", TEMP_MODE), ("MAX_TEMP", MAX_TEMP), 
+	      			("JET_LAG", JET_LAG), ("LATENCY",LATENCY), ("LOGGING_LEVEL", LOGGING_LEVEL)]
 
 
 # sys paths
@@ -169,20 +182,15 @@ def handle_int(mi=0, ma=10000) :
 			ans = input("\nwrong input, expected number between {} and {}\n".format(mi, ma))
 
 
-def set_system_var(mode="wb", folder=VAR_FOLDER) : 
+def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) : 
 	""" """
 
 	print("do you want to use system default var ?")
 	ans = handle_bool()
 
 	if ans : 
-		var_manager("SLEEPER", mode, SLEEPER, folder=folder)
-		var_manager("LAP_STAMP", mode, LAP_STAMP, folder=folder)
-		var_manager("MIN_HASH", mode, MIN_HASH, folder=folder)
-		var_manager("AUTO_REBOOT", mode, AUTO_REBOOT, folder=folder)
-		var_manager("AUTO_LAUNCH", mode, AUTO_LAUNCH, folder=folder)		
-		var_manager("JET_LAG", mode, JET_LAG, folder=folder)
-		var_manager("LATENCY", mode, LATENCY, folder=folder)
+		[var_manager(f, mode, var, folder=folder) for (f, var) in pairs]
+		
 
 	else : 
 		print("\n\nSLEEPER : the time of loop processing -- in seconds --, \ndefault value (STRONGLY RECOMMANDED) : {}".format(SLEEPER))
@@ -203,13 +211,11 @@ def set_system_var(mode="wb", folder=VAR_FOLDER) :
 		print("\n\nAUTO_REBOOT : Boolean value -- y/n--, if set, your miner will reboot if MIN_HASH threshold is reached, \ndefault value (STRONGLY RECOMMANDED) : {}".format("y"))		
 		print("\ndefine auto reboot : ")
 		ans = handle_bool()
-		if not ans : ans=0
 		var_manager("AUTO_REBOOT", mode, ans, folder=folder)
 
 		print("\n\nAUTO_LAUNCH: Boolean value -- y/n--, if set, your program will be launched automaticly when your miner will boot, \ndefault value (STRONGLY RECOMMANDED) : {}".format("y"))		
 		print("\ndefine auto reboot : ")
 		ans = handle_bool()
-		if not ans : ans=0
 		var_manager("AUTO_REBOOT", mode, ans, folder=folder)
 
 		print("\n\nJET_LAG : the time stamp -- in hours -- between your local time and your system time, \ndefault value : {}".format(JET_LAG))		
@@ -220,7 +226,6 @@ def set_system_var(mode="wb", folder=VAR_FOLDER) :
 		print("\n\nLATENCY : Boolean value -- y/n--, if set, your miner will have the time to wake up and to launch all GPUs before being scanned, \ndefault value (STRONGLY RECOMMANDED) : {}".format("y"))		
 		print("\ndefine latency : ")
 		ans = handle_bool()
-		if not ans : ans=0
 		var_manager("LATENCY", mode, ans, folder=folder)
 
 
@@ -305,19 +310,10 @@ def confirm_connexion(token, chat_id, mi=100000, ma=999999) :
 		else 	: return 2 
 
 
-
-def load_system_var(mode="rb", folder = VAR_FOLDER) : 
+def load_system_var(mode="rb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) : 
 	""" """
 
-	SLEEPER 	= var_manager("SLEEPER", mode)
-	LAP_STAMP 	= var_manager("LAP_STAMP", mode)
-	MIN_HASH 	= var_manager("MIN_HASH", mode)
-	AUTO_REBOOT	= var_manager("AUTO_REBOOT", mode)
-	AUTO_LAUNCH	= var_manager("AUTO_LAUNCH", mode)	
-	JET_LAG 	= var_manager("JET_LAG", mode)
-	LATENCY 	= var_manager("LATENCY", mode)
-
-	return SLEEPER, LAP_STAMP, MIN_HASH, AUTO_REBOOT, AUTO_LAUNCH, JET_LAG, LATENCY
+	return (var_manager(f, mode, folder=folder) for (f, var) in pairs)
 
 
 def load_telegram_var(mode="rb", folder=VAR_FOLDER) : 
