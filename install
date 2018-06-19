@@ -19,18 +19,18 @@ from src._var import *
 # main
 
 def main() : 
+	
 	prepare_system()
 	
 	main_title()
 	input()
 
 	system_var_title()
-
 	set_system_var()
+
 	telegram_var_title()
 	set_telegram_var()
 	
-
 	write_title()
 	write_alias()
 	write_autolaunch()

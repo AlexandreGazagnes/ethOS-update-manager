@@ -41,6 +41,10 @@ def main() :
 	SLEEPER, LAP_STAMP, MIN_HASH, AUTO_REBOOT, AUTO_LAUNCH, JET_LAG, LATENCY = load_system_var()
 	TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
 
+	# if not AUTO_LAUNCH stop the program
+	if not AUTO_LAUNCH : 
+		return 0
+
 	# init logging
 	logging.warning("\n\n\n")
 	warning("init new session")
@@ -51,7 +55,9 @@ def main() :
 	if LATENCY and (SLEEPER < (60 * 6)) :  
 		time.sleep(600 - SLEEPER)
 
+	# init lap
 	lap = 0
+
 
 	# main loop
 	while True :
@@ -67,17 +73,20 @@ def main() :
 		hashrate = return_hash(data)
 
 		# reboot option
-		if isinstance(hashrate, float) or isinstance(hashrate, int) : 
+		if (isinstance(hashrate, float) or isinstance(hashrate, int)) : 
 			
 			if hashrate < MIN_HASH : 
+				
 				if AUTO_REBOOT : 
 					warning("rebooting due to hashrate {}\n auto reboot mode enabled\n".format(hashrate))
 					reboot()
+				
 				else : 
 					warning("hashrate problem {}\n auto reboot mode disabled".format(hashrate))
 
 			else : 
 				debug("hashrate OK")
+				
 				if not lap % LAP_STAMP : 
 					warning("everything is fine, hashrate {}\n".format(hashrate))
 
