@@ -27,6 +27,7 @@ def main() :
 
 	system_var_title()
 	set_system_var()
+	set_id_var()
 
 	telegram_var_title()
 	set_telegram_var()
