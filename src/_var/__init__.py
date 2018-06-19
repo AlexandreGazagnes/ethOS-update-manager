@@ -154,38 +154,69 @@ def handle_choice(*li) :
 def handle_bool(default=None) : 
 	"""read a bool response"""
 
-	ans = input("'y' / 'n' -- 'd' for default value\n")
-	
-	while True: 
+	if default : 
 
-		if ans.lower() == "y" : 
-			return True
-		elif ans.lower() == "n":
-			return False
-		elif  ans.lower() == "d" : 
-			return default
-		else : 
-			ans = input("\nwrong input, expected 'y', 'n', or  'd'\n")
+		ans = input("'y' / 'n' -- 'd' for default value\n")
+		
+		while True: 
+
+			if ans.lower() == "y" : 
+				return True
+			elif ans.lower() == "n":
+				return False
+			elif  ans.lower() == "d" : 
+				return default
+			else : 
+				ans = input("\nwrong input, expected 'y', 'n', or  'd'\n")
+
+	else : 
+		ans = input("'y' / 'n'\n")
+		
+		while True: 
+
+			if ans.lower() == "y" : 
+				return True
+			elif ans.lower() == "n":
+				return False
+			else : 
+				ans = input("\nwrong input, expected 'y', 'n'\n")
 			
 
 def handle_int(mi=0, ma=10000, default=None) : 
 	"""read a int response"""
 
-	ans = input("number between {} and {}  --  'd' for defalut value\n".format(mi, ma))
+	if default : 
 
-	if ans.lower() == "d" : 
-		return default
-	
-	while True: 
+		ans = input("number between {} and {}  --  'd' for defalut value\n".format(mi, ma))
 
-		try : 
-			ans = int(ans)
-			if (ans > mi) and (ans < ma) : 
-				return ans
-			else : 
+		if ans.lower() == "d" : 
+			return default
+		
+		while True: 
+
+			try : 
+				ans = int(ans)
+				if (ans > mi) and (ans < ma) : 
+					return ans
+				else : 
+					ans = input("\nwrong input, expected number between {} and {}, or 'd'\n".format(mi, ma))
+			except :  
 				ans = input("\nwrong input, expected number between {} and {}, or 'd'\n".format(mi, ma))
-		except :  
-			ans = input("\nwrong input, expected number between {} and {}, or 'd'\n".format(mi, ma))
+
+	else : 
+		ans = input("number between {} and {}\n".format(mi, ma))
+		
+		while True: 
+
+			try : 
+				ans = int(ans)
+				if (ans > mi) and (ans < ma) : 
+					return ans
+				else : 
+					ans = input("\nwrong input, expected number between {}\n".format(mi, ma))
+			except :  
+				ans = input("\nwrong input, expected number between {}\n".format(mi, ma))
+
 
 
 def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) : 
@@ -200,57 +231,57 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 
 	else : 
 		print("\n\nSLEEPER : the time of loop processing -- in seconds --, \ndefault value (STRONGLY RECOMMANDED) : {}".format(SLEEPER))
-		print("\ndefine sleeper : ")
+		print("\ndefine sleeper : ", end ="")
 		ans = handle_int(60, 60*60, SLEEPER)
 		var_manager("SLEEPER", mode, ans, folder=folder)
 
 		print("\n\nLAP_STAMP : the rate of info logging (inform you if everything is fine), the more it is important the less you will be informed -- in lap --, \ndefault value (STRONGLY RECOMMANDED) : {}".format(LAP_STAMP))
-		print("\ndefine lap_stamp : ")
+		print("\ndefine lap_stamp : ", end ="")
 		ans = handle_int(1, 6*24, LAP_STAMP)
 		var_manager("LAP_STAMP", mode, ans, folder=folder)		
 
 
 		print("\n\nAUTO_REBOOT : Boolean value -- 'y'/'n'--, if set, your miner will reboot if MIN_HASH threshold is reached, \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))		
-		print("\ndefine auto reboot : ")
+		print("\ndefine auto reboot : ", end ="")
 		ans = handle_bool(AUTO_REBOOT)
 		var_manager("AUTO_REBOOT", mode, ans, folder=folder)
 
 		print("\n\nAUTO_LAUNCH: Boolean value -- 'y'/'n'--, if set, your program will be launched automaticly when your miner will boot, \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))		
-		print("\ndefine auto reboot : ")
+		print("\ndefine auto reboot : ", end ="")
 		ans = handle_bool(AUTO_LAUNCH)
 		var_manager("AUTO_LAUNCH", mode, ans, folder=folder)
 
 
 		print("\n\nHASH_MODE : Boolean value -- 'y'/'n'--, do you allow your system to check and take care of your hashrate ? \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))
-		print("\ndefine min_hash : ")
+		print("\ndefine min_hash : ", end ="")
 		ans = handle_bool(HASH_MODE)
 		var_manager("HASH_MODE", mode, ans, folder=folder)
 
 		print("\n\nMIN_HASH : if your miner's hashrate fall bellow this threshold you will be warned and miner will reboot. Consider nb of GPUS x min GPU expected rate -- in global summed hashrate --, \ndefault value : {}".format(MIN_HASH))
-		print("\ndefine min_hash : ")
+		print("\ndefine min_hash : ", end ="")
 		ans = handle_int(15, 12 * 35, MIN_HASH)
 		var_manager("MIN_HASH", mode, ans, folder=folder)
 
 
 		print("\n\nTEMP_MODE : Boolean value -- 'y'/'n'--, do you allow your system to check and take care of your GPUs temperature ? \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))
-		print("\ndefine min_hash : ")
+		print("\ndefine min_hash : ", end ="")
 		ans = handle_bool(TEMP_MODE)
 		var_manager("TEMP_MODE", mode, ans, folder=folder)
 
 		print("\n\nMAX_TEMP : if one of your GPUs temp is too hot  -- in °C -- your miner will be stoped for 30 min or 1 hour, you will be warned and miner will reboot, \ndefault value : {}".format(MIN_HASH))
-		print("\ndefine min_hash : ")
+		print("\ndefine min_hash : ", end ="")
 		ans = handle_int(15, 12 * 35, MIN_HASH)
 		var_manager("MIN_HASH", mode, ans, folder=folder)
 
 
 		print("\n\nJET_LAG : the time stamp -- in hours -- between your local time and your system time, \ndefault value : {}".format(JET_LAG))		
-		print("\ndefine jet_lag : ")
+		print("\ndefine jet_lag : ", end ="")
 		ans = handle_int(-24, +24, JET_LAG)
 		var_manager("JET_LAG", mode, ans, folder=folder)
 	
 		print("\n\nLATENCY : Boolean value -- 'y'/'n'--, if set, your miner will have the time to wake up and to launch all GPUs before being scanned, \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))		
 		print("\ndefine latency : ")
-		ans = handle_bool(LATENCY)
+		ans = handle_bool(LATENCY, end ="")
 		var_manager("LATENCY", mode, ans, folder=folder)
 
 
