@@ -284,6 +284,11 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 		ans = handle_bool(LATENCY)
 		var_manager("LATENCY", mode, ans, folder=folder)
 
+		print("\n\nLOGGING_LEVEL : Boolean value -- 'y'/'n'--, not implemented yet :), \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))		
+		print("\ndefine logging_level : ",end ="")
+		ans = handle_bool(LOGGING_LEVEL, end ="")
+		var_manager("LOGGING_LEVEL", mode, ans, folder=folder)
+
 
 def set_telegram_var(mode="wb", folder=VAR_FOLDER) :
 	""" """ 
