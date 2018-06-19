@@ -268,9 +268,9 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 		ans = handle_bool(TEMP_MODE)
 		var_manager("TEMP_MODE", mode, ans, folder=folder)
 
-		print("\n\nMAX_TEMP : if one of your GPUs temp is too hot  -- in °C -- your miner will be stoped for 30 min or 1 hour, you will be warned and miner will reboot, \ndefault value : {}".format(MIN_HASH))
+		print("\n\nMAX_TEMP : if one of your GPUs temp is too hot  -- in °C -- your miner will be stoped for 30 min or 1 hour, you will be warned and miner will reboot, \ndefault value (STRONGLY RECOMMANDED) : {}".format(MIN_HASH))
 		print("\ndefine min_hash : ", end ="")
-		ans = handle_int(15, 12 * 35, MIN_HASH)
+		ans = handle_int(50, 100, MIN_HASH)
 		var_manager("MIN_HASH", mode, ans, folder=folder)
 
 
