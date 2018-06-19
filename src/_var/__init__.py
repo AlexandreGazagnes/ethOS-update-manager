@@ -196,7 +196,7 @@ def handle_int(mi=0, ma=10000, default=None) :
 
 			try : 
 				ans = int(ans)
-				if (ans > mi) and (ans < ma) : 
+				if (ans >= mi) and (ans <= ma) : 
 					return ans
 				else : 
 					ans = input("\nwrong input, expected number between {} and {}, or 'd'\n".format(mi, ma))
@@ -253,25 +253,30 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 
 
 		print("\n\nHASH_MODE : Boolean value -- 'y'/'n'--, do you allow your system to check and take care of your hashrate ? \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))
-		print("\ndefine min_hash : ", end ="")
+		print("\ndefine hash_mode : ", end ="")
 		ans = handle_bool(HASH_MODE)
 		var_manager("HASH_MODE", mode, ans, folder=folder)
 
-		print("\n\nMIN_HASH : if your miner's hashrate fall bellow this threshold you will be warned and miner will reboot. Consider nb of GPUS x min GPU expected rate -- in global summed hashrate --, \ndefault value : {}".format(MIN_HASH))
-		print("\ndefine min_hash : ", end ="")
-		ans = handle_int(15, 12 * 35, MIN_HASH)
-		var_manager("MIN_HASH", mode, ans, folder=folder)
-
+		if ans : 
+			print("\n\nMIN_HASH : if your miner's hashrate fall bellow this threshold you will be warned and miner will reboot. Consider nb of GPUS x min GPU expected rate -- in global summed hashrate --, \ndefault value : {}".format(MIN_HASH))
+			print("\ndefine min_hash : ", end ="")
+			ans = handle_int(15, 12 * 35, MIN_HASH)
+			var_manager("MIN_HASH", mode, ans, folder=folder)
+		else : 
+			var_manager("MIN_HASH", mode, None, folder=folder)
 
 		print("\n\nTEMP_MODE : Boolean value -- 'y'/'n'--, do you allow your system to check and take care of your GPUs temperature ? \ndefault value (STRONGLY RECOMMANDED) : {}".format("'y'"))
-		print("\ndefine min_hash : ", end ="")
+		print("\ndefine temp_mode : ", end ="")
 		ans = handle_bool(TEMP_MODE)
 		var_manager("TEMP_MODE", mode, ans, folder=folder)
 
-		print("\n\nMAX_TEMP : if one of your GPUs temp is too hot  -- in °C -- your miner will be stoped for 30 min or 1 hour, you will be warned and miner will reboot, \ndefault value (STRONGLY RECOMMANDED) : {}".format(MIN_HASH))
-		print("\ndefine min_hash : ", end ="")
-		ans = handle_int(50, 100, MIN_HASH)
-		var_manager("MIN_HASH", mode, ans, folder=folder)
+		if ans : 
+			print("\n\nMAX_TEMP : if one of your GPUs temp is too hot  -- in °C -- your miner will be stoped for 30 min or 1 hour, you will be warned and miner will reboot, \ndefault value (STRONGLY RECOMMANDED) : {}".format(MAX_TEMP))
+			print("\ndefine max_temp : ", end ="")
+			ans = handle_int(50, 100, MIN_HASH)
+			var_manager("MAX_TEMP", mode, ans, folder=folder)
+		else : 
+			var_manager("MAX_TEMP", mode, None, folder=folder)
 
 
 		print("\n\nJET_LAG : the time stamp -- in hours -- between your local time and your system time, \ndefault value : {}".format(JET_LAG))		
@@ -390,7 +395,4 @@ def load_telegram_var(mode="rb", folder=VAR_FOLDER) :
 		CHAT_ID	= var_manager("CHAT_ID", mode, folder=folder)
 		RIG 	= var_manager("RIG", mode, folder=folder)
 
-		return True, TOKEN, CHAT_ID, RIG
-
-
-
+		return True, "YourToken", "YourChatId", "YourRigName"
