@@ -505,17 +505,17 @@ def load_id_var(mode="rb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 	""" """
 
 	USER 	= var_manager("USER", mode, folder=folder)
-	INT_IP	= var_manager("IN_IP", mode, folder=folder)
-	EXT_IP 	= var_manager("EXT_IP", mode, folder=folder)
+	IP_INT	= var_manager("IP_INT", mode, folder=folder)
+	IP_EXT 	= var_manager("IP_EXT", mode, folder=folder)
 
-	return USER, INT_IP, EXT_IP
+	return USER, IP_INT, IP_EXT
 
 
 if __name__ != '__main__':
 
 	try : 
 
-		USER, INT_IP, EXT_IP = load_id_var()
+		USER, IP_INT, IP_EXT = load_id_var()
 		TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
 		SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH,\
 		 TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
