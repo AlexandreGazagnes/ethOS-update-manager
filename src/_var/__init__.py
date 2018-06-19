@@ -25,6 +25,8 @@ LATENCY 	= True			# if LATENCY additionnal sleeper added to give time
 
 VAR_FOLDER 	= "/home/ethos/ethOS-update-manager/src/var/"
 DATA_FOLDER	= "/home/ethos/ethOS-update-manager/data/"
+VAR_FOLDER 	= "/home/ethos/ethOS-update-manager/docs/"
+
 
 # telegram params
 
