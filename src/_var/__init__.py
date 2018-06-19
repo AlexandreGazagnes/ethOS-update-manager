@@ -9,7 +9,7 @@ var functions
 
 # import 
 
-import pickle, random, urllib.request
+import os, pickle, random, urllib.request
 
 
 # sys params
@@ -122,7 +122,7 @@ def var_read(folder=VAR_FOLDER, verbose=False) :
 		print(file_list) 
 
 	for file in file_list : 
-		print(str(file + " : "), end="  ")
+		print(str(file + " : ").ljust(20, " "), end="  ")
 		try : 
 			with open(folder+file, "r") as f : var = f.read()
 			if verbose : 
@@ -133,7 +133,7 @@ def var_read(folder=VAR_FOLDER, verbose=False) :
 			with open(folder+file, "rb") as f : var = str(pickle.load(f))
 			if verbose : 
 				print("bin format : ")
-			print(str(var), str(type(var)))
+			print(str(var))
 
 
 def handle_choice(*li) : 
@@ -395,4 +395,4 @@ def load_telegram_var(mode="rb", folder=VAR_FOLDER) :
 		CHAT_ID	= var_manager("CHAT_ID", mode, folder=folder)
 		RIG 	= var_manager("RIG", mode, folder=folder)
 
-		return True, "YourToken", "YourChatId", "YourRigName"
+		return True, "-", "-", "-"
