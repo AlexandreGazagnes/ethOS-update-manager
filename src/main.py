@@ -39,7 +39,7 @@ def main() :
 
 	# read var
 	SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH, \
-		TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_telegram_var()
+		TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
 	TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
 
 	# if not AUTO_LAUNCH stop the program
@@ -67,7 +67,7 @@ def main() :
 
 		# update var
 		SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH, \
-			TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_telegram_var()
+			TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
 		TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
 		
 		# proceed 

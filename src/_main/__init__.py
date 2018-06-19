@@ -15,11 +15,11 @@ from _var import *
 
 # read var
 SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH, \
-	TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_telegram_var()
+	TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
 TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
 
 
-# functions
+# functions	
 
 def not_the_first_process_launched() : 
 	""" check if on porcess is already running"""
