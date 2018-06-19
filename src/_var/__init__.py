@@ -131,9 +131,11 @@ def var_read(folder=VAR_FOLDER, verbose=False) :
 			print(var)
 		
 		except : 
-			with open(folder+file, "rb") as f : var = str(pickle.load(f))
+			with open(folder+file, "rb") as f : var = pickle.load(f)
 			if verbose : 
 				print("bin format : ")
+			if var == 0 : var = "off"
+			if var == 1 : var = "on"
 			print(str(var))
 
 
@@ -238,7 +240,7 @@ def set_system_var(mode="wb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 
 		print("\n\nLAP_STAMP : the rate of info logging (inform you if everything is fine), the more it is important the less you will be informed -- in lap --, \ndefault value (STRONGLY RECOMMANDED) : {}".format(LAP_STAMP))
 		print("\ndefine lap_stamp : ", end ="")
-		ans = handle_int(1, 6*24, LAP_STAMP)
+		ans = handle_int(2, 6*24, LAP_STAMP)
 		var_manager("LAP_STAMP", mode, ans, folder=folder)		
 
 
@@ -389,11 +391,11 @@ def load_telegram_var(mode="rb", folder=VAR_FOLDER) :
 	TELEGRAM_MODE 	= var_manager("TELEGRAM_MODE", mode, folder=folder)
 
 	if not TELEGRAM_MODE : 
-		return False, None, None, None
+		return False, "-", "-", "-"
 
 	else :
 		TOKEN 	= var_manager("TOKEN", mode, folder=folder)
 		CHAT_ID	= var_manager("CHAT_ID", mode, folder=folder)
 		RIG 	= var_manager("RIG", mode, folder=folder)
 
-		return True, "-", "-", "-"
+		return True, TOKEN, CHAT_ID, RIG
