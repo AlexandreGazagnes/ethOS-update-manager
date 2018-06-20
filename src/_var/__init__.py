@@ -511,18 +511,16 @@ def load_id_var(mode="rb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 	return USER, IP_INT, IP_EXT
 
 
-if __name__ != '__main__':
+def update_all_var() : 
+	""" """
+	global 	USER, IP_INT, IP_EXT, TELEGRAM_MODE, TOKEN, CHAT_ID, RIG \
+				SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH,\
+				TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL
 
-	try : 
-
-		USER, IP_INT, IP_EXT = load_id_var()
-		TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
-		SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH,\
-		 TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
-
-	except :
-
-		pass
+	USER, IP_INT, IP_EXT = load_id_var()
+	TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
+	SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH,\
+	 TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
 
 
 

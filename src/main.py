@@ -36,6 +36,9 @@ from _var import *
 def main() : 
 
 	debug("main")
+
+	# update vars
+	update_all_var()
 	
 	# if not AUTO_LAUNCH stop the program
 	if not AUTO_LAUNCH : return 0
@@ -57,7 +60,7 @@ def main() :
 		debug("main loop entrance") 
 
 		# update vars
-		from _var import * 
+		update_all_var()
 
 		# update ip
 		update_ip_ext()
@@ -80,11 +83,3 @@ def main() :
 
 if __name__ == '__main__':
 	main()
-
-
-
-# update var
-# USER, IP_INT, IP_EXT = load_id_var()
-# TELEGRAM_MODE, TOKEN, CHAT_ID, RIG = load_telegram_var()
-# SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH, \
-# 	TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
