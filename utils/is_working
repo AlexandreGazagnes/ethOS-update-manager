@@ -10,9 +10,15 @@ def main():
 	res = os.popen("ps -aux | grep ethOS-update-manager").readlines()
 	res = [i for i in res if "ethOS-update-manager/" in i]
 	res = "".join(res)
+	if not res : 
+		res = "not working"
 	print(res)
 
 
 
 if __name__ == '__main__':
-	main()
+	try : 
+		main()
+		return 0
+	except : 
+		return 1

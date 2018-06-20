@@ -8,7 +8,7 @@ def main() :
 		show = f.readlines()
 
 	new_line =  'temp:   75.0 100.0\n'
-	show = [new_line if i.startwith("temp:") else i for i in show]
+	show = [new_line if i.startswith("temp:") else i for i in show]
 
 	show = "".join(show)
 
@@ -18,4 +18,8 @@ def main() :
 
 
 if __name__ == '__main__':
-	main()
+	try : 
+		main()
+		return 0
+	except : 
+		return 1

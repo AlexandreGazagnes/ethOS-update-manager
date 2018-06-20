@@ -8,7 +8,7 @@ def main() :
 		show = f.readlines()
 
 	new_line =  'hash:   6\n'
-	show = [new_line if i.startwith("hash:") else i for i in show]
+	show = [new_line if i.startswith("hash:") else i for i in show]
 
 	show = "".join(show)
 
@@ -17,4 +17,9 @@ def main() :
 
 
 if __name__ == '__main__':
-	main()
+	try : 
+		main()
+		return 0
+	except : 
+		return 1
+
