@@ -6,7 +6,9 @@
 read_var
 """
 
-import os
+import os, sys
+sys.path.append("/home/ethos/ethOS-update-manager/src")
+from _var import *
 
 
-os.system("python3 /home/ethos/ethOS-update-manager/src/_utils/read_var.py")
+var_read()
