@@ -67,7 +67,7 @@ def main(fake_mode=False) :
 		update_ip_ext()
 
 		# extract and enhance data 
-		data = data_from_cmd(fake_mode) 	# extract data from cmd 
+		data = data_from_cmd(fake_mode=fake_mode)
 		data = enhance_data(data)
 
 		# update stats
