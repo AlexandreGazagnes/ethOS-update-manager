@@ -23,7 +23,7 @@ def arg_manager() :
     logging.debug(s)
 
     if len(sys.argv) == 1 : 
-        print("You have to call 'ehtuper COMMAND + [OPTION] (if needed)")
+        print("You have to call 'ethuper COMMAND + [OPTION]' (if needed)")
         helper()
         return None, None
     elif len(sys.argv) == 3 : 
@@ -73,7 +73,6 @@ def command_manager(command, option) :
 
     elif command == "unistall" : 
         unistall(option)
-
     else : 
         print("Error command not avialable")
         helper()
