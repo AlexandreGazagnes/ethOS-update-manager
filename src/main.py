@@ -33,7 +33,7 @@ from _var import *
 
 # main
 
-def main() : 
+def main(fake_mode=False) : 
 
 	debug("main")
 
@@ -66,7 +66,7 @@ def main() :
 		update_ip_ext()
 
 		# extract and enhance data 
-		data = data_from_cmd() 	# extract data from cmd 
+		data = data_from_cmd(fake_mode) 	# extract data from cmd 
 		data = enhance_data(data)
 
 		# update stats
