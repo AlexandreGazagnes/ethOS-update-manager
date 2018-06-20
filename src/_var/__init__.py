@@ -513,7 +513,7 @@ def load_id_var(mode="rb", pairs=SYS_VAR_PAIRS, folder=VAR_FOLDER) :
 
 def update_all_var() : 
 	""" """
-	global 	USER, IP_INT, IP_EXT, TELEGRAM_MODE, TOKEN, CHAT_ID, RIG \
+	global 	USER, IP_INT, IP_EXT, TELEGRAM_MODE, TOKEN, CHAT_ID, RIG, \
 				SLEEPER, LAP_STAMP, AUTO_REBOOT, AUTO_LAUNCH, HASH_MODE, MIN_HASH,\
 				TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL
 

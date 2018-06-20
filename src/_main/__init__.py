@@ -278,7 +278,7 @@ def update_ip_ext() :
 		old_ip = var_manager("IP_EXT", "rb", folder=VAR_FOLDER)
 		if new_ip != old_ip : 
 			warning("new ip is {}".format(new_ip))
-			var_manager("IP_EXT", "wb", new_ip folder=VAR_FOLDER)
+			var_manager("IP_EXT", "wb", new_ip, folder=VAR_FOLDER)
 
 
 def manage_hashrate(hashrate, min_hash=MIN_HASH): 
