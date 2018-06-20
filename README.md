@@ -16,7 +16,7 @@ it provide a Telegram bot logger wich help you to log automaticly your(s) rig(s)
 <br><br>
 
 ## VERSION
-v0.5.0 on origin/master </p>
+v0.6.0 on origin/master </p>
 
 <br><br>
 

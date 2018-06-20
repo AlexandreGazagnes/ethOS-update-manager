@@ -5,6 +5,7 @@
 """
 install script for ethOS-update-manager
 chmod exec for launch.py and main.py
+set manually or automaticly all variables
 create aliases and cmd for autoclaunch in .bashrc with fancy text
 try to reboot 
 """

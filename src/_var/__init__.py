@@ -524,7 +524,7 @@ def update_all_var() :
 
 
 
-if __name__ = '__main__':
+if __name__ == '__main__':
 	pass 
 
 else : 

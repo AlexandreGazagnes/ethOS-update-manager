@@ -3,7 +3,7 @@
 
 
 """
-ethOS-update-manager - launcher - v0.5.0
+ethOS-update-manager - launcher - v0.6.0
 launcher for main.py
 avoid multi session launching by adding random sleeper  and
 by searching in all process if program aleardy running 

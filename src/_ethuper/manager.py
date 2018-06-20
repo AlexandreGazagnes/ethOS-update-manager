@@ -2,6 +2,10 @@
 #--*-- coding: utf-8 --*--
 
 
+"""
+ethuper : manager functions
+"""
+
 
 # import 
 

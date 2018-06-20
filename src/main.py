@@ -3,7 +3,7 @@
 
 
 """
-ethOS-update-manager - main - v0.5.0 
+ethOS-update-manager - main - v0.6.0 
 
 Handle results from a CMD 'show stats' or  and reboot 
 if nedeed, ie your hashrate is too low (aka MIN_HASH).
