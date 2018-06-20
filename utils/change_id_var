@@ -2,13 +2,10 @@
 #--*-- coding: utf-8 --*--
 
 
-"""
-read_var
-"""
-
 import os, sys
 sys.path.append("/home/ethos/ethOS-update-manager/src")
 from _var import *
 
 
-var_read()
+if __name__ == '__main__':
+	set_id_var()

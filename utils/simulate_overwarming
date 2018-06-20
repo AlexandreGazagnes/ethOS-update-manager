@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+#--*-- coding: utf-8 --*--
+
+
+def main() : 
+
+	with open("/home/ethos/ethOS-update-manager/.show_stats.txt", "r") as f :
+		show = f.readlines()
+
+	new_line =  'temp:   75.0 100.0\n'
+	show = [new_line if i.startwith("temp:") else i for i in show]
+
+	show = "".join(show)
+
+	with open("/home/ethos/ethOS-update-manager/.show_stats.txt", "w") as f :
+		f.write(show)
+
+
+
+if __name__ == '__main__':
+	main()

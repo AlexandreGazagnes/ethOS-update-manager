@@ -44,3 +44,7 @@ def launch_if_needed(is_working) :
 	return 0
 
 
+def reset_fake_show_stats():
+	""" """
+
+	os.system("cp /home/ethos/ethOS-update-manager/.show_stats.save /home/ethos/ethOS-update-manager/.show_stats.txt")

@@ -21,6 +21,7 @@ from src._launch import *
 def main() : 
 	
 	randomize_start()
+	reset_fake_show_stats()
 	launch_if_needed(working_process())
 
 

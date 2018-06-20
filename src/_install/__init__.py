@@ -53,6 +53,15 @@ def prepare_system(folder=VAR_FOLDER, files=VAR_FILE_LIST):
 	os.system("chmod +x /home/ethos/ethOS-update-manager/launch.py")
 	os.system("chmod +x /home/ethos/ethOS-update-manager/src/main.py")
 
+	utils = "/home/ethos/ethOS-update-manager/utils/"
+	li = os.listdir(utils)
+	li = [i for i in li if "." not in i]
+
+	for filename in li : 
+		filename = utils+filename
+		os.system("chmod +x {}".format(filename))
+
+
 
 def main_title():
 	"""print title and intro for install manualy"""
