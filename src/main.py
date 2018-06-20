@@ -74,8 +74,8 @@ def main(fake_mode=False) :
 		update_stats(data)
 
 		# manage rig
-		if HASH_MODE : 	manage_hashrate(return_hash(data))
-		if TEMP_MODE : 	manage_temp(return_temp(data))
+		if HASH_MODE : 	manage_hashrate(return_hash(data), lap)
+		if TEMP_MODE : 	manage_temp(return_temp(data), lap)
 
 		# wait and lap
 		time.sleep(SLEEPER)

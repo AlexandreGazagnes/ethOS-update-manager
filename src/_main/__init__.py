@@ -281,7 +281,7 @@ def update_ip_ext() :
 			var_manager("IP_EXT", "wb", new_ip, folder=VAR_FOLDER)
 
 
-def manage_hashrate(hashrate, min_hash=MIN_HASH): 
+def manage_hashrate(hashrate, lap, min_hash=MIN_HASH): 
 	""" """
 
 	# reboot option
@@ -306,7 +306,7 @@ def manage_hashrate(hashrate, min_hash=MIN_HASH):
 		warning("invalid hashrate type {}\n".format(type(hashrate)))
 
 
-def manage_temp(temp, max_temp = MAX_TEMP) : 
+def manage_temp(temp, lap, max_temp = MAX_TEMP) : 
 	""" """
 
 	# reboot option
