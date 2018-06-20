@@ -5,7 +5,7 @@
 
 import os, sys
 sys.path.append("/home/ethos/ethOS-update-manager/src")
-from _main import *
+from main import *
 
 
 if __name__ == '__main__':

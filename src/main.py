@@ -36,6 +36,7 @@ from _var import *
 def main(fake_mode=False) : 
 
 	debug("main")
+	if fake_mode : logging.warning("simulation mode : handly enabled")
 
 	# update vars
 	update_all_var()
