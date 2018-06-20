@@ -523,10 +523,12 @@ def update_all_var() :
 	 TEMP_MODE, MAX_TEMP, JET_LAG, LATENCY, LOGGING_LEVEL = load_system_var()
 
 
-if __name__ == '__main__':
+
+if __name__ = '__main__':
 	pass 
+
 else : 
 	try : 
 		update_all_var()
-	else :
+	except :
 		pass
