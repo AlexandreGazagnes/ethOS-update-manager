@@ -80,4 +80,5 @@ def command_manager(command, option) :
 
 def helper() : 
     """ """
+    
     print("type 'ethuper man' or 'ethuper help' for full info")

@@ -4,18 +4,9 @@
 
 
 import os, sys
-
-
-def main(): 
-	res = os.popen("ps -aux | grep ethOS-update-manager").readlines()
-	res = [i for i in res if "ethOS-update-manager/" in i]
-	res = "".join(res)
-	if not res : 
-		res = "not working"
-	print(res)
-
+sys.path.append("/home/ethos/ethOS-update-manager/src/")
+from _ethuper.command import *
 
 
 if __name__ == '__main__':
-	
-	main()
+	is_working

@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+#--*-- coding: utf-8 --*--
+
+
+
+import os, sys
+sys.path.append("/home/ethos/ethOS-update-manager/src/")
+from _ethuper.command import *
+
+
+if __name__ == '__main__':
+	stop_all()

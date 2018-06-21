@@ -73,11 +73,11 @@ def start(option) :
 			start()
 
 
-def stop() : 
+def stop_all() : 
 	""" """
 
 	res = os.popen("ps aux | grep ethOS-update-manager").readlines()
-	l = [i for i in res if "main.py" in i ]
+	l = [i for i in res if "ethOS-update-manager/" in i ]
 
 	if len(l) : 
 		print("Sorry program not started")
@@ -93,7 +93,7 @@ def stop() :
 def restart() : 
 	""" """
 	
-	stop()
+	stop_all()
 	start("bg")
 
 
@@ -123,15 +123,15 @@ def merge_files() :
 def is_working() : 
 	""" """
 
-	res = os.popen("ps aux | grep ethOS-update-manager").readlines()
-	l = [i for i in res if "main.py" in i ]
-
-	if len(l) : 
-		print("Sorry program not started")
+	res = os.popen("ps -aux | grep ethOS-update-manager").readlines()
+	res = [i for i in res if "ethOS-update-manager/" in i]
+	res = "".join(res)
+	if not res : 
+		res = "Program not working"
+		print(res)
 		return False
 	else : 
-		for i in l : 
-			print(i)
+		print(res)
 		return True
 
 
